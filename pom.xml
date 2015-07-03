@@ -6,7 +6,7 @@
   <name>Bible</name>
   <description>Bible Study Application</description>
   <build>
-    <sourceDirectory>src</sourceDirectory>
+    <sourceDirectory>src/main/java</sourceDirectory>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
