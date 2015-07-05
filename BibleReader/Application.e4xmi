@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmi:id="_d53TMCM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.ide.application" bindingContexts="_d53TOSM8EeWAgOzJmBnGEA">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_d53TMSM8EeWAgOzJmBnGEA" label="reader" width="500" height="400">
+    <children xsi:type="advanced:PerspectiveStack" xmi:id="_GRc5oCNLEeW4Abd66DaAtA" elementId="biblereader.perspectivestack.0">
+      <children xsi:type="advanced:Perspective" xmi:id="_JnVQUCNLEeW4Abd66DaAtA" elementId="biblereader.perspective.0">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_NTWPECNLEeW4Abd66DaAtA" elementId="biblereader.partsashcontainer.0">
+          <children xsi:type="basic:PartSashContainer" xmi:id="_O6yuACNLEeW4Abd66DaAtA" elementId="biblereader.partsashcontainer.1" horizontal="true">
+            <children xsi:type="basic:PartStack" xmi:id="_WnWxECNLEeW4Abd66DaAtA" elementId="biblereader.partstack.0">
+              <children xsi:type="basic:Part" xmi:id="_Yj7ygCNLEeW4Abd66DaAtA" elementId="biblereader.part.0" contributionURI="bundleclass://reader/parts.Books"/>
+            </children>
+            <children xsi:type="basic:PartStack" xmi:id="_XF0OsCNLEeW4Abd66DaAtA" elementId="biblereader.partstack.1"/>
+            <children xsi:type="basic:PartStack" xmi:id="_Xiu0MCNLEeW4Abd66DaAtA" elementId="biblereader.partstack.2"/>
+          </children>
+          <children xsi:type="basic:PartSashContainer" xmi:id="_TM6DcCNLEeW4Abd66DaAtA" elementId="biblereader.partsashcontainer.2"/>
+        </children>
+      </children>
+    </children>
+  </children>
+  <rootContext xmi:id="_d53TOSM8EeWAgOzJmBnGEA" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
+    <children xmi:id="_d53TOiM8EeWAgOzJmBnGEA" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
+    <children xmi:id="_d53TOyM8EeWAgOzJmBnGEA" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
+  </rootContext>
+  <addons xmi:id="_d53TMiM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
+  <addons xmi:id="_d53TMyM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
+  <addons xmi:id="_d53TNCM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
+  <addons xmi:id="_d53TNSM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.ui.workbench.commands.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.CommandProcessingAddon"/>
+  <addons xmi:id="_d53TNiM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.ui.workbench.handler.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
+  <addons xmi:id="_d53TNyM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
+  <addons xmi:id="_d53TOCM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
+</application:Application>
