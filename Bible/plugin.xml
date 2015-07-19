@@ -11,6 +11,10 @@
                name="applicationCSS"
                value="platform:/plugin/bible/css/default.css">
          </property>
+         <property
+               name="appName"
+               value="bible">
+         </property>
       </product>
    </extension>
 
