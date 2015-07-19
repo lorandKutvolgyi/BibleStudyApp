@@ -7,7 +7,7 @@
     <relativePath>../Bible</relativePath>
   </parent>
   <artifactId>reader</artifactId>
-  <packaging>eclipse-plugin</packaging>
+  <packaging>eclipse-repository</packaging>
   <name>BibleReader</name>
   <build>
     <sourceDirectory>src</sourceDirectory>
@@ -59,6 +59,28 @@
     								</versionRange>
     								<goals>
     									<goal>validate-id</goal>
+    									<goal>
+    										build-qualifier-aggregator
+    									</goal>
+    								</goals>
+    							</pluginExecutionFilter>
+    							<action>
+    								<ignore></ignore>
+    							</action>
+    						</pluginExecution>
+    						<pluginExecution>
+    							<pluginExecutionFilter>
+    								<groupId>
+    									org.apache.maven.plugins
+    								</groupId>
+    								<artifactId>
+    									maven-clean-plugin
+    								</artifactId>
+    								<versionRange>
+    									[2.4.1,)
+    								</versionRange>
+    								<goals>
+    									<goal>clean</goal>
     								</goals>
     							</pluginExecutionFilter>
     							<action>

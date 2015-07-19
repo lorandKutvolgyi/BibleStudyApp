@@ -10,6 +10,10 @@
                name="applicationCSS"
                value="platform:/plugin/reader/css/default.css">
          </property>
+         <property
+               name="appName"
+               value="reader">
+         </property>
       </product>
    </extension>
 </plugin>
