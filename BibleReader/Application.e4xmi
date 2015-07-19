@@ -11,7 +11,6 @@
             <children xsi:type="basic:PartStack" xmi:id="_XF0OsCNLEeW4Abd66DaAtA" elementId="biblereader.partstack.1"/>
             <children xsi:type="basic:PartStack" xmi:id="_Xiu0MCNLEeW4Abd66DaAtA" elementId="biblereader.partstack.2"/>
           </children>
-          <children xsi:type="basic:PartSashContainer" xmi:id="_TM6DcCNLEeW4Abd66DaAtA" elementId="biblereader.partsashcontainer.2"/>
         </children>
       </children>
     </children>
