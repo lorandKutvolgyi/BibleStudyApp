@@ -1,4 +1,4 @@
-package parts;
+package view;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;

@@ -6,7 +6,7 @@
         <children xsi:type="basic:PartSashContainer" xmi:id="_NTWPECNLEeW4Abd66DaAtA" elementId="biblereader.partsashcontainer.0">
           <children xsi:type="basic:PartSashContainer" xmi:id="_O6yuACNLEeW4Abd66DaAtA" elementId="biblereader.partsashcontainer.1" horizontal="true">
             <children xsi:type="basic:PartStack" xmi:id="_WnWxECNLEeW4Abd66DaAtA" elementId="biblereader.partstack.0">
-              <children xsi:type="basic:Part" xmi:id="_Yj7ygCNLEeW4Abd66DaAtA" elementId="biblereader.part.0" contributionURI="bundleclass://reader/parts.Books"/>
+              <children xsi:type="basic:Part" xmi:id="_Yj7ygCNLEeW4Abd66DaAtA" elementId="biblereader.part.0" contributionURI="bundleclass://reader/view.Books"/>
             </children>
             <children xsi:type="basic:PartStack" xmi:id="_XF0OsCNLEeW4Abd66DaAtA" elementId="biblereader.partstack.1"/>
             <children xsi:type="basic:PartStack" xmi:id="_Xiu0MCNLEeW4Abd66DaAtA" elementId="biblereader.partstack.2"/>
