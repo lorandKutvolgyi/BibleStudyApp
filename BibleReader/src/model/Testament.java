@@ -37,6 +37,16 @@ public enum Testament {
         return name;
     }
 
+    public static Testament getTestament(String name) {
+        for (Testament testament : Testament.values()) {
+            String testamentName = testament.getName();
+            if (testamentName.equals(name)) {
+                return testament;
+            }
+        }
+        return null;
+    }
+
     public abstract Set<? extends Books> getBooks();
 
     private enum OldTestamentBooks implements Books {
