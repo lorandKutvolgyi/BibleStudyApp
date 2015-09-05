@@ -10,6 +10,13 @@
 	<artifactId>reader</artifactId>
 	<packaging>eclipse-repository</packaging>
 	<name>BibleReader</name>
+	<dependencies>
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+			<version>3.4.1</version>
+		</dependency>
+	</dependencies>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
@@ -21,8 +28,24 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
-
-
+			<plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<configuration>
+					<changeLogFile>C:\Users\lkutvolg\myworkspace\BibleReader\resources\db.changelog.xml</changeLogFile>
+					<driver>com.mysql.jdbc.Driver</driver>
+					<url>jdbc:mysql://localhost:3306/Bible</url>
+					<username>root</username>
+					<password></password>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>update</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
@@ -98,5 +121,5 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-	
+
 </project>
