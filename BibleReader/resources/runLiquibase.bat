@@ -1,2 +1,0 @@
-cd %~dp0
-java -jar liquibase.jar --driver=com.mysql.jdbc.Driver --classpath=mysql-connector-java-5.1.6.jar --changeLogFile=db.changelog.xml --url="jdbc:mysql://localhost:3306/Bible?useUnicode=true&characterEncoding=UTF-8" --username=root update
