@@ -22,6 +22,18 @@
 			<layout>p2</layout>
 		</repository>
 	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-maven-plugin</artifactId>
+			<version>3.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.6</version>
+		</dependency>
+	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
