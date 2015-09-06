@@ -30,7 +30,6 @@
 				<version>${tycho.version}</version>
 				<extensions>true</extensions>
 			</plugin>
-
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
@@ -64,25 +63,6 @@
 						</environment>
 					</environments>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.liquibase</groupId>
-				<artifactId>liquibase-maven-plugin</artifactId>
-				<version>3.4.1</version>
-				<configuration>
-					<changeLogFile>C:\Users\lkutvolg\myworkspace\BibleReader\resources\db.changelog.xml</changeLogFile>
-					<driver>com.mysql.jdbc.Driver</driver>
-					<url>jdbc:mysql://localhost:3306/Bible</url>
-					<username>root</username>
-					<password></password>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>update</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 		<pluginManagement>
