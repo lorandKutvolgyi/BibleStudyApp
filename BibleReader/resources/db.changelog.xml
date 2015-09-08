@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-    <changeSet author="lkutvolg" id="1">
-        <sqlFile path="../BibleReader/resources/dump.sql"/>
-    </changeSet>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+	<changeSet author="lkutvolg" id="1">
+		<sqlFile path="../BibleReader/resources/dump.sql" />
+	</changeSet>
+	<changeSet author="lkutvolg" id="2">
+		<sql>
+			UPDATE 3mozes SET short_content="Mózes felszenteli a szentélyt és a papságot" WHERE chapter=8;
+			UPDATE 3mozes SET short_content ="Áron áldozatot mutat be magáért és a népért" WHERE chapter=9;
+			UPDATE 3mozes SET short_content ="Nádáb és Abihu" WHERE chapter=10;
+			UPDATE 3mozes SET short_content ="Megkövezik az átkozódót" WHERE chapter=24;
+		</sql>
+	</changeSet>
+	<changeSet author="lkutvolg" id="3">
+		<sql>
+			INSERT INTO parts_3mozes (Chapter_Start, Verse_Start, Chapter_End, Verse_End, Part) VALUES(1,1,7,38,"Áldozatok");
+			INSERT INTO parts_3mozes (Chapter_Start, Verse_Start, Chapter_End, Verse_End, Part) VALUES(8,1,10,20,"Az áldozati rendszer beiktatása");
+			INSERT INTO parts_3mozes (Chapter_Start, Verse_Start, Chapter_End, Verse_End, Part) VALUES(11,1,25,55,"A szentség törvényei");
+			INSERT INTO parts_3mozes (Chapter_Start, Verse_Start, Chapter_End, Verse_End, Part) VALUES(26,1,26,46,"Áldások és átkok");
+			INSERT INTO parts_3mozes (Chapter_Start, Verse_Start, Chapter_End, Verse_End, Part) VALUES(27,1,27,34,"Önkéntes fogadalmak, ajándékok");
+		</sql>
+	</changeSet>
 </databaseChangeLog>
