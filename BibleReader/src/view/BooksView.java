@@ -1,22 +1,62 @@
 package view;
 
+import i18n.Messages;
+
+import java.lang.reflect.Field;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
-import model.Books;
+import model.Book;
+import model.Chapter;
 import model.Testament;
 
+import org.eclipse.e4.tools.services.Translation;
+import org.eclipse.e4.ui.services.IStylingEngine;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Text;
 
+/**
+ * Shows the books of the Bible and shows the text of them in an other part.
+ * 
+ * @author lorandKutvolgyi
+ * 
+ */
 public class BooksView {
+
+    @Inject
+    @Translation
+    private static Messages messages;
+
+    @Inject
+    IStylingEngine engine;
+    Chapter chapter;
+
+    @Inject
+    public BooksView() {
+
+    }
+
+    @PostConstruct
+    public void postConstruct(Composite parent) {
+        parent.setLayout(new FillLayout());
+        TreeViewer books = new TreeViewer(parent);
+        books.setLabelProvider(new ViewerLabelProvider());
+        books.setContentProvider(new ViewerTreeContentProvider());
+        books.setInput(Testament.class);
+        chapter = Testament.NewTestamentBook.MATTHEW.getChapter(28);
+        Text textbox = new Text(parent, SWT.NONE);
+        textbox.setText(chapter.getText());
+    }
+
     private static class ViewerLabelProvider extends LabelProvider {
         @Override
         public Image getImage(Object element) {
@@ -26,10 +66,23 @@ public class BooksView {
         @Override
         public String getText(Object element) {
             if (element instanceof Testament) {
-                return ((Testament) element).getName();
+                Field field;
+                try {
+                    field = Messages.class.getField(((Testament) element).getName());
+                    return (String) field.get(messages);
+                } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+
             }
-            assert element instanceof Books;
-            return ((Books) element).getTitle();
+            assert element instanceof Book;
+            try {
+                Field field = Messages.class.getField(((Book) element).getTitle());
+                return (String) field.get(messages);
+            } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            return "";
         }
     }
 
@@ -42,7 +95,7 @@ public class BooksView {
         @Override
         public Object[] getChildren(Object parentElement) {
             if (parentElement instanceof Testament) {
-                Set<? extends Books> books = ((Testament) parentElement).getBooks();
+                Set<? extends Book> books = ((Testament) parentElement).getBooks();
                 return books.toArray();
             }
             return null;
@@ -56,8 +109,8 @@ public class BooksView {
         @Override
         public Object getParent(Object element) {
             Object result = null;
-            if (element instanceof Books) {
-                result = ((Books) element).getTestament();
+            if (element instanceof Book) {
+                result = ((Book) element).getTestament();
             }
             return result;
         }
@@ -73,18 +126,4 @@ public class BooksView {
 
     }
 
-    @Inject
-    public BooksView() {
-        // TODO Your code here
-    }
-
-    @PostConstruct
-    public void postConstruct(Composite parent) {
-        parent.setLayout(new FillLayout());
-        TreeViewer oldTestamentBooks = new TreeViewer(parent);
-        oldTestamentBooks.setAutoExpandLevel(1);
-        oldTestamentBooks.setLabelProvider(new ViewerLabelProvider());
-        oldTestamentBooks.setContentProvider(new ViewerTreeContentProvider());
-        oldTestamentBooks.setInput(Testament.class);
-    }
 }

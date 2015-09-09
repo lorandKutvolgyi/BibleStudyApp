@@ -1,7 +1,11 @@
 package model;
 
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Set;
+
+import database.ChapterDao;
+import database.DaoFactory;
 
 /**
  * Represents the Testaments of the Bible.
@@ -11,19 +15,19 @@ import java.util.Set;
  */
 public enum Testament {
     OLD_TESTAMENT("OldTestament") {
-        private final Set<? extends Books> books = EnumSet.allOf(OldTestamentBooks.class);
+        private final Set<? extends Book> books = EnumSet.allOf(OldTestamentBook.class);
 
         @Override
-        public Set<? extends Books> getBooks() {
+        public Set<? extends Book> getBooks() {
             return books;
         }
 
     },
     NEW_TESTAMENT("NewTestament") {
-        private final Set<? extends Books> books = EnumSet.allOf(NewTestamentBooks.class);
+        private final Set<? extends Book> books = EnumSet.allOf(NewTestamentBook.class);
 
         @Override
-        public Set<? extends Books> getBooks() {
+        public Set<? extends Book> getBooks() {
             return books;
         }
     };
@@ -47,9 +51,9 @@ public enum Testament {
         return null;
     }
 
-    public abstract Set<? extends Books> getBooks();
+    public abstract Set<? extends Book> getBooks();
 
-    private enum OldTestamentBooks implements Books {
+    public enum OldTestamentBook implements Book {
         GENESIS("GENESIS"),
         EXODUS("EXODUS"),
         LEVITICUS("LEVITICUS"),
@@ -91,9 +95,11 @@ public enum Testament {
         MALACHI("MALACHI");
 
         private String title;
+        private ChapterDao dao;
 
-        private OldTestamentBooks(String title) {
+        private OldTestamentBook(String title) {
             this.title = title;
+            dao = DaoFactory.getInstanceOfChapterDao();
         }
 
         @Override
@@ -106,9 +112,19 @@ public enum Testament {
             return Testament.OLD_TESTAMENT;
         }
 
+        @Override
+        public List<Chapter> getChapters() {
+            return dao.findAll(this);
+        }
+
+        @Override
+        public Chapter getChapter(int id) {
+            return dao.findByChapterId(this, id);
+        }
+
     }
 
-    private enum NewTestamentBooks implements Books {
+    public enum NewTestamentBook implements Book {
         MATTHEW("MATTHEW"),
         MARK("MARK"),
         LUKE("LUKE"),
@@ -138,9 +154,11 @@ public enum Testament {
         REVELATION_OF_JOHN("REVELATION_OF_JOHN");
 
         private final String title;
+        private ChapterDao dao;
 
-        private NewTestamentBooks(String title) {
+        private NewTestamentBook(String title) {
             this.title = title;
+            dao = DaoFactory.getInstanceOfChapterDao();
         }
 
         @Override
@@ -153,5 +171,14 @@ public enum Testament {
             return Testament.NEW_TESTAMENT;
         }
 
+        @Override
+        public List<Chapter> getChapters() {
+            return dao.findAll(this);
+        }
+
+        @Override
+        public Chapter getChapter(int id) {
+            return dao.findByChapterId(this, id);
+        }
     }
 }
