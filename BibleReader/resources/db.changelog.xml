@@ -2,24 +2,49 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-	<changeSet author="lkutvolg" id="1">
+	<changeSet id="1" author="lkutvolg" >
 		<sqlFile path="../BibleReader/resources/dump.sql" />
 	</changeSet>
-	<changeSet author="lkutvolg" id="2">
+	<changeSet id="2" author="lkutvolg" >
 		<sql>
-			UPDATE 3mozes SET short_content="Mózes felszenteli a szentélyt és a papságot" WHERE chapter=8;
-			UPDATE 3mozes SET short_content ="Áron áldozatot mutat be magáért és a népért" WHERE chapter=9;
-			UPDATE 3mozes SET short_content ="Nádáb és Abihu" WHERE chapter=10;
-			UPDATE 3mozes SET short_content ="Megkövezik az átkozódót" WHERE chapter=24;
+			UPDATE LEVITICUS SET short_content="Mózes felszenteli a szentélyt és
+			a papságot" WHERE chapter=8;
+			UPDATE LEVITICUS SET short_content ="Áron
+			áldozatot mutat be magáért és a népért" WHERE chapter=9;
+			UPDATE LEVITICUS
+			SET short_content ="Nádáb és Abihu" WHERE chapter=10;
+			UPDATE LEVITICUS
+			SET short_content ="Megkövezik az átkozódót" WHERE chapter=24;
 		</sql>
 	</changeSet>
-	<changeSet author="lkutvolg" id="3">
+	<changeSet id="3" author="lkutvolg" >
 		<sql>
-			INSERT INTO parts_3mozes (Chapter_Start, Verse_Start, Chapter_End, Verse_End, Part) VALUES(1,1,7,38,"Áldozatok");
-			INSERT INTO parts_3mozes (Chapter_Start, Verse_Start, Chapter_End, Verse_End, Part) VALUES(8,1,10,20,"Az áldozati rendszer beiktatása");
-			INSERT INTO parts_3mozes (Chapter_Start, Verse_Start, Chapter_End, Verse_End, Part) VALUES(11,1,25,55,"A szentség törvényei");
-			INSERT INTO parts_3mozes (Chapter_Start, Verse_Start, Chapter_End, Verse_End, Part) VALUES(26,1,26,46,"Áldások és átkok");
-			INSERT INTO parts_3mozes (Chapter_Start, Verse_Start, Chapter_End, Verse_End, Part) VALUES(27,1,27,34,"Önkéntes fogadalmak, ajándékok");
+			INSERT INTO parts_LEVITICUS (Chapter_Start, Verse_Start,
+			Chapter_End, Verse_End, Part) VALUES(1,1,7,38,"Áldozatok");
+			INSERT
+			INTO parts_LEVITICUS (Chapter_Start, Verse_Start, Chapter_End,
+			Verse_End, Part) VALUES(8,1,10,20,"Az áldozati rendszer beiktatása");
+			INSERT INTO parts_LEVITICUS (Chapter_Start, Verse_Start, Chapter_End,
+			Verse_End, Part) VALUES(11,1,25,55,"A szentség törvényei");
+			INSERT
+			INTO parts_LEVITICUS (Chapter_Start, Verse_Start, Chapter_End,
+			Verse_End, Part) VALUES(26,1,26,46,"Áldások és átkok");
+			INSERT INTO
+			parts_LEVITICUS (Chapter_Start, Verse_Start, Chapter_End, Verse_End,
+			Part) VALUES(27,1,27,34,"Önkéntes fogadalmak, ajándékok");
+		</sql>
+	</changeSet>
+	<changeSet id="4" author="lkutvolg">
+		<sql>
+			INSERT INTO parts_EXODUS
+			(Chapter_start,Verse_start,Chapter_end,Verse_end,Part)
+			VALUES(1,1,1,22,"Izrael sorsa rosszra fordul"),(2,1,4,31,"Mózes a
+			szabadító"),(5,1,15,21,"Izrael megszabadulása"),(15,22,19,25,"Út a
+			Sínai hegyhez"),(20,1,23,33,"A Törvény"),(24,1,24,18,"A
+			szövetségkötés"),(25,1,31,18,"Utasítások a hajlék
+			elkészítésére"),(32,1,34,35,"A szövetség megszegése és
+			megújítása"),(35,1,40,38,"A hajlékra vonatkozó utasítások
+			végrehajtása");
 		</sql>
 	</changeSet>
 </databaseChangeLog>

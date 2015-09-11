@@ -151,7 +151,7 @@ public enum Testament {
         II_JOHN("II_JOHN"),
         III_JOHN("III_JOHN"),
         JUDE("JUDE"),
-        REVELATION_OF_JOHN("REVELATION_OF_JOHN");
+        REVELATION("REVELATION");
 
         private final String title;
         private ChapterDao dao;

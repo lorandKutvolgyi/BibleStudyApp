@@ -70,7 +70,7 @@ public class Messages {
     public String II_JOHN;
     public String III_JOHN;
     public String JUDE;
-    public String REVELATION_OF_JOHN;
+    public String REVELATION;
 
     public String OldTestament;
     public String NewTestament;
