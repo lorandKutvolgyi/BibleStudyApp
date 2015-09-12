@@ -2,9 +2,12 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-	
-	<include file="resources/db.changeset1.xml"/>
-	<include file="resources/db.changeset2.xml"/>
-	<include file="resources/db.changeset3.xml"/>
-	<include file="resources/db.changeset4.xml"/>	
+	<changeSet id="2" author="lkutvolg">
+		<sql>
+			UPDATE LEVITICUS SET short_content="Mózes felszenteli a szentélyt és a papságot" WHERE chapter=8;
+			UPDATE LEVITICUS SET short_content="Áron áldozatot mutat be magáért és a népért" WHERE chapter=9;
+			UPDATE LEVITICUS SET short_content ="Nádáb és Abihu" WHERE chapter=10;
+			UPDATE LEVITICUS SET short_content ="Megkövezik az átkozódót" WHERE chapter=24;
+		</sql>
+	</changeSet>
 </databaseChangeLog>

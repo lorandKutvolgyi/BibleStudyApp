@@ -2,9 +2,7 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-	
-	<include file="resources/db.changeset1.xml"/>
-	<include file="resources/db.changeset2.xml"/>
-	<include file="resources/db.changeset3.xml"/>
-	<include file="resources/db.changeset4.xml"/>	
+	<changeSet id="1" author="lkutvolg">
+		<sqlFile path="../BibleReader/resources/dump.sql" />
+	</changeSet>
 </databaseChangeLog>
