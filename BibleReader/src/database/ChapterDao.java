@@ -16,8 +16,8 @@ public interface ChapterDao {
     /**
      * Provides text of a chapter by the chapter id.
      * 
-     * @param book searches in it
-     * @param id searches by it
+     * @param book searches in this
+     * @param id searches by this
      * @return the text of chapter
      */
     public Chapter findByChapterId(Book book, int id);
@@ -25,7 +25,7 @@ public interface ChapterDao {
     /**
      * Provides text of each chapter of a book.
      * 
-     * @param book searches in it
+     * @param book searches in this
      * @return the text of chapter
      */
     public List<Chapter> findAll(Book book);

@@ -94,12 +94,11 @@ public enum Testament {
         ZECHARIAH("ZECHARIAH"),
         MALACHI("MALACHI");
 
+        private static ChapterDao dao = DaoFactory.getInstanceOfChapterDao();
         private String title;
-        private ChapterDao dao;
 
         private OldTestamentBook(String title) {
             this.title = title;
-            dao = DaoFactory.getInstanceOfChapterDao();
         }
 
         @Override
@@ -153,12 +152,11 @@ public enum Testament {
         JUDE("JUDE"),
         REVELATION("REVELATION");
 
+        private static ChapterDao dao = DaoFactory.getInstanceOfChapterDao();
         private final String title;
-        private ChapterDao dao;
 
         private NewTestamentBook(String title) {
             this.title = title;
-            dao = DaoFactory.getInstanceOfChapterDao();
         }
 
         @Override

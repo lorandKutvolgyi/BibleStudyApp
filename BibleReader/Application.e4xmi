@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmi:id="_d53TMCM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.ide.application" bindingContexts="_d53TOSM8EeWAgOzJmBnGEA">
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_d53TMCM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.ide.application" bindingContexts="_d53TOSM8EeWAgOzJmBnGEA">
   <children xsi:type="basic:TrimmedWindow" xmi:id="_d53TMSM8EeWAgOzJmBnGEA" label="reader" width="500" height="400">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_GRc5oCNLEeW4Abd66DaAtA" elementId="biblereader.perspectivestack.0">
       <children xsi:type="advanced:Perspective" xmi:id="_JnVQUCNLEeW4Abd66DaAtA" elementId="biblereader.perspective.0">
         <children xsi:type="basic:PartSashContainer" xmi:id="_NTWPECNLEeW4Abd66DaAtA" elementId="biblereader.partsashcontainer.0">
           <children xsi:type="basic:PartSashContainer" xmi:id="_O6yuACNLEeW4Abd66DaAtA" elementId="biblereader.partsashcontainer.1" horizontal="true">
             <children xsi:type="basic:PartStack" xmi:id="_WnWxECNLEeW4Abd66DaAtA" elementId="biblereader.partstack.0">
-              <children xsi:type="basic:Part" xmi:id="_Yj7ygCNLEeW4Abd66DaAtA" elementId="biblereader.BooksView" contributionURI="bundleclass://reader/view.BooksView"/>
+              <children xsi:type="basic:Part" xmi:id="_Yj7ygCNLEeW4Abd66DaAtA" elementId="biblereader.BooksPart" contributionURI="bundleclass://reader/view.BooksPart">
+                <menus xmi:id="_SUbdYFrwEeWf1fIjSgOKGg" elementId="biblereader.menu.0"/>
+                <menus xsi:type="menu:PopupMenu" xmi:id="_UimlIFrwEeWf1fIjSgOKGg" elementId="biblereader.popupmenu.0" tooltip="aaaaaaaaaa"/>
+                <menus xmi:id="_VqXecFrwEeWf1fIjSgOKGg" elementId="biblereader.menu.1">
+                  <tags>ViewMenu</tags>
+                </menus>
+              </children>
             </children>
             <children xsi:type="basic:PartStack" xmi:id="_XF0OsCNLEeW4Abd66DaAtA" elementId="biblereader.partstack.1">
-              <children xsi:type="basic:Part" xmi:id="_33tk4Ff4EeWw0_pvm8Qobg" elementId="biblereader.BibleTextView" accessibilityPhrase="" contributionURI="bundleclass://reader/view.BibleTextView" label=""/>
+              <children xsi:type="basic:Part" xmi:id="_33tk4Ff4EeWw0_pvm8Qobg" elementId="biblereader.BibleTextPart" accessibilityPhrase="" contributionURI="bundleclass://reader/view.BibleTextPart" label=""/>
             </children>
             <children xsi:type="basic:PartStack" xmi:id="_Xiu0MCNLEeW4Abd66DaAtA" elementId="biblereader.partstack.2"/>
           </children>

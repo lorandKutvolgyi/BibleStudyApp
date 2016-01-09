@@ -7,13 +7,13 @@ import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import model.Book;
-import model.Chapter;
 import model.Testament;
 
 import org.eclipse.e4.tools.services.Translation;
-import org.eclipse.e4.ui.services.IStylingEngine;
+import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -22,7 +22,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Text;
+
+import view.eventhandler.BookSelectionListener;
 
 /**
  * Shows the books of the Bible and shows the text of them in an other part.
@@ -30,31 +31,36 @@ import org.eclipse.swt.widgets.Text;
  * @author lorandKutvolgyi
  * 
  */
-public class BooksView {
+public class BooksPart {
 
     @Inject
     @Translation
     private static Messages messages;
 
     @Inject
-    IStylingEngine engine;
-    Chapter chapter;
+    private EPartService service;
 
-    @Inject
-    public BooksView() {
+    private Composite chapterNumbers;
+
+    public Composite getChapterNumbers() {
+        return chapterNumbers;
+    }
+
+    @Singleton
+    public BooksPart() {
 
     }
 
     @PostConstruct
-    public void postConstruct(Composite parent) {
-        parent.setLayout(new FillLayout());
-        TreeViewer books = new TreeViewer(parent);
+    public void postConstruct(final Composite parent) {
+        parent.setLayout(new FillLayout(SWT.HORIZONTAL));
+        TreeViewer books = new TreeViewer(parent, SWT.V_SCROLL);
+        chapterNumbers = new Composite(parent, SWT.H_SCROLL);
+        chapterNumbers.setLayout(new FillLayout(SWT.VERTICAL));
         books.setLabelProvider(new ViewerLabelProvider());
         books.setContentProvider(new ViewerTreeContentProvider());
         books.setInput(Testament.class);
-        chapter = Testament.NewTestamentBook.MATTHEW.getChapter(28);
-        Text textbox = new Text(parent, SWT.NONE);
-        textbox.setText(chapter.getText());
+        books.addSelectionChangedListener(new BookSelectionListener(service));
     }
 
     private static class ViewerLabelProvider extends LabelProvider {

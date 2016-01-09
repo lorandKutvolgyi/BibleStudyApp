@@ -1,6 +1,6 @@
 package database;
 
-public class DaoFactory {
+public final class DaoFactory {
     private static ChapterDao dao = new ChapterSqlDao();
 
     public static ChapterDao getInstanceOfChapterDao() {

@@ -2,10 +2,14 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-	
-	<include file="../BibleReader/resources/db.changeset1.xml"/>
-	<include file="../BibleReader/resources/db.changeset2.xml"/>
-	<include file="../BibleReader/resources/db.changeset3.xml"/>
-	<include file="../BibleReader/resources/db.changeset4.xml"/>
-	<include file="../BibleReader/resources/db.changeset5.xml"/>
+	<changeSet id="4" author="lkutvolg">
+		<sql>
+			INSERT INTO parts_Numbers (Chapter_start,Verse_start,Chapter_end,Verse_end,Part)
+			VALUES(1,1,10,10,"Izrael a Sínai hegynél"),
+			(10,11,12,16,"Út a Párán-pusztába"),
+			(13,1,14,45,"Kánaán kikémlelése"),
+			(15,1,21,35,"Út Móáb síkságára"),
+			(22,1,24,25,"Bálám története");
+		</sql>
+	</changeSet>
 </databaseChangeLog>

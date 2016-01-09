@@ -27,7 +27,6 @@ public class ChapterSqlDao implements ChapterDao {
 
     public ChapterSqlDao() {
         loadProperties();
-        loadJdbcDriver();
         String url = prop.getProperty("url");
         String username = prop.getProperty("username");
         String password = prop.getProperty("password");
@@ -93,7 +92,6 @@ public class ChapterSqlDao implements ChapterDao {
         try {
             PreparedStatement stmt = connection.prepareStatement("SELECT chapter, content FROM " + book.getTitle()
                     + " ;");
-            stmt.setString(1, book.getTitle());
             ResultSet result = stmt.executeQuery();
             while (result.next()) {
                 Chapter chapter = new Chapter();
