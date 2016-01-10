@@ -17,7 +17,7 @@ public class BibleTextPart {
 
     @PostConstruct
     public void postConstruct(Composite parent) {
-        text = new Text(parent, SWT.MULTI | SWT.BORDER | SWT.WRAP);
+        text = new Text(parent, SWT.MULTI | SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
         text.setEditable(false);
     }
 
