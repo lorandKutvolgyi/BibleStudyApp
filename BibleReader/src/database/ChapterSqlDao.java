@@ -34,28 +34,10 @@ public class ChapterSqlDao implements ChapterDao {
     }
 
     private void loadProperties() {
-        InputStream input = null;
-        try {
-            Class<? extends ChapterSqlDao> clazz = getClass();
-            input = clazz.getResourceAsStream("/src/database/db_connection.properties");
+        Class<? extends ChapterSqlDao> clazz = getClass();
+        try (InputStream input = clazz.getResourceAsStream("db_connection.properties")) {
             prop.load(input);
         } catch (IOException ex) {
-            ex.printStackTrace();
-        } finally {
-            if (input != null) {
-                try {
-                    input.close();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
-        }
-    }
-
-    private void loadJdbcDriver() {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         }
     }
@@ -72,17 +54,34 @@ public class ChapterSqlDao implements ChapterDao {
     public Chapter findByChapterId(Book book, int id) {
         Chapter chapter = null;
         try {
-            PreparedStatement stmt = connection.prepareStatement("SELECT Chapter, Content FROM " + book.getTitle()
-                    + " WHERE chapter=?;");
-            stmt.setInt(1, id);
-            ResultSet result = stmt.executeQuery();
-            result.next();
-            chapter = new Chapter();
-            chapter.setId(result.getInt("Chapter"));
-            chapter.setText(result.getString("Content"));
+            PreparedStatement stmt = createStatement(book, id);
+            ResultSet result = executeQuery(book, id, stmt);
+            chapter = createChapterByResult(result);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return chapter;
+    }
+
+    private PreparedStatement createStatement(Book book, int id) throws SQLException {
+        PreparedStatement stmt = connection.prepareStatement("SELECT Chapter, Content FROM " + book.getTitle()
+                + " WHERE chapter=?;");
+        stmt.setInt(1, id);
+        return stmt;
+    }
+
+    private ResultSet executeQuery(Book book, int id, PreparedStatement stmt) throws SQLException {
+        ResultSet result = stmt.executeQuery();
+        if (!result.next()) {
+            throw new IllegalArgumentException("Chapter " + id + " does not exist in the book " + book);
+        }
+        return result;
+    }
+
+    private Chapter createChapterByResult(ResultSet result) throws SQLException {
+        Chapter chapter = new Chapter();
+        chapter.setId(result.getInt("Chapter"));
+        chapter.setText(result.getString("Content"));
         return chapter;
     }
 
@@ -94,9 +93,7 @@ public class ChapterSqlDao implements ChapterDao {
                     + " ;");
             ResultSet result = stmt.executeQuery();
             while (result.next()) {
-                Chapter chapter = new Chapter();
-                chapter.setId(result.getInt("Chapter"));
-                chapter.setText(result.getString("Content"));
+                Chapter chapter = createChapterByResult(result);
                 chapters.add(chapter);
             }
         } catch (SQLException e) {
