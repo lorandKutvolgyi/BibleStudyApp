@@ -29,7 +29,6 @@ public class ChapterSqlDaoTest {
     @Test
     public void testFindByChapterIdWhenIdIsCorrectShouldReturnTheChapter() {
         Chapter chapter = underTest.findByChapterId(Testament.NewTestamentBook.I_JOHN, 1);
-
         assertTrue(trimText(chapter).startsWith("Az élet igéjének szemtanúi"));
         assertEquals(1, chapter.getId());
     }
