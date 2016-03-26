@@ -2,13 +2,20 @@ package model;
 
 /**
  * Represents a chapter of a book in the Bible.
- * 
+ *
  * @author lorandKutvolgyi
- * 
+ *
  */
 public class Chapter {
-    private int id;
-    private String text;
+    private final int id;
+    private final String text;
+    private final Book book;
+
+    public Chapter(int id, String text, Book book) {
+        this.id = id;
+        this.text = text;
+        this.book = book;
+    }
 
     public int getId() {
         return id;
@@ -18,11 +25,7 @@ public class Chapter {
         return text;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setText(String text) {
-        this.text = text;
+    public Book getBook() {
+        return book;
     }
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+	<changeSet id="2" author="lkutvolg">
+		<sql>
+			UPDATE NUMBERS SET short_content="Elindulnak a Sínai hegytől" WHERE chapter=10;
+			UPDATE NUMBERS SET short_content="A nép siránkozik, Isten fürjeket ad, A hetven prófétáló vén" WHERE chapter=11;
+			UPDATE NUMBERS SET short_content="Mirjám poklossága, megérkezés a Párán pusztába" WHERE chapter=12;
+			UPDATE NUMBERS SET short_content="Kánaán kikémlelése" WHERE chapter=13;
+			UPDATE NUMBERS SET short_content="A nép zúgolódása és bűnhődése" WHERE chapter=14;
+			UPDATE NUMBERS SET short_content="Kórah, Dátán és Abirám lázadása" WHERE chapter=16;
+			UPDATE NUMBERS SET short_content="Áron vesszője kivirágzik" WHERE chapter=17;
+			UPDATE NUMBERS SET short_content="Mirjám halála, Isten vizet fakaszt a sziklából, Edóm nem engedi át Izraelt, Áron halála" WHERE chapter=20;
+			UPDATE NUMBERS SET short_content="A rézkígyó, Szihón és Óg legyőzése" WHERE chapter=21; 
+			UPDATE NUMBERS SET short_content="Bálák hívatja Bálámot" WHERE chapter=22;
+			UPDATE NUMBERS SET short_content="Bálám megáldja Izraelt" WHERE chapter=23;
+			UPDATE NUMBERS SET short_content="Bálám prófétál" WHERE chapter=24;
+			UPDATE NUMBERS SET short_content="Izrael paráznasága a móábitákkal és a büntetés" WHERE chapter=25;
+			UPDATE NUMBERS SET short_content="Népszámlálás" WHERE chapter=26;
+			UPDATE NUMBERS SET short_content="Mózes átadja a vezetést Józsuénak" WHERE chapter=27;
+			UPDATE NUMBERS SET short_content="Izrael bosszút áll Midjánon" WHERE chapter=31;
+			UPDATE NUMBERS SET short_content="A Jordántól keletre eső országrész felosztása" WHERE chapter=32;
+		</sql>
+	</changeSet>
+</databaseChangeLog>

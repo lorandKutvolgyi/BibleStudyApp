@@ -28,7 +28,7 @@ public class ChapterSqlDaoTest {
 
     @Test
     public void testFindByChapterIdWhenIdIsCorrectShouldReturnTheChapter() {
-        Chapter chapter = underTest.findByChapterId(Testament.NewTestamentBook.I_JOHN, 1);
+        Chapter chapter = underTest.findChapterById(Testament.NewTestamentBooks.I_JOHN, 1);
         assertTrue(trimText(chapter).startsWith("Az élet igéjének szemtanúi"));
         assertEquals(1, chapter.getId());
     }
@@ -40,12 +40,12 @@ public class ChapterSqlDaoTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testFindByChapterIdWhenIdIsNotCorrectShouldThrowException() {
-        underTest.findByChapterId(Testament.NewTestamentBook.I_JOHN, 11);
+        underTest.findChapterById(Testament.NewTestamentBooks.I_JOHN, 11);
     }
 
     @Test
     public void testFindAll() {
-        List<Chapter> books = underTest.findAll(Testament.NewTestamentBook.I_JOHN);
+        List<Chapter> books = underTest.findAllChapters(Testament.NewTestamentBooks.I_JOHN);
 
         assertEquals(5, books.size());
 

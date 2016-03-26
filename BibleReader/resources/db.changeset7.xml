@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+	<changeSet id="3" author="lkutvolg">
+		<sql>
+			INSERT INTO parts_DEUTERONOMY (Chapter_Start, Verse_Start, Chapter_End, Verse_End, Part) 
+			VALUES(1,1,1,4,"Előszó"),
+			(1,5,4,43,"A szövetségkötés előtörténete"),
+			(4,44,11,32,"Általános rendelkezések"),
+			(12,1,26,19,"Konkrét rendelkezések"),
+			(27,1,30,20,"Áldások és átkok"),
+			(31,1,34,12,"Mózes átadja a vezetést Józsuénak");
+		</sql>
+	</changeSet>
+</databaseChangeLog>

@@ -1,9 +1,26 @@
 package database;
 
-public final class DaoFactory {
-    private static ChapterDao dao = new ChapterSqlDao();
+/**
+ * Factory for Chapter Dao.
+ *
+ * @author lorandKutvolgyi
+ *
+ */
+public enum ChapterDaoFactory {
+    CHAPTER_SQL_DAO;
 
-    public static ChapterDao getInstanceOfChapterDao() {
+    private ChapterDao dao;
+
+    private ChapterDaoFactory() {
+        dao = new ChapterSqlDao();
+    }
+
+    /**
+     * Factory method for ChapterDao.
+     *
+     * @return ChapterDao
+     */
+    public ChapterDao getInstance() {
         return dao;
     }
 }

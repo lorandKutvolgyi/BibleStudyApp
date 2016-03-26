@@ -1,21 +1,23 @@
 package model;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
 import database.ChapterDao;
-import database.DaoFactory;
+import database.ChapterDaoFactory;
 
 /**
  * Represents the Testaments of the Bible.
- * 
+ *
  * @author lorandKutvolgyi
- * 
+ *
  */
-public enum Testament {
+public enum Testament implements TreeElement {
     OLD_TESTAMENT("OldTestament") {
-        private final Set<? extends Book> books = EnumSet.allOf(OldTestamentBook.class);
+        private final Set<? extends Book> books = EnumSet.allOf(OldTestamentBooks.class);
 
         @Override
         public Set<? extends Book> getBooks() {
@@ -24,7 +26,7 @@ public enum Testament {
 
     },
     NEW_TESTAMENT("NewTestament") {
-        private final Set<? extends Book> books = EnumSet.allOf(NewTestamentBook.class);
+        private final Set<? extends Book> books = EnumSet.allOf(NewTestamentBooks.class);
 
         @Override
         public Set<? extends Book> getBooks() {
@@ -41,6 +43,30 @@ public enum Testament {
         return name;
     }
 
+    @Override
+    public String getContent() {
+        return name;
+    }
+
+    @Override
+    public Collection<? extends TreeElement> getChildren() {
+        return getBooks();
+    }
+
+    @Override
+    public TreeElement getParent() {
+        return null;
+    }
+
+    public Book getBook(String name) {
+        for (Book book : getBooks()) {
+            if (name != null && name.equals(book.getTitle())) {
+                return book;
+            }
+        }
+        return null;
+    }
+
     public static Testament getTestament(String name) {
         for (Testament testament : Testament.values()) {
             String testamentName = testament.getName();
@@ -53,7 +79,13 @@ public enum Testament {
 
     public abstract Set<? extends Book> getBooks();
 
-    public enum OldTestamentBook implements Book {
+    /**
+     * Represents the all books of the Old Testament.
+     *
+     * @author lorandKutvolgyi
+     *
+     */
+    public enum OldTestamentBooks implements Book {
         GENESIS("GENESIS"),
         EXODUS("EXODUS"),
         LEVITICUS("LEVITICUS"),
@@ -94,10 +126,10 @@ public enum Testament {
         ZECHARIAH("ZECHARIAH"),
         MALACHI("MALACHI");
 
-        private static ChapterDao dao = DaoFactory.getInstanceOfChapterDao();
+        private static ChapterDao dao = ChapterDaoFactory.CHAPTER_SQL_DAO.getInstance();
         private String title;
 
-        private OldTestamentBook(String title) {
+        private OldTestamentBooks(String title) {
             this.title = title;
         }
 
@@ -113,17 +145,38 @@ public enum Testament {
 
         @Override
         public List<Chapter> getChapters() {
-            return dao.findAll(this);
+            return dao.findAllChapters(this);
         }
 
         @Override
         public Chapter getChapter(int id) {
-            return dao.findByChapterId(this, id);
+            return dao.findChapterById(this, id);
+        }
+
+        @Override
+        public Collection<? extends TreeElement> getChildren() {
+            return Collections.emptyList();
+        }
+
+        @Override
+        public String getContent() {
+            return getTitle();
+        }
+
+        @Override
+        public TreeElement getParent() {
+            return getTestament();
         }
 
     }
 
-    public enum NewTestamentBook implements Book {
+    /**
+     * Represents the all books of the New Testament.
+     *
+     * @author lorandKutvolgyi
+     *
+     */
+    public enum NewTestamentBooks implements Book {
         MATTHEW("MATTHEW"),
         MARK("MARK"),
         LUKE("LUKE"),
@@ -152,10 +205,10 @@ public enum Testament {
         JUDE("JUDE"),
         REVELATION("REVELATION");
 
-        private static ChapterDao dao = DaoFactory.getInstanceOfChapterDao();
+        private static ChapterDao dao = ChapterDaoFactory.CHAPTER_SQL_DAO.getInstance();
         private final String title;
 
-        private NewTestamentBook(String title) {
+        private NewTestamentBooks(String title) {
             this.title = title;
         }
 
@@ -171,12 +224,27 @@ public enum Testament {
 
         @Override
         public List<Chapter> getChapters() {
-            return dao.findAll(this);
+            return dao.findAllChapters(this);
         }
 
         @Override
         public Chapter getChapter(int id) {
-            return dao.findByChapterId(this, id);
+            return dao.findChapterById(this, id);
+        }
+
+        @Override
+        public Collection<? extends TreeElement> getChildren() {
+            return Collections.emptyList();
+        }
+
+        @Override
+        public String getContent() {
+            return getTitle();
+        }
+
+        @Override
+        public TreeElement getParent() {
+            return getTestament();
         }
     }
 }

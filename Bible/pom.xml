@@ -11,12 +11,12 @@
 	<properties>
 		<tycho.version>0.23.0</tycho.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<kepler-repo.url>http://download.eclipse.org/releases/kepler</kepler-repo.url>
+		<mars-repo.url>http://download.eclipse.org/releases/mars</mars-repo.url>
 	</properties>
 	<repositories>
 		<repository>
-			<id>kepler</id>
-			<url>${kepler-repo.url}</url>
+			<id>mars</id>
+			<url>${mars-repo.url}</url>
 			<layout>p2</layout>
 		</repository>
 	</repositories>

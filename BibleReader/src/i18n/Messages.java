@@ -1,8 +1,12 @@
 package i18n;
 
-import org.eclipse.e4.tools.services.Message;
-
-@Message(contributorURI = "platform:/plugin/BibleReader/resource")
+/**
+ * Message keys for I18N. All fields have to be the same as a property in the
+ * properties files.
+ *
+ * @author lorandKutvolgyi
+ *
+ */
 public class Messages {
     public String GENESIS;
     public String EXODUS;
@@ -75,4 +79,6 @@ public class Messages {
     public String OldTestament;
     public String NewTestament;
 
+    public String Bible_Study_Application;
+    public String Books;
 }

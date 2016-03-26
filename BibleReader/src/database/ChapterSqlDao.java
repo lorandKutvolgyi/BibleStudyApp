@@ -15,10 +15,10 @@ import model.Book;
 import model.Chapter;
 
 /**
- * Data access object for chapters of the Bible using a MySql database.
- * 
+ * Data access object for chapters of the Bible using MySql database.
+ *
  * @author lorandKutvolgyi
- * 
+ *
  */
 public class ChapterSqlDao implements ChapterDao {
 
@@ -51,12 +51,12 @@ public class ChapterSqlDao implements ChapterDao {
     }
 
     @Override
-    public Chapter findByChapterId(Book book, int id) {
+    public Chapter findChapterById(Book book, int id) {
         Chapter chapter = null;
         try {
             PreparedStatement stmt = createStatement(book, id);
             ResultSet result = executeQuery(book, id, stmt);
-            chapter = createChapterByResult(result);
+            chapter = createChapterByResult(book, result);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -64,8 +64,8 @@ public class ChapterSqlDao implements ChapterDao {
     }
 
     private PreparedStatement createStatement(Book book, int id) throws SQLException {
-        PreparedStatement stmt = connection.prepareStatement("SELECT Chapter, Content FROM " + book.getTitle()
-                + " WHERE chapter=?;");
+        PreparedStatement stmt = connection
+                .prepareStatement("SELECT Chapter, Content FROM " + book.getTitle() + " WHERE chapter=?;");
         stmt.setInt(1, id);
         return stmt;
     }
@@ -78,22 +78,21 @@ public class ChapterSqlDao implements ChapterDao {
         return result;
     }
 
-    private Chapter createChapterByResult(ResultSet result) throws SQLException {
-        Chapter chapter = new Chapter();
-        chapter.setId(result.getInt("Chapter"));
-        chapter.setText(result.getString("Content"));
-        return chapter;
+    private Chapter createChapterByResult(Book book, ResultSet result) throws SQLException {
+        int id = result.getInt("Chapter");
+        String content = result.getString("Content");
+        return new Chapter(id, content, book);
     }
 
     @Override
-    public List<Chapter> findAll(Book book) {
+    public List<Chapter> findAllChapters(Book book) {
         List<Chapter> chapters = new ArrayList<>();
         try {
-            PreparedStatement stmt = connection.prepareStatement("SELECT chapter, content FROM " + book.getTitle()
-                    + " ;");
+            PreparedStatement stmt = connection
+                    .prepareStatement("SELECT chapter, content FROM " + book.getTitle() + " ;");
             ResultSet result = stmt.executeQuery();
             while (result.next()) {
-                Chapter chapter = createChapterByResult(result);
+                Chapter chapter = createChapterByResult(book, result);
                 chapters.add(chapter);
             }
         } catch (SQLException e) {

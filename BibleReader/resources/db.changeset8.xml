@@ -2,15 +2,9 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-	<changeSet id="4" author="lkutvolg">
+	<changeSet id="2" author="lkutvolg">
 		<sql>
-			INSERT INTO parts_Numbers (Chapter_start,Verse_start,Chapter_end,Verse_end,Part)
-			VALUES(1,1,10,10,"Izrael a Sínai hegynél"),
-			(10,11,12,16,"Út a Párán-pusztába"),
-			(13,1,14,45,"Kánaán kikémlelése"),
-			(15,1,22,1,"Út Móáb síkságára"),
-			(22,2,25,18,"A móábiak és Bálám"),
-			(26,1,36,13,"Utolsó előkészületek Kánaán elfoglalására");
+			UPDATE DEUTERONOMY SET short_content="Mózes halála" WHERE chapter=34;
 		</sql>
 	</changeSet>
 </databaseChangeLog>
