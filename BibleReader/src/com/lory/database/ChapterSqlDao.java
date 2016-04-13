@@ -52,16 +52,15 @@ public class ChapterSqlDao implements ChapterDao {
 
     @Override
     public Chapter findChapterById(Book book, int id) {
-        throw new RuntimeException();
-        // Chapter chapter = null;
-        // try {
-        // PreparedStatement stmt = createStatement(book, id);
-        // ResultSet result = executeQuery(book, id, stmt);
-        // chapter = createChapterByResult(book, result);
-        // } catch (SQLException e) {
-        // e.printStackTrace();
-        // }
-        // return chapter;
+        Chapter chapter = null;
+        try {
+            PreparedStatement stmt = createStatement(book, id);
+            ResultSet result = executeQuery(book, id, stmt);
+            chapter = createChapterByResult(book, result);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return chapter;
     }
 
     private PreparedStatement createStatement(Book book, int id) throws SQLException {
