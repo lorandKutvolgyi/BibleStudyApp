@@ -1,4 +1,4 @@
-package database;
+package com.lory.database;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import model.Book;
-import model.Chapter;
+import com.lory.model.Book;
+import com.lory.model.Chapter;
 
 /**
- * Data access object for chapters of the Bible using MySql database.
+ * Data access object for chapters of the Bible using MySql com.lory.database.
  *
  * @author lorandKutvolgyi
  *
@@ -52,15 +52,16 @@ public class ChapterSqlDao implements ChapterDao {
 
     @Override
     public Chapter findChapterById(Book book, int id) {
-        Chapter chapter = null;
-        try {
-            PreparedStatement stmt = createStatement(book, id);
-            ResultSet result = executeQuery(book, id, stmt);
-            chapter = createChapterByResult(book, result);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return chapter;
+        throw new RuntimeException();
+        // Chapter chapter = null;
+        // try {
+        // PreparedStatement stmt = createStatement(book, id);
+        // ResultSet result = executeQuery(book, id, stmt);
+        // chapter = createChapterByResult(book, result);
+        // } catch (SQLException e) {
+        // e.printStackTrace();
+        // }
+        // return chapter;
     }
 
     private PreparedStatement createStatement(Book book, int id) throws SQLException {

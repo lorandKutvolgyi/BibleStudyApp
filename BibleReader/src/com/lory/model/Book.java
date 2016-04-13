@@ -1,4 +1,4 @@
-package model;
+package com.lory.model;
 
 import java.util.List;
 

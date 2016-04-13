@@ -1,4 +1,4 @@
-package view;
+package com.lory.view;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -20,14 +20,14 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 
-import eventhandler.BookSelectionListener;
-import i18n.MessageService;
-import i18n.Messages;
-import model.Book;
-import model.Chapter;
-import model.CurrentChapter;
-import model.Testament;
-import model.TreeElement;
+import com.lory.eventhandler.BookSelectionListener;
+import com.lory.i18n.MessageService;
+import com.lory.i18n.Messages;
+import com.lory.model.Book;
+import com.lory.model.Chapter;
+import com.lory.model.CurrentChapter;
+import com.lory.model.Testament;
+import com.lory.model.TreeElement;
 
 /**
  * Shows the title of the books.
@@ -39,7 +39,6 @@ public class BooksPart {
 
     @Inject
     private EPartService service;
-
     @Inject
     @Translation
     private Messages messages;

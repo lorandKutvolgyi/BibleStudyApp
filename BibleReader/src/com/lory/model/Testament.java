@@ -1,4 +1,4 @@
-package model;
+package com.lory.model;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -6,8 +6,8 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
-import database.ChapterDao;
-import database.ChapterDaoFactory;
+import com.lory.database.ChapterDao;
+import com.lory.database.ChapterDaoFactory;
 
 /**
  * Represents the Testaments of the Bible.

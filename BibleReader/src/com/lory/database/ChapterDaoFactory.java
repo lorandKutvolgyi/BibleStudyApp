@@ -1,4 +1,4 @@
-package database;
+package com.lory.database;
 
 /**
  * Factory for Chapter Dao.

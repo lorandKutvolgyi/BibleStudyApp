@@ -1,4 +1,4 @@
-package view;
+package com.lory.view;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -15,9 +15,9 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
-import i18n.MessageService;
-import i18n.Messages;
-import model.CurrentChapter;
+import com.lory.i18n.MessageService;
+import com.lory.i18n.Messages;
+import com.lory.model.CurrentChapter;
 
 /**
  * Shows the text of the selected chapter.

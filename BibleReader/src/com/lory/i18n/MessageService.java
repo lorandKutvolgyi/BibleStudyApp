@@ -1,9 +1,9 @@
-package i18n;
+package com.lory.i18n;
 
 import java.lang.reflect.Field;
 
 /**
- * Service class for i18n messages. This is not intended to subclass it.
+ * Service class for com.lory.i18n messages. This is not intended to subclass it.
  *
  * @author lorandKutvolgyi
  *

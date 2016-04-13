@@ -1,4 +1,4 @@
-package eventhandler;
+package com.lory.eventhandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +23,9 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Tree;
 
-import model.Book;
-import model.Chapter;
-import model.CurrentChapter;
+import com.lory.model.Book;
+import com.lory.model.Chapter;
+import com.lory.model.CurrentChapter;
 
 /**
  * Event handler for BooksPart.

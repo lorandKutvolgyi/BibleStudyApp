@@ -5,14 +5,15 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import model.Chapter;
-import model.Testament;
-
 import org.junit.Before;
 import org.junit.Test;
 
+import com.lory.database.ChapterSqlDao;
+import com.lory.model.Chapter;
+import com.lory.model.Testament;
+
 /**
- * Integration test for {@link ChapterSqlDao}. The database server have to work
+ * Integration test for {@link ChapterSqlDao}. The com.lory.database server have to work
  * to make this test work.
  * 
  * @author lorandKutvolgyi

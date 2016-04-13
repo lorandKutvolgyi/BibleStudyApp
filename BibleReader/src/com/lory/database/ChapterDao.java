@@ -1,9 +1,9 @@
-package database;
+package com.lory.database;
 
 import java.util.List;
 
-import model.Book;
-import model.Chapter;
+import com.lory.model.Book;
+import com.lory.model.Chapter;
 
 /**
  * Data access object for chapters of the Bible.

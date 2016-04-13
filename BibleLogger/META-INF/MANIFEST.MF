@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: BibleLogger
+Bundle-SymbolicName: BibleLogger;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: org.aspectj.runtime;bundle-version="1.8.9"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ClassPath: .,
+ BibleLogger.jar
+Eclipse-SupplementBundle: reader
+Export-Package: com.lory.logging;aspects=BibleLogger
+Bundle-ActivationPolicy: lazy

@@ -1,4 +1,4 @@
-package i18n;
+package com.lory.i18n;
 
 /**
  * Message keys for I18N. All fields have to be the same as a property in the

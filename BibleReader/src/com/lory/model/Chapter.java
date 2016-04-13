@@ -1,4 +1,4 @@
-package model;
+package com.lory.model;
 
 /**
  * Represents a chapter of a book in the Bible.
