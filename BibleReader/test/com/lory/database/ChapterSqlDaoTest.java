@@ -1,4 +1,4 @@
-package database;
+package com.lory.database;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
