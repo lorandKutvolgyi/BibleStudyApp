@@ -3,15 +3,15 @@ package com.lory.i18n;
 import java.lang.reflect.Field;
 
 /**
- * Service class for com.lory.i18n messages. This is not intended to subclass it.
+ * Service class for com.lory.i18n messages. This is not intended to subclass
+ * it.
  *
  * @author lorandKutvolgyi
  *
  */
 public final class MessageService {
 
-    private MessageService() {
-    }
+    private MessageService() {}
 
     /**
      * Provides the message String which relates to parameter messageKey.
@@ -28,4 +28,10 @@ public final class MessageService {
             throw new IllegalArgumentException(messageKey);
         }
     }
+
+    @Override
+    public String toString() {
+        return "MessageService";
+    }
+
 }

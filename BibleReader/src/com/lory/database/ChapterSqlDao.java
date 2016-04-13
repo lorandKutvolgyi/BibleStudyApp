@@ -101,4 +101,9 @@ public class ChapterSqlDao implements ChapterDao {
         }
         return chapters;
     }
+
+    @Override
+    public String toString() {
+        return "ChapterSqlDao\n\tconnection: " + connection + "\n\tURL: " + prop.getProperty("url");
+    }
 }

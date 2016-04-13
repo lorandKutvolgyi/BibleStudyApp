@@ -28,4 +28,10 @@ public class Chapter {
     public Book getBook() {
         return book;
     }
+
+    @Override
+    public String toString() {
+        return "Chapter\n\tid: " + id + "\n\ttext: " + text + "\n\tbook: " + book;
+    }
+
 }

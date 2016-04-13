@@ -73,4 +73,8 @@ public final class BibleTextPart implements Observer {
                 + CurrentChapter.getInstance().getId());
     }
 
+    @Override
+    public String toString() {
+        return "BibleTextPart\n\ttext: " + text.getText(0, 200);
+    }
 }

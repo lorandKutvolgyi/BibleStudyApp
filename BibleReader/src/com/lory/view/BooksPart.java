@@ -154,6 +154,11 @@ public class BooksPart {
         return CurrentChapter.getInstance() != null;
     }
 
+    @Override
+    public String toString() {
+        return "BooksPart\n\tselectionListener: " + selectionListener + "\n\tselection: " + books.getSelection();
+    }
+
     private class ViewerLabelProvider extends LabelProvider {
 
         @Override
@@ -164,6 +169,11 @@ public class BooksPart {
         @Override
         public String getText(Object element) {
             return MessageService.getMessage(messages, ((TreeElement) element).getContent());
+        }
+
+        @Override
+        public String toString() {
+            return "ViewerLabelProvider";
         }
     }
 
@@ -195,6 +205,10 @@ public class BooksPart {
         @Override
         public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {}
 
+        @Override
+        public String toString() {
+            return "ViewerTreeContentProvider";
+        }
     }
 
 }

@@ -23,4 +23,8 @@ public class CurrentChapter extends Observable {
         instance.addObserver(observer);
     }
 
+    @Override
+    public String toString() {
+        return "CurrentChapter\n\tchapter: " + chapter;
+    }
 }

@@ -230,4 +230,10 @@ public class BookSelectionListener implements ISelectionChangedListener {
     public void preventSelectionChangeEvent() {
         dontRunEventHandler = true;
     }
+
+    @Override
+    public String toString() {
+        return "BookSelectionListener\n\tcache: " + cache + "\n\tchapterNumbersPopupShell: " + chapterNumbersPopupShell
+                + "\n\tdontRunEventHandler: " + dontRunEventHandler;
+    }
 }
