@@ -1,5 +1,7 @@
 package com.lory.i18n;
 
+import org.eclipse.e4.core.di.annotations.Creatable;
+
 /**
  * Message keys for I18N. All fields have to be the same as a property in the
  * properties files.
@@ -7,6 +9,7 @@ package com.lory.i18n;
  * @author lorandKutvolgyi
  *
  */
+@Creatable
 public class Messages {
     public String GENESIS;
     public String EXODUS;
@@ -81,4 +84,5 @@ public class Messages {
 
     public String Bible_Study_Application;
     public String Books;
+
 }

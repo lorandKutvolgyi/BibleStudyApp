@@ -2,7 +2,6 @@ package com.lory.logging;
 
 import java.io.IOException;
 import java.util.logging.FileHandler;
-import java.util.logging.Formatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
@@ -10,6 +9,8 @@ import java.util.logging.SimpleFormatter;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 
 @Aspect
 public class BibleLogger {
@@ -22,24 +23,43 @@ public class BibleLogger {
         } catch (SecurityException | IOException e) {
             System.exit(1);
         }
-        Formatter formatterTxt = new SimpleFormatter();
-        fileTxt.setFormatter(formatterTxt);
+        fileTxt.setFormatter(new SimpleFormatter());
         fileTxt.setLevel(Level.FINEST);
         LOGGER.addHandler(fileTxt);
         LOGGER.setLevel(Level.SEVERE);
     }
 
-    @AfterThrowing("execution(* com.lory..*.*(..)) && !execution(* com.lory.logging..*.*(..))")
-    public void log(JoinPoint point) {
-        LOGGER.severe("\n*sourceLocation: " + point.getSourceLocation() + "\n*this: " + point.getThis() + "\n*call: "
-                + point.getSignature() + getArgs(point) + "\n");
+    @Pointcut("execution(public * com.lory..*.*(..)) && !execution(* com.lory.logging..*.*(..)) && !execution(* com.lory..*.toString(..))")
+    public void publicMethodExecution() {}
+
+    @Pointcut("execution(* com.lory..*.*(..)) && !execution(* com.lory.logging..*.*(..)) && !execution(* com.lory..*.toString(..))")
+    public void methodExecution() {}
+
+    @Before(value = "publicMethodExecution()")
+    public void debugLog(JoinPoint point) {
+        LOGGER.config(getMethodCallDetails(point));
+    }
+
+    @AfterThrowing(value = "methodExecution()", throwing = "throwable")
+    public void productLog(JoinPoint point, Throwable throwable) {
+        LOGGER.severe(getMethodCallDetails(point));
+        LOGGER.severe(getThrowableDetails(throwable));
+    }
+
+    private String getMethodCallDetails(JoinPoint point) {
+        return "\n*sourceLocation: " + point.getSourceLocation() + "\n*this: " + point.getThis() + "\n*call: "
+                + point.getSignature() + getArgs(point) + "\n";
+    }
+
+    private String getThrowableDetails(Throwable throwable) {
+        return throwable.toString();
     }
 
     private String getArgs(JoinPoint point) {
         Object[] args = point.getArgs();
         StringBuilder builder = new StringBuilder();
         for (Object arg : args) {
-            builder.append("\n" + arg.toString());
+            builder.append("\n" + (arg != null ? arg.toString() : "null"));
         }
         return builder.toString();
     }

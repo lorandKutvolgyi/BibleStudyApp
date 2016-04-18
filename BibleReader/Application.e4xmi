@@ -22,7 +22,6 @@
         </children>
       </children>
     </children>
-    <handlers xmi:id="_fpk6gO4lEeWpZ56YuS0hfQ" elementId="" contributionURI="bundleclass://reader/com.lory.eventhandler.WindowResizeListener"/>
   </children>
   <rootContext xmi:id="_d53TOSM8EeWAgOzJmBnGEA" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
     <children xmi:id="_d53TOiM8EeWAgOzJmBnGEA" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>

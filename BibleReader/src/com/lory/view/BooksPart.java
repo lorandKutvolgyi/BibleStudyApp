@@ -6,7 +6,6 @@ import javax.inject.Inject;
 import org.eclipse.e4.core.services.nls.Translation;
 import org.eclipse.e4.ui.di.PersistState;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
-import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TreePath;
@@ -21,6 +20,7 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 
 import com.lory.eventhandler.BookSelectionListener;
+import com.lory.eventhandler.PagingListener;
 import com.lory.i18n.MessageService;
 import com.lory.i18n.Messages;
 import com.lory.model.Book;
@@ -38,13 +38,13 @@ import com.lory.model.TreeElement;
 public class BooksPart {
 
     @Inject
-    private EPartService service;
-    @Inject
     @Translation
     private Messages messages;
-
+    @Inject
     private BookSelectionListener selectionListener;
     private TreeViewer books;
+    @Inject
+    private PagingListener pagingListener;
 
     @PostConstruct
     public void postConstruct(MPart part, final Composite parent) {
@@ -62,15 +62,15 @@ public class BooksPart {
         parent.setLayout(new FillLayout(SWT.HORIZONTAL));
     }
 
-    private void createBooksTree(final Composite parent) {
+    private void createBooksTree(Composite parent) {
         books = new TreeViewer(parent, SWT.V_SCROLL);
         books.setLabelProvider(new ViewerLabelProvider());
         books.setContentProvider(new ViewerTreeContentProvider());
         books.setInput(Testament.class);
-        selectionListener = new BookSelectionListener();
         books.addSelectionChangedListener(selectionListener);
         addEnterListener(books);
         addArrowButtonListener(books);
+        books.getTree().addKeyListener(pagingListener);
     }
 
     @PersistState
@@ -117,37 +117,8 @@ public class BooksPart {
                         || e.keyCode >= 'a' && e.keyCode <= 'z') {
                     selectionListener.preventSelectionChangeEvent();
                 }
-                if (!isSelectedChapter()) {
-                    return;
-                }
-                if (!(e.stateMask == SWT.ALT && (e.keyCode == SWT.ARROW_RIGHT || e.keyCode == SWT.ARROW_LEFT))) {
-                    return;
-                }
-
-                int id = CurrentChapter.getInstance().getId();
-                int newId = 0;
-                if (e.keyCode == SWT.ARROW_RIGHT) {
-                    newId = id + 1;
-                } else if (e.keyCode == SWT.ARROW_LEFT) {
-                    newId = id - 1;
-                }
-                e.doit = false;
-                MPart part = service.findPart("biblereader.BibleTextPart");
-                BibleTextPart textPart = (BibleTextPart) part.getObject();
-                Book book = CurrentChapter.getInstance().getBook();
-                if (newId != 0 && newId <= isMax(CurrentChapter.getInstance())) {
-                    textPart.setContent(book.getChapter(newId).getText());
-                    part.setLabel(MessageService.getMessage(messages, book.getTitle()) + " " + (newId));
-                    CurrentChapter.setCurrentChapter(book.getChapter(newId));
-                }
             }
         });
-    }
-
-    private int isMax(Chapter currentChapter) {
-        Book book = currentChapter.getBook();
-        int max = book.getChapters().size();
-        return max;
     }
 
     private boolean isSelectedChapter() {
@@ -156,7 +127,8 @@ public class BooksPart {
 
     @Override
     public String toString() {
-        return "BooksPart\n\tselectionListener: " + selectionListener + "\n\tselection: " + books.getSelection();
+        return "BooksPart\n\tselectionListener: " + selectionListener + "\n\tselection: "
+                + (books != null ? books.getSelection() : "");
     }
 
     private class ViewerLabelProvider extends LabelProvider {

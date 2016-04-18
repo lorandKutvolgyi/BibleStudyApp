@@ -25,6 +25,7 @@ public class CurrentChapter extends Observable {
 
     @Override
     public String toString() {
-        return "CurrentChapter\n\tchapter: " + chapter;
+        return "CurrentChapter\n\tchapter: "
+                + (chapter != null ? chapter.getBook().getTitle() + " " + chapter.getId() : "");
     }
 }

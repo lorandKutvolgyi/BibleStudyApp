@@ -3,6 +3,7 @@ package com.lory.eventhandler;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeSelection;
@@ -33,6 +34,7 @@ import com.lory.model.CurrentChapter;
  * @author lorandKutvolgyi
  *
  */
+@Creatable
 public class BookSelectionListener implements ISelectionChangedListener {
     private static final int MAXIMUM_CACHE_SIZE = 3;
     private final List<Character> cache = new ArrayList<>(3);

@@ -24,7 +24,7 @@ public final class MessageService {
         try {
             Field field = Messages.class.getField(messageKey);
             return (String) field.get(messages);
-        } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
+        } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new IllegalArgumentException(messageKey);
         }
     }

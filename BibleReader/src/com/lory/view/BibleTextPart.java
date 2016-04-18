@@ -15,6 +15,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
+import com.lory.eventhandler.PagingListener;
 import com.lory.i18n.MessageService;
 import com.lory.i18n.Messages;
 import com.lory.model.CurrentChapter;
@@ -35,6 +36,8 @@ public final class BibleTextPart implements Observer {
     @Translation
     private Messages messages;
     private MPart part;
+    @Inject
+    private PagingListener pagingListener;
 
     @PostConstruct
     public void postConstruct(Composite parent, MPart part) {
@@ -47,6 +50,7 @@ public final class BibleTextPart implements Observer {
         if (CurrentChapter.getInstance() != null) {
             loadCurrentChapter();
         }
+        text.addKeyListener(pagingListener);
     }
 
     /**
@@ -75,6 +79,6 @@ public final class BibleTextPart implements Observer {
 
     @Override
     public String toString() {
-        return "BibleTextPart\n\ttext: " + text.getText(0, 200);
+        return "BibleTextPart\n\ttext: " + (text != null ? text.getText(0, 200) : "");
     }
 }

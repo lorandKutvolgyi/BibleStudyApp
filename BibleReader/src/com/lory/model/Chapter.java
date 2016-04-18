@@ -31,7 +31,7 @@ public class Chapter {
 
     @Override
     public String toString() {
-        return "Chapter\n\tid: " + id + "\n\ttext: " + text + "\n\tbook: " + book;
+        return "Chapter\n\tid: " + id + "\n\ttext: " + text + "\n\tbook: " + book != null ? book.getTitle() : "";
     }
 
 }
