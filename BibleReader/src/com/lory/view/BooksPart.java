@@ -3,7 +3,6 @@ package com.lory.view;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
-import org.eclipse.e4.core.services.nls.Translation;
 import org.eclipse.e4.ui.di.PersistState;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.jface.viewers.ITreeContentProvider;
@@ -22,7 +21,6 @@ import org.eclipse.swt.widgets.Composite;
 import com.lory.eventhandler.BookSelectionListener;
 import com.lory.eventhandler.PagingListener;
 import com.lory.i18n.MessageService;
-import com.lory.i18n.Messages;
 import com.lory.model.Book;
 import com.lory.model.Chapter;
 import com.lory.model.CurrentChapter;
@@ -38,13 +36,12 @@ import com.lory.model.TreeElement;
 public class BooksPart {
 
     @Inject
-    @Translation
-    private Messages messages;
-    @Inject
     private BookSelectionListener selectionListener;
     private TreeViewer books;
     @Inject
     private PagingListener pagingListener;
+    @Inject
+    private MessageService messageService;
 
     @PostConstruct
     public void postConstruct(MPart part, final Composite parent) {
@@ -55,7 +52,7 @@ public class BooksPart {
     }
 
     private void setPartTitle(MPart part) {
-        part.setLabel(MessageService.getMessage(messages, "Books"));
+        part.setLabel(messageService.getMessage("Books"));
     }
 
     private void setLayout(final Composite parent) {
@@ -140,12 +137,7 @@ public class BooksPart {
 
         @Override
         public String getText(Object element) {
-            return MessageService.getMessage(messages, ((TreeElement) element).getContent());
-        }
-
-        @Override
-        public String toString() {
-            return "ViewerLabelProvider";
+            return messageService.getMessage(((TreeElement) element).getContent());
         }
     }
 
@@ -177,10 +169,6 @@ public class BooksPart {
         @Override
         public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {}
 
-        @Override
-        public String toString() {
-            return "ViewerTreeContentProvider";
-        }
     }
 
 }

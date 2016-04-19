@@ -38,6 +38,8 @@ public final class BibleTextPart implements Observer {
     private MPart part;
     @Inject
     private PagingListener pagingListener;
+    @Inject
+    private MessageService messageService;
 
     @PostConstruct
     public void postConstruct(Composite parent, MPart part) {
@@ -45,7 +47,7 @@ public final class BibleTextPart implements Observer {
         text = new Text(parent, SWT.MULTI | SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
         text.setEditable(false);
         MWindow window = (MWindow) modelService.find("readerWindow", application);
-        window.setLabel(MessageService.getMessage(messages, "Bible_Study_Application"));
+        window.setLabel(messageService.getMessage("Bible_Study_Application"));
         CurrentChapter.initialize(this);
         if (CurrentChapter.getInstance() != null) {
             loadCurrentChapter();
@@ -73,7 +75,7 @@ public final class BibleTextPart implements Observer {
     }
 
     private void refreshTitle() {
-        part.setLabel(MessageService.getMessage(messages, CurrentChapter.getInstance().getBook().getTitle()) + " "
+        part.setLabel(messageService.getMessage(CurrentChapter.getInstance().getBook().getTitle()) + " "
                 + CurrentChapter.getInstance().getId());
     }
 

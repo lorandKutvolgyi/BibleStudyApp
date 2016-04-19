@@ -2,6 +2,12 @@ package com.lory.i18n;
 
 import java.lang.reflect.Field;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import org.eclipse.e4.core.di.annotations.Creatable;
+import org.eclipse.e4.core.services.nls.Translation;
+
 /**
  * Service class for com.lory.i18n messages. This is not intended to subclass
  * it.
@@ -9,9 +15,12 @@ import java.lang.reflect.Field;
  * @author lorandKutvolgyi
  *
  */
+@Singleton
+@Creatable
 public final class MessageService {
-
-    private MessageService() {}
+    @Inject
+    @Translation
+    private Messages messages;
 
     /**
      * Provides the message String which relates to parameter messageKey.
@@ -20,7 +29,7 @@ public final class MessageService {
      * @param messageKey the key of the needed message
      * @return the message String
      */
-    public static String getMessage(Messages messages, String messageKey) {
+    public String getMessage(String messageKey) {
         try {
             Field field = Messages.class.getField(messageKey);
             return (String) field.get(messages);
@@ -28,10 +37,4 @@ public final class MessageService {
             throw new IllegalArgumentException(messageKey);
         }
     }
-
-    @Override
-    public String toString() {
-        return "MessageService";
-    }
-
 }
