@@ -9,11 +9,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.lory.model.Chapter;
-import com.lory.model.Testament;
+import com.lory.model.NewTestamentBooks;
 
 /**
- * Integration test for {@link ChapterSqlDao}. The com.lory.database server have
- * to work to make this test work.
+ * Integration test for {@link ChapterSqlDao}. The database server have to work
+ * to make this test work.
  *
  * @author lorandKutvolgyi
  *
@@ -28,7 +28,7 @@ public class ChapterSqlDaoTest {
 
     @Test
     public void testFindByChapterIdWhenIdIsCorrectShouldReturnTheChapter() {
-        Chapter chapter = underTest.findChapterById(Testament.NewTestamentBooks.I_JOHN, 1);
+        Chapter chapter = underTest.findChapterById(NewTestamentBooks.I_JOHN, 1);
         assertTrue(trimText(chapter).startsWith("Az élet igéjének szemtanúi"));
         assertEquals(1, chapter.getId());
     }
@@ -40,12 +40,12 @@ public class ChapterSqlDaoTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testFindByChapterIdWhenIdIsNotCorrectShouldThrowException() {
-        underTest.findChapterById(Testament.NewTestamentBooks.I_JOHN, 11);
+        underTest.findChapterById(NewTestamentBooks.I_JOHN, 11);
     }
 
     @Test
     public void testFindAll() {
-        List<Chapter> books = underTest.findAllChapters(Testament.NewTestamentBooks.I_JOHN);
+        List<Chapter> books = underTest.findAllChapters(NewTestamentBooks.I_JOHN);
 
         assertEquals(5, books.size());
 

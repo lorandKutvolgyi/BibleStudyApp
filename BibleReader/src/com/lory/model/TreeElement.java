@@ -15,7 +15,7 @@ public interface TreeElement {
      *
      * @return the text to show in the tree
      */
-    String getContent();
+    String getText();
 
     /**
      * Returns the subelements.

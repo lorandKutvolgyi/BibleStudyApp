@@ -6,21 +6,16 @@ package com.lory.database;
  * @author lorandKutvolgyi
  *
  */
-public enum ChapterDaoFactory {
-    CHAPTER_SQL_DAO;
+public class ChapterDaoFactory {
 
-    private ChapterDao dao;
-
-    private ChapterDaoFactory() {
-        dao = new ChapterSqlDao();
-    }
+    private static final ChapterDao dao = new ChapterSqlDao();
 
     /**
      * Factory method for ChapterDao.
      *
      * @return ChapterDao
      */
-    public ChapterDao getInstance() {
+    public static ChapterDao getInstance() {
         return dao;
     }
 }

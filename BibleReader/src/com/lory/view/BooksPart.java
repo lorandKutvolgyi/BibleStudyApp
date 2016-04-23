@@ -20,6 +20,7 @@ import org.eclipse.swt.widgets.Composite;
 
 import com.lory.eventhandler.BookSelectionListener;
 import com.lory.eventhandler.PagingListener;
+import com.lory.eventhandler.SortingListener;
 import com.lory.i18n.MessageService;
 import com.lory.model.Book;
 import com.lory.model.Chapter;
@@ -37,11 +38,11 @@ public class BooksPart {
 
     @Inject
     private BookSelectionListener selectionListener;
-    private TreeViewer books;
     @Inject
     private PagingListener pagingListener;
     @Inject
     private MessageService messageService;
+    private TreeViewer books;
 
     @PostConstruct
     public void postConstruct(MPart part, final Composite parent) {
@@ -68,6 +69,7 @@ public class BooksPart {
         addEnterListener(books);
         addArrowButtonListener(books);
         books.getTree().addKeyListener(pagingListener);
+        books.getTree().addKeyListener(new SortingListener(books));
     }
 
     @PersistState
@@ -110,8 +112,9 @@ public class BooksPart {
         books.getTree().addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if (e.keyCode == SWT.ARROW_UP || e.keyCode == SWT.ARROW_DOWN || e.keyCode == SWT.ARROW_RIGHT
-                        || e.keyCode >= 'a' && e.keyCode <= 'z') {
+                if (e.stateMask != SWT.CTRL && (e.keyCode == SWT.ARROW_UP || e.keyCode == SWT.ARROW_DOWN
+                        || e.keyCode == SWT.ARROW_RIGHT || e.keyCode == SWT.PAGE_UP || e.keyCode == SWT.PAGE_DOWN
+                        || e.keyCode >= 'a' && e.keyCode <= 'z')) {
                     selectionListener.preventSelectionChangeEvent();
                 }
             }
@@ -137,7 +140,7 @@ public class BooksPart {
 
         @Override
         public String getText(Object element) {
-            return messageService.getMessage(((TreeElement) element).getContent());
+            return messageService.getMessage(((TreeElement) element).getText());
         }
     }
 
