@@ -6,7 +6,7 @@
         <children xsi:type="basic:PartSashContainer" xmi:id="_NTWPECNLEeW4Abd66DaAtA" elementId="biblereader.partsashcontainer.0">
           <children xsi:type="basic:PartSashContainer" xmi:id="_O6yuACNLEeW4Abd66DaAtA" elementId="biblereader.partsashcontainer.1" horizontal="true">
             <children xsi:type="basic:PartStack" xmi:id="_WnWxECNLEeW4Abd66DaAtA" elementId="biblereader.partstack.0">
-              <children xsi:type="basic:Part" xmi:id="_Yj7ygCNLEeW4Abd66DaAtA" elementId="biblereader.BooksPart" contributionURI="bundleclass://reader/com.lory.view.BooksPart" label="">
+              <children xsi:type="basic:Part" xmi:id="_Yj7ygCNLEeW4Abd66DaAtA" elementId="biblereader.BooksPart" contributionURI="bundleclass://reader/com.lory.biblereader.perspective.parts.bookspart.BooksPart" label="">
                 <menus xmi:id="_SUbdYFrwEeWf1fIjSgOKGg" elementId="biblereader.menu.0"/>
                 <menus xsi:type="menu:PopupMenu" xmi:id="_UimlIFrwEeWf1fIjSgOKGg" elementId="biblereader.popupmenu.0" tooltip=""/>
                 <menus xmi:id="_VqXecFrwEeWf1fIjSgOKGg" elementId="biblereader.menu.1">
@@ -15,7 +15,7 @@
               </children>
             </children>
             <children xsi:type="basic:PartStack" xmi:id="_XF0OsCNLEeW4Abd66DaAtA" elementId="biblereader.partstack.1">
-              <children xsi:type="basic:Part" xmi:id="_33tk4Ff4EeWw0_pvm8Qobg" elementId="biblereader.BibleTextPart" accessibilityPhrase="" contributionURI="bundleclass://reader/com.lory.view.BibleTextPart" label=""/>
+              <children xsi:type="basic:Part" xmi:id="_33tk4Ff4EeWw0_pvm8Qobg" elementId="biblereader.BibleTextPart" accessibilityPhrase="" contributionURI="bundleclass://reader/com.lory.biblereader.perspective.parts.textpart.BibleTextPart" label=""/>
             </children>
             <children xsi:type="basic:PartStack" xmi:id="_Xiu0MCNLEeW4Abd66DaAtA" elementId="biblereader.partstack.2"/>
           </children>

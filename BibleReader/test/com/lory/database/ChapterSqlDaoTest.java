@@ -8,8 +8,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.lory.model.Chapter;
-import com.lory.model.NewTestamentBooks;
+import com.lory.biblereader.perspective.model.Chapter;
+import com.lory.biblereader.perspective.model.NewTestamentBooks;
+import com.lory.biblereader.perspective.model.dao.ChapterSqlDao;
 
 /**
  * Integration test for {@link ChapterSqlDao}. The database server have to work
