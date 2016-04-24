@@ -15,6 +15,12 @@ import com.lory.model.Chapter;
 import com.lory.model.CurrentChapter;
 import com.lory.view.BibleTextPart;
 
+/**
+ * EventHandler for paging event.
+ *
+ * @author lorandKutvolgyi
+ *
+ */
 @Creatable
 public class PagingListener extends KeyAdapter {
     @Inject
@@ -24,21 +30,37 @@ public class PagingListener extends KeyAdapter {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (!isSelectedChapter()) {
+        if (!isSelectedChapter() || !isPagingCommand(e)) {
             return;
         }
-        if (!(e.stateMask == SWT.ALT && (e.keyCode == SWT.ARROW_RIGHT || e.keyCode == SWT.ARROW_LEFT))) {
-            return;
-        }
-
         int id = CurrentChapter.getInstance().getId();
+        preventTreeEventTriggering(e);
+        changeTextPartContent(getNewId(e, id));
+    }
+
+    private boolean isSelectedChapter() {
+        return CurrentChapter.getInstance() != null;
+    }
+
+    private boolean isPagingCommand(KeyEvent e) {
+        return e.stateMask == SWT.ALT && (e.keyCode == SWT.ARROW_RIGHT || e.keyCode == SWT.ARROW_LEFT);
+    }
+
+    private void preventTreeEventTriggering(KeyEvent e) {
+        e.doit = false;
+    }
+
+    private int getNewId(KeyEvent e, int id) {
         int newId = 0;
         if (e.keyCode == SWT.ARROW_RIGHT) {
             newId = id + 1;
         } else if (e.keyCode == SWT.ARROW_LEFT) {
             newId = id - 1;
         }
-        e.doit = false;
+        return newId;
+    }
+
+    private void changeTextPartContent(int newId) {
         MPart part = partService.findPart("biblereader.BibleTextPart");
         BibleTextPart textPart = (BibleTextPart) part.getObject();
         Book book = CurrentChapter.getInstance().getBook();
@@ -47,10 +69,6 @@ public class PagingListener extends KeyAdapter {
             part.setLabel(messageService.getMessage(book.getTitle()) + " " + (newId));
             CurrentChapter.setCurrentChapter(book.getChapter(newId));
         }
-    }
-
-    private boolean isSelectedChapter() {
-        return CurrentChapter.getInstance() != null;
     }
 
     private int isMax(Chapter currentChapter) {

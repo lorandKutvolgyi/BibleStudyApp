@@ -7,10 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.eclipse.e4.core.services.nls.Translation;
-import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
-import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
-import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
@@ -29,10 +26,6 @@ import com.lory.model.CurrentChapter;
 public final class BibleTextPart implements Observer {
     private Text text;
     @Inject
-    private MApplication application;
-    @Inject
-    private EModelService modelService;
-    @Inject
     @Translation
     private Messages messages;
     private MPart part;
@@ -46,9 +39,7 @@ public final class BibleTextPart implements Observer {
         this.part = part;
         text = new Text(parent, SWT.MULTI | SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
         text.setEditable(false);
-        MWindow window = (MWindow) modelService.find("readerWindow", application);
-        window.setLabel(messageService.getMessage("Bible_Study_Application"));
-        CurrentChapter.initialize(this);
+        CurrentChapter.setObserver(this);
         if (CurrentChapter.getInstance() != null) {
             loadCurrentChapter();
         }

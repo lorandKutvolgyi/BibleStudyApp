@@ -12,13 +12,13 @@ import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.KeyAdapter;
-import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 
 import com.lory.eventhandler.BookSelectionListener;
+import com.lory.eventhandler.EnterKeyListener;
+import com.lory.eventhandler.NavigationKeyListener;
 import com.lory.eventhandler.PagingListener;
 import com.lory.eventhandler.SortingListener;
 import com.lory.i18n.MessageService;
@@ -65,10 +65,14 @@ public class BooksPart {
         books.setLabelProvider(new ViewerLabelProvider());
         books.setContentProvider(new ViewerTreeContentProvider());
         books.setInput(Testament.class);
+        addListeners();
+    }
+
+    private void addListeners() {
         books.addSelectionChangedListener(selectionListener);
-        addEnterListener(books);
-        addArrowButtonListener(books);
+        books.getTree().addKeyListener(new EnterKeyListener(books));
         books.getTree().addKeyListener(pagingListener);
+        books.getTree().addKeyListener(new NavigationKeyListener(selectionListener));
         books.getTree().addKeyListener(new SortingListener(books));
     }
 
@@ -95,30 +99,6 @@ public class BooksPart {
             Chapter persistedChapter = book.getChapter(Integer.valueOf(part.getPersistedState().get("chapterId")));
             CurrentChapter.setCurrentChapter(persistedChapter);
         }
-    }
-
-    private void addEnterListener(final TreeViewer books) {
-        books.getTree().addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.keyCode == SWT.CR && !books.getSelection().isEmpty()) {
-                    books.getTree().notifyListeners(SWT.Selection, null);
-                }
-            }
-        });
-    }
-
-    private void addArrowButtonListener(final TreeViewer books) {
-        books.getTree().addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.stateMask != SWT.CTRL && (e.keyCode == SWT.ARROW_UP || e.keyCode == SWT.ARROW_DOWN
-                        || e.keyCode == SWT.ARROW_RIGHT || e.keyCode == SWT.PAGE_UP || e.keyCode == SWT.PAGE_DOWN
-                        || e.keyCode >= 'a' && e.keyCode <= 'z')) {
-                    selectionListener.preventSelectionChangeEvent();
-                }
-            }
-        });
     }
 
     private boolean isSelectedChapter() {

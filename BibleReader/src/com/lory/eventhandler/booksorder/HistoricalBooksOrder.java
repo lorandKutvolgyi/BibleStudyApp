@@ -1,24 +1,17 @@
 package com.lory.eventhandler.booksorder;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.viewers.ViewerSorter;
-
-import com.lory.model.Book;
 import com.lory.model.NewTestamentBooks;
 import com.lory.model.OldTestamentBooks;
-import com.lory.model.Testament;
 
-public class HistoricalOrder extends ViewerSorter {
-    private static List<Testament> testaments = new ArrayList<>();
-    private static List<Book> books = new ArrayList<>();
+/**
+ * Represents the historical order of the tree in the BooksPart.
+ * 
+ * @author lorandKutvolgyi
+ *
+ */
+public class HistoricalBooksOrder extends AbstractBooksOrder {
 
-    static {
-        testaments.add(Testament.OLD_TESTAMENT);
-        testaments.add(Testament.NEW_TESTAMENT);
-
+    public HistoricalBooksOrder() {
         books.add(OldTestamentBooks.GENESIS);
         books.add(OldTestamentBooks.JOB);
         books.add(OldTestamentBooks.EXODUS);
@@ -85,16 +78,5 @@ public class HistoricalOrder extends ViewerSorter {
         books.add(NewTestamentBooks.II_JOHN);
         books.add(NewTestamentBooks.III_JOHN);
         books.add(NewTestamentBooks.REVELATION);
-    }
-
-    @Override
-    public int compare(Viewer viewer, Object first, Object second) {
-        if (first instanceof Book) {
-            assert second instanceof Book;
-            return books.indexOf(first) - books.indexOf(second);
-        }
-        assert first instanceof Testament;
-        assert second instanceof Testament;
-        return testaments.indexOf(first) - testaments.indexOf(second);
     }
 }

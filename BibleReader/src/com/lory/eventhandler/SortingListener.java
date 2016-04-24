@@ -9,8 +9,14 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 
-import com.lory.eventhandler.booksorder.HistoricalOrder;
+import com.lory.eventhandler.booksorder.HistoricalBooksOrder;
 
+/**
+ * EventHandler for sorting event.
+ * 
+ * @author lorandKutvolgyi
+ *
+ */
 public class SortingListener extends KeyAdapter {
     private static final List<ViewerSorter> sorters = new ArrayList<>();
     private static int index = 0;
@@ -18,7 +24,7 @@ public class SortingListener extends KeyAdapter {
 
     static {
         sorters.add(null);
-        sorters.add(new HistoricalOrder());
+        sorters.add(new HistoricalBooksOrder());
     }
 
     public SortingListener(TreeViewer viewer) {

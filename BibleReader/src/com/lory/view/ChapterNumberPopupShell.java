@@ -1,33 +1,32 @@
 package com.lory.view;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.KeyAdapter;
-import org.eclipse.swt.events.KeyEvent;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Tree;
 
+import com.lory.eventhandler.ChapterNumberLabelListener;
+import com.lory.eventhandler.ChapterNumberPopupListener;
 import com.lory.model.Book;
 import com.lory.model.Chapter;
-import com.lory.model.CurrentChapter;
 
+/**
+ * Shows the chapter numbers of the selected book.
+ *
+ * @author lorandKutvolgyi
+ *
+ */
 public class ChapterNumberPopupShell {
-    private static final int MAXIMUM_CACHE_SIZE = 3;
-    private final List<Character> cache = new ArrayList<>(3);
     private final Shell shell;
 
     public ChapterNumberPopupShell(SelectionChangedEvent event, Book selectedBook) {
@@ -35,7 +34,7 @@ public class ChapterNumberPopupShell {
         shell = new Shell(display, SWT.ON_TOP | SWT.FOCUSED);
         Composite comp = createMainComposite();
         initPopup(event, selectedBook, display, comp);
-        addListeners(comp);
+        shell.addKeyListener(new ChapterNumberPopupListener(comp, this));
     }
 
     private Composite createMainComposite() {
@@ -103,103 +102,40 @@ public class ChapterNumberPopupShell {
         for (int i = 1; i <= numOfChapters; i++) {
             Label label = new Label(comp, SWT.HORIZONTAL);
             label.setText(Integer.toString(i));
-            addListenerToLabels(book, label, i);
+            label.addMouseListener(new ChapterNumberLabelListener(book, label, i, this));
         }
     }
 
-    private void addListeners(Composite comp) {
-        addEscListener(comp);
-        addNumbersListener(comp);
-    }
-
-    private void addEscListener(final Composite comp) {
-        comp.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.keyCode == SWT.ESC) {
-                    close();
-                }
-            }
-        });
-    }
-
-    private void addNumbersListener(final Composite comp) {
-        comp.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(final KeyEvent e) {
-                if (!(e.keyCode >= '0' && e.keyCode <= '9')) {
-                    return;
-                }
-                if (cache.isEmpty() && e.keyCode == '0') {
-                    return;
-                }
-                if (cache.size() < MAXIMUM_CACHE_SIZE) {
-                    cache.add((char) e.keyCode);
-                }
-                if (!comp.isDisposed() && !cache.isEmpty()
-                        && comp.getChildren().length >= Integer.valueOf(getCachedChars())) {
-                    selectNumLabel(getCachedChars(), comp);
-                }
-                Display.getCurrent().timerExec(1000, new Runnable() {
-                    @Override
-                    public void run() {
-                        cache.clear();
-                    }
-                });
-            }
-        });
-    }
-
-    private String getCachedChars() {
-        StringBuilder result = new StringBuilder("");
-        for (Character cachedChar : cache) {
-            result.append(cachedChar);
-        }
-        return result.toString();
-    }
-
-    private void selectNumLabel(String key, Composite comp) {
-        Label label = (Label) comp.getChildren()[Integer.valueOf(key) - 1];
-        Event event = new Event();
-        event.data = 1000;
-        label.notifyListeners(SWT.MouseDown, event);
-    }
-
-    private void addListenerToLabels(final Book book, final Label label, final int i) {
-        label.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseDown(MouseEvent event) {
-                CurrentChapter.setCurrentChapter(book.getChapter(i));
-                label.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_GRAY));
-                if (event.data == null) {
-                    close();
-                } else {
-                    closeChapterNumberPopupShellDelayed((int) event.data);
-                }
-            }
-        });
-    }
-
-    private void closeChapterNumberPopupShellDelayed(int delay) {
-        Display.getCurrent().timerExec(delay, new Runnable() {
-            @Override
-            public void run() {
-                close();
-            }
-        });
-    }
-
+    /**
+     * Opens the shell.
+     *
+     * @see @link org.eclipse.swt.widgets.Shell#open()
+     */
     public void open() {
         shell.open();
     }
 
+    /**
+     * Closes the shell.
+     *
+     * @see org.eclipse.swt.widgets.Shell#close()
+     */
     public void close() {
         if (shell != null && !shell.isDisposed()) {
             shell.close();
         }
     }
 
+    /**
+     * Returns true if the widget has been disposed or has not been created, and
+     * false otherwise.
+     *
+     * @see org.eclipse.swt.widgets.Shell#isDisposed()
+     *
+     * @return true if the widget has been disposed or has not been created, and
+     *         false otherwise
+     */
     public boolean isDisposed() {
-        return shell.isDisposed();
+        return shell == null || shell.isDisposed();
     }
 }

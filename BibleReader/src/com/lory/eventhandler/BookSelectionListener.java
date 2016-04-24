@@ -9,7 +9,7 @@ import com.lory.model.Book;
 import com.lory.view.ChapterNumberPopupShell;
 
 /**
- * Event handler for BooksPart.
+ * Event handler for book selection event.
  *
  * @author lorandKutvolgyi
  *
@@ -22,7 +22,7 @@ public class BookSelectionListener implements ISelectionChangedListener {
 
     @Override
     public void selectionChanged(SelectionChangedEvent event) {
-        if (chapterNumberPopupShell != null && !chapterNumberPopupShell.isDisposed()) {
+        if (chapterNumberPopupShell != null) {
             chapterNumberPopupShell.close();
         }
         if (selectionChangeEventNotNeeded) {
@@ -36,12 +36,15 @@ public class BookSelectionListener implements ISelectionChangedListener {
         }
     }
 
-    private Object getSelectedElement(SelectionChangedEvent event) {
-        return ((TreeSelection) event.getSelection()).getFirstElement();
-    }
-
+    /**
+     * Prevent triggering the selection change event.
+     */
     public void preventSelectionChangeEvent() {
         selectionChangeEventNotNeeded = true;
+    }
+
+    private Object getSelectedElement(SelectionChangedEvent event) {
+        return ((TreeSelection) event.getSelection()).getFirstElement();
     }
 
     @Override

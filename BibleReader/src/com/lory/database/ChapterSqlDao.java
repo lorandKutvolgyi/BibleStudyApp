@@ -15,7 +15,7 @@ import com.lory.model.Book;
 import com.lory.model.Chapter;
 
 /**
- * Data access object for chapters of the Bible using MySql com.lory.database.
+ * Data access object for chapters of the Bible using MySql Database.
  *
  * @author lorandKutvolgyi
  *
