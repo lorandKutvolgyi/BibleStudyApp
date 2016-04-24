@@ -1,4 +1,4 @@
-package com.lory.database;
+package com.lory.biblereader.perspective.model.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
