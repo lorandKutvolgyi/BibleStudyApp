@@ -89,7 +89,7 @@ public class ChapterSqlDao implements ChapterDao {
         List<Chapter> chapters = new ArrayList<>();
         try {
             PreparedStatement stmt = connection
-                    .prepareStatement("SELECT chapter, content FROM " + book.getTitle() + " ;");
+                    .prepareStatement("SELECT chapter, content FROM " + book.getTitle() + " ORDER BY chapter;");
             ResultSet result = stmt.executeQuery();
             while (result.next()) {
                 Chapter chapter = createChapterByResult(book, result);

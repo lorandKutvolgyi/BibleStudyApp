@@ -56,8 +56,7 @@ public class ChapterNumberPopupShell {
 
     private int getNumberOfChapters(final Book selectedBook) {
         List<Chapter> chapters = selectedBook.getChapters();
-        int numOfChapters = chapters.size();
-        return numOfChapters;
+        return chapters.size();
     }
 
     private int calculateHeight(int numOfLabels) {

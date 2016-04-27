@@ -40,7 +40,7 @@ public final class BibleTextPart implements Observer {
         text = new Text(parent, SWT.MULTI | SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
         text.setEditable(false);
         CurrentChapter.setObserver(this);
-        if (CurrentChapter.getInstance() != null) {
+        if (CurrentChapter.getCurrentChapter() != null) {
             loadCurrentChapter();
         }
         text.addKeyListener(pagingListener);
@@ -61,13 +61,13 @@ public final class BibleTextPart implements Observer {
     }
 
     private void loadCurrentChapter() {
-        setContent(CurrentChapter.getInstance().getText());
+        setContent(CurrentChapter.getCurrentChapter().getText());
         refreshTitle();
     }
 
     private void refreshTitle() {
-        part.setLabel(messageService.getMessage(CurrentChapter.getInstance().getBook().getTitle()) + " "
-                + CurrentChapter.getInstance().getId());
+        part.setLabel(messageService.getMessage(CurrentChapter.getCurrentChapter().getBook().getTitle()) + " "
+                + CurrentChapter.getCurrentChapter().getId());
     }
 
     @Override

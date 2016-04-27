@@ -79,7 +79,6 @@ public class Messages {
     public String OldTestament;
     public String NewTestament;
 
-    public String Bible_Study_Application;
     public String Books;
 
 }

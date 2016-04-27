@@ -21,7 +21,7 @@ public class CurrentChapter extends Observable {
      *
      * @return the current chapter instance
      */
-    public static Chapter getInstance() {
+    public static Chapter getCurrentChapter() {
         return instance.chapter;
     }
 

@@ -53,9 +53,9 @@ public enum Testament implements TreeElement {
         return null;
     }
 
-    public Book getBook(String name) {
+    public Book getBook(String title) {
         for (Book book : getBooks()) {
-            if (name != null && name.equals(book.getTitle())) {
+            if (title != null && title.equals(book.getTitle())) {
                 return book;
             }
         }

@@ -3,6 +3,7 @@ package com.lory.biblereader.perspective.model.dao;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
@@ -10,7 +11,6 @@ import org.junit.Test;
 
 import com.lory.biblereader.perspective.model.Chapter;
 import com.lory.biblereader.perspective.model.NewTestamentBooks;
-import com.lory.biblereader.perspective.model.dao.ChapterSqlDao;
 
 /**
  * Integration test for {@link ChapterSqlDao}. The database server have to work
@@ -45,26 +45,32 @@ public class ChapterSqlDaoTest {
     }
 
     @Test
-    public void testFindAll() {
-        List<Chapter> books = underTest.findAllChapters(NewTestamentBooks.I_JOHN);
+    public void testFindAllShouldReturnAllChaptersOfTheBook() {
+        List<Chapter> chapters = underTest.findAllChapters(NewTestamentBooks.I_JOHN);
+        assertEquals(5, chapters.size());
+    }
 
-        assertEquals(5, books.size());
+    @Test
+    public void testFindAllShouldReturnCorrectChapters() {
+        List<Chapter> chapters = underTest.findAllChapters(NewTestamentBooks.I_JOHN);
+        assertTrue(isCorrectChapters(chapters));
+    }
 
-        Chapter firstChapter = books.get(0);
-        assertEquals(1, firstChapter.getId());
-        Chapter secondChapter = books.get(1);
-        assertEquals(2, secondChapter.getId());
-        Chapter thirdChapter = books.get(2);
-        assertEquals(3, thirdChapter.getId());
-        Chapter fourthChapter = books.get(3);
-        assertEquals(4, fourthChapter.getId());
-        Chapter fifthChapter = books.get(4);
-        assertEquals(5, fifthChapter.getId());
-
-        assertTrue(trimText(firstChapter).startsWith("Az élet igéjének szemtanúi"));
-        assertTrue(trimText(secondChapter).startsWith("Krisztus parancsolatainak megtartása"));
-        assertTrue(trimText(thirdChapter).startsWith("Isten gyermekei és az ördög gyermekei"));
-        assertTrue(trimText(fourthChapter).startsWith("A lelkek megvizsgálása"));
-        assertTrue(trimText(fifthChapter).startsWith("A hit győzelme"));
+    private boolean isCorrectChapters(List<Chapter> chapters) {
+        List<String> texts = new ArrayList<>();
+        texts.add("Az élet igéjének szemtanúi");
+        texts.add("Krisztus parancsolatainak megtartása");
+        texts.add("Isten gyermekei és az ördög gyermekei");
+        texts.add("A lelkek megvizsgálása");
+        texts.add("A hit győzelme");
+        for (int i = 0; i < chapters.size(); i++) {
+            if (i + 1 != chapters.get(i).getId()) {
+                return false;
+            }
+            if (!trimText(chapters.get(i)).startsWith(texts.get(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 }

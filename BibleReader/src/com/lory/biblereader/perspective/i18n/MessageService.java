@@ -9,8 +9,8 @@ import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.e4.core.services.nls.Translation;
 
 /**
- * Service class for com.lory.biblereader.perspective.i18n messages. This is not intended to subclass
- * it.
+ * Service class for com.lory.biblereader.perspective.i18n messages. This is not
+ * intended to subclass it.
  *
  * @author lorandKutvolgyi
  *

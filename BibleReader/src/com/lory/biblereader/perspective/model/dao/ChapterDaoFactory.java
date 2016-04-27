@@ -8,7 +8,7 @@ package com.lory.biblereader.perspective.model.dao;
  */
 public class ChapterDaoFactory {
 
-    private static final ChapterDao dao = new ChapterSqlDao();
+    private static ChapterDao dao;
 
     /**
      * Factory method for ChapterDao.
@@ -16,6 +16,9 @@ public class ChapterDaoFactory {
      * @return ChapterDao
      */
     public static ChapterDao getInstance() {
+        if (dao == null) {
+            dao = new ChapterSqlDao();
+        }
         return dao;
     }
 }

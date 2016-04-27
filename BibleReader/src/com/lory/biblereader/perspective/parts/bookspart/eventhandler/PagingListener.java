@@ -33,13 +33,13 @@ public class PagingListener extends KeyAdapter {
         if (!isSelectedChapter() || !isPagingCommand(e)) {
             return;
         }
-        int id = CurrentChapter.getInstance().getId();
+        int id = CurrentChapter.getCurrentChapter().getId();
         preventTreeEventTriggering(e);
         changeTextPartContent(getNewId(e, id));
     }
 
     private boolean isSelectedChapter() {
-        return CurrentChapter.getInstance() != null;
+        return CurrentChapter.getCurrentChapter() != null;
     }
 
     private boolean isPagingCommand(KeyEvent e) {
@@ -63,8 +63,8 @@ public class PagingListener extends KeyAdapter {
     private void changeTextPartContent(int newId) {
         MPart part = partService.findPart("biblereader.BibleTextPart");
         BibleTextPart textPart = (BibleTextPart) part.getObject();
-        Book book = CurrentChapter.getInstance().getBook();
-        if (newId != 0 && newId <= isMax(CurrentChapter.getInstance())) {
+        Book book = CurrentChapter.getCurrentChapter().getBook();
+        if (newId != 0 && newId <= isMax(CurrentChapter.getCurrentChapter())) {
             textPart.setContent(book.getChapter(newId).getText());
             part.setLabel(messageService.getMessage(book.getTitle()) + " " + (newId));
             CurrentChapter.setCurrentChapter(book.getChapter(newId));

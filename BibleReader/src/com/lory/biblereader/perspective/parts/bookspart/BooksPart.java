@@ -81,8 +81,8 @@ public class BooksPart {
         if (isSelectedChapter()) {
             String sel = books.getSelection().toString();
             part.getPersistedState().put("treeSelection", sel.substring(1, sel.length() - 1));
-            part.getPersistedState().put("bookTitle", CurrentChapter.getInstance().getBook().getTitle());
-            part.getPersistedState().put("chapterId", String.valueOf(CurrentChapter.getInstance().getId()));
+            part.getPersistedState().put("bookTitle", CurrentChapter.getCurrentChapter().getBook().getTitle());
+            part.getPersistedState().put("chapterId", String.valueOf(CurrentChapter.getCurrentChapter().getId()));
         }
     }
 
@@ -102,7 +102,7 @@ public class BooksPart {
     }
 
     private boolean isSelectedChapter() {
-        return CurrentChapter.getInstance() != null;
+        return CurrentChapter.getCurrentChapter() != null;
     }
 
     @Override
