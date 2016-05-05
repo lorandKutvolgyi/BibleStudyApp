@@ -29,10 +29,10 @@ public class BibleLogger {
         LOGGER.setLevel(Level.SEVERE);
     }
 
-    @Pointcut("execution(public * com.lory.biblereader.perspective..*.*(..)) && !execution(* com.lory.biblereader.perspective.logging..*.*(..)) && !execution(* com.lory.biblereader.perspective..*.toString(..))")
+    @Pointcut("execution(public * com.lory.biblereader..*.*(..)) && !execution(* com.lory.biblereader.logging..*.*(..)) && !execution(* com.lory.biblereader..*.toString(..))")
     public void publicMethodExecution() {}
 
-    @Pointcut("execution(* com.lory.biblereader.perspective..*.*(..)) && !execution(* com.lory.biblereader.perspective.logging..*.*(..)) && !execution(* com.lory.biblereader.perspective..*.toString(..))")
+    @Pointcut("execution(* com.lory.biblereader..*.*(..)) && !execution(* com.lory.biblereader.logging..*.*(..)) && !execution(* com.lory.biblereader..*.toString(..))")
     public void methodExecution() {}
 
     @Before(value = "publicMethodExecution()")

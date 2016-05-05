@@ -7,7 +7,7 @@
          point="org.eclipse.core.runtime.applications">
       <application>
          <run
-               class="com.lory.biblereader.perspective.logging.BibleLogger">
+               class="com.lory.biblereader.logging.BibleLogger">
          </run>
       </application>
    </extension>
