@@ -7,20 +7,20 @@ import org.eclipse.swt.events.KeyEvent;
 
 /**
  * Event handler for Enter key.
- * 
+ *
  * @author lorandKutvolgyi
  *
  */
 public class EnterKeyListener extends KeyAdapter {
-    TreeViewer books;
+    private TreeViewer books;
 
     public EnterKeyListener(TreeViewer books) {
         this.books = books;
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {
-        if (e.keyCode == SWT.CR && !books.getSelection().isEmpty()) {
+    public void keyPressed(KeyEvent event) {
+        if (event.keyCode == SWT.CR && !books.getSelection().isEmpty()) {
             books.getTree().notifyListeners(SWT.Selection, null);
         }
     }

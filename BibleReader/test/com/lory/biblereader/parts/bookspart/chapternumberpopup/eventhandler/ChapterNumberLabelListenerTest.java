@@ -21,7 +21,6 @@ import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.CurrentChapter;
 import com.lory.biblereader.parts.bookspart.chapternumberpopup.ChapterNumberPopupShell;
-import com.lory.biblereader.parts.bookspart.chapternumberpopup.eventhandler.ChapterNumberLabelListener;
 
 /**
  * Unit test for {@link ChapterNumberLabelListener}.
