@@ -13,7 +13,7 @@ import com.lory.biblereader.parts.bookspart.treesorter.HistoricalBooksOrder;
 
 /**
  * EventHandler for sorting event.
- * 
+ *
  * @author lorandKutvolgyi
  *
  */
@@ -32,17 +32,17 @@ public class SortingListener extends KeyAdapter {
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {
-        if (e.stateMask == SWT.CTRL && e.keyCode == 'o') {
+    public void keyPressed(KeyEvent event) {
+        if (event.stateMask == SWT.CTRL && event.keyCode == 'o') {
             viewer.setSorter(sorters.get(next()));
         }
     }
 
     private static int next() {
-        if (index < sorters.size() - 1) {
-            return ++index;
+        if (index == sorters.size() - 1) {
+            index = 0;
+            return index;
         }
-        index = 0;
-        return index;
+        return ++index;
     }
 }

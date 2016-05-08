@@ -16,8 +16,8 @@ import com.lory.biblereader.model.Testament;
  *
  */
 public abstract class AbstractBooksOrder extends ViewerSorter {
-    protected List<Testament> testaments = new ArrayList<>();
-    protected List<Book> books = new ArrayList<>();
+    private List<Testament> testaments = new ArrayList<>();
+    private List<Book> books = new ArrayList<>();
 
     public AbstractBooksOrder() {
         testaments.add(Testament.OLD_TESTAMENT);
@@ -33,5 +33,9 @@ public abstract class AbstractBooksOrder extends ViewerSorter {
         assert first instanceof Testament;
         assert second instanceof Testament;
         return testaments.indexOf(first) - testaments.indexOf(second);
+    }
+
+    protected List<Book> getBooks() {
+        return books;
     }
 }
