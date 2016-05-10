@@ -94,7 +94,7 @@ public class ChapterNumberPopupListenerTest {
     }
 
     @Test
-    public void testKeyPressedWhenKeyIsANonZeroOrNonFirstNumberAndCacheIsNotFullShouldAddNumberToCacheAndClickTheLabel() {
+    public void testKeyPressedWhenKeyIsANonZeroOrCacheIsNotEmptyAndCacheIsNotFullShouldAddNumberToCacheAndClickTheLabel() {
         event.keyCode = '1';
         Whitebox.setInternalState(underTest, "cache", cache);
         when(cache.size()).thenReturn(1);
