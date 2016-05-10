@@ -57,6 +57,7 @@ public class ChapterSqlDao implements ChapterDao {
             PreparedStatement stmt = createStatement(book, id);
             ResultSet result = executeQuery(book, id, stmt);
             chapter = createChapterByResult(book, result);
+            throw new RuntimeException();
         } catch (SQLException e) {
             e.printStackTrace();
         }

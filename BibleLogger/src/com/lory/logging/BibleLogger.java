@@ -19,25 +19,25 @@ public class BibleLogger {
 
     static {
         try {
-            fileTxt = new FileHandler("bible_logging.txt");
+            fileTxt = new FileHandler("biblelogging.txt");
         } catch (SecurityException | IOException e) {
             System.exit(1);
         }
         fileTxt.setFormatter(new SimpleFormatter());
         fileTxt.setLevel(Level.FINEST);
         LOGGER.addHandler(fileTxt);
-        LOGGER.setLevel(Level.SEVERE);
+        LOGGER.setLevel(Level.FINEST);
     }
 
-    @Pointcut("execution(public * com.lory.biblereader..*.*(..)) && !execution(* com.lory.biblereader.logging..*.*(..)) && !execution(* com.lory.biblereader..*.toString(..))")
+    @Pointcut("execution(public * com.lory.biblereader..*.*(..)) && !execution(* com.lory.biblereader..*.toString(..)) && !execution(* com.lory.biblereader..*Test.*(..))")
     public void publicMethodExecution() {}
 
-    @Pointcut("execution(* com.lory.biblereader..*.*(..)) && !execution(* com.lory.biblereader.logging..*.*(..)) && !execution(* com.lory.biblereader..*.toString(..))")
+    @Pointcut("execution(* com.lory.biblereader..*.*(..)) && !execution(* com.lory.biblereader..*.toString(..))")
     public void methodExecution() {}
 
     @Before(value = "publicMethodExecution()")
     public void debugLog(JoinPoint point) {
-        LOGGER.config(getMethodCallDetails(point));
+        LOGGER.finest(getMethodCallDetails(point));
     }
 
     @AfterThrowing(value = "methodExecution()", throwing = "throwable")
