@@ -26,7 +26,7 @@ public class BibleLogger {
         fileTxt.setFormatter(new SimpleFormatter());
         fileTxt.setLevel(Level.ALL);
         LOGGER.addHandler(fileTxt);
-        LOGGER.setLevel(Level.FINEST);
+        LOGGER.setLevel(Level.CONFIG);
     }
 
     @Pointcut("execution(public * com.lory.biblereader..*.*(..)) && !execution(* com.lory.biblereader..*.toString(..)) && !execution(* com.lory.biblereader..*Test.*(..))")
@@ -37,7 +37,7 @@ public class BibleLogger {
 
     @Before(value = "publicMethodExecution()")
     public void debugLog(JoinPoint point) {
-        LOGGER.finest(getMethodCallDetails(point));
+        LOGGER.config(getMethodCallDetails(point));
     }
 
     @AfterThrowing(value = "methodExecution()", throwing = "throwable")
@@ -59,6 +59,9 @@ public class BibleLogger {
         Object[] args = point.getArgs();
         StringBuilder builder = new StringBuilder();
         for (Object arg : args) {
+            if (arg instanceof String && ((String) arg).length() > 100) {
+                arg = ((String) arg).substring(0, 101) + "...";
+            }
             builder.append("\n" + (arg != null ? arg.toString() : "null"));
         }
         return builder.toString();

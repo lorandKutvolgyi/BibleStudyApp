@@ -72,6 +72,9 @@ public final class BibleTextPart implements Observer {
 
     @Override
     public String toString() {
-        return "BibleTextPart\n\ttext: " + (text != null ? text.getText(0, 200) : "");
+        if (text == null) {
+            return "";
+        }
+        return "BibleTextPart\n\ttext: " + text.getText(0, 101) + (text.getText().length() > 100 ? "..." : "");
     }
 }
