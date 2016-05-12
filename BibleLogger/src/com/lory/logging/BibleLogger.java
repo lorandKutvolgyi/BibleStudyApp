@@ -24,7 +24,7 @@ public class BibleLogger {
             System.exit(1);
         }
         fileTxt.setFormatter(new SimpleFormatter());
-        fileTxt.setLevel(Level.FINEST);
+        fileTxt.setLevel(Level.ALL);
         LOGGER.addHandler(fileTxt);
         LOGGER.setLevel(Level.FINEST);
     }

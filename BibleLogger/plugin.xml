@@ -3,13 +3,16 @@
 <plugin>
 
    <extension
-         id="application"
-         point="org.eclipse.core.runtime.applications">
-      <application>
-         <run
-               class="com.lory.logging.BibleLogger">
-         </run>
-      </application>
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            name="com.lory.logging"
+            application="org.eclipse.e4.ui.workbench.swt.E4Application">
+         <property
+               name="applicationCSS"
+               value="platform:/plugin/BibleLogger/css/default.css">
+         </property>
+      </product>
    </extension>
 
 </plugin>
