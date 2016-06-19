@@ -7,6 +7,7 @@ import static org.powermock.api.mockito.PowerMockito.whenNew;
 
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeSelection;
+import org.eclipse.swt.widgets.Display;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +26,7 @@ import com.lory.biblereader.parts.bookspart.chapternumberpopup.ChapterNumberPopu
  *
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(BookSelectionListener.class)
+@PrepareForTest({ Display.class, BookSelectionListener.class })
 public class BookSelectionListenerTest {
     private BookSelectionListener underTest;
     @Mock

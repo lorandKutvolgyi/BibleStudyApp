@@ -18,17 +18,14 @@ import com.lory.biblereader.parts.bookspart.treesorter.HistoricalBooksOrder;
  *
  */
 public class SortingListener extends KeyAdapter {
-    private static final List<ViewerSorter> sorters = new ArrayList<>();
-    private static int index = 0;
+    private final List<ViewerSorter> sorters = new ArrayList<>();
+    private int index = 0;
     private final TreeViewer viewer;
-
-    static {
-        sorters.add(null);
-        sorters.add(new HistoricalBooksOrder());
-    }
 
     public SortingListener(TreeViewer viewer) {
         this.viewer = viewer;
+        sorters.add(null);
+        sorters.add(new HistoricalBooksOrder());
     }
 
     @Override
@@ -38,7 +35,7 @@ public class SortingListener extends KeyAdapter {
         }
     }
 
-    private static int next() {
+    private int next() {
         if (index == sorters.size() - 1) {
             index = 0;
             return index;

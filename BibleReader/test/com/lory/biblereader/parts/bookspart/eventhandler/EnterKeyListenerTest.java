@@ -6,13 +6,14 @@ import static org.mockito.Mockito.when;
 
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.widgets.Tree;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
  * Unit test for {@link EnterKeyListener}.
@@ -20,6 +21,7 @@ import org.mockito.MockitoAnnotations;
  * @author lorandKutvolgyi
  *
  */
+@RunWith(PowerMockRunner.class)
 public class EnterKeyListenerTest {
     private EnterKeyListener underTest;
     @Mock
@@ -39,37 +41,43 @@ public class EnterKeyListenerTest {
 
     @Test
     public void testKeyPressedWhenSelectedBookExistsAndEnterIsPressedShouldTriggerSelectionEvent() throws Exception {
-        event.keyCode = SWT.CR;
+        int enter = 13;
+        event.keyCode = enter;
         when(books.getSelection()).thenReturn(selection);
         when(selection.isEmpty()).thenReturn(false);
         when(books.getTree()).thenReturn(tree);
 
         underTest.keyPressed(event);
 
-        verify(tree).notifyListeners(SWT.Selection, null);
+        int selection = 13;
+        verify(tree).notifyListeners(selection, null);
     }
 
     @Test
     public void testKeyPressedWhenSelectedBookDoesNotExistShouldNotTriggerSelectionEvent() throws Exception {
-        event.keyCode = SWT.CR;
+        int enter = 13;
+        event.keyCode = enter;
         when(books.getSelection()).thenReturn(selection);
         when(selection.isEmpty()).thenReturn(true);
         when(books.getTree()).thenReturn(tree);
 
         underTest.keyPressed(event);
 
-        verify(tree, never()).notifyListeners(SWT.Selection, null);
+        int selection = 13;
+        verify(tree, never()).notifyListeners(selection, null);
     }
 
     @Test
     public void testKeyPressedWhenNotEnterIsPressedShouldNotTriggerSelectionEvent() throws Exception {
-        event.keyCode = SWT.BS;
+        int backSpace = 8;
+        event.keyCode = backSpace;
         when(books.getSelection()).thenReturn(selection);
         when(selection.isEmpty()).thenReturn(false);
         when(books.getTree()).thenReturn(tree);
 
         underTest.keyPressed(event);
 
-        verify(tree, never()).notifyListeners(SWT.Selection, null);
+        int selection = 13;
+        verify(tree, never()).notifyListeners(selection, null);
     }
 }

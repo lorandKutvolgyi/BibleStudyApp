@@ -5,15 +5,16 @@ import static org.mockito.Mockito.verify;
 
 import java.util.Observable;
 
+import org.eclipse.swt.widgets.Display;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.internal.verification.VerificationModeFactory;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.reflect.Whitebox;
-
-import com.lory.biblereader.model.Chapter;
-import com.lory.biblereader.model.CurrentChapter;
 
 /**
  * Unit test for {@link CurrentChapter}.
@@ -21,6 +22,8 @@ import com.lory.biblereader.model.CurrentChapter;
  * @author lorandKutvolgyi
  *
  */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({ Display.class })
 public class CurrentChapterTest {
     @Mock
     private CurrentChapter underTest;

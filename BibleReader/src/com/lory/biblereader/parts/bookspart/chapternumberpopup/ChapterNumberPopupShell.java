@@ -17,8 +17,8 @@ import org.eclipse.swt.widgets.Tree;
 
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
-import com.lory.biblereader.parts.bookspart.chapternumberpopup.eventhandler.ChapterNumberLabelListener;
-import com.lory.biblereader.parts.bookspart.chapternumberpopup.eventhandler.ChapterNumberPopupListener;
+import com.lory.biblereader.parts.bookspart.chapternumberpopup.eventhandler.ChapterNumberMouseListener;
+import com.lory.biblereader.parts.bookspart.chapternumberpopup.eventhandler.ChapterNumberKeyListener;
 
 /**
  * Shows the chapter numbers of the selected book.
@@ -34,7 +34,7 @@ public class ChapterNumberPopupShell {
         shell = new Shell(display, SWT.ON_TOP | SWT.FOCUSED);
         Composite comp = createMainComposite();
         initPopup(event, selectedBook, display, comp);
-        shell.addKeyListener(new ChapterNumberPopupListener(comp, this));
+        shell.addKeyListener(new ChapterNumberKeyListener(comp));
     }
 
     private Composite createMainComposite() {
@@ -101,7 +101,7 @@ public class ChapterNumberPopupShell {
         for (int i = 1; i <= numOfChapters; i++) {
             Label label = new Label(comp, SWT.HORIZONTAL);
             label.setText(Integer.toString(i));
-            label.addMouseListener(new ChapterNumberLabelListener(book, label, i, this));
+            label.addMouseListener(new ChapterNumberMouseListener(book, label, i, this));
         }
     }
 

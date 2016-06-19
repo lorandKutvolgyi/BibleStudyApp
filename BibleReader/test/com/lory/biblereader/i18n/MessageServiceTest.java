@@ -2,14 +2,15 @@ package com.lory.biblereader.i18n;
 
 import static org.junit.Assert.assertEquals;
 
+import org.eclipse.swt.widgets.Display;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.internal.util.reflection.Whitebox;
-
-import com.lory.biblereader.i18n.MessageService;
-import com.lory.biblereader.i18n.Messages;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
  * Unit test for {@link MessageService}.
@@ -17,6 +18,8 @@ import com.lory.biblereader.i18n.Messages;
  * @author lorandKutvolgyi
  *
  */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({ Display.class })
 public class MessageServiceTest {
     private MessageService underTest;
     @Mock
@@ -24,6 +27,7 @@ public class MessageServiceTest {
 
     @Before
     public void setUp() {
+        System.out.println("MessageServiceTest " + Thread.currentThread().getContextClassLoader());
         MockitoAnnotations.initMocks(this);
         underTest = new MessageService();
         Whitebox.setInternalState(underTest, "messages", messages);

@@ -7,16 +7,19 @@ import java.util.List;
 
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerSorter;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.widgets.Display;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.api.support.membermodification.MemberModifier;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import org.powermock.reflect.Whitebox;
+
+import com.lory.biblereader.parts.bookspart.treesorter.HistoricalBooksOrder;
 
 /**
  * Unit test for {@link SortingListener}.
@@ -24,8 +27,8 @@ import org.powermock.reflect.Whitebox;
  * @author lorandKutvolgyi
  *
  */
-@PrepareForTest(SortingListener.class)
 @RunWith(PowerMockRunner.class)
+@PrepareForTest({ Display.class, SortingListener.class, HistoricalBooksOrder.class })
 public class SortingListenerTest {
     private SortingListener underTest;
     @Mock
@@ -35,27 +38,30 @@ public class SortingListenerTest {
     @Mock
     private List<ViewerSorter> sorters;
     @Mock
-    private ViewerSorter sorter;
+    private HistoricalBooksOrder historicalBooksOrder;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
+        System.out.println(getClass().getName() + Thread.currentThread().getContextClassLoader());
         MockitoAnnotations.initMocks(this);
+        PowerMockito.whenNew(HistoricalBooksOrder.class).withNoArguments().thenReturn(historicalBooksOrder);
         underTest = new SortingListener(viewer);
-        Whitebox.setInternalState(SortingListener.class, "sorters", sorters);
+        MemberModifier.field(SortingListener.class, "sorters").set(underTest, sorters);
     }
 
     @Test
     public void testKeyPressedWhenCtrlAndOArePressedShouldTheNextOrderIsSet() {
-        event.stateMask = SWT.CTRL;
+        int ctrl = 262144;
+        event.stateMask = ctrl;
         event.keyCode = 'o';
         when(sorters.size()).thenReturn(2);
         when(sorters.get(0)).thenReturn(null);
-        when(sorters.get(1)).thenReturn(sorter);
+        when(sorters.get(1)).thenReturn(historicalBooksOrder);
 
         underTest.keyPressed(event);
 
         verify(sorters).get(1);
-        verify(viewer).setSorter(sorter);
+        verify(viewer).setSorter(historicalBooksOrder);
 
         underTest.keyPressed(event);
 

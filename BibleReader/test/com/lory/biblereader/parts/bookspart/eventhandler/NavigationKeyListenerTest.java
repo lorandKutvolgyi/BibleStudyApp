@@ -3,12 +3,15 @@ package com.lory.biblereader.parts.bookspart.eventhandler;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.widgets.Display;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
  * Unit test for {@link NavigationKeyListener}.
@@ -16,6 +19,8 @@ import org.mockito.MockitoAnnotations;
  * @author lorandKutvolgyi
  *
  */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({ Display.class })
 public class NavigationKeyListenerTest {
     private NavigationKeyListener underTest;
     @Mock
@@ -25,13 +30,15 @@ public class NavigationKeyListenerTest {
 
     @Before
     public void SetUp() {
+        System.out.println(getClass().getName() + Thread.currentThread().getContextClassLoader());
         MockitoAnnotations.initMocks(this);
         underTest = new NavigationKeyListener(bookSelectionListener);
     }
 
     @Test
     public void testKeyPressedWhenKeyIsEnterShouldNotPrenentOfTriggeringSelectionEvent() throws Exception {
-        event.keyCode = SWT.CR;
+        int enter = 13;
+        event.keyCode = enter;
 
         underTest.keyPressed(event);
 
@@ -40,7 +47,8 @@ public class NavigationKeyListenerTest {
 
     @Test
     public void testKeyPressedWhenKeyIsSpaceShouldNotPrenentOfTriggeringSelectionEvent() throws Exception {
-        event.keyCode = SWT.SPACE;
+        int space = 32;
+        event.keyCode = space;
 
         underTest.keyPressed(event);
 
@@ -49,7 +57,8 @@ public class NavigationKeyListenerTest {
 
     @Test
     public void testKeyPressedWhenKeyIsArrowUpShouldPrenentOfTriggeringSelectionEvent() throws Exception {
-        event.keyCode = SWT.ARROW_UP;
+        int arrowUp = 16777217;
+        event.keyCode = arrowUp;
 
         underTest.keyPressed(event);
 
@@ -58,7 +67,8 @@ public class NavigationKeyListenerTest {
 
     @Test
     public void testKeyPressedWhenKeyIsArrowDownShouldPrenentOfTriggeringSelectionEvent() throws Exception {
-        event.keyCode = SWT.ARROW_DOWN;
+        int arrowDown = 16777218;
+        event.keyCode = arrowDown;
 
         underTest.keyPressed(event);
 
@@ -67,7 +77,8 @@ public class NavigationKeyListenerTest {
 
     @Test
     public void testKeyPressedWhenKeyIsArrowRightShouldPrenentOfTriggeringSelectionEvent() throws Exception {
-        event.keyCode = SWT.ARROW_RIGHT;
+        int arrowRight = 16777220;
+        event.keyCode = arrowRight;
 
         underTest.keyPressed(event);
 
@@ -76,7 +87,8 @@ public class NavigationKeyListenerTest {
 
     @Test
     public void testKeyPressedWhenKeyIsPageUpShouldPrenentOfTriggeringSelectionEvent() throws Exception {
-        event.keyCode = SWT.PAGE_UP;
+        int pageUp = 16777221;
+        event.keyCode = pageUp;
 
         underTest.keyPressed(event);
 
@@ -85,7 +97,8 @@ public class NavigationKeyListenerTest {
 
     @Test
     public void testKeyPressedWhenKeyIsPageDownShouldPrenentOfTriggeringSelectionEvent() throws Exception {
-        event.keyCode = SWT.PAGE_DOWN;
+        int pageDown = 16777222;
+        event.keyCode = pageDown;
 
         underTest.keyPressed(event);
 

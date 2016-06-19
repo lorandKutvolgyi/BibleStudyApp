@@ -19,23 +19,21 @@ import com.lory.biblereader.parts.bookspart.chapternumberpopup.ChapterNumberPopu
  * @author lorandKutvolgyi
  *
  */
-public class ChapterNumberPopupListener extends KeyAdapter {
+public class ChapterNumberKeyListener extends KeyAdapter {
     private static final int CACHE_CLEARING_DELAY = 1000;
     private static final int POPUP_CLOSING_DELAY = 1000;
     private static final int MAXIMUM_CACHE_SIZE = 3;
     private final List<Character> cache = new ArrayList<>(3);
     private final Composite composite;
-    private final ChapterNumberPopupShell shell;
 
-    public ChapterNumberPopupListener(Composite composite, ChapterNumberPopupShell shell) {
+    public ChapterNumberKeyListener(Composite composite) {
         this.composite = composite;
-        this.shell = shell;
     }
 
     @Override
     public void keyPressed(final KeyEvent event) {
         if (isEscCharacter(event)) {
-            shell.close();
+            ((ChapterNumberPopupShell) event.getSource()).close();
         }
         if (!isNumberCharacter(event)) {
             return;

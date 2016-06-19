@@ -9,7 +9,6 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -24,15 +23,15 @@ import com.lory.biblereader.model.CurrentChapter;
 import com.lory.biblereader.parts.bookspart.chapternumberpopup.ChapterNumberPopupShell;
 
 /**
- * Unit test for {@link ChapterNumberLabelListener}.
+ * Unit test for {@link ChapterNumberMouseListener}.
  *
  * @author lorandKutvolgyi
  *
  */
-@PrepareForTest({ CurrentChapter.class, Display.class })
 @RunWith(PowerMockRunner.class)
-public class ChapterNumberLabelListenerTest {
-    private ChapterNumberLabelListener underTest;
+@PrepareForTest({ Display.class, CurrentChapter.class })
+public class ChapterNumberMouseListenerTest {
+    private ChapterNumberMouseListener underTest;
     @Mock
     private Book book;
     @Mock
@@ -51,10 +50,9 @@ public class ChapterNumberLabelListenerTest {
         MockitoAnnotations.initMocks(this);
         PowerMockito.mockStatic(CurrentChapter.class);
         PowerMockito.mockStatic(Display.class);
-        underTest = new ChapterNumberLabelListener(book, label, 1, shell);
+        underTest = new ChapterNumberMouseListener(book, label, 1, shell);
     }
 
-    @Ignore
     @Test
     public void testMouseDownShouldSetCurrentChapterAndCloseTheShell() {
         when(book.getChapter(1)).thenReturn(chapter);
@@ -67,7 +65,6 @@ public class ChapterNumberLabelListenerTest {
         verify(shell).close();
     }
 
-    @Ignore
     @Test
     public void testMouseDownWhenEventDataIsSetShouldSetCurrentChapterAndCloseTheShellInDelayed() {
         event.data = 2;

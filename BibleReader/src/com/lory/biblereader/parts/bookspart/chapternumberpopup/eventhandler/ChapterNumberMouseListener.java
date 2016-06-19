@@ -16,13 +16,13 @@ import com.lory.biblereader.parts.bookspart.chapternumberpopup.ChapterNumberPopu
  * @author lorandKutvolgyi
  *
  */
-public class ChapterNumberLabelListener extends MouseAdapter {
+public class ChapterNumberMouseListener extends MouseAdapter {
     private final Book book;
     private final Label label;
     private final int chapterId;
     private final ChapterNumberPopupShell shell;
 
-    public ChapterNumberLabelListener(Book book, Label label, int chapterId, ChapterNumberPopupShell shell) {
+    public ChapterNumberMouseListener(Book book, Label label, int chapterId, ChapterNumberPopupShell shell) {
         this.book = book;
         this.label = label;
         this.chapterId = chapterId;

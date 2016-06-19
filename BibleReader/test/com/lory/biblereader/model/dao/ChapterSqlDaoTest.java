@@ -11,7 +11,6 @@ import org.junit.Test;
 
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.NewTestamentBooks;
-import com.lory.biblereader.model.dao.ChapterSqlDao;
 
 /**
  * Integration test for {@link ChapterSqlDao}. The database server have to work

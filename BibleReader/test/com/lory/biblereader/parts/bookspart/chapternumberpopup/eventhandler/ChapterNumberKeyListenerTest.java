@@ -9,7 +9,6 @@ import static org.mockito.Mockito.when;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -28,15 +27,16 @@ import org.powermock.reflect.Whitebox;
 import com.lory.biblereader.parts.bookspart.chapternumberpopup.ChapterNumberPopupShell;
 
 /**
- * Unit test for {@link ChapterNumberPopupListener}.
+ * Unit test for {@link ChapterNumberKeyListener}.
  *
  * @author lorandKutvolgyi
  *
  */
-@PrepareForTest({ Display.class })
+
 @RunWith(PowerMockRunner.class)
-public class ChapterNumberPopupListenerTest {
-    private ChapterNumberPopupListener underTest;
+@PrepareForTest({ Display.class })
+public class ChapterNumberKeyListenerTest {
+    private ChapterNumberKeyListener underTest;
     @Mock
     private Composite composite;
     @Mock
@@ -55,13 +55,14 @@ public class ChapterNumberPopupListenerTest {
     @Before
     public void SetUp() {
         MockitoAnnotations.initMocks(this);
-        PowerMockito.mockStatic(Display.class);
-        underTest = new ChapterNumberPopupListener(composite, shell);
+        underTest = new ChapterNumberKeyListener(composite);
     }
 
     @Test
     public void testKeyPressedWhenKeyIsEscShouldCloseTheShell() {
-        event.keyCode = SWT.ESC;
+        int esc = 27;
+        event.keyCode = esc;
+        when(event.getSource()).thenReturn(shell);
 
         underTest.keyPressed(event);
 
@@ -95,6 +96,7 @@ public class ChapterNumberPopupListenerTest {
 
     @Test
     public void testKeyPressedWhenKeyIsANonZeroOrCacheIsNotEmptyAndCacheIsNotFullShouldAddNumberToCacheAndClickTheLabel() {
+        PowerMockito.mockStatic(Display.class);
         event.keyCode = '1';
         Whitebox.setInternalState(underTest, "cache", cache);
         when(cache.size()).thenReturn(1);
@@ -113,6 +115,7 @@ public class ChapterNumberPopupListenerTest {
         underTest.keyPressed(event);
 
         verify(cache).add((char) event.keyCode);
-        verify(label).notifyListeners(eq(SWT.MouseDown), any());
+        int mouseDown = 3;
+        verify(label).notifyListeners(eq(mouseDown), any());
     }
 }

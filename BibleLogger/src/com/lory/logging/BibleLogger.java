@@ -29,10 +29,10 @@ public class BibleLogger {
         LOGGER.setLevel(Level.CONFIG);
     }
 
-    @Pointcut("execution(public * com.lory.biblereader..*.*(..)) && !execution(* com.lory.biblereader..*.toString(..)) && !execution(* com.lory.biblereader..*Test.*(..))")
+    @Pointcut("(execution(public * com.lory.biblereader..*.*(..)) && !execution(* com.lory.biblereader..*.toString(..))) && !execution(* *..*Test.*(..))")
     public void publicMethodExecution() {}
 
-    @Pointcut("execution(* com.lory.biblereader..*.*(..)) && !execution(* com.lory.biblereader..*.toString(..))")
+    @Pointcut("(execution(* com.lory.biblereader..*.*(..)) && !execution(* com.lory.biblereader..*.toString(..))) && !execution(* *..*Test.*(..))")
     public void methodExecution() {}
 
     @Before(value = "publicMethodExecution()")
@@ -42,8 +42,8 @@ public class BibleLogger {
 
     @AfterThrowing(value = "methodExecution()", throwing = "throwable")
     public void productLog(JoinPoint point, Throwable throwable) {
-        LOGGER.severe(getMethodCallDetails(point));
-        LOGGER.severe(getThrowableDetails(throwable));
+        LOGGER.config(getMethodCallDetails(point));
+        LOGGER.config(getThrowableDetails(throwable));
     }
 
     private String getMethodCallDetails(JoinPoint point) {
