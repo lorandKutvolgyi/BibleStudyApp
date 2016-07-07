@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-	<changeSet id="4" author="lkutvolg">
+	<changeSet id="5" author="lkutvolg">
 		<sql>
 			ALTER TABLE jesus_prophecies_exodus DROP COLUMN Prophecy;
 			INSERT INTO jesus_prophecies_exodus (Chapter_start,Verse_start,Chapter_end,Verse_end)
@@ -13,6 +13,7 @@
 			ALTER TABLE jesus_prophecies_deuteronomy DROP COLUMN Prophecy;
 			INSERT INTO jesus_prophecies_deuteronomy (Chapter_start,Verse_start,Chapter_end,Verse_end)
 			VALUES(18,15,18,15);
+			ALTER TABLE jesus_prophecies_joshua DROP COLUMN Prophecy;
 		</sql>
 	</changeSet>
 </databaseChangeLog>

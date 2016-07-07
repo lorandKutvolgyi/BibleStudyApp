@@ -2,7 +2,7 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-	<changeSet id="4" author="lkutvolg">
+	<changeSet id="6" author="lkutvolg">
 		<sql>
 			INSERT INTO parts_Numbers (Chapter_start,Verse_start,Chapter_end,Verse_end,Part)
 			VALUES(1,1,10,10,"Izrael a Sínai hegynél"),

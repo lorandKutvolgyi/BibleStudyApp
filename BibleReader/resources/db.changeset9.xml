@@ -2,7 +2,7 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-	<changeSet id="2" author="lkutvolg">
+	<changeSet id="9" author="lkutvolg">
 		<sql>
 			UPDATE NUMBERS SET short_content="Elindulnak a Sínai hegytől" WHERE chapter=10;
 			UPDATE NUMBERS SET short_content="A nép siránkozik, Isten fürjeket ad, A hetven prófétáló vén" WHERE chapter=11;
