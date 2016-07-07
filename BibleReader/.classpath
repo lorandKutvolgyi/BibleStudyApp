@@ -19,8 +19,5 @@
 	<classpathentry kind="lib" path="lib/mockito-all-1.9.1-20110911.jar"/>
 	<classpathentry kind="var" path="ASPECTJRT_LIB"/>
 	<classpathentry kind="lib" path="lib/objenesis-2.2.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate-validator-5.2.4.Final.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate-validator-annotation-processor-5.2.4.Final.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate-validator-cdi-5.2.4.Final.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
