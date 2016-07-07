@@ -4,7 +4,7 @@
 	<changeSet id="10" author="lkutvolg">
 		<sql>
 			INSERT INTO parts_JOSHUA (Chapter_Start, Verse_Start, Chapter_End, Verse_End, Part) 
-			VALUES(1,1,5,15,"Előkészület a honfoglalásra"),
+			VALUES(1,1,5,15,"Út Jerikóig"),
 			(6,1,12,24,"Honfoglalás"),
 			(13,1,21,45,"A föld felosztása"),
 			(22,1,22,34,"Oltárépítés a Jordánon túl"),
