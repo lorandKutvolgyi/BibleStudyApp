@@ -17,8 +17,8 @@ import org.eclipse.swt.widgets.Tree;
 
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
-import com.lory.biblereader.parts.bookspart.chapternumberpopup.eventhandler.ChapterNumberMouseListener;
 import com.lory.biblereader.parts.bookspart.chapternumberpopup.eventhandler.ChapterNumberKeyListener;
+import com.lory.biblereader.parts.bookspart.chapternumberpopup.eventhandler.ChapterNumberMouseListener;
 
 /**
  * Shows the chapter numbers of the selected book.
@@ -28,12 +28,13 @@ import com.lory.biblereader.parts.bookspart.chapternumberpopup.eventhandler.Chap
  */
 public class ChapterNumberPopupShell {
     private Shell shell;
+    private Display display;
 
     public ChapterNumberPopupShell(SelectionChangedEvent event, Book selectedBook) {
-        Display display = Display.getDefault();
+        display = Display.getDefault();
         shell = new Shell(display, SWT.ON_TOP | SWT.FOCUSED);
         Composite comp = createMainComposite();
-        initPopup(event, selectedBook, display, comp);
+        initPopup(event, selectedBook, comp);
         shell.addKeyListener(new ChapterNumberKeyListener(comp));
     }
 
@@ -43,13 +44,12 @@ public class ChapterNumberPopupShell {
         return comp;
     }
 
-    private void initPopup(SelectionChangedEvent event, final Book selectedBook, final Display display,
-            Composite comp) {
+    private void initPopup(SelectionChangedEvent event, final Book selectedBook, Composite comp) {
         shell.setLayout(new FillLayout());
         int numOfChapters = getNumberOfChapters(selectedBook);
         int height = calculateHeight(numOfChapters);
         shell.setSize(100, height);
-        shell.setLocation(calculateLocation(display, getTree(event), height));
+        shell.setLocation(calculateLocation(getTree(event), height));
         createLabels(selectedBook, numOfChapters, comp);
         comp.layout();
     }
@@ -80,12 +80,12 @@ public class ChapterNumberPopupShell {
         return rowsHeight;
     }
 
-    private Point calculateLocation(final Display display, Tree tree, int height) {
+    private Point calculateLocation(Tree tree, int height) {
         Point shellLocation = display.getActiveShell().getLocation();
         Rectangle bounds = tree.getSelection()[0].getBounds();
         Point result = new Point(shellLocation.x + bounds.x + bounds.width + 15,
                 shellLocation.y + bounds.y + bounds.height);
-        int screenHeight = Display.getDefault().getClientArea().height;
+        int screenHeight = display.getClientArea().height;
         if (result.y + height > screenHeight) {
             int diff = result.y + height - screenHeight;
             result.y -= diff;
