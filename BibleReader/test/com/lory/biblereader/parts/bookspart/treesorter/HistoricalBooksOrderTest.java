@@ -1,12 +1,8 @@
 package com.lory.biblereader.parts.bookspart.treesorter;
 
-import org.eclipse.swt.widgets.Display;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.lory.biblereader.model.OldTestamentBooks;
 import com.lory.biblereader.model.Testament;
@@ -17,14 +13,11 @@ import com.lory.biblereader.model.Testament;
  * @author lorandKutvolgyi
  *
  */
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({ Display.class })
 public class HistoricalBooksOrderTest {
     private HistoricalBooksOrder underTest;
 
     @Before
     public void setUp() {
-        System.out.println(getClass().getName() + Thread.currentThread().getContextClassLoader());
         underTest = new HistoricalBooksOrder();
     }
 

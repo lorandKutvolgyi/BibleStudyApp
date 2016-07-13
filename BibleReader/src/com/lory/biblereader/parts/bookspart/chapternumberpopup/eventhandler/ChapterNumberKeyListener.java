@@ -25,6 +25,7 @@ public class ChapterNumberKeyListener extends KeyAdapter {
     private static final int MAXIMUM_CACHE_SIZE = 3;
     private final List<Character> cache = new ArrayList<>(3);
     private final Composite composite;
+    private Display display;
 
     public ChapterNumberKeyListener(Composite composite) {
         this.composite = composite;
@@ -71,7 +72,11 @@ public class ChapterNumberKeyListener extends KeyAdapter {
     }
 
     private void clearCacheWithDelay() {
-        Display.getCurrent().timerExec(CACHE_CLEARING_DELAY, () -> cache.clear());
+        getDisplay().timerExec(CACHE_CLEARING_DELAY, () -> cache.clear());
+    }
+
+    private Display getDisplay() {
+        return display == null ? Display.getCurrent() : display;
     }
 
     private String concatCachedChars() {
@@ -87,5 +92,9 @@ public class ChapterNumberKeyListener extends KeyAdapter {
         Event event = new Event();
         event.data = POPUP_CLOSING_DELAY;
         label.notifyListeners(SWT.MouseDown, event);
+    }
+
+    void setDisplay(Display display) {
+        this.display = display;
     }
 }

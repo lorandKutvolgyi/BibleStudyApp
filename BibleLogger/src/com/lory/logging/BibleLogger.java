@@ -1,32 +1,25 @@
 package com.lory.logging;
 
-import java.io.IOException;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
+import java.io.File;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Aspect
 public class BibleLogger {
-    private final static Logger LOGGER = Logger.getLogger(BibleLogger.class.getName());
-    private static FileHandler fileTxt;
+    private final static Logger LOGGER = LoggerFactory.getLogger(BibleLogger.class);
 
-    static {
-        try {
-            fileTxt = new FileHandler("biblelogging.txt");
-        } catch (SecurityException | IOException e) {
-            System.exit(1);
+    public BibleLogger() {
+        File log4jProperties = new File("log4j.properties");
+        if (log4jProperties.exists()) {
+            PropertyConfigurator.configure(log4jProperties.getAbsolutePath());
         }
-        fileTxt.setFormatter(new SimpleFormatter());
-        fileTxt.setLevel(Level.ALL);
-        LOGGER.addHandler(fileTxt);
-        LOGGER.setLevel(Level.CONFIG);
     }
 
     @Pointcut("(execution(public * com.lory.biblereader..*.*(..)) && !execution(* com.lory.biblereader..*.toString(..))) && !execution(* *..*Test.*(..))")
@@ -37,13 +30,13 @@ public class BibleLogger {
 
     @Before(value = "publicMethodExecution()")
     public void debugLog(JoinPoint point) {
-        LOGGER.config(getMethodCallDetails(point));
+        LOGGER.debug(getMethodCallDetails(point));
     }
 
     @AfterThrowing(value = "methodExecution()", throwing = "throwable")
     public void productLog(JoinPoint point, Throwable throwable) {
-        LOGGER.config(getMethodCallDetails(point));
-        LOGGER.config(getThrowableDetails(throwable));
+        LOGGER.error(getMethodCallDetails(point));
+        LOGGER.error(getThrowableDetails(throwable));
     }
 
     private String getMethodCallDetails(JoinPoint point) {

@@ -21,6 +21,7 @@ public class ChapterNumberMouseListener extends MouseAdapter {
     private final Label label;
     private final int chapterId;
     private final ChapterNumberPopupShell shell;
+    private Display display;
 
     public ChapterNumberMouseListener(Book book, Label label, int chapterId, ChapterNumberPopupShell shell) {
         this.book = book;
@@ -32,19 +33,20 @@ public class ChapterNumberMouseListener extends MouseAdapter {
     @Override
     public void mouseDown(MouseEvent event) {
         CurrentChapter.setCurrentChapter(book.getChapter(chapterId));
-        label.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_GRAY));
-        if (event.data == null) {
-            closeShell();
-        } else {
-            closeShellDelayed((int) event.data);
-        }
+        label.setForeground(getDisplay().getSystemColor(SWT.COLOR_GRAY));
+        int delay = event.data == null ? 0 : (int) event.data;
+        closeShell(delay);
     }
 
-    private void closeShell() {
-        shell.close();
+    private Display getDisplay() {
+        return display == null ? Display.getCurrent() : display;
     }
 
-    private void closeShellDelayed(int delay) {
-        Display.getCurrent().timerExec(delay, (() -> closeShell()));
+    void setDisplay(Display display) {
+        this.display = display;
+    }
+
+    private void closeShell(int delay) {
+        getDisplay().timerExec(delay, (() -> shell.close()));
     }
 }

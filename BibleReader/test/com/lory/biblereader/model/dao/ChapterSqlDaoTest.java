@@ -20,7 +20,7 @@ import com.lory.biblereader.model.NewTestamentBooks;
  *
  */
 public class ChapterSqlDaoTest {
-    ChapterSqlDao underTest;
+    private ChapterSqlDao underTest;
 
     @Before
     public void setUp() {

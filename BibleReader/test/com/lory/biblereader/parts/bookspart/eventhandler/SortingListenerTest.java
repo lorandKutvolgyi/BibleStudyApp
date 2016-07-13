@@ -8,12 +8,10 @@ import java.util.List;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.events.KeyEvent;
-import org.eclipse.swt.widgets.Display;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.api.support.membermodification.MemberModifier;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -28,7 +26,7 @@ import com.lory.biblereader.parts.bookspart.treesorter.HistoricalBooksOrder;
  *
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ Display.class, SortingListener.class, HistoricalBooksOrder.class })
+@PrepareForTest({ SortingListener.class, HistoricalBooksOrder.class })
 public class SortingListenerTest {
     private SortingListener underTest;
     @Mock
@@ -42,8 +40,6 @@ public class SortingListenerTest {
 
     @Before
     public void setUp() throws Exception {
-        System.out.println(getClass().getName() + Thread.currentThread().getContextClassLoader());
-        MockitoAnnotations.initMocks(this);
         PowerMockito.whenNew(HistoricalBooksOrder.class).withNoArguments().thenReturn(historicalBooksOrder);
         underTest = new SortingListener(viewer);
         MemberModifier.field(SortingListener.class, "sorters").set(underTest, sorters);

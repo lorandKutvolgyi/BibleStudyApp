@@ -12,7 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -29,7 +28,7 @@ import com.lory.biblereader.parts.bookspart.chapternumberpopup.ChapterNumberPopu
  *
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ Display.class, CurrentChapter.class })
+@PrepareForTest({ CurrentChapter.class })
 public class ChapterNumberMouseListenerTest {
     private ChapterNumberMouseListener underTest;
     @Mock
@@ -47,29 +46,26 @@ public class ChapterNumberMouseListenerTest {
 
     @Before
     public void SetUp() {
-        MockitoAnnotations.initMocks(this);
         PowerMockito.mockStatic(CurrentChapter.class);
-        PowerMockito.mockStatic(Display.class);
         underTest = new ChapterNumberMouseListener(book, label, 1, shell);
+        underTest.setDisplay(display);
     }
 
     @Test
     public void testMouseDownShouldSetCurrentChapterAndCloseTheShell() {
         when(book.getChapter(1)).thenReturn(chapter);
-        PowerMockito.when(Display.getCurrent()).thenReturn(display);
 
         underTest.mouseDown(event);
 
         PowerMockito.verifyStatic();
         CurrentChapter.setCurrentChapter(chapter);
-        verify(shell).close();
+        verify(display).timerExec(eq(0), any());
     }
 
     @Test
     public void testMouseDownWhenEventDataIsSetShouldSetCurrentChapterAndCloseTheShellInDelayed() {
         event.data = 2;
         when(book.getChapter(1)).thenReturn(chapter);
-        PowerMockito.when(Display.getCurrent()).thenReturn(display);
 
         underTest.mouseDown(event);
 

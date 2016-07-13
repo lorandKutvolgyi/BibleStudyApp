@@ -6,13 +6,12 @@ import static org.mockito.Mockito.when;
 
 import java.util.List;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
-import org.eclipse.swt.widgets.Display;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -28,7 +27,7 @@ import com.lory.biblereader.model.CurrentChapter;
  *
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ Display.class, CurrentChapter.class })
+@PrepareForTest({ CurrentChapter.class })
 public class PagingListenerTest {
     PagingListener underTest;
     @Mock
@@ -46,7 +45,6 @@ public class PagingListenerTest {
 
     @Before
     public void SetUp() {
-        MockitoAnnotations.initMocks(this);
         PowerMockito.mockStatic(CurrentChapter.class);
         underTest = new PagingListener();
     }
@@ -54,10 +52,8 @@ public class PagingListenerTest {
     @Test
     public void testKeyPressedWhenAltAndArrowRightArePressedAndThereIsNextChapterShouldSetCurrentChapter() {
         PowerMockito.when(CurrentChapter.getCurrentChapter()).thenReturn(chapter);
-        int alt = 65536;
-        event.stateMask = alt;
-        int arrowRight = 16777220;
-        event.keyCode = arrowRight;
+        event.stateMask = SWT.ALT;
+        event.keyCode = SWT.ARROW_RIGHT;
         when(chapter.getId()).thenReturn(1);
         when(chapter.getBook()).thenReturn(book);
         when(book.getChapters()).thenReturn(chapters);
@@ -73,10 +69,8 @@ public class PagingListenerTest {
     @Test
     public void testKeyPressedWhenAltAndArrowLeftArePressedAndThereIsPreviousChapterShouldSetCurrentChapter() {
         PowerMockito.when(CurrentChapter.getCurrentChapter()).thenReturn(chapter);
-        int alt = 65536;
-        event.stateMask = alt;
-        int arrowLeft = 16777219;
-        event.keyCode = arrowLeft;
+        event.stateMask = SWT.ALT;
+        event.keyCode = SWT.ARROW_LEFT;
         when(chapter.getId()).thenReturn(2);
         when(chapter.getBook()).thenReturn(book);
         when(book.getChapters()).thenReturn(chapters);
@@ -92,10 +86,8 @@ public class PagingListenerTest {
     @Test
     public void testKeyPressedWhenAltAndArrowRightArePressedAndThereIsNoNextChapterShouldNotSetCurrentChapter() {
         PowerMockito.when(CurrentChapter.getCurrentChapter()).thenReturn(chapter);
-        int alt = 65536;
-        event.stateMask = alt;
-        int arrowRight = 16777220;
-        event.keyCode = arrowRight;
+        event.stateMask = SWT.ALT;
+        event.keyCode = SWT.ARROW_RIGHT;
         when(chapter.getId()).thenReturn(2);
         when(chapter.getBook()).thenReturn(book);
         when(book.getChapters()).thenReturn(chapters);
@@ -110,10 +102,8 @@ public class PagingListenerTest {
     @Test
     public void testKeyPressedWhenAltAndArrowLeftArePressedAndThereIsNoPreviousChapterShouldNotSetCurrentChapter() {
         PowerMockito.when(CurrentChapter.getCurrentChapter()).thenReturn(chapter);
-        int alt = 65536;
-        event.stateMask = alt;
-        int arrowLeft = 16777219;
-        event.keyCode = arrowLeft;
+        event.stateMask = SWT.ALT;
+        event.keyCode = SWT.ARROW_LEFT;
         when(chapter.getId()).thenReturn(1);
         when(chapter.getBook()).thenReturn(book);
         when(book.getChapters()).thenReturn(chapters);

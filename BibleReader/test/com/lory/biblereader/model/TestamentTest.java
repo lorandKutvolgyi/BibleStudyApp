@@ -6,12 +6,8 @@ import static org.junit.Assert.assertNull;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.eclipse.swt.widgets.Display;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.reflect.Whitebox;
 
 /**
@@ -20,14 +16,10 @@ import org.powermock.reflect.Whitebox;
  * @author lorandKutvolgyi
  *
  */
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({ Display.class })
 public class TestamentTest {
-    Testament underTest;
 
     @Before
     public void setUp() {
-        System.out.println(getClass().getName() + Thread.currentThread().getContextClassLoader());
         Set<Book> books = new HashSet<>();
         books.add(OldTestamentBooks.GENESIS);
         Whitebox.setInternalState(Testament.OLD_TESTAMENT, Set.class, books);

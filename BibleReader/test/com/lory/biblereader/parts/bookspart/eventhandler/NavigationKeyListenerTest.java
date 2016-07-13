@@ -4,13 +4,10 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 import org.eclipse.swt.events.KeyEvent;
-import org.eclipse.swt.widgets.Display;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
@@ -20,7 +17,6 @@ import org.powermock.modules.junit4.PowerMockRunner;
  *
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ Display.class })
 public class NavigationKeyListenerTest {
     private NavigationKeyListener underTest;
     @Mock
@@ -30,8 +26,6 @@ public class NavigationKeyListenerTest {
 
     @Before
     public void SetUp() {
-        System.out.println(getClass().getName() + Thread.currentThread().getContextClassLoader());
-        MockitoAnnotations.initMocks(this);
         underTest = new NavigationKeyListener(bookSelectionListener);
     }
 
