@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+	<changeSet id="13" author="lkutvolg">
+		<sql>
+			UPDATE JUDGES SET short_content ="Harcok Kánaánban" WHERE chapter=1;
+			UPDATE JUDGES SET short_content ="Izrael elfordul Istentől" WHERE chapter=2;
+			UPDATE JUDGES SET short_content ="Otniél, Éhúd, Samgar Izrael bírái" WHERE chapter=3;
+			UPDATE JUDGES SET short_content ="Sisera legyőzése" WHERE chapter=4;
+			UPDATE JUDGES SET short_content ="Debóra éneke" WHERE chapter=5;
+			UPDATE JUDGES SET short_content ="Gedeon elhívása" WHERE chapter=6;
+			UPDATE JUDGES SET short_content ="Gedeon győzelme" WHERE chapter=7;
+			UPDATE JUDGES SET short_content="Gedeon elfogja Midján királyait, Gedeon halála" WHERE chapter=8;
+			UPDATE JUDGES SET short_content="Abímelek" WHERE chapter=9;
+			UPDATE JUDGES SET short_content ="Tólá, Jáír Izrael bírái, Jefte történetének előzménye" WHERE chapter=10;
+			UPDATE JUDGES SET short_content ="Jefte győzelme" WHERE chapter=11;
+			UPDATE JUDGES SET short_content ="Jefte és Efraim viszálya, Ibcán, Élón és Abdón bírák" WHERE chapter=12;
+			UPDATE JUDGES SET short_content ="Sámson születése" WHERE chapter=13;
+			UPDATE JUDGES SET short_content ="Sámson házassága, lakodalma" WHERE chapter=14;
+			UPDATE JUDGES SET short_content ="Sámson hőstettei a filiszteusok ellen" WHERE chapter=15;
+			UPDATE JUDGES SET short_content ="Sámson és Delila, Sámson halála" WHERE chapter=16;
+			UPDATE JUDGES SET short_content ="Míká bálványozása" WHERE chapter=17;
+			UPDATE JUDGES SET short_content ="Dán törzse új helyet keres, elrabolják Miká bálványszobrait" WHERE chapter=18;
+			UPDATE JUDGES SET short_content ="Gibea lakosai megöli egy lévita feleségét" WHERE chapter=19;
+			UPDATE JUDGES SET short_content ="Izrael harca Benjámin törzse ellen" WHERE chapter=20;
+			UPDATE JUDGES SET short_content ="Benjámin törzsének helyreállítása" WHERE chapter=21;
+		</sql>
+	</changeSet>
+</databaseChangeLog>
