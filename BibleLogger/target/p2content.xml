@@ -1,5 +1,114 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <units size='64'>
+  <unit id='toolinglogger_product.application' version='1.0.0.201701221653'>
+    <provides size='1'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.application' version='1.0.0.201701221653'/>
+    </provides>
+    <requires size='21'>
+      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.gtk.linux.x86_64' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.executable.gtk.linux.x86' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.gtk.linux.x86' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.executable.win32.win32.x86_64' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolingorg.eclipse.equinox.launcher.win32.win32.x86_64' range='[1.1.401.v20161122-1740,1.1.401.v20161122-1740]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.cocoa.macosx.x86_64' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolingorg.eclipse.equinox.launcher.gtk.linux.x86_64' range='[1.1.400.v20160518-1444,1.1.400.v20160518-1444]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.cocoa.macosx.x86_64.eclipse' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.gtk.linux.x86_64.eclipse' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolingorg.eclipse.equinox.launcher.cocoa.macosx.x86_64' range='[1.1.400.v20160518-1444,1.1.400.v20160518-1444]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.executable.win32.win32.x86' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.win32.win32.x86.eclipse' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.gtk.linux.x86.eclipse' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolingorg.eclipse.equinox.launcher' range='[1.3.201.v20161025-1711,1.3.201.v20161025-1711]'/>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolingorg.eclipse.equinox.launcher.gtk.linux.x86' range='[1.1.400.v20160518-1444,1.1.400.v20160518-1444]'>
+        <filter>
+          (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.executable.gtk.linux.x86_64' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolingorg.eclipse.equinox.launcher.win32.win32.x86' range='[1.1.401.v20161122-1740,1.1.401.v20161122-1740]'>
+        <filter>
+          (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.win32.win32.x86' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.executable.cocoa.macosx.x86_64' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.win32.win32.x86_64' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.win32.win32.x86_64.eclipse' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
+        </filter>
+      </required>
+    </requires>
+    <touchpoint id='null' version='0.0.0'/>
+  </unit>
   <unit id='tooling.org.eclipse.update.feature.default' version='1.0.0' singleton='false'>
     <hostRequirements size='1'>
       <required namespace='org.eclipse.equinox.p2.eclipse.type' name='feature' range='0.0.0' optional='true' multiple='true' greedy='false'/>
@@ -205,6 +314,189 @@
     </provides>
     <touchpoint id='org.eclipse.equinox.p2.native' version='1.0.0'/>
   </unit>
+  <unit id='toolinglogger_product.configuration' version='1.0.0.201701221653'>
+    <provides size='1'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.configuration' version='1.0.0.201701221653'/>
+    </provides>
+    <requires size='35'>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.ini.cocoa.macosx.x86_64' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.config.gtk.linux.x86' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86org.eclipse.equinox.event' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolingcocoa.macosx.x86_64org.eclipse.equinox.common' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.ini.gtk.linux.x86' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86_64org.eclipse.equinox.common' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolingcocoa.macosx.x86_64org.eclipse.core.runtime' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.config.win32.win32.x86_64' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86_64org.eclipse.core.runtime' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86_64org.eclipse.equinox.simpleconfigurator' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86_64org.eclipse.core.runtime' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86org.eclipse.equinox.ds' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolingcocoa.macosx.x86_64org.eclipse.equinox.event' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolingcocoa.macosx.x86_64org.eclipse.equinox.simpleconfigurator' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86_64org.eclipse.equinox.simpleconfigurator' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86org.eclipse.equinox.simpleconfigurator' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86_64org.eclipse.equinox.common' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86_64org.eclipse.equinox.ds' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86org.eclipse.core.runtime' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86org.eclipse.core.runtime' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.ini.win32.win32.x86' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86org.eclipse.equinox.ds' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86_64org.eclipse.equinox.event' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.config.gtk.linux.x86_64' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86org.eclipse.equinox.event' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86org.eclipse.equinox.common' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.ini.win32.win32.x86_64' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.ini.gtk.linux.x86_64' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolingcocoa.macosx.x86_64org.eclipse.equinox.ds' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.config.win32.win32.x86' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86_64org.eclipse.equinox.ds' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.config.cocoa.macosx.x86_64' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86org.eclipse.equinox.common' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86_64org.eclipse.equinox.event' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
+        </filter>
+      </required>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86org.eclipse.equinox.simpleconfigurator' range='[1.0.0.201701221653,1.0.0.201701221653]'>
+        <filter>
+          (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
+        </filter>
+      </required>
+    </requires>
+    <touchpoint id='null' version='0.0.0'/>
+  </unit>
   <unit id='config.a.jre.javase' version='1.6.0' singleton='false'>
     <hostRequirements size='1'>
       <required namespace='org.eclipse.equinox.p2.iu' name='a.jre.javase' range='1.6.0'/>
@@ -253,189 +545,6 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='toolinglogger_product.configuration' version='1.0.0.201701221612'>
-    <provides size='1'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.configuration' version='1.0.0.201701221612'/>
-    </provides>
-    <requires size='35'>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.ini.cocoa.macosx.x86_64' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.ini.gtk.linux.x86' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolingcocoa.macosx.x86_64org.eclipse.equinox.common' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.config.win32.win32.x86_64' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86_64org.eclipse.core.runtime' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.config.gtk.linux.x86' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86org.eclipse.equinox.ds' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolingcocoa.macosx.x86_64org.eclipse.equinox.simpleconfigurator' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86_64org.eclipse.core.runtime' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolingcocoa.macosx.x86_64org.eclipse.core.runtime' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolingcocoa.macosx.x86_64org.eclipse.equinox.event' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86_64org.eclipse.equinox.ds' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86org.eclipse.core.runtime' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86org.eclipse.equinox.simpleconfigurator' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86_64org.eclipse.equinox.common' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86_64org.eclipse.equinox.simpleconfigurator' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.ini.win32.win32.x86' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86org.eclipse.equinox.ds' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86org.eclipse.equinox.event' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.config.gtk.linux.x86_64' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.ini.win32.win32.x86_64' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86_64org.eclipse.equinox.simpleconfigurator' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86org.eclipse.equinox.common' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.ini.gtk.linux.x86_64' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86_64org.eclipse.equinox.event' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolingcocoa.macosx.x86_64org.eclipse.equinox.ds' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.config.win32.win32.x86' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86_64org.eclipse.equinox.ds' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.config.cocoa.macosx.x86_64' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86org.eclipse.equinox.event' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86org.eclipse.core.runtime' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86_64org.eclipse.equinox.event' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86_64org.eclipse.equinox.common' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86org.eclipse.equinox.common' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86org.eclipse.equinox.simpleconfigurator' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
-        </filter>
-      </required>
-    </requires>
-    <touchpoint id='null' version='0.0.0'/>
-  </unit>
   <unit id='tooling.osgi.bundle.default' version='1.0.0' singleton='false'>
     <hostRequirements size='1'>
       <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='0.0.0' multiple='true' greedy='false'/>
@@ -468,119 +577,10 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='toolinglogger_product.application' version='1.0.0.201701221612'>
-    <provides size='1'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.application' version='1.0.0.201701221612'/>
-    </provides>
-    <requires size='21'>
-      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.gtk.linux.x86' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.win32.win32.x86.eclipse' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.executable.win32.win32.x86_64' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolingorg.eclipse.equinox.launcher.win32.win32.x86_64' range='[1.1.401.v20161122-1740,1.1.401.v20161122-1740]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.win32.win32.x86_64.eclipse' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.gtk.linux.x86_64' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolingorg.eclipse.equinox.launcher.gtk.linux.x86_64' range='[1.1.400.v20160518-1444,1.1.400.v20160518-1444]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.win32.win32.x86' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolingorg.eclipse.equinox.launcher.cocoa.macosx.x86_64' range='[1.1.400.v20160518-1444,1.1.400.v20160518-1444]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.cocoa.macosx.x86_64' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.gtk.linux.x86.eclipse' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.executable.cocoa.macosx.x86_64' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolingorg.eclipse.equinox.launcher' range='[1.3.201.v20161025-1711,1.3.201.v20161025-1711]'/>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.executable.win32.win32.x86' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.cocoa.macosx.x86_64.eclipse' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.gtk.linux.x86_64.eclipse' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolingorg.eclipse.equinox.launcher.gtk.linux.x86' range='[1.1.400.v20160518-1444,1.1.400.v20160518-1444]'>
-        <filter>
-          (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.executable.gtk.linux.x86_64' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolingorg.eclipse.equinox.launcher.win32.win32.x86' range='[1.1.401.v20161122-1740,1.1.401.v20161122-1740]'>
-        <filter>
-          (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.win32.win32.x86_64' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
-        </filter>
-      </required>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.executable.gtk.linux.x86' range='[1.0.0.201701221612,1.0.0.201701221612]'>
-        <filter>
-          (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
-        </filter>
-      </required>
-    </requires>
-    <touchpoint id='null' version='0.0.0'/>
-  </unit>
-  <unit id='toolinglogger_product.ini.cocoa.macosx.x86_64' version='1.0.0.201701221612' singleton='false'>
+  <unit id='toolinglogger_product.ini.cocoa.macosx.x86_64' version='1.0.0.201701221653' singleton='false'>
     <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.ini.cocoa.macosx.x86_64' version='1.0.0.201701221612'/>
-      <provided namespace='toolinglogger_product' name='logger_product.ini' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.ini.cocoa.macosx.x86_64' version='1.0.0.201701221653'/>
+      <provided namespace='toolinglogger_product' name='logger_product.ini' version='1.0.0.201701221653'/>
     </provides>
     <filter>
       (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
@@ -597,21 +597,39 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='logger_product.executable.win32.win32.x86_64.eclipse' version='1.0.0.201701221612' singleton='false'>
-    <provides size='1'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.win32.win32.x86_64.eclipse' version='1.0.0.201701221612'/>
+  <unit id='toolingwin32.win32.x86org.eclipse.equinox.event' version='1.0.0.201701221653' singleton='false'>
+    <hostRequirements size='2'>
+      <required namespace='osgi.bundle' name='org.eclipse.equinox.event' range='1.3.200.v20160324-1850'/>
+      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
+    </hostRequirements>
+    <properties size='1'>
+      <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
+    </properties>
+    <provides size='2'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86org.eclipse.equinox.event' version='1.0.0.201701221653'/>
+      <provided namespace='org.eclipse.equinox.p2.flavor' name='toolingwin32.win32.x86' version='1.0.0'/>
     </provides>
+    <requires size='2'>
+      <required namespace='osgi.bundle' name='org.eclipse.equinox.event' range='1.3.200.v20160324-1850'/>
+      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
+    </requires>
     <filter>
-      (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
+      (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
     </filter>
-    <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+    <touchpoint id='null' version='0.0.0'/>
     <touchpointData size='1'>
-      <instructions size='2'>
+      <instructions size='4'>
+        <instruction key='uninstall'>
+          uninstallBundle(bundle:${artifact})
+        </instruction>
+        <instruction key='install'>
+          installBundle(bundle:${artifact})
+        </instruction>
         <instruction key='configure'>
-          setLauncherName(name:eclipse)
+          setStartLevel(startLevel:2);markStarted(started: true);
         </instruction>
         <instruction key='unconfigure'>
-          setLauncherName()
+          setStartLevel(startLevel:-1);markStarted(started: false);
         </instruction>
       </instructions>
     </touchpointData>
@@ -650,7 +668,44 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='toolinggtk.linux.x86_64org.eclipse.core.runtime' version='1.0.0.201701221612' singleton='false'>
+  <unit id='toolinggtk.linux.x86_64org.eclipse.equinox.simpleconfigurator' version='1.0.0.201701221653' singleton='false'>
+    <hostRequirements size='2'>
+      <required namespace='osgi.bundle' name='org.eclipse.equinox.simpleconfigurator' range='1.1.200.v20160504-1450'/>
+      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
+    </hostRequirements>
+    <properties size='1'>
+      <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
+    </properties>
+    <provides size='2'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86_64org.eclipse.equinox.simpleconfigurator' version='1.0.0.201701221653'/>
+      <provided namespace='org.eclipse.equinox.p2.flavor' name='toolinggtk.linux.x86_64' version='1.0.0'/>
+    </provides>
+    <requires size='2'>
+      <required namespace='osgi.bundle' name='org.eclipse.equinox.simpleconfigurator' range='1.1.200.v20160504-1450'/>
+      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
+    </requires>
+    <filter>
+      (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
+    </filter>
+    <touchpoint id='null' version='0.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='4'>
+        <instruction key='uninstall'>
+          uninstallBundle(bundle:${artifact})
+        </instruction>
+        <instruction key='install'>
+          installBundle(bundle:${artifact})
+        </instruction>
+        <instruction key='configure'>
+          setStartLevel(startLevel:1);markStarted(started: true);
+        </instruction>
+        <instruction key='unconfigure'>
+          setStartLevel(startLevel:-1);markStarted(started: false);
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+  <unit id='toolinggtk.linux.x86_64org.eclipse.core.runtime' version='1.0.0.201701221653' singleton='false'>
     <hostRequirements size='2'>
       <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='3.12.0.v20160606-1342'/>
       <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
@@ -659,7 +714,7 @@
       <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
     </properties>
     <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86_64org.eclipse.core.runtime' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86_64org.eclipse.core.runtime' version='1.0.0.201701221653'/>
       <provided namespace='org.eclipse.equinox.p2.flavor' name='toolinggtk.linux.x86_64' version='1.0.0'/>
     </provides>
     <requires size='2'>
@@ -687,7 +742,7 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='toolingcocoa.macosx.x86_64org.eclipse.equinox.event' version='1.0.0.201701221612' singleton='false'>
+  <unit id='toolingcocoa.macosx.x86_64org.eclipse.equinox.event' version='1.0.0.201701221653' singleton='false'>
     <hostRequirements size='2'>
       <required namespace='osgi.bundle' name='org.eclipse.equinox.event' range='1.3.200.v20160324-1850'/>
       <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
@@ -696,7 +751,7 @@
       <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
     </properties>
     <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingcocoa.macosx.x86_64org.eclipse.equinox.event' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingcocoa.macosx.x86_64org.eclipse.equinox.event' version='1.0.0.201701221653'/>
       <provided namespace='org.eclipse.equinox.p2.flavor' name='toolingcocoa.macosx.x86_64' version='1.0.0'/>
     </provides>
     <requires size='2'>
@@ -724,47 +779,10 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='toolingwin32.win32.x86_64org.eclipse.equinox.ds' version='1.0.0.201701221612' singleton='false'>
-    <hostRequirements size='2'>
-      <required namespace='osgi.bundle' name='org.eclipse.equinox.ds' range='1.4.400.v20160226-2036'/>
-      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
-    </hostRequirements>
-    <properties size='1'>
-      <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
-    </properties>
+  <unit id='logger_product.executable.win32.win32.x86_64' version='1.0.0.201701221653'>
     <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86_64org.eclipse.equinox.ds' version='1.0.0.201701221612'/>
-      <provided namespace='org.eclipse.equinox.p2.flavor' name='toolingwin32.win32.x86_64' version='1.0.0'/>
-    </provides>
-    <requires size='2'>
-      <required namespace='osgi.bundle' name='org.eclipse.equinox.ds' range='1.4.400.v20160226-2036'/>
-      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
-    </requires>
-    <filter>
-      (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
-    </filter>
-    <touchpoint id='null' version='0.0.0'/>
-    <touchpointData size='1'>
-      <instructions size='4'>
-        <instruction key='uninstall'>
-          uninstallBundle(bundle:${artifact})
-        </instruction>
-        <instruction key='install'>
-          installBundle(bundle:${artifact})
-        </instruction>
-        <instruction key='configure'>
-          setStartLevel(startLevel:2);markStarted(started: true);
-        </instruction>
-        <instruction key='unconfigure'>
-          setStartLevel(startLevel:-1);markStarted(started: false);
-        </instruction>
-      </instructions>
-    </touchpointData>
-  </unit>
-  <unit id='logger_product.executable.win32.win32.x86_64' version='1.0.0.201701221612'>
-    <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.win32.win32.x86_64' version='1.0.0.201701221612'/>
-      <provided namespace='toolinglogger_product' name='logger_product.executable' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.win32.win32.x86_64' version='1.0.0.201701221653'/>
+      <provided namespace='toolinglogger_product' name='logger_product.executable' version='1.0.0.201701221653'/>
     </provides>
     <requires size='1'>
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.equinox.launcher.win32.win32.x86_64' range='0.0.0'>
@@ -777,48 +795,11 @@
       (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
     </filter>
     <artifacts size='1'>
-      <artifact classifier='binary' id='logger_product.executable.win32.win32.x86_64' version='1.0.0.201701221612'/>
+      <artifact classifier='binary' id='logger_product.executable.win32.win32.x86_64' version='1.0.0.201701221653'/>
     </artifacts>
     <touchpoint id='org.eclipse.equinox.p2.native' version='1.0.0'/>
   </unit>
-  <unit id='toolingwin32.win32.x86org.eclipse.core.runtime' version='1.0.0.201701221612' singleton='false'>
-    <hostRequirements size='2'>
-      <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='3.12.0.v20160606-1342'/>
-      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
-    </hostRequirements>
-    <properties size='1'>
-      <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
-    </properties>
-    <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86org.eclipse.core.runtime' version='1.0.0.201701221612'/>
-      <provided namespace='org.eclipse.equinox.p2.flavor' name='toolingwin32.win32.x86' version='1.0.0'/>
-    </provides>
-    <requires size='2'>
-      <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='3.12.0.v20160606-1342'/>
-      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
-    </requires>
-    <filter>
-      (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
-    </filter>
-    <touchpoint id='null' version='0.0.0'/>
-    <touchpointData size='1'>
-      <instructions size='4'>
-        <instruction key='uninstall'>
-          uninstallBundle(bundle:${artifact})
-        </instruction>
-        <instruction key='install'>
-          installBundle(bundle:${artifact})
-        </instruction>
-        <instruction key='configure'>
-          markStarted(started: true);
-        </instruction>
-        <instruction key='unconfigure'>
-          markStarted(started: false);
-        </instruction>
-      </instructions>
-    </touchpointData>
-  </unit>
-  <unit id='toolingwin32.win32.x86_64org.eclipse.equinox.simpleconfigurator' version='1.0.0.201701221612' singleton='false'>
+  <unit id='toolingwin32.win32.x86_64org.eclipse.equinox.simpleconfigurator' version='1.0.0.201701221653' singleton='false'>
     <hostRequirements size='2'>
       <required namespace='osgi.bundle' name='org.eclipse.equinox.simpleconfigurator' range='1.1.200.v20160504-1450'/>
       <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
@@ -827,7 +808,7 @@
       <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
     </properties>
     <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86_64org.eclipse.equinox.simpleconfigurator' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86_64org.eclipse.equinox.simpleconfigurator' version='1.0.0.201701221653'/>
       <provided namespace='org.eclipse.equinox.p2.flavor' name='toolingwin32.win32.x86_64' version='1.0.0'/>
     </provides>
     <requires size='2'>
@@ -855,12 +836,12 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='logger_product.executable.win32.win32.x86.eclipse' version='1.0.0.201701221612' singleton='false'>
+  <unit id='logger_product.executable.win32.win32.x86_64.eclipse' version='1.0.0.201701221653' singleton='false'>
     <provides size='1'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.win32.win32.x86.eclipse' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.win32.win32.x86_64.eclipse' version='1.0.0.201701221653'/>
     </provides>
     <filter>
-      (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
+      (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
     </filter>
     <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
     <touchpointData size='1'>
@@ -874,38 +855,149 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='toolinglogger_product.ini.win32.win32.x86' version='1.0.0.201701221612' singleton='false'>
+  <unit id='toolingwin32.win32.x86_64org.eclipse.equinox.ds' version='1.0.0.201701221653' singleton='false'>
+    <hostRequirements size='2'>
+      <required namespace='osgi.bundle' name='org.eclipse.equinox.ds' range='1.4.400.v20160226-2036'/>
+      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
+    </hostRequirements>
+    <properties size='1'>
+      <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
+    </properties>
     <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.ini.win32.win32.x86' version='1.0.0.201701221612'/>
-      <provided namespace='toolinglogger_product' name='logger_product.ini' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86_64org.eclipse.equinox.ds' version='1.0.0.201701221653'/>
+      <provided namespace='org.eclipse.equinox.p2.flavor' name='toolingwin32.win32.x86_64' version='1.0.0'/>
     </provides>
+    <requires size='2'>
+      <required namespace='osgi.bundle' name='org.eclipse.equinox.ds' range='1.4.400.v20160226-2036'/>
+      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
+    </requires>
     <filter>
-      (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
+      (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
     </filter>
-    <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+    <touchpoint id='null' version='0.0.0'/>
     <touchpointData size='1'>
-      <instructions size='2'>
+      <instructions size='4'>
+        <instruction key='uninstall'>
+          uninstallBundle(bundle:${artifact})
+        </instruction>
+        <instruction key='install'>
+          installBundle(bundle:${artifact})
+        </instruction>
         <instruction key='configure'>
-          addProgramArg(programArg:-clearPersistedState);
+          setStartLevel(startLevel:2);markStarted(started: true);
         </instruction>
         <instruction key='unconfigure'>
-          removeProgramArg(programArg:-clearPersistedState);
+          setStartLevel(startLevel:-1);markStarted(started: false);
         </instruction>
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='toolinglogger_product.executable.win32.win32.x86_64' version='1.0.0.201701221612' singleton='false'>
+  <unit id='toolingwin32.win32.x86org.eclipse.core.runtime' version='1.0.0.201701221653' singleton='false'>
+    <hostRequirements size='2'>
+      <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='3.12.0.v20160606-1342'/>
+      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
+    </hostRequirements>
+    <properties size='1'>
+      <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
+    </properties>
+    <provides size='2'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86org.eclipse.core.runtime' version='1.0.0.201701221653'/>
+      <provided namespace='org.eclipse.equinox.p2.flavor' name='toolingwin32.win32.x86' version='1.0.0'/>
+    </provides>
+    <requires size='2'>
+      <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='3.12.0.v20160606-1342'/>
+      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
+    </requires>
+    <filter>
+      (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
+    </filter>
+    <touchpoint id='null' version='0.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='4'>
+        <instruction key='uninstall'>
+          uninstallBundle(bundle:${artifact})
+        </instruction>
+        <instruction key='install'>
+          installBundle(bundle:${artifact})
+        </instruction>
+        <instruction key='configure'>
+          markStarted(started: true);
+        </instruction>
+        <instruction key='unconfigure'>
+          markStarted(started: false);
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+  <unit id='logger_product.executable.gtk.linux.x86_64' version='1.0.0.201701221653'>
+    <provides size='2'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.gtk.linux.x86_64' version='1.0.0.201701221653'/>
+      <provided namespace='toolinglogger_product' name='logger_product.executable' version='1.0.0.201701221653'/>
+    </provides>
+    <requires size='1'>
+      <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.equinox.launcher.gtk.linux.x86_64' range='0.0.0'>
+        <filter>
+          (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
+        </filter>
+      </required>
+    </requires>
+    <filter>
+      (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
+    </filter>
+    <artifacts size='1'>
+      <artifact classifier='binary' id='logger_product.executable.gtk.linux.x86_64' version='1.0.0.201701221653'/>
+    </artifacts>
+    <touchpoint id='org.eclipse.equinox.p2.native' version='1.0.0'/>
+  </unit>
+  <unit id='toolinggtk.linux.x86org.eclipse.core.runtime' version='1.0.0.201701221653' singleton='false'>
+    <hostRequirements size='2'>
+      <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='3.12.0.v20160606-1342'/>
+      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
+    </hostRequirements>
+    <properties size='1'>
+      <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
+    </properties>
+    <provides size='2'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86org.eclipse.core.runtime' version='1.0.0.201701221653'/>
+      <provided namespace='org.eclipse.equinox.p2.flavor' name='toolinggtk.linux.x86' version='1.0.0'/>
+    </provides>
+    <requires size='2'>
+      <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='3.12.0.v20160606-1342'/>
+      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
+    </requires>
+    <filter>
+      (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
+    </filter>
+    <touchpoint id='null' version='0.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='4'>
+        <instruction key='uninstall'>
+          uninstallBundle(bundle:${artifact})
+        </instruction>
+        <instruction key='install'>
+          installBundle(bundle:${artifact})
+        </instruction>
+        <instruction key='configure'>
+          markStarted(started: true);
+        </instruction>
+        <instruction key='unconfigure'>
+          markStarted(started: false);
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+  <unit id='toolinglogger_product.executable.win32.win32.x86_64' version='1.0.0.201701221653' singleton='false'>
     <hostRequirements size='1'>
-      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.win32.win32.x86_64' range='[1.0.0.201701221612,1.0.0.201701221612]'/>
+      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.win32.win32.x86_64' range='[1.0.0.201701221653,1.0.0.201701221653]'/>
     </hostRequirements>
     <properties size='1'>
       <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
     </properties>
     <provides size='1'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.executable.win32.win32.x86_64' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.executable.win32.win32.x86_64' version='1.0.0.201701221653'/>
     </provides>
     <requires size='1'>
-      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.win32.win32.x86_64' range='[1.0.0.201701221612,1.0.0.201701221612]'/>
+      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.win32.win32.x86_64' range='[1.0.0.201701221653,1.0.0.201701221653]'/>
     </requires>
     <filter>
       (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
@@ -922,47 +1014,46 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='logger_product.executable.gtk.linux.x86_64' version='1.0.0.201701221612'>
+  <unit id='toolinglogger_product.ini.win32.win32.x86' version='1.0.0.201701221653' singleton='false'>
     <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.gtk.linux.x86_64' version='1.0.0.201701221612'/>
-      <provided namespace='toolinglogger_product' name='logger_product.executable' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.ini.win32.win32.x86' version='1.0.0.201701221653'/>
+      <provided namespace='toolinglogger_product' name='logger_product.ini' version='1.0.0.201701221653'/>
     </provides>
-    <requires size='1'>
-      <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.equinox.launcher.gtk.linux.x86_64' range='0.0.0'>
-        <filter>
-          (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
-        </filter>
-      </required>
-    </requires>
-    <filter>
-      (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
-    </filter>
-    <artifacts size='1'>
-      <artifact classifier='binary' id='logger_product.executable.gtk.linux.x86_64' version='1.0.0.201701221612'/>
-    </artifacts>
-    <touchpoint id='org.eclipse.equinox.p2.native' version='1.0.0'/>
-  </unit>
-  <unit id='logger_product.executable.win32.win32.x86' version='1.0.0.201701221612'>
-    <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.win32.win32.x86' version='1.0.0.201701221612'/>
-      <provided namespace='toolinglogger_product' name='logger_product.executable' version='1.0.0.201701221612'/>
-    </provides>
-    <requires size='1'>
-      <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.equinox.launcher.win32.win32.x86' range='0.0.0'>
-        <filter>
-          (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
-        </filter>
-      </required>
-    </requires>
     <filter>
       (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
     </filter>
-    <artifacts size='1'>
-      <artifact classifier='binary' id='logger_product.executable.win32.win32.x86' version='1.0.0.201701221612'/>
-    </artifacts>
-    <touchpoint id='org.eclipse.equinox.p2.native' version='1.0.0'/>
+    <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='2'>
+        <instruction key='configure'>
+          addProgramArg(programArg:-clearPersistedState);
+        </instruction>
+        <instruction key='unconfigure'>
+          removeProgramArg(programArg:-clearPersistedState);
+        </instruction>
+      </instructions>
+    </touchpointData>
   </unit>
-  <unit id='toolinggtk.linux.x86org.eclipse.equinox.ds' version='1.0.0.201701221612' singleton='false'>
+  <unit id='logger_product.executable.gtk.linux.x86_64.eclipse' version='1.0.0.201701221653' singleton='false'>
+    <provides size='1'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.gtk.linux.x86_64.eclipse' version='1.0.0.201701221653'/>
+    </provides>
+    <filter>
+      (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
+    </filter>
+    <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='2'>
+        <instruction key='configure'>
+          setLauncherName(name:eclipse)
+        </instruction>
+        <instruction key='unconfigure'>
+          setLauncherName()
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+  <unit id='toolinggtk.linux.x86org.eclipse.equinox.ds' version='1.0.0.201701221653' singleton='false'>
     <hostRequirements size='2'>
       <required namespace='osgi.bundle' name='org.eclipse.equinox.ds' range='1.4.400.v20160226-2036'/>
       <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
@@ -971,7 +1062,7 @@
       <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
     </properties>
     <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86org.eclipse.equinox.ds' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86org.eclipse.equinox.ds' version='1.0.0.201701221653'/>
       <provided namespace='org.eclipse.equinox.p2.flavor' name='toolinggtk.linux.x86' version='1.0.0'/>
     </provides>
     <requires size='2'>
@@ -999,12 +1090,12 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='logger_product.executable.gtk.linux.x86_64.eclipse' version='1.0.0.201701221612' singleton='false'>
+  <unit id='logger_product.executable.win32.win32.x86.eclipse' version='1.0.0.201701221653' singleton='false'>
     <provides size='1'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.gtk.linux.x86_64.eclipse' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.win32.win32.x86.eclipse' version='1.0.0.201701221653'/>
     </provides>
     <filter>
-      (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
+      (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
     </filter>
     <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
     <touchpointData size='1'>
@@ -1055,18 +1146,38 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='toolinglogger_product.executable.gtk.linux.x86_64' version='1.0.0.201701221612' singleton='false'>
+  <unit id='toolinglogger_product.ini.gtk.linux.x86_64' version='1.0.0.201701221653' singleton='false'>
+    <provides size='2'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.ini.gtk.linux.x86_64' version='1.0.0.201701221653'/>
+      <provided namespace='toolinglogger_product' name='logger_product.ini' version='1.0.0.201701221653'/>
+    </provides>
+    <filter>
+      (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
+    </filter>
+    <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='2'>
+        <instruction key='configure'>
+          addProgramArg(programArg:-clearPersistedState);
+        </instruction>
+        <instruction key='unconfigure'>
+          removeProgramArg(programArg:-clearPersistedState);
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+  <unit id='toolinglogger_product.executable.gtk.linux.x86_64' version='1.0.0.201701221653' singleton='false'>
     <hostRequirements size='1'>
-      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.gtk.linux.x86_64' range='[1.0.0.201701221612,1.0.0.201701221612]'/>
+      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.gtk.linux.x86_64' range='[1.0.0.201701221653,1.0.0.201701221653]'/>
     </hostRequirements>
     <properties size='1'>
       <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
     </properties>
     <provides size='1'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.executable.gtk.linux.x86_64' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.executable.gtk.linux.x86_64' version='1.0.0.201701221653'/>
     </provides>
     <requires size='1'>
-      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.gtk.linux.x86_64' range='[1.0.0.201701221612,1.0.0.201701221612]'/>
+      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.gtk.linux.x86_64' range='[1.0.0.201701221653,1.0.0.201701221653]'/>
     </requires>
     <filter>
       (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
@@ -1079,6 +1190,26 @@
         </instruction>
         <instruction key='install'>
           unzip(source:@artifact, target:${installFolder}); chmod(targetDir:${installFolder}, targetFile:eclipse, permissions:755);
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+  <unit id='toolinglogger_product.config.win32.win32.x86' version='1.0.0.201701221653' singleton='false'>
+    <provides size='2'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.config.win32.win32.x86' version='1.0.0.201701221653'/>
+      <provided namespace='toolinglogger_product' name='logger_product.config' version='1.0.0.201701221653'/>
+    </provides>
+    <filter>
+      (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
+    </filter>
+    <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='2'>
+        <instruction key='configure'>
+          setProgramProperty(propName:eclipse.product,propValue:BibleLogger.product);setProgramProperty(propName:eclipse.application,propValue:org.eclipse.e4.ui.workbench.swt.E4Application);
+        </instruction>
+        <instruction key='unconfigure'>
+          setProgramProperty(propName:eclipse.product,propValue:);setProgramProperty(propName:eclipse.application,propValue:);
         </instruction>
       </instructions>
     </touchpointData>
@@ -1120,47 +1251,27 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='toolinglogger_product.ini.gtk.linux.x86_64' version='1.0.0.201701221612' singleton='false'>
+  <unit id='logger_product.executable.win32.win32.x86' version='1.0.0.201701221653'>
     <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.ini.gtk.linux.x86_64' version='1.0.0.201701221612'/>
-      <provided namespace='toolinglogger_product' name='logger_product.ini' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.win32.win32.x86' version='1.0.0.201701221653'/>
+      <provided namespace='toolinglogger_product' name='logger_product.executable' version='1.0.0.201701221653'/>
     </provides>
-    <filter>
-      (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
-    </filter>
-    <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-    <touchpointData size='1'>
-      <instructions size='2'>
-        <instruction key='configure'>
-          addProgramArg(programArg:-clearPersistedState);
-        </instruction>
-        <instruction key='unconfigure'>
-          removeProgramArg(programArg:-clearPersistedState);
-        </instruction>
-      </instructions>
-    </touchpointData>
-  </unit>
-  <unit id='toolinglogger_product.config.win32.win32.x86' version='1.0.0.201701221612' singleton='false'>
-    <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.config.win32.win32.x86' version='1.0.0.201701221612'/>
-      <provided namespace='toolinglogger_product' name='logger_product.config' version='1.0.0.201701221612'/>
-    </provides>
+    <requires size='1'>
+      <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.equinox.launcher.win32.win32.x86' range='0.0.0'>
+        <filter>
+          (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
+        </filter>
+      </required>
+    </requires>
     <filter>
       (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
     </filter>
-    <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-    <touchpointData size='1'>
-      <instructions size='2'>
-        <instruction key='configure'>
-          setProgramProperty(propName:eclipse.product,propValue:BibleLogger.product);setProgramProperty(propName:eclipse.application,propValue:org.eclipse.e4.ui.workbench.swt.E4Application);
-        </instruction>
-        <instruction key='unconfigure'>
-          setProgramProperty(propName:eclipse.product,propValue:);setProgramProperty(propName:eclipse.application,propValue:);
-        </instruction>
-      </instructions>
-    </touchpointData>
+    <artifacts size='1'>
+      <artifact classifier='binary' id='logger_product.executable.win32.win32.x86' version='1.0.0.201701221653'/>
+    </artifacts>
+    <touchpoint id='org.eclipse.equinox.p2.native' version='1.0.0'/>
   </unit>
-  <unit id='toolinggtk.linux.x86_64org.eclipse.equinox.ds' version='1.0.0.201701221612' singleton='false'>
+  <unit id='toolinggtk.linux.x86_64org.eclipse.equinox.ds' version='1.0.0.201701221653' singleton='false'>
     <hostRequirements size='2'>
       <required namespace='osgi.bundle' name='org.eclipse.equinox.ds' range='1.4.400.v20160226-2036'/>
       <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
@@ -1169,7 +1280,7 @@
       <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
     </properties>
     <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86_64org.eclipse.equinox.ds' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86_64org.eclipse.equinox.ds' version='1.0.0.201701221653'/>
       <provided namespace='org.eclipse.equinox.p2.flavor' name='toolinggtk.linux.x86_64' version='1.0.0'/>
     </provides>
     <requires size='2'>
@@ -1197,81 +1308,7 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='toolingwin32.win32.x86org.eclipse.equinox.event' version='1.0.0.201701221612' singleton='false'>
-    <hostRequirements size='2'>
-      <required namespace='osgi.bundle' name='org.eclipse.equinox.event' range='1.3.200.v20160324-1850'/>
-      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
-    </hostRequirements>
-    <properties size='1'>
-      <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
-    </properties>
-    <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86org.eclipse.equinox.event' version='1.0.0.201701221612'/>
-      <provided namespace='org.eclipse.equinox.p2.flavor' name='toolingwin32.win32.x86' version='1.0.0'/>
-    </provides>
-    <requires size='2'>
-      <required namespace='osgi.bundle' name='org.eclipse.equinox.event' range='1.3.200.v20160324-1850'/>
-      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
-    </requires>
-    <filter>
-      (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
-    </filter>
-    <touchpoint id='null' version='0.0.0'/>
-    <touchpointData size='1'>
-      <instructions size='4'>
-        <instruction key='uninstall'>
-          uninstallBundle(bundle:${artifact})
-        </instruction>
-        <instruction key='install'>
-          installBundle(bundle:${artifact})
-        </instruction>
-        <instruction key='configure'>
-          setStartLevel(startLevel:2);markStarted(started: true);
-        </instruction>
-        <instruction key='unconfigure'>
-          setStartLevel(startLevel:-1);markStarted(started: false);
-        </instruction>
-      </instructions>
-    </touchpointData>
-  </unit>
-  <unit id='toolinggtk.linux.x86org.eclipse.core.runtime' version='1.0.0.201701221612' singleton='false'>
-    <hostRequirements size='2'>
-      <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='3.12.0.v20160606-1342'/>
-      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
-    </hostRequirements>
-    <properties size='1'>
-      <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
-    </properties>
-    <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86org.eclipse.core.runtime' version='1.0.0.201701221612'/>
-      <provided namespace='org.eclipse.equinox.p2.flavor' name='toolinggtk.linux.x86' version='1.0.0'/>
-    </provides>
-    <requires size='2'>
-      <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='3.12.0.v20160606-1342'/>
-      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
-    </requires>
-    <filter>
-      (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
-    </filter>
-    <touchpoint id='null' version='0.0.0'/>
-    <touchpointData size='1'>
-      <instructions size='4'>
-        <instruction key='uninstall'>
-          uninstallBundle(bundle:${artifact})
-        </instruction>
-        <instruction key='install'>
-          installBundle(bundle:${artifact})
-        </instruction>
-        <instruction key='configure'>
-          markStarted(started: true);
-        </instruction>
-        <instruction key='unconfigure'>
-          markStarted(started: false);
-        </instruction>
-      </instructions>
-    </touchpointData>
-  </unit>
-  <unit id='toolingwin32.win32.x86org.eclipse.equinox.common' version='1.0.0.201701221612' singleton='false'>
+  <unit id='toolingwin32.win32.x86org.eclipse.equinox.common' version='1.0.0.201701221653' singleton='false'>
     <hostRequirements size='2'>
       <required namespace='osgi.bundle' name='org.eclipse.equinox.common' range='3.8.0.v20160509-1230'/>
       <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
@@ -1280,7 +1317,7 @@
       <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
     </properties>
     <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86org.eclipse.equinox.common' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86org.eclipse.equinox.common' version='1.0.0.201701221653'/>
       <provided namespace='org.eclipse.equinox.p2.flavor' name='toolingwin32.win32.x86' version='1.0.0'/>
     </provides>
     <requires size='2'>
@@ -1308,35 +1345,7 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='toolinglogger_product.executable.gtk.linux.x86' version='1.0.0.201701221612' singleton='false'>
-    <hostRequirements size='1'>
-      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.gtk.linux.x86' range='[1.0.0.201701221612,1.0.0.201701221612]'/>
-    </hostRequirements>
-    <properties size='1'>
-      <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
-    </properties>
-    <provides size='1'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.executable.gtk.linux.x86' version='1.0.0.201701221612'/>
-    </provides>
-    <requires size='1'>
-      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.gtk.linux.x86' range='[1.0.0.201701221612,1.0.0.201701221612]'/>
-    </requires>
-    <filter>
-      (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
-    </filter>
-    <touchpoint id='org.eclipse.equinox.p2.native' version='1.0.0'/>
-    <touchpointData size='1'>
-      <instructions size='2'>
-        <instruction key='uninstall'>
-          cleanupzip(source:@artifact, target:${installFolder});
-        </instruction>
-        <instruction key='install'>
-          unzip(source:@artifact, target:${installFolder}); chmod(targetDir:${installFolder}, targetFile:eclipse, permissions:755);
-        </instruction>
-      </instructions>
-    </touchpointData>
-  </unit>
-  <unit id='toolingwin32.win32.x86org.eclipse.equinox.simpleconfigurator' version='1.0.0.201701221612' singleton='false'>
+  <unit id='toolingwin32.win32.x86org.eclipse.equinox.simpleconfigurator' version='1.0.0.201701221653' singleton='false'>
     <hostRequirements size='2'>
       <required namespace='osgi.bundle' name='org.eclipse.equinox.simpleconfigurator' range='1.1.200.v20160504-1450'/>
       <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
@@ -1345,7 +1354,7 @@
       <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
     </properties>
     <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86org.eclipse.equinox.simpleconfigurator' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86org.eclipse.equinox.simpleconfigurator' version='1.0.0.201701221653'/>
       <provided namespace='org.eclipse.equinox.p2.flavor' name='toolingwin32.win32.x86' version='1.0.0'/>
     </provides>
     <requires size='2'>
@@ -1373,10 +1382,95 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='toolinglogger_product.ini.gtk.linux.x86' version='1.0.0.201701221612' singleton='false'>
+  <unit id='toolinglogger_product.executable.gtk.linux.x86' version='1.0.0.201701221653' singleton='false'>
+    <hostRequirements size='1'>
+      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.gtk.linux.x86' range='[1.0.0.201701221653,1.0.0.201701221653]'/>
+    </hostRequirements>
+    <properties size='1'>
+      <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
+    </properties>
+    <provides size='1'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.executable.gtk.linux.x86' version='1.0.0.201701221653'/>
+    </provides>
+    <requires size='1'>
+      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.gtk.linux.x86' range='[1.0.0.201701221653,1.0.0.201701221653]'/>
+    </requires>
+    <filter>
+      (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
+    </filter>
+    <touchpoint id='org.eclipse.equinox.p2.native' version='1.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='2'>
+        <instruction key='uninstall'>
+          cleanupzip(source:@artifact, target:${installFolder});
+        </instruction>
+        <instruction key='install'>
+          unzip(source:@artifact, target:${installFolder}); chmod(targetDir:${installFolder}, targetFile:eclipse, permissions:755);
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+  <unit id='toolinglogger_product.config.gtk.linux.x86' version='1.0.0.201701221653' singleton='false'>
     <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.ini.gtk.linux.x86' version='1.0.0.201701221612'/>
-      <provided namespace='toolinglogger_product' name='logger_product.ini' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.config.gtk.linux.x86' version='1.0.0.201701221653'/>
+      <provided namespace='toolinglogger_product' name='logger_product.config' version='1.0.0.201701221653'/>
+    </provides>
+    <filter>
+      (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
+    </filter>
+    <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='2'>
+        <instruction key='configure'>
+          setProgramProperty(propName:eclipse.product,propValue:BibleLogger.product);setProgramProperty(propName:eclipse.application,propValue:org.eclipse.e4.ui.workbench.swt.E4Application);
+        </instruction>
+        <instruction key='unconfigure'>
+          setProgramProperty(propName:eclipse.product,propValue:);setProgramProperty(propName:eclipse.application,propValue:);
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+  <unit id='toolingcocoa.macosx.x86_64org.eclipse.equinox.common' version='1.0.0.201701221653' singleton='false'>
+    <hostRequirements size='2'>
+      <required namespace='osgi.bundle' name='org.eclipse.equinox.common' range='3.8.0.v20160509-1230'/>
+      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
+    </hostRequirements>
+    <properties size='1'>
+      <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
+    </properties>
+    <provides size='2'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingcocoa.macosx.x86_64org.eclipse.equinox.common' version='1.0.0.201701221653'/>
+      <provided namespace='org.eclipse.equinox.p2.flavor' name='toolingcocoa.macosx.x86_64' version='1.0.0'/>
+    </provides>
+    <requires size='2'>
+      <required namespace='osgi.bundle' name='org.eclipse.equinox.common' range='3.8.0.v20160509-1230'/>
+      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
+    </requires>
+    <filter>
+      (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
+    </filter>
+    <touchpoint id='null' version='0.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='4'>
+        <instruction key='uninstall'>
+          uninstallBundle(bundle:${artifact})
+        </instruction>
+        <instruction key='install'>
+          installBundle(bundle:${artifact})
+        </instruction>
+        <instruction key='configure'>
+          setStartLevel(startLevel:2);markStarted(started: true);
+        </instruction>
+        <instruction key='unconfigure'>
+          setStartLevel(startLevel:-1);markStarted(started: false);
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+  <unit id='toolinglogger_product.ini.gtk.linux.x86' version='1.0.0.201701221653' singleton='false'>
+    <provides size='2'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.ini.gtk.linux.x86' version='1.0.0.201701221653'/>
+      <provided namespace='toolinglogger_product' name='logger_product.ini' version='1.0.0.201701221653'/>
     </provides>
     <filter>
       (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
@@ -1389,6 +1483,43 @@
         </instruction>
         <instruction key='unconfigure'>
           removeProgramArg(programArg:-clearPersistedState);
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+  <unit id='toolingwin32.win32.x86_64org.eclipse.equinox.common' version='1.0.0.201701221653' singleton='false'>
+    <hostRequirements size='2'>
+      <required namespace='osgi.bundle' name='org.eclipse.equinox.common' range='3.8.0.v20160509-1230'/>
+      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
+    </hostRequirements>
+    <properties size='1'>
+      <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
+    </properties>
+    <provides size='2'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86_64org.eclipse.equinox.common' version='1.0.0.201701221653'/>
+      <provided namespace='org.eclipse.equinox.p2.flavor' name='toolingwin32.win32.x86_64' version='1.0.0'/>
+    </provides>
+    <requires size='2'>
+      <required namespace='osgi.bundle' name='org.eclipse.equinox.common' range='3.8.0.v20160509-1230'/>
+      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
+    </requires>
+    <filter>
+      (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
+    </filter>
+    <touchpoint id='null' version='0.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='4'>
+        <instruction key='uninstall'>
+          uninstallBundle(bundle:${artifact})
+        </instruction>
+        <instruction key='install'>
+          installBundle(bundle:${artifact})
+        </instruction>
+        <instruction key='configure'>
+          setStartLevel(startLevel:2);markStarted(started: true);
+        </instruction>
+        <instruction key='unconfigure'>
+          setStartLevel(startLevel:-1);markStarted(started: false);
         </instruction>
       </instructions>
     </touchpointData>
@@ -1430,43 +1561,6 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='toolingcocoa.macosx.x86_64org.eclipse.equinox.common' version='1.0.0.201701221612' singleton='false'>
-    <hostRequirements size='2'>
-      <required namespace='osgi.bundle' name='org.eclipse.equinox.common' range='3.8.0.v20160509-1230'/>
-      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
-    </hostRequirements>
-    <properties size='1'>
-      <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
-    </properties>
-    <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingcocoa.macosx.x86_64org.eclipse.equinox.common' version='1.0.0.201701221612'/>
-      <provided namespace='org.eclipse.equinox.p2.flavor' name='toolingcocoa.macosx.x86_64' version='1.0.0'/>
-    </provides>
-    <requires size='2'>
-      <required namespace='osgi.bundle' name='org.eclipse.equinox.common' range='3.8.0.v20160509-1230'/>
-      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
-    </requires>
-    <filter>
-      (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
-    </filter>
-    <touchpoint id='null' version='0.0.0'/>
-    <touchpointData size='1'>
-      <instructions size='4'>
-        <instruction key='uninstall'>
-          uninstallBundle(bundle:${artifact})
-        </instruction>
-        <instruction key='install'>
-          installBundle(bundle:${artifact})
-        </instruction>
-        <instruction key='configure'>
-          setStartLevel(startLevel:2);markStarted(started: true);
-        </instruction>
-        <instruction key='unconfigure'>
-          setStartLevel(startLevel:-1);markStarted(started: false);
-        </instruction>
-      </instructions>
-    </touchpointData>
-  </unit>
   <unit id='toolingorg.eclipse.equinox.launcher.cocoa.macosx.x86_64' version='1.1.400.v20160518-1444' singleton='false'>
     <hostRequirements size='2'>
       <required namespace='osgi.bundle' name='org.eclipse.equinox.launcher.cocoa.macosx.x86_64' range='1.1.400.v20160518-1444'/>
@@ -1504,10 +1598,47 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='toolinglogger_product.config.win32.win32.x86_64' version='1.0.0.201701221612' singleton='false'>
+  <unit id='toolingcocoa.macosx.x86_64org.eclipse.core.runtime' version='1.0.0.201701221653' singleton='false'>
+    <hostRequirements size='2'>
+      <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='3.12.0.v20160606-1342'/>
+      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
+    </hostRequirements>
+    <properties size='1'>
+      <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
+    </properties>
     <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.config.win32.win32.x86_64' version='1.0.0.201701221612'/>
-      <provided namespace='toolinglogger_product' name='logger_product.config' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingcocoa.macosx.x86_64org.eclipse.core.runtime' version='1.0.0.201701221653'/>
+      <provided namespace='org.eclipse.equinox.p2.flavor' name='toolingcocoa.macosx.x86_64' version='1.0.0'/>
+    </provides>
+    <requires size='2'>
+      <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='3.12.0.v20160606-1342'/>
+      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
+    </requires>
+    <filter>
+      (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
+    </filter>
+    <touchpoint id='null' version='0.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='4'>
+        <instruction key='uninstall'>
+          uninstallBundle(bundle:${artifact})
+        </instruction>
+        <instruction key='install'>
+          installBundle(bundle:${artifact})
+        </instruction>
+        <instruction key='configure'>
+          markStarted(started: true);
+        </instruction>
+        <instruction key='unconfigure'>
+          markStarted(started: false);
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+  <unit id='toolinglogger_product.config.win32.win32.x86_64' version='1.0.0.201701221653' singleton='false'>
+    <provides size='2'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.config.win32.win32.x86_64' version='1.0.0.201701221653'/>
+      <provided namespace='toolinglogger_product' name='logger_product.config' version='1.0.0.201701221653'/>
     </provides>
     <filter>
       (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
@@ -1524,7 +1655,7 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='toolingwin32.win32.x86_64org.eclipse.core.runtime' version='1.0.0.201701221612' singleton='false'>
+  <unit id='toolingwin32.win32.x86_64org.eclipse.core.runtime' version='1.0.0.201701221653' singleton='false'>
     <hostRequirements size='2'>
       <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='3.12.0.v20160606-1342'/>
       <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
@@ -1533,7 +1664,7 @@
       <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
     </properties>
     <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86_64org.eclipse.core.runtime' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86_64org.eclipse.core.runtime' version='1.0.0.201701221653'/>
       <provided namespace='org.eclipse.equinox.p2.flavor' name='toolingwin32.win32.x86_64' version='1.0.0'/>
     </provides>
     <requires size='2'>
@@ -1561,27 +1692,7 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='toolinglogger_product.config.gtk.linux.x86' version='1.0.0.201701221612' singleton='false'>
-    <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.config.gtk.linux.x86' version='1.0.0.201701221612'/>
-      <provided namespace='toolinglogger_product' name='logger_product.config' version='1.0.0.201701221612'/>
-    </provides>
-    <filter>
-      (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
-    </filter>
-    <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-    <touchpointData size='1'>
-      <instructions size='2'>
-        <instruction key='configure'>
-          setProgramProperty(propName:eclipse.product,propValue:BibleLogger.product);setProgramProperty(propName:eclipse.application,propValue:org.eclipse.e4.ui.workbench.swt.E4Application);
-        </instruction>
-        <instruction key='unconfigure'>
-          setProgramProperty(propName:eclipse.product,propValue:);setProgramProperty(propName:eclipse.application,propValue:);
-        </instruction>
-      </instructions>
-    </touchpointData>
-  </unit>
-  <unit id='toolingwin32.win32.x86org.eclipse.equinox.ds' version='1.0.0.201701221612' singleton='false'>
+  <unit id='toolingwin32.win32.x86org.eclipse.equinox.ds' version='1.0.0.201701221653' singleton='false'>
     <hostRequirements size='2'>
       <required namespace='osgi.bundle' name='org.eclipse.equinox.ds' range='1.4.400.v20160226-2036'/>
       <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
@@ -1590,7 +1701,7 @@
       <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
     </properties>
     <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86org.eclipse.equinox.ds' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86org.eclipse.equinox.ds' version='1.0.0.201701221653'/>
       <provided namespace='org.eclipse.equinox.p2.flavor' name='toolingwin32.win32.x86' version='1.0.0'/>
     </provides>
     <requires size='2'>
@@ -1618,7 +1729,35 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='toolingcocoa.macosx.x86_64org.eclipse.equinox.simpleconfigurator' version='1.0.0.201701221612' singleton='false'>
+  <unit id='toolinglogger_product.executable.cocoa.macosx.x86_64' version='1.0.0.201701221653' singleton='false'>
+    <hostRequirements size='1'>
+      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.cocoa.macosx.x86_64' range='[1.0.0.201701221653,1.0.0.201701221653]'/>
+    </hostRequirements>
+    <properties size='1'>
+      <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
+    </properties>
+    <provides size='1'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.executable.cocoa.macosx.x86_64' version='1.0.0.201701221653'/>
+    </provides>
+    <requires size='1'>
+      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.cocoa.macosx.x86_64' range='[1.0.0.201701221653,1.0.0.201701221653]'/>
+    </requires>
+    <filter>
+      (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
+    </filter>
+    <touchpoint id='org.eclipse.equinox.p2.native' version='1.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='2'>
+        <instruction key='uninstall'>
+          cleanupzip(source:@artifact, target:${installFolder}/../);
+        </instruction>
+        <instruction key='install'>
+          unzip(source:@artifact, target:${installFolder}/../); chmod(targetDir:${installFolder}/../MacOS/, targetFile:eclipse, permissions:755);
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+  <unit id='toolingcocoa.macosx.x86_64org.eclipse.equinox.simpleconfigurator' version='1.0.0.201701221653' singleton='false'>
     <hostRequirements size='2'>
       <required namespace='osgi.bundle' name='org.eclipse.equinox.simpleconfigurator' range='1.1.200.v20160504-1450'/>
       <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
@@ -1627,7 +1766,7 @@
       <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
     </properties>
     <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingcocoa.macosx.x86_64org.eclipse.equinox.simpleconfigurator' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingcocoa.macosx.x86_64org.eclipse.equinox.simpleconfigurator' version='1.0.0.201701221653'/>
       <provided namespace='org.eclipse.equinox.p2.flavor' name='toolingcocoa.macosx.x86_64' version='1.0.0'/>
     </provides>
     <requires size='2'>
@@ -1655,24 +1794,24 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='toolingcocoa.macosx.x86_64org.eclipse.core.runtime' version='1.0.0.201701221612' singleton='false'>
+  <unit id='toolinggtk.linux.x86org.eclipse.equinox.simpleconfigurator' version='1.0.0.201701221653' singleton='false'>
     <hostRequirements size='2'>
-      <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='3.12.0.v20160606-1342'/>
+      <required namespace='osgi.bundle' name='org.eclipse.equinox.simpleconfigurator' range='1.1.200.v20160504-1450'/>
       <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
     </hostRequirements>
     <properties size='1'>
       <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
     </properties>
     <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingcocoa.macosx.x86_64org.eclipse.core.runtime' version='1.0.0.201701221612'/>
-      <provided namespace='org.eclipse.equinox.p2.flavor' name='toolingcocoa.macosx.x86_64' version='1.0.0'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86org.eclipse.equinox.simpleconfigurator' version='1.0.0.201701221653'/>
+      <provided namespace='org.eclipse.equinox.p2.flavor' name='toolinggtk.linux.x86' version='1.0.0'/>
     </provides>
     <requires size='2'>
-      <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='3.12.0.v20160606-1342'/>
+      <required namespace='osgi.bundle' name='org.eclipse.equinox.simpleconfigurator' range='1.1.200.v20160504-1450'/>
       <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
     </requires>
     <filter>
-      (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
+      (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
     </filter>
     <touchpoint id='null' version='0.0.0'/>
     <touchpointData size='1'>
@@ -1684,15 +1823,52 @@
           installBundle(bundle:${artifact})
         </instruction>
         <instruction key='configure'>
-          markStarted(started: true);
+          setStartLevel(startLevel:1);markStarted(started: true);
         </instruction>
         <instruction key='unconfigure'>
-          markStarted(started: false);
+          setStartLevel(startLevel:-1);markStarted(started: false);
         </instruction>
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='logger_product' version='1.0.0.201701221612'>
+  <unit id='toolinggtk.linux.x86_64org.eclipse.equinox.common' version='1.0.0.201701221653' singleton='false'>
+    <hostRequirements size='2'>
+      <required namespace='osgi.bundle' name='org.eclipse.equinox.common' range='3.8.0.v20160509-1230'/>
+      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
+    </hostRequirements>
+    <properties size='1'>
+      <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
+    </properties>
+    <provides size='2'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86_64org.eclipse.equinox.common' version='1.0.0.201701221653'/>
+      <provided namespace='org.eclipse.equinox.p2.flavor' name='toolinggtk.linux.x86_64' version='1.0.0'/>
+    </provides>
+    <requires size='2'>
+      <required namespace='osgi.bundle' name='org.eclipse.equinox.common' range='3.8.0.v20160509-1230'/>
+      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
+    </requires>
+    <filter>
+      (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
+    </filter>
+    <touchpoint id='null' version='0.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='4'>
+        <instruction key='uninstall'>
+          uninstallBundle(bundle:${artifact})
+        </instruction>
+        <instruction key='install'>
+          installBundle(bundle:${artifact})
+        </instruction>
+        <instruction key='configure'>
+          setStartLevel(startLevel:2);markStarted(started: true);
+        </instruction>
+        <instruction key='unconfigure'>
+          setStartLevel(startLevel:-1);markStarted(started: false);
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+  <unit id='logger_product' version='1.0.0.201701221653'>
     <update id='logger_product' range='0.0.0' severity='0'/>
     <properties size='3'>
       <property name='org.eclipse.equinox.p2.name' value='BibleLogger'/>
@@ -1700,7 +1876,7 @@
       <property name='org.eclipse.equinox.p2.type.group' value='true'/>
     </properties>
     <provides size='1'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='logger_product' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='logger_product' version='1.0.0.201701221653'/>
     </provides>
     <requires size='130'>
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.e4.ui.css.swt.theme' range='[0.10.100.v20160523-0836,0.10.100.v20160523-0836]'/>
@@ -1758,6 +1934,7 @@
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.m2e.model.edit' range='[1.7.0.20160603-1933,1.7.0.20160603-1933]'/>
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.e4.ui.workbench.swt' range='[0.14.1.v20160829-0832,0.14.1.v20160829-0832]'/>
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.equinox.common' range='[3.8.0.v20160509-1230,3.8.0.v20160509-1230]'/>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.configuration' range='[1.0.0.201701221653,1.0.0.201701221653]'/>
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.ui' range='[3.108.1.v20160929-1045,3.108.1.v20160929-1045]'/>
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.ui.ide' range='[3.12.2.v20161115-1450,3.12.2.v20161115-1450]'/>
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.e4.ui.workbench.addons.swt' range='[1.2.100.v20160831-1151,1.2.100.v20160831-1151]'/>
@@ -1771,7 +1948,6 @@
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.ui.workbench' range='[3.108.2.v20161025-2029,3.108.2.v20161025-2029]'/>
       <required namespace='org.eclipse.equinox.p2.iu' name='tooling.source.default' range='[1.0.0,1.0.0]'/>
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.compare.core' range='[3.6.0.v20160418-1534,3.6.0.v20160418-1534]'/>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.application' range='[1.0.0.201701221612,1.0.0.201701221612]'/>
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.equinox.concurrent' range='[1.1.0.v20130327-1442,1.1.0.v20130327-1442]'/>
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.equinox.p2.repository' range='[2.3.200.v20160421-0324,2.3.200.v20160421-0324]'/>
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.equinox.p2.core' range='[2.4.100.v20160419-0834,2.4.100.v20160419-0834]'/>
@@ -1786,6 +1962,7 @@
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.core.filebuffers' range='[3.6.0.v20160503-1849,3.6.0.v20160503-1849]'/>
       <required namespace='org.eclipse.equinox.p2.iu' name='org.apache.commons.jxpath' range='[1.3.0.v200911051830,1.3.0.v200911051830]'/>
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.e4.ui.services' range='[1.2.100.v20160506-0759,1.2.100.v20160506-0759]'/>
+      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.application' range='[1.0.0.201701221653,1.0.0.201701221653]'/>
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.m2e.maven.runtime.slf4j.simple' range='[1.7.0.20160603-1931,1.7.0.20160603-1931]'/>
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.core.databinding' range='[1.6.0.v20160412-0910,1.6.0.v20160412-0910]'/>
       <required namespace='org.eclipse.equinox.p2.iu' name='a.jre.javase' range='[1.6.0,1.6.0]'/>
@@ -1829,7 +2006,6 @@
       <required namespace='org.eclipse.equinox.p2.iu' name='ch.qos.logback.slf4j' range='[1.0.7.v201505121915,1.0.7.v201505121915]'/>
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.wst.xml.core' range='[1.1.1000.v201605120036,1.1.1000.v201605120036]'/>
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.emf.databinding' range='[1.3.0.v20160526-0356,1.3.0.v20160526-0356]'/>
-      <required namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.configuration' range='[1.0.0.201701221612,1.0.0.201701221612]'/>
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.equinox.ds' range='[1.4.400.v20160226-2036,1.4.400.v20160226-2036]'/>
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.jface.databinding' range='[1.8.1.v20161026-1531,1.8.1.v20161026-1531]'/>
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.e4.ui.di' range='[1.1.100.v20160506-0759,1.1.100.v20160506-0759]'/>
@@ -1852,84 +2028,10 @@
     </requires>
     <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
   </unit>
-  <unit id='toolinggtk.linux.x86org.eclipse.equinox.simpleconfigurator' version='1.0.0.201701221612' singleton='false'>
-    <hostRequirements size='2'>
-      <required namespace='osgi.bundle' name='org.eclipse.equinox.simpleconfigurator' range='1.1.200.v20160504-1450'/>
-      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
-    </hostRequirements>
-    <properties size='1'>
-      <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
-    </properties>
+  <unit id='logger_product.executable.gtk.linux.x86' version='1.0.0.201701221653'>
     <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86org.eclipse.equinox.simpleconfigurator' version='1.0.0.201701221612'/>
-      <provided namespace='org.eclipse.equinox.p2.flavor' name='toolinggtk.linux.x86' version='1.0.0'/>
-    </provides>
-    <requires size='2'>
-      <required namespace='osgi.bundle' name='org.eclipse.equinox.simpleconfigurator' range='1.1.200.v20160504-1450'/>
-      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
-    </requires>
-    <filter>
-      (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
-    </filter>
-    <touchpoint id='null' version='0.0.0'/>
-    <touchpointData size='1'>
-      <instructions size='4'>
-        <instruction key='uninstall'>
-          uninstallBundle(bundle:${artifact})
-        </instruction>
-        <instruction key='install'>
-          installBundle(bundle:${artifact})
-        </instruction>
-        <instruction key='configure'>
-          setStartLevel(startLevel:1);markStarted(started: true);
-        </instruction>
-        <instruction key='unconfigure'>
-          setStartLevel(startLevel:-1);markStarted(started: false);
-        </instruction>
-      </instructions>
-    </touchpointData>
-  </unit>
-  <unit id='toolinggtk.linux.x86_64org.eclipse.equinox.common' version='1.0.0.201701221612' singleton='false'>
-    <hostRequirements size='2'>
-      <required namespace='osgi.bundle' name='org.eclipse.equinox.common' range='3.8.0.v20160509-1230'/>
-      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
-    </hostRequirements>
-    <properties size='1'>
-      <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
-    </properties>
-    <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86_64org.eclipse.equinox.common' version='1.0.0.201701221612'/>
-      <provided namespace='org.eclipse.equinox.p2.flavor' name='toolinggtk.linux.x86_64' version='1.0.0'/>
-    </provides>
-    <requires size='2'>
-      <required namespace='osgi.bundle' name='org.eclipse.equinox.common' range='3.8.0.v20160509-1230'/>
-      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
-    </requires>
-    <filter>
-      (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
-    </filter>
-    <touchpoint id='null' version='0.0.0'/>
-    <touchpointData size='1'>
-      <instructions size='4'>
-        <instruction key='uninstall'>
-          uninstallBundle(bundle:${artifact})
-        </instruction>
-        <instruction key='install'>
-          installBundle(bundle:${artifact})
-        </instruction>
-        <instruction key='configure'>
-          setStartLevel(startLevel:2);markStarted(started: true);
-        </instruction>
-        <instruction key='unconfigure'>
-          setStartLevel(startLevel:-1);markStarted(started: false);
-        </instruction>
-      </instructions>
-    </touchpointData>
-  </unit>
-  <unit id='logger_product.executable.gtk.linux.x86' version='1.0.0.201701221612'>
-    <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.gtk.linux.x86' version='1.0.0.201701221612'/>
-      <provided namespace='toolinglogger_product' name='logger_product.executable' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.gtk.linux.x86' version='1.0.0.201701221653'/>
+      <provided namespace='toolinglogger_product' name='logger_product.executable' version='1.0.0.201701221653'/>
     </provides>
     <requires size='1'>
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.equinox.launcher.gtk.linux.x86' range='0.0.0'>
@@ -1942,7 +2044,7 @@
       (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
     </filter>
     <artifacts size='1'>
-      <artifact classifier='binary' id='logger_product.executable.gtk.linux.x86' version='1.0.0.201701221612'/>
+      <artifact classifier='binary' id='logger_product.executable.gtk.linux.x86' version='1.0.0.201701221653'/>
     </artifacts>
     <touchpoint id='org.eclipse.equinox.p2.native' version='1.0.0'/>
   </unit>
@@ -1983,47 +2085,10 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='toolinggtk.linux.x86org.eclipse.equinox.event' version='1.0.0.201701221612' singleton='false'>
-    <hostRequirements size='2'>
-      <required namespace='osgi.bundle' name='org.eclipse.equinox.event' range='1.3.200.v20160324-1850'/>
-      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
-    </hostRequirements>
-    <properties size='1'>
-      <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
-    </properties>
+  <unit id='logger_product.executable.cocoa.macosx.x86_64' version='1.0.0.201701221653'>
     <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86org.eclipse.equinox.event' version='1.0.0.201701221612'/>
-      <provided namespace='org.eclipse.equinox.p2.flavor' name='toolinggtk.linux.x86' version='1.0.0'/>
-    </provides>
-    <requires size='2'>
-      <required namespace='osgi.bundle' name='org.eclipse.equinox.event' range='1.3.200.v20160324-1850'/>
-      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
-    </requires>
-    <filter>
-      (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
-    </filter>
-    <touchpoint id='null' version='0.0.0'/>
-    <touchpointData size='1'>
-      <instructions size='4'>
-        <instruction key='uninstall'>
-          uninstallBundle(bundle:${artifact})
-        </instruction>
-        <instruction key='install'>
-          installBundle(bundle:${artifact})
-        </instruction>
-        <instruction key='configure'>
-          setStartLevel(startLevel:2);markStarted(started: true);
-        </instruction>
-        <instruction key='unconfigure'>
-          setStartLevel(startLevel:-1);markStarted(started: false);
-        </instruction>
-      </instructions>
-    </touchpointData>
-  </unit>
-  <unit id='logger_product.executable.cocoa.macosx.x86_64' version='1.0.0.201701221612'>
-    <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.cocoa.macosx.x86_64' version='1.0.0.201701221612'/>
-      <provided namespace='toolinglogger_product' name='logger_product.executable' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.cocoa.macosx.x86_64' version='1.0.0.201701221653'/>
+      <provided namespace='toolinglogger_product' name='logger_product.executable' version='1.0.0.201701221653'/>
     </provides>
     <requires size='1'>
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.equinox.launcher.cocoa.macosx.x86_64' range='0.0.0'>
@@ -2036,44 +2101,16 @@
       (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
     </filter>
     <artifacts size='1'>
-      <artifact classifier='binary' id='logger_product.executable.cocoa.macosx.x86_64' version='1.0.0.201701221612'/>
+      <artifact classifier='binary' id='logger_product.executable.cocoa.macosx.x86_64' version='1.0.0.201701221653'/>
     </artifacts>
     <touchpoint id='org.eclipse.equinox.p2.native' version='1.0.0'/>
   </unit>
-  <unit id='toolinglogger_product.executable.cocoa.macosx.x86_64' version='1.0.0.201701221612' singleton='false'>
-    <hostRequirements size='1'>
-      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.cocoa.macosx.x86_64' range='[1.0.0.201701221612,1.0.0.201701221612]'/>
-    </hostRequirements>
-    <properties size='1'>
-      <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
-    </properties>
+  <unit id='logger_product.executable.cocoa.macosx.x86_64.eclipse' version='1.0.0.201701221653' singleton='false'>
     <provides size='1'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.executable.cocoa.macosx.x86_64' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.cocoa.macosx.x86_64.eclipse' version='1.0.0.201701221653'/>
     </provides>
-    <requires size='1'>
-      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.cocoa.macosx.x86_64' range='[1.0.0.201701221612,1.0.0.201701221612]'/>
-    </requires>
     <filter>
       (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
-    </filter>
-    <touchpoint id='org.eclipse.equinox.p2.native' version='1.0.0'/>
-    <touchpointData size='1'>
-      <instructions size='2'>
-        <instruction key='uninstall'>
-          cleanupzip(source:@artifact, target:${installFolder}/../);
-        </instruction>
-        <instruction key='install'>
-          unzip(source:@artifact, target:${installFolder}/../); chmod(targetDir:${installFolder}/../MacOS/, targetFile:eclipse, permissions:755);
-        </instruction>
-      </instructions>
-    </touchpointData>
-  </unit>
-  <unit id='logger_product.executable.gtk.linux.x86.eclipse' version='1.0.0.201701221612' singleton='false'>
-    <provides size='1'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.gtk.linux.x86.eclipse' version='1.0.0.201701221612'/>
-    </provides>
-    <filter>
-      (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
     </filter>
     <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
     <touchpointData size='1'>
@@ -2087,18 +2124,18 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='toolinglogger_product.executable.win32.win32.x86' version='1.0.0.201701221612' singleton='false'>
+  <unit id='toolinglogger_product.executable.win32.win32.x86' version='1.0.0.201701221653' singleton='false'>
     <hostRequirements size='1'>
-      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.win32.win32.x86' range='[1.0.0.201701221612,1.0.0.201701221612]'/>
+      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.win32.win32.x86' range='[1.0.0.201701221653,1.0.0.201701221653]'/>
     </hostRequirements>
     <properties size='1'>
       <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
     </properties>
     <provides size='1'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.executable.win32.win32.x86' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.executable.win32.win32.x86' version='1.0.0.201701221653'/>
     </provides>
     <requires size='1'>
-      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.win32.win32.x86' range='[1.0.0.201701221612,1.0.0.201701221612]'/>
+      <required namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.win32.win32.x86' range='[1.0.0.201701221653,1.0.0.201701221653]'/>
     </requires>
     <filter>
       (&amp;(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))
@@ -2115,140 +2152,7 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='logger_product.executable.cocoa.macosx.x86_64.eclipse' version='1.0.0.201701221612' singleton='false'>
-    <provides size='1'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.cocoa.macosx.x86_64.eclipse' version='1.0.0.201701221612'/>
-    </provides>
-    <filter>
-      (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
-    </filter>
-    <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-    <touchpointData size='1'>
-      <instructions size='2'>
-        <instruction key='configure'>
-          setLauncherName(name:eclipse)
-        </instruction>
-        <instruction key='unconfigure'>
-          setLauncherName()
-        </instruction>
-      </instructions>
-    </touchpointData>
-  </unit>
-  <unit id='toolinglogger_product.config.gtk.linux.x86_64' version='1.0.0.201701221612' singleton='false'>
-    <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.config.gtk.linux.x86_64' version='1.0.0.201701221612'/>
-      <provided namespace='toolinglogger_product' name='logger_product.config' version='1.0.0.201701221612'/>
-    </provides>
-    <filter>
-      (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
-    </filter>
-    <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-    <touchpointData size='1'>
-      <instructions size='2'>
-        <instruction key='configure'>
-          setProgramProperty(propName:eclipse.product,propValue:BibleLogger.product);setProgramProperty(propName:eclipse.application,propValue:org.eclipse.e4.ui.workbench.swt.E4Application);
-        </instruction>
-        <instruction key='unconfigure'>
-          setProgramProperty(propName:eclipse.product,propValue:);setProgramProperty(propName:eclipse.application,propValue:);
-        </instruction>
-      </instructions>
-    </touchpointData>
-  </unit>
-  <unit id='toolinglogger_product.ini.win32.win32.x86_64' version='1.0.0.201701221612' singleton='false'>
-    <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.ini.win32.win32.x86_64' version='1.0.0.201701221612'/>
-      <provided namespace='toolinglogger_product' name='logger_product.ini' version='1.0.0.201701221612'/>
-    </provides>
-    <filter>
-      (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
-    </filter>
-    <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-    <touchpointData size='1'>
-      <instructions size='2'>
-        <instruction key='configure'>
-          addProgramArg(programArg:-clearPersistedState);
-        </instruction>
-        <instruction key='unconfigure'>
-          removeProgramArg(programArg:-clearPersistedState);
-        </instruction>
-      </instructions>
-    </touchpointData>
-  </unit>
-  <unit id='toolinggtk.linux.x86_64org.eclipse.equinox.simpleconfigurator' version='1.0.0.201701221612' singleton='false'>
-    <hostRequirements size='2'>
-      <required namespace='osgi.bundle' name='org.eclipse.equinox.simpleconfigurator' range='1.1.200.v20160504-1450'/>
-      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
-    </hostRequirements>
-    <properties size='1'>
-      <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
-    </properties>
-    <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86_64org.eclipse.equinox.simpleconfigurator' version='1.0.0.201701221612'/>
-      <provided namespace='org.eclipse.equinox.p2.flavor' name='toolinggtk.linux.x86_64' version='1.0.0'/>
-    </provides>
-    <requires size='2'>
-      <required namespace='osgi.bundle' name='org.eclipse.equinox.simpleconfigurator' range='1.1.200.v20160504-1450'/>
-      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
-    </requires>
-    <filter>
-      (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
-    </filter>
-    <touchpoint id='null' version='0.0.0'/>
-    <touchpointData size='1'>
-      <instructions size='4'>
-        <instruction key='uninstall'>
-          uninstallBundle(bundle:${artifact})
-        </instruction>
-        <instruction key='install'>
-          installBundle(bundle:${artifact})
-        </instruction>
-        <instruction key='configure'>
-          setStartLevel(startLevel:1);markStarted(started: true);
-        </instruction>
-        <instruction key='unconfigure'>
-          setStartLevel(startLevel:-1);markStarted(started: false);
-        </instruction>
-      </instructions>
-    </touchpointData>
-  </unit>
-  <unit id='toolinggtk.linux.x86org.eclipse.equinox.common' version='1.0.0.201701221612' singleton='false'>
-    <hostRequirements size='2'>
-      <required namespace='osgi.bundle' name='org.eclipse.equinox.common' range='3.8.0.v20160509-1230'/>
-      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
-    </hostRequirements>
-    <properties size='1'>
-      <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
-    </properties>
-    <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86org.eclipse.equinox.common' version='1.0.0.201701221612'/>
-      <provided namespace='org.eclipse.equinox.p2.flavor' name='toolinggtk.linux.x86' version='1.0.0'/>
-    </provides>
-    <requires size='2'>
-      <required namespace='osgi.bundle' name='org.eclipse.equinox.common' range='3.8.0.v20160509-1230'/>
-      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
-    </requires>
-    <filter>
-      (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
-    </filter>
-    <touchpoint id='null' version='0.0.0'/>
-    <touchpointData size='1'>
-      <instructions size='4'>
-        <instruction key='uninstall'>
-          uninstallBundle(bundle:${artifact})
-        </instruction>
-        <instruction key='install'>
-          installBundle(bundle:${artifact})
-        </instruction>
-        <instruction key='configure'>
-          setStartLevel(startLevel:2);markStarted(started: true);
-        </instruction>
-        <instruction key='unconfigure'>
-          setStartLevel(startLevel:-1);markStarted(started: false);
-        </instruction>
-      </instructions>
-    </touchpointData>
-  </unit>
-  <unit id='toolingwin32.win32.x86_64org.eclipse.equinox.event' version='1.0.0.201701221612' singleton='false'>
+  <unit id='toolingwin32.win32.x86_64org.eclipse.equinox.event' version='1.0.0.201701221653' singleton='false'>
     <hostRequirements size='2'>
       <required namespace='osgi.bundle' name='org.eclipse.equinox.event' range='1.3.200.v20160324-1850'/>
       <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
@@ -2257,7 +2161,7 @@
       <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
     </properties>
     <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86_64org.eclipse.equinox.event' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86_64org.eclipse.equinox.event' version='1.0.0.201701221653'/>
       <provided namespace='org.eclipse.equinox.p2.flavor' name='toolingwin32.win32.x86_64' version='1.0.0'/>
     </provides>
     <requires size='2'>
@@ -2285,7 +2189,140 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='toolingcocoa.macosx.x86_64org.eclipse.equinox.ds' version='1.0.0.201701221612' singleton='false'>
+  <unit id='logger_product.executable.gtk.linux.x86.eclipse' version='1.0.0.201701221653' singleton='false'>
+    <provides size='1'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='logger_product.executable.gtk.linux.x86.eclipse' version='1.0.0.201701221653'/>
+    </provides>
+    <filter>
+      (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
+    </filter>
+    <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='2'>
+        <instruction key='configure'>
+          setLauncherName(name:eclipse)
+        </instruction>
+        <instruction key='unconfigure'>
+          setLauncherName()
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+  <unit id='toolinglogger_product.config.gtk.linux.x86_64' version='1.0.0.201701221653' singleton='false'>
+    <provides size='2'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.config.gtk.linux.x86_64' version='1.0.0.201701221653'/>
+      <provided namespace='toolinglogger_product' name='logger_product.config' version='1.0.0.201701221653'/>
+    </provides>
+    <filter>
+      (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
+    </filter>
+    <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='2'>
+        <instruction key='configure'>
+          setProgramProperty(propName:eclipse.product,propValue:BibleLogger.product);setProgramProperty(propName:eclipse.application,propValue:org.eclipse.e4.ui.workbench.swt.E4Application);
+        </instruction>
+        <instruction key='unconfigure'>
+          setProgramProperty(propName:eclipse.product,propValue:);setProgramProperty(propName:eclipse.application,propValue:);
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+  <unit id='toolinggtk.linux.x86org.eclipse.equinox.event' version='1.0.0.201701221653' singleton='false'>
+    <hostRequirements size='2'>
+      <required namespace='osgi.bundle' name='org.eclipse.equinox.event' range='1.3.200.v20160324-1850'/>
+      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
+    </hostRequirements>
+    <properties size='1'>
+      <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
+    </properties>
+    <provides size='2'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86org.eclipse.equinox.event' version='1.0.0.201701221653'/>
+      <provided namespace='org.eclipse.equinox.p2.flavor' name='toolinggtk.linux.x86' version='1.0.0'/>
+    </provides>
+    <requires size='2'>
+      <required namespace='osgi.bundle' name='org.eclipse.equinox.event' range='1.3.200.v20160324-1850'/>
+      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
+    </requires>
+    <filter>
+      (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
+    </filter>
+    <touchpoint id='null' version='0.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='4'>
+        <instruction key='uninstall'>
+          uninstallBundle(bundle:${artifact})
+        </instruction>
+        <instruction key='install'>
+          installBundle(bundle:${artifact})
+        </instruction>
+        <instruction key='configure'>
+          setStartLevel(startLevel:2);markStarted(started: true);
+        </instruction>
+        <instruction key='unconfigure'>
+          setStartLevel(startLevel:-1);markStarted(started: false);
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+  <unit id='toolinggtk.linux.x86org.eclipse.equinox.common' version='1.0.0.201701221653' singleton='false'>
+    <hostRequirements size='2'>
+      <required namespace='osgi.bundle' name='org.eclipse.equinox.common' range='3.8.0.v20160509-1230'/>
+      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
+    </hostRequirements>
+    <properties size='1'>
+      <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
+    </properties>
+    <provides size='2'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86org.eclipse.equinox.common' version='1.0.0.201701221653'/>
+      <provided namespace='org.eclipse.equinox.p2.flavor' name='toolinggtk.linux.x86' version='1.0.0'/>
+    </provides>
+    <requires size='2'>
+      <required namespace='osgi.bundle' name='org.eclipse.equinox.common' range='3.8.0.v20160509-1230'/>
+      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
+    </requires>
+    <filter>
+      (&amp;(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))
+    </filter>
+    <touchpoint id='null' version='0.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='4'>
+        <instruction key='uninstall'>
+          uninstallBundle(bundle:${artifact})
+        </instruction>
+        <instruction key='install'>
+          installBundle(bundle:${artifact})
+        </instruction>
+        <instruction key='configure'>
+          setStartLevel(startLevel:2);markStarted(started: true);
+        </instruction>
+        <instruction key='unconfigure'>
+          setStartLevel(startLevel:-1);markStarted(started: false);
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+  <unit id='toolinglogger_product.ini.win32.win32.x86_64' version='1.0.0.201701221653' singleton='false'>
+    <provides size='2'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.ini.win32.win32.x86_64' version='1.0.0.201701221653'/>
+      <provided namespace='toolinglogger_product' name='logger_product.ini' version='1.0.0.201701221653'/>
+    </provides>
+    <filter>
+      (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
+    </filter>
+    <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='2'>
+        <instruction key='configure'>
+          addProgramArg(programArg:-clearPersistedState);
+        </instruction>
+        <instruction key='unconfigure'>
+          removeProgramArg(programArg:-clearPersistedState);
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+  <unit id='toolingcocoa.macosx.x86_64org.eclipse.equinox.ds' version='1.0.0.201701221653' singleton='false'>
     <hostRequirements size='2'>
       <required namespace='osgi.bundle' name='org.eclipse.equinox.ds' range='1.4.400.v20160226-2036'/>
       <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
@@ -2294,7 +2331,7 @@
       <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
     </properties>
     <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingcocoa.macosx.x86_64org.eclipse.equinox.ds' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingcocoa.macosx.x86_64org.eclipse.equinox.ds' version='1.0.0.201701221653'/>
       <provided namespace='org.eclipse.equinox.p2.flavor' name='toolingcocoa.macosx.x86_64' version='1.0.0'/>
     </provides>
     <requires size='2'>
@@ -2322,10 +2359,10 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='toolinglogger_product.config.cocoa.macosx.x86_64' version='1.0.0.201701221612' singleton='false'>
+  <unit id='toolinglogger_product.config.cocoa.macosx.x86_64' version='1.0.0.201701221653' singleton='false'>
     <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.config.cocoa.macosx.x86_64' version='1.0.0.201701221612'/>
-      <provided namespace='toolinglogger_product' name='logger_product.config' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinglogger_product.config.cocoa.macosx.x86_64' version='1.0.0.201701221653'/>
+      <provided namespace='toolinglogger_product' name='logger_product.config' version='1.0.0.201701221653'/>
     </provides>
     <filter>
       (&amp;(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))
@@ -2342,7 +2379,7 @@
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='toolinggtk.linux.x86_64org.eclipse.equinox.event' version='1.0.0.201701221612' singleton='false'>
+  <unit id='toolinggtk.linux.x86_64org.eclipse.equinox.event' version='1.0.0.201701221653' singleton='false'>
     <hostRequirements size='2'>
       <required namespace='osgi.bundle' name='org.eclipse.equinox.event' range='1.3.200.v20160324-1850'/>
       <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
@@ -2351,7 +2388,7 @@
       <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
     </properties>
     <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86_64org.eclipse.equinox.event' version='1.0.0.201701221612'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='toolinggtk.linux.x86_64org.eclipse.equinox.event' version='1.0.0.201701221653'/>
       <provided namespace='org.eclipse.equinox.p2.flavor' name='toolinggtk.linux.x86_64' version='1.0.0'/>
     </provides>
     <requires size='2'>
@@ -2360,43 +2397,6 @@
     </requires>
     <filter>
       (&amp;(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk))
-    </filter>
-    <touchpoint id='null' version='0.0.0'/>
-    <touchpointData size='1'>
-      <instructions size='4'>
-        <instruction key='uninstall'>
-          uninstallBundle(bundle:${artifact})
-        </instruction>
-        <instruction key='install'>
-          installBundle(bundle:${artifact})
-        </instruction>
-        <instruction key='configure'>
-          setStartLevel(startLevel:2);markStarted(started: true);
-        </instruction>
-        <instruction key='unconfigure'>
-          setStartLevel(startLevel:-1);markStarted(started: false);
-        </instruction>
-      </instructions>
-    </touchpointData>
-  </unit>
-  <unit id='toolingwin32.win32.x86_64org.eclipse.equinox.common' version='1.0.0.201701221612' singleton='false'>
-    <hostRequirements size='2'>
-      <required namespace='osgi.bundle' name='org.eclipse.equinox.common' range='3.8.0.v20160509-1230'/>
-      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
-    </hostRequirements>
-    <properties size='1'>
-      <property name='org.eclipse.equinox.p2.type.fragment' value='true'/>
-    </properties>
-    <provides size='2'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='toolingwin32.win32.x86_64org.eclipse.equinox.common' version='1.0.0.201701221612'/>
-      <provided namespace='org.eclipse.equinox.p2.flavor' name='toolingwin32.win32.x86_64' version='1.0.0'/>
-    </provides>
-    <requires size='2'>
-      <required namespace='osgi.bundle' name='org.eclipse.equinox.common' range='3.8.0.v20160509-1230'/>
-      <required namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' range='[1.0.0,2.0.0)' greedy='false'/>
-    </requires>
-    <filter>
-      (&amp;(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))
     </filter>
     <touchpoint id='null' version='0.0.0'/>
     <touchpointData size='1'>
