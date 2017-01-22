@@ -3,6 +3,7 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 	<changeSet id="5" author="lkutvolg">
 		<sql>
+<<<<<<< HEAD
 			ALTER TABLE jesus_prophecies_EXODUS DROP COLUMN Prophecy;
 			INSERT INTO jesus_prophecies_EXODUS (Chapter_start,Verse_start,Chapter_end,Verse_end)
 			VALUES(23,20,23,21);
