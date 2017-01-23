@@ -19,5 +19,6 @@
 	<classpathentry kind="lib" path="lib/objenesis-2.2.jar"/>
 	<classpathentry kind="lib" path="lib/powermock-api-mockito-1.6.4.jar"/>
 	<classpathentry kind="lib" path="lib/powermock-mockito.jar"/>
+	<classpathentry kind="lib" path="/home/lory/Projects/BibleApp/BibleLogger/BibleLogger.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
