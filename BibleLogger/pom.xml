@@ -8,7 +8,7 @@
 		<relativePath>../Bible</relativePath>
 	</parent>
 	<artifactId>logger</artifactId>
-	<packaging>eclipse-repository</packaging>
+	<packaging>eclipse-application</packaging>
 	<name>BibleLogger</name>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
