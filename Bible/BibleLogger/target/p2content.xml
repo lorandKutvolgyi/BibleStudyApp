@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <units size='1'>
-  <unit id='logger' version='0.0.1.201702041358'>
-    <update id='logger' range='[0.0.0,0.0.1.201702041358)' severity='0'/>
+  <unit id='logger' version='0.0.1.201702041801'>
+    <update id='logger' range='[0.0.0,0.0.1.201702041801)' severity='0'/>
     <properties size='4'>
       <property name='org.eclipse.equinox.p2.name' value='BibleLogger'/>
       <property name='maven-groupId' value='com.lorandkutvolgyi'/>
@@ -9,8 +9,8 @@
       <property name='maven-version' value='0.0.1-SNAPSHOT'/>
     </properties>
     <provides size='4'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='logger' version='0.0.1.201702041358'/>
-      <provided namespace='osgi.bundle' name='logger' version='0.0.1.201702041358'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='logger' version='0.0.1.201702041801'/>
+      <provided namespace='osgi.bundle' name='logger' version='0.0.1.201702041801'/>
       <provided namespace='java.package' name='com.lory.logging' version='0.0.0'/>
       <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
     </provides>
@@ -20,13 +20,13 @@
       <required namespace='osgi.bundle' name='org.aspectj.runtime' range='1.8.10'/>
     </requires>
     <artifacts size='1'>
-      <artifact classifier='osgi.bundle' id='logger' version='0.0.1.201702041358'/>
+      <artifact classifier='osgi.bundle' id='logger' version='0.0.1.201702041801'/>
     </artifacts>
     <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
     <touchpointData size='1'>
       <instructions size='1'>
         <instruction key='manifest'>
-          Bundle-SymbolicName: logger;singleton:=true&#xA;Bundle-Version: 0.0.1.201702041358&#xA;
+          Bundle-SymbolicName: logger;singleton:=true&#xA;Bundle-Version: 0.0.1.201702041801&#xA;
         </instruction>
       </instructions>
     </touchpointData>
