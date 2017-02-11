@@ -3,8 +3,8 @@
 <artifacts size='1'>
   <artifact classifier='osgi.bundle' id='logger' version='0.0.1'>
     <properties size='5'>
-      <property name='artifact.size' value='11643'/>
-      <property name='download.size' value='11643'/>
+      <property name='artifact.size' value='11642'/>
+      <property name='download.size' value='11642'/>
       <property name='maven-groupId' value='com.lorandkutvolgyi'/>
       <property name='maven-artifactId' value='logger'/>
       <property name='maven-version' value='0.0.1'/>
