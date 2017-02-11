@@ -3,15 +3,16 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.lorandkutvolgyi</groupId>
 	<artifactId>bible</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>pom</packaging>
 	<name>Bible</name>
 	<modules>
 		<module>./BibleReader</module>
 		<module>./BibleLogger</module>
+		<module>./BibleProduct</module>
 	</modules>
 	<properties>
-		<tycho.version>0.23.0</tycho.version>
+		<tycho.version>0.26.0</tycho.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<neon-repo.url>http://download.eclipse.org/releases/neon</neon-repo.url>
 		<aspectj-repo.url> http://download.eclipse.org/tools/ajdt/46/dev/update</aspectj-repo.url>

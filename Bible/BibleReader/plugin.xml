@@ -4,23 +4,11 @@
          id="product"
          point="org.eclipse.core.runtime.products">
       <product
-            name="reader"
+            name="BibleProduct"
             application="org.eclipse.e4.ui.workbench.swt.E4Application">
          <property
                name="appName"
-               value="reader">
-         </property>
-         <property
-               name="startupMessageRect"
-               value="7,252,445,20">
-         </property>
-         <property
-               name="startupProgressRect"
-               value="5,275,445,15">
-         </property>
-         <property
-               name="preferenceCustomization"
-               value="plugin_customization.ini">
+               value="BibleProduct">
          </property>
       </product>
    </extension>

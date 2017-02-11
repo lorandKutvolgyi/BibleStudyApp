@@ -1,0 +1,55 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.lorandkutvolgyi</groupId>
+		<artifactId>bible</artifactId>
+		<version>0.0.1</version>
+		<relativePath>..</relativePath>
+	</parent>
+	<artifactId>product</artifactId>
+	<packaging>eclipse-repository</packaging>
+	<name>BibleProduct</name>
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+<!-- 			<plugin> -->
+<!-- 				<groupId>${tycho.groupId}</groupId> -->
+<!-- 				<artifactId>tycho-p2-publisher-plugin</artifactId> -->
+<!-- 				<version>${tycho.version}</version> -->
+<!-- 				<configuration> -->
+<!-- 					<publishArtifacts>true</publishArtifacts> -->
+<!-- 				</configuration> -->
+<!-- 			</plugin> -->
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-director-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<executions>
+					<execution>
+						<id>create-product-distributions</id>
+						<goals>
+							<goal>materialize-products</goal>
+							<goal>archive-products</goal>
+						</goals>
+					</execution>
+				</executions>
+<!-- 				<configuration> -->
+<!-- 					<products> -->
+<!-- 						<product> -->
+<!-- 							<id>reader.product</id> -->
+<!-- 						</product> -->
+<!-- 					</products> -->
+<!-- 				</configuration> -->
+			</plugin>
+		</plugins>
+	</build>
+</project>
