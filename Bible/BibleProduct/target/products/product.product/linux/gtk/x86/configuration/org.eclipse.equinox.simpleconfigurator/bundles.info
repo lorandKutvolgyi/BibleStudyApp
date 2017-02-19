@@ -4,10 +4,13 @@ com.ibm.icu,56.1.0.v201601250100,plugins/com.ibm.icu_56.1.0.v201601250100.jar,4,
 javax.annotation,1.2.0.v201602091430,plugins/javax.annotation_1.2.0.v201602091430.jar,4,false
 javax.inject,1.0.0.v20091030,plugins/javax.inject_1.0.0.v20091030.jar,4,false
 javax.xml,1.3.4.v201005080400,plugins/javax.xml_1.3.4.v201005080400.jar,4,false
+logger,0.0.1,plugins/logger_0.0.1.jar,4,false
 org.apache.batik.css,1.7.0.v201011041433,plugins/org.apache.batik.css_1.7.0.v201011041433.jar,4,false
 org.apache.batik.util,1.7.0.v201011041433,plugins/org.apache.batik.util_1.7.0.v201011041433.jar,4,false
 org.apache.batik.util.gui,1.7.0.v200903091627,plugins/org.apache.batik.util.gui_1.7.0.v200903091627.jar,4,false
 org.apache.commons.jxpath,1.3.0.v200911051830,plugins/org.apache.commons.jxpath_1.3.0.v200911051830.jar,4,false
+org.apache.log4j,1.2.15.v201012070815,plugins/org.apache.log4j_1.2.15.v201012070815.jar,4,false
+org.aspectj.runtime,1.8.10.201701131634,plugins/org.aspectj.runtime_1.8.10.201701131634.jar,4,false
 org.eclipse.core.commands,3.8.0.v20160316-1921,plugins/org.eclipse.core.commands_3.8.0.v20160316-1921.jar,4,false
 org.eclipse.core.contenttype,3.5.100.v20160418-1621,plugins/org.eclipse.core.contenttype_3.5.100.v20160418-1621.jar,4,false
 org.eclipse.core.databinding,1.6.0.v20160412-0910,plugins/org.eclipse.core.databinding_1.6.0.v20160412-0910.jar,4,false
@@ -59,6 +62,7 @@ org.eclipse.osgi.services,3.5.100.v20160504-1419,plugins/org.eclipse.osgi.servic
 org.eclipse.swt,3.105.2.v20161122-0613,plugins/org.eclipse.swt_3.105.2.v20161122-0613.jar,4,false
 org.eclipse.swt.gtk.linux.x86,3.105.2.v20161122-0613,plugins/org.eclipse.swt.gtk.linux.x86_3.105.2.v20161122-0613.jar,4,false
 org.eclipse.wst.jsdt.nashorn.extension,1.0.0.v201605131737,plugins/org.eclipse.wst.jsdt.nashorn.extension_1.0.0.v201605131737.jar,4,false
+org.slf4j.api,1.7.2.v20121108-1250,plugins/org.slf4j.api_1.7.2.v20121108-1250.jar,4,false
 org.w3c.css.sac,1.3.1.v200903091627,plugins/org.w3c.css.sac_1.3.1.v200903091627.jar,4,false
 org.w3c.dom.events,3.0.0.draft20060413_v201105210656,plugins/org.w3c.dom.events_3.0.0.draft20060413_v201105210656.jar,4,false
 org.w3c.dom.smil,1.0.1.v200903091627,plugins/org.w3c.dom.smil_1.0.1.v200903091627.jar,4,false

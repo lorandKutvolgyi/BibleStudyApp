@@ -3,7 +3,7 @@
   <unit id='logger' version='0.0.1'>
     <update id='logger' range='[0.0.0,0.0.1)' severity='0'/>
     <properties size='4'>
-      <property name='org.eclipse.equinox.p2.name' value='BibleLogger'/>
+      <property name='org.eclipse.equinox.p2.name' value='logger'/>
       <property name='maven-groupId' value='com.lorandkutvolgyi'/>
       <property name='maven-artifactId' value='logger'/>
       <property name='maven-version' value='0.0.1'/>

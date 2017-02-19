@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <?metadataRepository version='1.1.0'?>
 <repository name='TychoTargetPlatform' type='org.eclipse.equinox.internal.p2.metadata.repository.LocalMetadataRepository' version='0.0.1'>
-  <units size='83'>
+  <units size='87'>
     <unit id='org.eclipse.e4.ui.css.swt.theme' version='0.10.100.v20160523-0836'>
       <update id='org.eclipse.e4.ui.css.swt.theme' range='[0.0.0,0.10.100.v20160523-0836)' severity='0'/>
       <properties size='8'>
@@ -1228,6 +1228,36 @@
         </instructions>
       </touchpointData>
     </unit>
+    <unit id='org.slf4j.api' version='1.7.2.v20121108-1250' singleton='false'>
+      <update id='org.slf4j.api' range='[0.0.0,1.7.2.v20121108-1250)' severity='0'/>
+      <properties size='5'>
+        <property name='df_LT.Bundle-Vendor.0' value='Eclipse.org'/>
+        <property name='df_LT.Bundle-Name.0' value='SLF4J API'/>
+        <property name='org.eclipse.equinox.p2.name' value='%Bundle-Name.0'/>
+        <property name='org.eclipse.equinox.p2.provider' value='%Bundle-Vendor.0'/>
+        <property name='org.eclipse.equinox.p2.bundle.localization' value='plugin'/>
+      </properties>
+      <provides size='7'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.slf4j.api' version='1.7.2.v20121108-1250'/>
+        <provided namespace='osgi.bundle' name='org.slf4j.api' version='1.7.2.v20121108-1250'/>
+        <provided namespace='java.package' name='org.slf4j' version='1.7.2'/>
+        <provided namespace='java.package' name='org.slf4j.helpers' version='1.7.2'/>
+        <provided namespace='java.package' name='org.slf4j.spi' version='1.7.2'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
+      </provides>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.slf4j.api' version='1.7.2.v20121108-1250'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.slf4j.api&#xA;Bundle-Version: 1.7.2.v20121108-1250
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
     <unit id='org.eclipse.equinox.registry' version='3.6.100.v20160223-2218'>
       <update id='org.eclipse.equinox.registry' range='[0.0.0,3.6.100.v20160223-2218)' severity='0'/>
       <properties size='8'>
@@ -1880,7 +1910,7 @@
         <provided namespace='osgi.bundle' name='reader' version='0.0.1'/>
         <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
       </provides>
-      <requires size='7'>
+      <requires size='8'>
         <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='3.9.100'/>
         <required namespace='osgi.bundle' name='org.eclipse.e4.ui.model.workbench' range='1.0.1'/>
         <required namespace='osgi.bundle' name='org.eclipse.jface' range='3.9.1'/>
@@ -1888,6 +1918,7 @@
         <required namespace='osgi.bundle' name='org.eclipse.e4.core.services' range='2.0.0'/>
         <required namespace='osgi.bundle' name='org.eclipse.e4.core.di.annotations' range='1.5.0'/>
         <required namespace='osgi.bundle' name='javax.annotation' range='1.2.0'/>
+        <required namespace='java.package' name='com.lory.logging' range='0.0.0'/>
       </requires>
       <artifacts size='1'>
         <artifact classifier='osgi.bundle' id='reader' version='0.0.1'/>
@@ -1979,6 +2010,52 @@
         <instructions size='1'>
           <instruction key='manifest'>
             Bundle-SymbolicName: javax.xml&#xA;Bundle-Version: 1.3.4.v201005080400
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='org.apache.log4j' version='1.2.15.v201012070815' singleton='false'>
+      <update id='org.apache.log4j' range='[0.0.0,1.2.15.v201012070815)' severity='0'/>
+      <properties size='5'>
+        <property name='df_LT.PLUGIN_NAME' value='Apache Jakarta log4j Plug-in'/>
+        <property name='df_LT.PLUGIN_PROVIDER' value='Eclipse Orbit'/>
+        <property name='org.eclipse.equinox.p2.name' value='%PLUGIN_NAME'/>
+        <property name='org.eclipse.equinox.p2.provider' value='%PLUGIN_PROVIDER'/>
+        <property name='org.eclipse.equinox.p2.bundle.localization' value='plugin'/>
+      </properties>
+      <provides size='23'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.apache.log4j' version='1.2.15.v201012070815'/>
+        <provided namespace='osgi.bundle' name='org.apache.log4j' version='1.2.15.v201012070815'/>
+        <provided namespace='java.package' name='org.apache.log4j' version='1.2.15'/>
+        <provided namespace='java.package' name='org.apache.log4j.chainsaw' version='1.2.15'/>
+        <provided namespace='java.package' name='org.apache.log4j.config' version='1.2.15'/>
+        <provided namespace='java.package' name='org.apache.log4j.helpers' version='1.2.15'/>
+        <provided namespace='java.package' name='org.apache.log4j.jdbc' version='1.2.15'/>
+        <provided namespace='java.package' name='org.apache.log4j.jmx' version='1.2.15'/>
+        <provided namespace='java.package' name='org.apache.log4j.lf5' version='1.2.15'/>
+        <provided namespace='java.package' name='org.apache.log4j.lf5.util' version='1.2.15'/>
+        <provided namespace='java.package' name='org.apache.log4j.lf5.viewer' version='1.2.15'/>
+        <provided namespace='java.package' name='org.apache.log4j.lf5.viewer.categoryexplorer' version='1.2.15'/>
+        <provided namespace='java.package' name='org.apache.log4j.lf5.viewer.configure' version='1.2.15'/>
+        <provided namespace='java.package' name='org.apache.log4j.net' version='1.2.15'/>
+        <provided namespace='java.package' name='org.apache.log4j.nt' version='1.2.15'/>
+        <provided namespace='java.package' name='org.apache.log4j.or' version='1.2.15'/>
+        <provided namespace='java.package' name='org.apache.log4j.or.jms' version='1.2.15'/>
+        <provided namespace='java.package' name='org.apache.log4j.or.sax' version='1.2.15'/>
+        <provided namespace='java.package' name='org.apache.log4j.spi' version='1.2.15'/>
+        <provided namespace='java.package' name='org.apache.log4j.varia' version='1.2.15'/>
+        <provided namespace='java.package' name='org.apache.log4j.xml' version='1.2.15'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
+      </provides>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.apache.log4j' version='1.2.15.v201012070815'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.apache.log4j&#xA;Bundle-Version: 1.2.15.v201012070815
           </instruction>
         </instructions>
       </touchpointData>
@@ -2545,6 +2622,42 @@
         </instructions>
       </touchpointData>
     </unit>
+    <unit id='org.aspectj.runtime' version='1.8.10.201701131634' singleton='false'>
+      <update id='org.aspectj.runtime' range='[0.0.0,1.8.10.201701131634)' severity='0'/>
+      <properties size='5'>
+        <property name='org.eclipse.equinox.p2.name' value='AspectJ Runtime'/>
+        <property name='org.eclipse.equinox.p2.provider' value='Eclipse AspectJ Development Tools'/>
+        <property name='maven-groupId' value='org.aspectj.ajde'/>
+        <property name='maven-artifactId' value='org.aspectj.runtime'/>
+        <property name='maven-version' value='1.8.10-SNAPSHOT'/>
+      </properties>
+      <provides size='13'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.aspectj.runtime' version='1.8.10.201701131634'/>
+        <provided namespace='osgi.bundle' name='org.aspectj.runtime' version='1.8.10.201701131634'/>
+        <provided namespace='java.package' name='org.aspectj.internal.lang.annotation' version='1.8.10'/>
+        <provided namespace='java.package' name='org.aspectj.internal.lang.reflect' version='1.8.10'/>
+        <provided namespace='java.package' name='org.aspectj.lang' version='1.8.10'/>
+        <provided namespace='java.package' name='org.aspectj.lang.annotation' version='1.8.10'/>
+        <provided namespace='java.package' name='org.aspectj.lang.internal.lang' version='1.8.10'/>
+        <provided namespace='java.package' name='org.aspectj.lang.reflect' version='1.8.10'/>
+        <provided namespace='java.package' name='org.aspectj.runtime' version='1.8.10'/>
+        <provided namespace='java.package' name='org.aspectj.runtime.internal' version='1.8.10'/>
+        <provided namespace='java.package' name='org.aspectj.runtime.internal.cflowstack' version='1.8.10'/>
+        <provided namespace='java.package' name='org.aspectj.runtime.reflect' version='1.8.10'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.aspectj.runtime' version='1.8.10.201701131634'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.aspectj.runtime&#xA;Bundle-Version: 1.8.10.201701131634
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
     <unit id='org.eclipse.equinox.common' version='3.8.0.v20160509-1230'>
       <update id='org.eclipse.equinox.common' range='[0.0.0,3.8.0.v20160509-1230)' severity='0'/>
       <properties size='8'>
@@ -2704,6 +2817,37 @@
         <instructions size='1'>
           <instruction key='manifest'>
             Bundle-SymbolicName: org.eclipse.equinox.event&#xA;Bundle-Version: 1.3.200.v20160324-1850
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='logger' version='0.0.1'>
+      <update id='logger' range='[0.0.0,0.0.1)' severity='0'/>
+      <properties size='4'>
+        <property name='org.eclipse.equinox.p2.name' value='logger'/>
+        <property name='maven-groupId' value='com.lorandkutvolgyi'/>
+        <property name='maven-artifactId' value='logger'/>
+        <property name='maven-version' value='0.0.1'/>
+      </properties>
+      <provides size='4'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='logger' version='0.0.1'/>
+        <provided namespace='osgi.bundle' name='logger' version='0.0.1'/>
+        <provided namespace='java.package' name='com.lory.logging' version='0.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <requires size='3'>
+        <required namespace='osgi.bundle' name='org.slf4j.api' range='1.7.2'/>
+        <required namespace='osgi.bundle' name='org.apache.log4j' range='1.2.15'/>
+        <required namespace='osgi.bundle' name='org.aspectj.runtime' range='1.8.10'/>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='logger' version='0.0.1'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: logger;singleton:=true&#xA;Bundle-Version: 0.0.1
           </instruction>
         </instructions>
       </touchpointData>

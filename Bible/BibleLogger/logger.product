@@ -30,9 +30,12 @@
       <plugin id="Bible"/>
       <plugin id="org.aspectj.runtime"/>
       <plugin id="org.aspectj.weaver"/>
+      <plugin id="org.slf4j.impl.log4j12" fragment="true"/>
    </plugins>
 
    <configurations>
+      <plugin id="org.aspectj.runtime" autoStart="true" startLevel="0" />
+      <plugin id="org.aspectj.weaver" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="2" />
       <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="2" />

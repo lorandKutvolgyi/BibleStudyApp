@@ -13,50 +13,53 @@ import org.slf4j.LoggerFactory;
 
 @Aspect
 public class BibleLogger {
-    private final static Logger LOGGER = LoggerFactory.getLogger(BibleLogger.class);
+	private final static Logger LOGGER;
+	static {
+		System.out.println("hbhbhbhhbhk");
+		LOGGER = LoggerFactory.getLogger(BibleLogger.class);
+		File log4jProperties = new File("log4j2.properties");
+		if (log4jProperties.exists()) {
+			PropertyConfigurator.configure(log4jProperties.getAbsolutePath());
+		}
+	}
 
-    public BibleLogger() {
-        File log4jProperties = new File("log4j.properties");
-        if (log4jProperties.exists()) {
-            PropertyConfigurator.configure(log4jProperties.getAbsolutePath());
-        }
-    }
+	@Pointcut("(execution(public * com.lory.biblereader..*.*(..)) && !execution(* com.lory.biblereader..*.toString(..))) && !execution(* *..*Test.*(..))")
+	public void publicMethodExecution() {
+	}
 
-    @Pointcut("(execution(public * com.lory.biblereader..*.*(..)) && !execution(* com.lory.biblereader..*.toString(..))) && !execution(* *..*Test.*(..))")
-    public void publicMethodExecution() {}
+	@Pointcut("(execution(* com.lory.biblereader..*.*(..)) && !execution(* com.lory.biblereader..*.toString(..))) && !execution(* *..*Test.*(..))")
+	public void methodExecution() {
+	}
 
-    @Pointcut("(execution(* com.lory.biblereader..*.*(..)) && !execution(* com.lory.biblereader..*.toString(..))) && !execution(* *..*Test.*(..))")
-    public void methodExecution() {}
+	@Before(value = "publicMethodExecution()")
+	public void debugLog(JoinPoint point) {
+		LOGGER.debug(getMethodCallDetails(point));
+	}
 
-    @Before(value = "publicMethodExecution()")
-    public void debugLog(JoinPoint point) {
-        LOGGER.debug(getMethodCallDetails(point));
-    }
+	@AfterThrowing(value = "methodExecution()", throwing = "throwable")
+	public void productLog(JoinPoint point, Throwable throwable) {
+		LOGGER.error(getMethodCallDetails(point));
+		LOGGER.error(getThrowableDetails(throwable));
+	}
 
-    @AfterThrowing(value = "methodExecution()", throwing = "throwable")
-    public void productLog(JoinPoint point, Throwable throwable) {
-        LOGGER.error(getMethodCallDetails(point));
-        LOGGER.error(getThrowableDetails(throwable));
-    }
+	private String getMethodCallDetails(JoinPoint point) {
+		return "\n*sourceLocation: " + point.getSourceLocation() + "\n*this: " + point.getThis() + "\n*call: "
+				+ point.getSignature() + getArgs(point) + "\n";
+	}
 
-    private String getMethodCallDetails(JoinPoint point) {
-        return "\n*sourceLocation: " + point.getSourceLocation() + "\n*this: " + point.getThis() + "\n*call: "
-                + point.getSignature() + getArgs(point) + "\n";
-    }
+	private String getThrowableDetails(Throwable throwable) {
+		return throwable.toString();
+	}
 
-    private String getThrowableDetails(Throwable throwable) {
-        return throwable.toString();
-    }
-
-    private String getArgs(JoinPoint point) {
-        Object[] args = point.getArgs();
-        StringBuilder builder = new StringBuilder();
-        for (Object arg : args) {
-            if (arg instanceof String && ((String) arg).length() > 100) {
-                arg = ((String) arg).substring(0, 101) + "...";
-            }
-            builder.append("\n" + (arg != null ? arg.toString() : "null"));
-        }
-        return builder.toString();
-    }
+	private String getArgs(JoinPoint point) {
+		Object[] args = point.getArgs();
+		StringBuilder builder = new StringBuilder();
+		for (Object arg : args) {
+			if (arg instanceof String && ((String) arg).length() > 100) {
+				arg = ((String) arg).substring(0, 101) + "...";
+			}
+			builder.append("\n" + (arg != null ? arg.toString() : "null"));
+		}
+		return builder.toString();
+	}
 }
