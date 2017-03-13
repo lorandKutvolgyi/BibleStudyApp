@@ -1,8 +1,7 @@
 package com.lory.logging;
 
-import java.io.File;
+import java.io.IOException;
 
-import org.apache.log4j.PropertyConfigurator;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
@@ -13,15 +12,7 @@ import org.slf4j.LoggerFactory;
 
 @Aspect
 public class BibleLogger {
-	private final static Logger LOGGER;
-	static {
-		System.out.println("hbhbhbhhbhk");
-		LOGGER = LoggerFactory.getLogger(BibleLogger.class);
-		File log4jProperties = new File("log4j2.properties");
-		if (log4jProperties.exists()) {
-			PropertyConfigurator.configure(log4jProperties.getAbsolutePath());
-		}
-	}
+	private final static Logger LOGGER = LoggerFactory.getLogger(BibleLogger.class);
 
 	@Pointcut("(execution(public * com.lory.biblereader..*.*(..)) && !execution(* com.lory.biblereader..*.toString(..))) && !execution(* *..*Test.*(..))")
 	public void publicMethodExecution() {
@@ -32,7 +23,7 @@ public class BibleLogger {
 	}
 
 	@Before(value = "publicMethodExecution()")
-	public void debugLog(JoinPoint point) {
+	public void debugLog(JoinPoint point) throws IOException {
 		LOGGER.debug(getMethodCallDetails(point));
 	}
 

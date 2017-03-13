@@ -38,7 +38,7 @@ public class ChapterSqlDao implements ChapterDao {
         try (InputStream input = clazz.getResourceAsStream("db_connection.properties")) {
             prop.load(input);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            ex.printStackTrace();//TODO userfrendly message in a popup
         }
     }
 

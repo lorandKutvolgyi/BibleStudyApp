@@ -4,7 +4,6 @@ Bundle-Name: logger
 Bundle-SymbolicName: logger;singleton:=true
 Bundle-Version: 0.0.1
 Require-Bundle: org.slf4j.api;bundle-version="1.7.2",
- org.apache.log4j;bundle-version="1.2.15",
  org.aspectj.runtime;bundle-version="1.8.10";visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Eclipse-SupplementBundle: reader

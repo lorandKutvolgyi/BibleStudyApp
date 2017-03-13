@@ -1,5 +1,5 @@
 .metadata/
-/target/
+*/target/*
 .dbeaver-temp/*
 */bin/*
 /.recommenders/
