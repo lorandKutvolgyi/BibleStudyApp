@@ -3,14 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: reader
 Bundle-SymbolicName: reader;singleton:=true
 Bundle-Version: 0.0.1
-Require-Bundle: org.eclipse.core.runtime;bundle-version="3.9.100",
- org.eclipse.e4.ui.model.workbench;bundle-version="1.0.1",
- org.eclipse.jface;bundle-version="3.9.1",
- org.eclipse.e4.ui.di;bundle-version="1.0.0",
- org.eclipse.e4.core.services;bundle-version="2.0.0",
- org.eclipse.e4.core.di.annotations;bundle-version="1.5.0",
- javax.annotation;bundle-version="1.2.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ClassPath: .,
  lib/junit-4.11.jar,
  lib/mysql-connector-java-5.1.6.jar,
@@ -21,3 +13,19 @@ Bundle-ClassPath: .,
  lib/objenesis-2.2.jar,
  lib/powermock-api-mockito-1.6.4.jar,
  lib/powermock-mockito.jar
+Bundle-Localization: bundle
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.9.100",
+ org.eclipse.e4.ui.model.workbench;bundle-version="1.0.1",
+ org.eclipse.jface;bundle-version="3.9.1",
+ org.eclipse.e4.ui.di;bundle-version="1.0.0",
+ org.eclipse.e4.core.services;bundle-version="2.0.0",
+ org.eclipse.e4.core.di.annotations;bundle-version="1.5.0",
+ javax.annotation;bundle-version="1.2.0",
+ org.apache.batik.util;bundle-version="1.7.0",
+ org.apache.batik.css;bundle-version="1.7.0",
+ org.apache.batik.util.gui;bundle-version="1.7.0",
+ org.eclipse.e4.core.di,
+ org.eclipse.e4.ui.workbench;bundle-version="1.4.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Import-Package: javax.annotation;version="1.0.0";resolution:=optional,
+ javax.inject;version="1.0.0"

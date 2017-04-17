@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+	<changeSet id="19" author="lkutvolg">
+		<sql>
+			ALTER TABLE jesus_prophecies_PSALMS DROP COLUMN Prophecy;
+			INSERT INTO jesus_prophecies_PSALMS (Chapter_start,Verse_start,Chapter_end,Verse_end)
+			VALUES(2,1,2,12);
+		</sql>
+	</changeSet>
+</databaseChangeLog>

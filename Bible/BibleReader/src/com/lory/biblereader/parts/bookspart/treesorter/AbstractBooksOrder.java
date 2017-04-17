@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.viewers.ViewerSorter;
+import org.eclipse.jface.viewers.ViewerComparator;
 
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Testament;
@@ -15,27 +15,27 @@ import com.lory.biblereader.model.Testament;
  * @author lorandKutvolgyi
  *
  */
-public abstract class AbstractBooksOrder extends ViewerSorter {
-    private List<Testament> testaments = new ArrayList<>();
-    private List<Book> books = new ArrayList<>();
+public abstract class AbstractBooksOrder extends ViewerComparator {
+	private List<Testament> testaments = new ArrayList<>();
+	private List<Book> books = new ArrayList<>();
 
-    public AbstractBooksOrder() {
-        testaments.add(Testament.OLD_TESTAMENT);
-        testaments.add(Testament.NEW_TESTAMENT);
-    }
+	public AbstractBooksOrder() {
+		testaments.add(Testament.OLD_TESTAMENT);
+		testaments.add(Testament.NEW_TESTAMENT);
+	}
 
-    @Override
-    public final int compare(Viewer viewer, Object first, Object second) {
-        if (first instanceof Book) {
-            assert second instanceof Book;
-            return books.indexOf(first) - books.indexOf(second);
-        }
-        assert first instanceof Testament;
-        assert second instanceof Testament;
-        return testaments.indexOf(first) - testaments.indexOf(second);
-    }
+	@Override
+	public final int compare(Viewer viewer, Object first, Object second) {
+		if (first instanceof Book) {
+			assert second instanceof Book;
+			return books.indexOf(first) - books.indexOf(second);
+		}
+		assert first instanceof Testament;
+		assert second instanceof Testament;
+		return testaments.indexOf(first) - testaments.indexOf(second);
+	}
 
-    protected List<Book> getBooks() {
-        return books;
-    }
+	public List<Book> getBooks() {
+		return books;
+	}
 }

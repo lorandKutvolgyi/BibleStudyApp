@@ -6,22 +6,50 @@
         <children xsi:type="basic:PartSashContainer" xmi:id="_NTWPECNLEeW4Abd66DaAtA" elementId="biblereader.partsashcontainer.0">
           <children xsi:type="basic:PartSashContainer" xmi:id="_O6yuACNLEeW4Abd66DaAtA" elementId="biblereader.partsashcontainer.1" horizontal="true">
             <children xsi:type="basic:PartStack" xmi:id="_WnWxECNLEeW4Abd66DaAtA" elementId="biblereader.partstack.0">
-              <children xsi:type="basic:Part" xmi:id="_Yj7ygCNLEeW4Abd66DaAtA" elementId="biblereader.BooksPart" contributionURI="bundleclass://reader/com.lory.biblereader.parts.bookspart.BooksPart" label="">
-                <menus xmi:id="_SUbdYFrwEeWf1fIjSgOKGg" elementId="biblereader.menu.0"/>
-                <menus xsi:type="menu:PopupMenu" xmi:id="_UimlIFrwEeWf1fIjSgOKGg" elementId="biblereader.popupmenu.0" tooltip=""/>
-                <menus xmi:id="_VqXecFrwEeWf1fIjSgOKGg" elementId="biblereader.menu.1">
-                  <tags>ViewMenu</tags>
-                </menus>
+              <children xsi:type="basic:Part" xmi:id="_Yj7ygCNLEeW4Abd66DaAtA" elementId="biblereader.BooksPart" contributionURI="bundleclass://reader/com.lory.biblereader.parts.bookspart.BooksPart" label=""/>
+            </children>
+            <children xsi:type="basic:PartSashContainer" xmi:id="_SffSQCHYEeeUyN1pG4NImw" elementId="biblereader.partsashcontainer.3" horizontal="true">
+              <children xsi:type="basic:PartStack" xmi:id="_XF0OsCNLEeW4Abd66DaAtA" elementId="biblereader.partstack.1">
+                <children xsi:type="basic:Part" xmi:id="_33tk4Ff4EeWw0_pvm8Qobg" elementId="biblereader.BibleTextPart.1" accessibilityPhrase="" contributionURI="bundleclass://reader/com.lory.biblereader.parts.textpart.BibleTextPart1" label=""/>
+              </children>
+              <children xsi:type="basic:PartStack" xmi:id="_hXr1kCHYEeeUyN1pG4NImw" elementId="biblereader.partstack.4" visible="false">
+                <children xsi:type="basic:Part" xmi:id="_iVNNwCHYEeeUyN1pG4NImw" elementId="biblereader.BibleTextPart.2" contributionURI="bundleclass://reader/com.lory.biblereader.parts.textpart.BibleTextPart2" closeable="true"/>
+              </children>
+              <children xsi:type="basic:PartStack" xmi:id="_nf5J8CHYEeeUyN1pG4NImw" elementId="biblereader.partstack.1" visible="false">
+                <children xsi:type="basic:Part" xmi:id="_nf5J8SHYEeeUyN1pG4NImw" elementId="biblereader.BibleTextPart.3" accessibilityPhrase="" contributionURI="bundleclass://reader/com.lory.biblereader.parts.textpart.BibleTextPart3" label="" closeable="true"/>
+              </children>
+              <children xsi:type="basic:PartStack" xmi:id="_nkAN4CHYEeeUyN1pG4NImw" elementId="biblereader.partstack.1" visible="false">
+                <children xsi:type="basic:Part" xmi:id="_nkAN4SHYEeeUyN1pG4NImw" elementId="biblereader.BibleTextPart.4" accessibilityPhrase="" contributionURI="bundleclass://reader/com.lory.biblereader.parts.textpart.BibleTextPart4" label="" closeable="true"/>
               </children>
             </children>
-            <children xsi:type="basic:PartStack" xmi:id="_XF0OsCNLEeW4Abd66DaAtA" elementId="biblereader.partstack.1">
-              <children xsi:type="basic:Part" xmi:id="_33tk4Ff4EeWw0_pvm8Qobg" elementId="biblereader.BibleTextPart" accessibilityPhrase="" contributionURI="bundleclass://reader/com.lory.biblereader.parts.textpart.BibleTextPart" label=""/>
+            <children xsi:type="basic:PartSashContainer" xmi:id="_x3oDwBw7EeetS7PfnSTHUQ" elementId="biblereader.partsashcontainer.2">
+              <children xsi:type="basic:PartStack" xmi:id="_9Y1dIBw7EeetS7PfnSTHUQ" elementId="biblereader.partstack.2">
+                <children xsi:type="basic:Part" xmi:id="_-7KykBw7EeetS7PfnSTHUQ" elementId="biblereader.part.0" contributionURI="bundleclass://reader/com.lory.biblereader.parts.mappart.MapPart"/>
+              </children>
+              <children xsi:type="basic:PartStack" xmi:id="_-Pf_YBw7EeetS7PfnSTHUQ" elementId="biblereader.partstack.3">
+                <children xsi:type="basic:Part" xmi:id="__lJjsBw7EeetS7PfnSTHUQ" elementId="biblereader.part.1"/>
+              </children>
             </children>
-            <children xsi:type="basic:PartStack" xmi:id="_Xiu0MCNLEeW4Abd66DaAtA" elementId="biblereader.partstack.2"/>
           </children>
         </children>
       </children>
     </children>
+    <mainMenu xmi:id="_P5x4EBo0EeeuaO7Y1kMvqw" elementId="biblereader.menu.2">
+      <children xsi:type="menu:Menu" xmi:id="_THOEcBo0EeeuaO7Y1kMvqw" elementId="biblereader.menu.oldtestament" label="%translations">
+        <children xsi:type="menu:Menu" xmi:id="_C38VoCHYEeeUyN1pG4NImw" elementId="biblereader.menu.hungarian" label="%hungarian"/>
+        <children xsi:type="menu:Menu" xmi:id="_G3AMMCHYEeeUyN1pG4NImw" elementId="biblereader.menu.english" label="%english"/>
+      </children>
+    </mainMenu>
+    <trimBars xmi:id="__LiGoBw3EeetS7PfnSTHUQ" elementId="biblereader.trimbar.0">
+      <children xsi:type="menu:ToolBar" xmi:id="_CNSAYBw4EeetS7PfnSTHUQ" elementId="biblereader.toolbar.0">
+        <children xsi:type="menu:DirectToolItem" xmi:id="_NJ5pgBw5EeetS7PfnSTHUQ" elementId="biblereader.directtoolitem.previous" label="Previous chapter" iconURI="platform:/plugin/reader/resources/referenceBack.gif" tooltip="%previous.chapter" contributionURI="bundleclass://reader/com.lory.biblereader.toolbar.eventhandler.PreviousChapter"/>
+        <children xsi:type="menu:DirectToolItem" xmi:id="_FoIGAB-uEeeCcr4eHJsE8w" elementId="biblereader.directtoolitem.nextchapter" label="Next chapter" iconURI="platform:/plugin/reader/resources/referenceForward.gif" tooltip="%next.chapter" contributionURI="bundleclass://reader/com.lory.biblereader.toolbar.eventhandler.NextChapter"/>
+        <children xsi:type="menu:DirectToolItem" xmi:id="_1zCKsB-vEeeCcr4eHJsE8w" elementId="biblereader.directtoolitem.previousbook" label="Previous book" iconURI="platform:/plugin/reader/resources/adviceBack.gif" tooltip="%previous.book" contributionURI="bundleclass://reader/com.lory.biblereader.toolbar.eventhandler.PreviousBook"/>
+        <children xsi:type="menu:DirectToolItem" xmi:id="_c-KGYB-wEeeCcr4eHJsE8w" elementId="biblereader.directtoolitem.nextbook" label="Next book" iconURI="platform:/plugin/reader/resources/adviceForward.gif" tooltip="%next.book" contributionURI="bundleclass://reader/com.lory.biblereader.toolbar.eventhandler.NextBook"/>
+        <children xsi:type="menu:DirectToolItem" xmi:id="_D0G8ACFhEeefyc0XSHCBbQ" elementId="biblereader.directtoolitem.english" label="English" iconURI="platform:/plugin/org.apache.batik.util.gui/org/apache/batik/util/gui/resources/flags/flag_en.gif" tooltip="%english"/>
+        <children xsi:type="menu:DirectToolItem" xmi:id="_hRBF8CFhEeefyc0XSHCBbQ" elementId="biblereader.directtoolitem.hungarian" label="Hungarian" iconURI="platform:/plugin/org.apache.batik.util.gui/org/apache/batik/util/gui/resources/flags/flag_hu.gif" tooltip="%hungarian"/>
+      </children>
+    </trimBars>
   </children>
   <rootContext xmi:id="_d53TOSM8EeWAgOzJmBnGEA" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
     <children xmi:id="_d53TOiM8EeWAgOzJmBnGEA" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>

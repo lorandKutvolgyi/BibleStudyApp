@@ -1,5 +1,8 @@
 package com.lory.biblereader.parts.bookspart;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
@@ -23,10 +26,7 @@ import com.lory.biblereader.model.CurrentChapter;
 import com.lory.biblereader.model.Testament;
 import com.lory.biblereader.model.TreeElement;
 import com.lory.biblereader.parts.bookspart.eventhandler.BookSelectionListener;
-import com.lory.biblereader.parts.bookspart.eventhandler.EnterKeyListener;
-import com.lory.biblereader.parts.bookspart.eventhandler.NavigationKeyListener;
-import com.lory.biblereader.parts.bookspart.eventhandler.PagingListener;
-import com.lory.biblereader.parts.bookspart.eventhandler.SortingListener;
+import com.lory.biblereader.parts.bookspart.eventhandler.BooksKeyListener;
 
 /**
  * Shows the title of the books.
@@ -34,124 +34,138 @@ import com.lory.biblereader.parts.bookspart.eventhandler.SortingListener;
  * @author lorandKutvolgyi
  *
  */
-public class BooksPart {
+public class BooksPart implements Observer {
 
-    @Inject
-    private BookSelectionListener selectionListener;
-    @Inject
-    private PagingListener pagingListener;
-    @Inject
-    private MessageService messageService;
-    private TreeViewer books;
+	@Inject
+	private BookSelectionListener selectionListener;
+	@Inject
+	private BooksKeyListener booksKeyListener;
+	@Inject
+	private MessageService messageService;
+	private TreeViewer books;
 
-    @PostConstruct
-    public void postConstruct(MPart part, final Composite parent) {
-        setPartTitle(part);
-        setLayout(parent);
-        createBooksTree(parent);
-        restorePersistedState(part);
-    }
+	@PostConstruct
+	public void postConstruct(MPart part, final Composite parent) {
+		setPartTitle(part);
+		setLayout(parent);
+		createBooksTree(parent);
+		restorePersistedState(part);
+		CurrentChapter.setObserver(this);
+	}
 
-    private void setPartTitle(MPart part) {
-        part.setLabel(messageService.getMessage("Books"));
-    }
+	private void setPartTitle(MPart part) {
+		part.setLabel(messageService.getMessage("Books"));
+	}
 
-    private void setLayout(final Composite parent) {
-        parent.setLayout(new FillLayout(SWT.HORIZONTAL));
-    }
+	private void setLayout(final Composite parent) {
+		parent.setLayout(new FillLayout(SWT.HORIZONTAL));
+	}
 
-    private void createBooksTree(Composite parent) {
-        books = new TreeViewer(parent, SWT.V_SCROLL);
-        books.setLabelProvider(new ViewerLabelProvider());
-        books.setContentProvider(new ViewerTreeContentProvider());
-        books.setInput(Testament.class);
-        addListeners();
-    }
+	private void createBooksTree(Composite parent) {
+		books = new TreeViewer(parent, SWT.V_SCROLL);
+		books.setLabelProvider(new ViewerLabelProvider());
+		books.setContentProvider(new ViewerTreeContentProvider());
+		books.setInput(Testament.class);
+		addListeners();
+	}
 
-    private void addListeners() {
-        books.addSelectionChangedListener(selectionListener);
-        books.getTree().addKeyListener(new EnterKeyListener(books));
-        books.getTree().addKeyListener(pagingListener);
-        books.getTree().addKeyListener(new NavigationKeyListener(selectionListener));
-        books.getTree().addKeyListener(new SortingListener(books));
-    }
+	private void addListeners() {
+		booksKeyListener.setTreeViewer(books);
+		books.getTree().addKeyListener(booksKeyListener);
+		books.addSelectionChangedListener(selectionListener);
+	}
 
-    @PersistState
-    private void persist(MPart part) {
-        if (isSelectedChapter()) {
-            String sel = books.getSelection().toString();
-            part.getPersistedState().put("treeSelection", sel.substring(1, sel.length() - 1));
-            part.getPersistedState().put("bookTitle", CurrentChapter.getCurrentChapter().getBook().getTitle());
-            part.getPersistedState().put("chapterId", String.valueOf(CurrentChapter.getCurrentChapter().getId()));
-        }
-    }
+	@PersistState
+	private void persist(MPart part) {
+		if (isSelectedChapter()) {
+			String sel = books.getSelection().toString();
+			part.getPersistedState().put("treeSelection", sel.substring(1, sel.length() - 1));
+			part.getPersistedState().put("bookTitle", CurrentChapter.getCurrentChapter().getBook().getTitle());
+			part.getPersistedState().put("chapterId", String.valueOf(CurrentChapter.getCurrentChapter().getId()));
+		}
+	}
 
-    private void restorePersistedState(MPart part) {
-        String title = part.getPersistedState().get("bookTitle");
-        Book book = Testament.OLD_TESTAMENT.getBook(title);
-        if (book == null) {
-            book = Testament.NEW_TESTAMENT.getBook(title);
-        }
-        if (book != null) {
-            selectionListener.preventSelectionChangeEvent();
-            books.setSelection(
-                    new TreeSelection(new TreePath[] { new TreePath(new Object[] { book.getParent(), book }) }));
-            Chapter persistedChapter = book.getChapter(Integer.valueOf(part.getPersistedState().get("chapterId")));
-            CurrentChapter.setCurrentChapter(persistedChapter);
-        }
-    }
+	private void restorePersistedState(MPart part) {
+		String title = part.getPersistedState().get("bookTitle");
+		Book book = Testament.OLD_TESTAMENT.getBook(title);
+		if (book == null) {
+			book = Testament.NEW_TESTAMENT.getBook(title);
+		}
+		if (book != null) {
+			selectionListener.preventSelectionChangeEvent();
+			books.setSelection(
+					new TreeSelection(new TreePath[] { new TreePath(new Object[] { book.getParent(), book }) }));
+			Chapter persistedChapter = book.getChapter(Integer.valueOf(part.getPersistedState().get("chapterId")));
+			CurrentChapter.setCurrentChapter(persistedChapter);
+		}
+	}
 
-    private boolean isSelectedChapter() {
-        return CurrentChapter.getCurrentChapter() != null;
-    }
+	private boolean isSelectedChapter() {
+		return CurrentChapter.getCurrentChapter() != null;
+	}
 
-    @Override
-    public String toString() {
-        return "BooksPart\n\tselectionListener: " + selectionListener + "\n\tselection: "
-                + (books != null ? books.getSelection() : "");
-    }
+	@Override
+	public String toString() {
+		return "BooksPart\n\tselectionListener: " + selectionListener + "\n\tselection: "
+				+ (books != null ? books.getSelection() : "");
+	}
 
-    private class ViewerLabelProvider extends LabelProvider {
+	private class ViewerLabelProvider extends LabelProvider {
 
-        @Override
-        public Image getImage(Object element) {
-            return super.getImage(element);
-        }
+		@Override
+		public Image getImage(Object element) {
+			return super.getImage(element);
+		}
 
-        @Override
-        public String getText(Object element) {
-            return messageService.getMessage(((TreeElement) element).getText());
-        }
-    }
+		@Override
+		public String getText(Object element) {
+			return messageService.getMessage(((TreeElement) element).getText());
+		}
+	}
 
-    private class ViewerTreeContentProvider implements ITreeContentProvider {
+	private class ViewerTreeContentProvider implements ITreeContentProvider {
 
-        @Override
-        public void dispose() {}
+		@Override
+		public void dispose() {
+		}
 
-        @Override
-        public Object[] getChildren(Object parentElement) {
-            return ((TreeElement) parentElement).getChildren().toArray();
-        }
+		@Override
+		public Object[] getChildren(Object parentElement) {
+			return ((TreeElement) parentElement).getChildren().toArray();
+		}
 
-        @Override
-        public Object[] getElements(Object inputElement) {
-            return new Object[] { Testament.OLD_TESTAMENT, Testament.NEW_TESTAMENT };
-        }
+		@Override
+		public Object[] getElements(Object inputElement) {
+			return new Object[] { Testament.OLD_TESTAMENT, Testament.NEW_TESTAMENT };
+		}
 
-        @Override
-        public Object getParent(Object element) {
-            return ((TreeElement) element).getParent();
-        }
+		@Override
+		public Object getParent(Object element) {
+			return ((TreeElement) element).getParent();
+		}
 
-        @Override
-        public boolean hasChildren(Object element) {
-            return !((TreeElement) element).getChildren().isEmpty();
-        }
+		@Override
+		public boolean hasChildren(Object element) {
+			return !((TreeElement) element).getChildren().isEmpty();
+		}
 
-        @Override
-        public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {}
+		@Override
+		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+		}
 
-    }
+	}
+
+	public TreeViewer getBooks() {
+		return books;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		Book book = CurrentChapter.getCurrentChapter().getBook();
+		Testament testament = book.getTestament();
+		selectionListener.preventSelectionChangeEvent();
+		books.setSelection(new TreeSelection(new TreePath(new Object[] { testament, book })));
+
+	}
 
 }
