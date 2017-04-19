@@ -35,9 +35,13 @@
       </children>
     </children>
     <mainMenu xmi:id="_P5x4EBo0EeeuaO7Y1kMvqw" elementId="biblereader.menu.2">
-      <children xsi:type="menu:Menu" xmi:id="_THOEcBo0EeeuaO7Y1kMvqw" elementId="biblereader.menu.oldtestament" label="%translations">
-        <children xsi:type="menu:Menu" xmi:id="_C38VoCHYEeeUyN1pG4NImw" elementId="biblereader.menu.hungarian" label="%hungarian"/>
-        <children xsi:type="menu:Menu" xmi:id="_G3AMMCHYEeeUyN1pG4NImw" elementId="biblereader.menu.english" label="%english"/>
+      <children xsi:type="menu:Menu" xmi:id="_THOEcBo0EeeuaO7Y1kMvqw" elementId="biblereader.menu.translations" label="%translations">
+        <children xsi:type="menu:Menu" xmi:id="_C38VoCHYEeeUyN1pG4NImw" elementId="biblereader.menu.hungarian" label="%hungarian">
+          <children xsi:type="menu:DirectMenuItem" xmi:id="_13hcUCVFEeeDM4f575PFtA" elementId="biblereader.directmenuitem.karoly" label="%karoly"/>
+        </children>
+        <children xsi:type="menu:Menu" xmi:id="_G3AMMCHYEeeUyN1pG4NImw" elementId="biblereader.menu.english" label="%english">
+          <children xsi:type="menu:DirectMenuItem" xmi:id="_L--boCVGEeeDM4f575PFtA" elementId="biblereader.directmenuitem.niv" label="%NIV"/>
+        </children>
       </children>
     </mainMenu>
     <trimBars xmi:id="__LiGoBw3EeetS7PfnSTHUQ" elementId="biblereader.trimbar.0">

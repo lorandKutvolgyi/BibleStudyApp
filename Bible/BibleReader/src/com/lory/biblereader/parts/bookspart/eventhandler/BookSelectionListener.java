@@ -4,14 +4,12 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import org.eclipse.e4.core.di.annotations.Creatable;
-import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeSelection;
 
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.parts.bookspart.chapternumberpopup.ChapterNumberPopupShell;
-import com.lory.biblereader.parts.textpart.TextPartManager;
 
 /**
  * Event handler for book selection event.
@@ -24,11 +22,8 @@ import com.lory.biblereader.parts.textpart.TextPartManager;
 public class BookSelectionListener implements ISelectionChangedListener {
 
 	private boolean selectionChangeEventNotNeeded;
+	@Inject
 	private ChapterNumberPopupShell chapterNumberPopupShell;
-	@Inject
-	private EPartService partService;
-	@Inject
-	private TextPartManager textPartManager;
 
 	@Override
 	public void selectionChanged(SelectionChangedEvent event) {
@@ -38,8 +33,7 @@ public class BookSelectionListener implements ISelectionChangedListener {
 		}
 		Object selectedElement = getSelectedElement(event);
 		if (selectedElement instanceof Book) {
-			chapterNumberPopupShell = new ChapterNumberPopupShell(event, (Book) selectedElement, partService,
-					textPartManager);
+			chapterNumberPopupShell.init(event, (Book) selectedElement);
 			chapterNumberPopupShell.open();
 		}
 	}

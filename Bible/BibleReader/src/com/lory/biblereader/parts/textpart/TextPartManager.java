@@ -1,27 +1,25 @@
 package com.lory.biblereader.parts.textpart;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.inject.Singleton;
 
 import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 
-import com.lory.biblereader.model.CurrentChapter;
-
 @Creatable
 @Singleton
 public class TextPartManager {
-	private Map<MPart, BibleTextPart> parts = new HashMap<>();
+	private Map<MPart, BibleTextPart> parts = new TreeMap<>(
+			(part1, part2) -> part1.getElementId().compareTo(part2.getElementId()));
 	private MPart activePart;
-	private boolean forcedActivate;
+	private boolean forcedActivation;
 
 	public void registerPart(MPart part, BibleTextPart obj) {
 		parts.put(part, obj);
-		if (!forcedActivate) {
-			activePart = part;
-			CurrentChapter.setObserver(parts.get(part));
+		if (!forcedActivation && part.getParent().isVisible()) {
+			activatePart(part);
 		}
 	}
 
@@ -30,10 +28,14 @@ public class TextPartManager {
 	}
 
 	public void setActivePart(MPart activePart) {
+		forcedActivation = true;
+		activatePart(activePart);
+	}
+
+	private void activatePart(MPart activePart) {
 		this.activePart = activePart;
 		parts.get(activePart).activate();
 		inactivateOtherParts();
-		forcedActivate = true;
 	}
 
 	private void inactivateOtherParts() {
@@ -44,7 +46,8 @@ public class TextPartManager {
 		}
 	}
 
-	public String getHiddenPart() {
+	// TODO schould be next
+	public String getNextHiddenPart() {
 		for (MPart part : parts.keySet()) {
 			if (!part.getParent().isVisible()) {
 				part.getParent().setVisible(true);
@@ -52,6 +55,15 @@ public class TextPartManager {
 			}
 		}
 		return activePart.getElementId();
+	}
+
+	public void setNextPartToActive() {
+		for (MPart part : parts.keySet()) {
+			if (part.getParent().isVisible()) {
+				activatePart(part);
+				return;
+			}
+		}
 	}
 
 }

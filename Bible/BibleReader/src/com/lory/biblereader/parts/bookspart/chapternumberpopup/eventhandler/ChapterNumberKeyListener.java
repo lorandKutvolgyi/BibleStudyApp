@@ -41,6 +41,7 @@ public class ChapterNumberKeyListener extends KeyAdapter {
 
 	@Override
 	public void keyPressed(final KeyEvent event) {
+		int stateMask = -1;
 		if (isEscCharacter(event)) {
 			((Shell) event.getSource()).close();
 		}
@@ -50,11 +51,14 @@ public class ChapterNumberKeyListener extends KeyAdapter {
 		if (isStartingWithZero(event)) {
 			return;
 		}
+		if (isCacheEmpty()) {
+			stateMask = event.stateMask;
+		}
 		if (!isCacheFull()) {
 			cache.add((char) event.keyCode);
 		}
 		if (!composite.isDisposed() && !cache.isEmpty() && isLabelWithCachedNumberExist()) {
-			selectNumLabel(concatCachedChars(), composite, event.stateMask);
+			selectNumLabel(concatCachedChars(), stateMask);
 		}
 		clearCacheWithDelay();
 	}
@@ -73,6 +77,10 @@ public class ChapterNumberKeyListener extends KeyAdapter {
 
 	private boolean isCacheFull() {
 		return cache.size() == MAXIMUM_CACHE_SIZE;
+	}
+
+	private boolean isCacheEmpty() {
+		return cache.size() == 0;
 	}
 
 	private boolean isLabelWithCachedNumberExist() {
@@ -95,12 +103,12 @@ public class ChapterNumberKeyListener extends KeyAdapter {
 		return result.toString();
 	}
 
-	private void selectNumLabel(String key, Composite composite, int stateMask) {
+	private void selectNumLabel(String key, int stateMask) {
 		Label label = (Label) composite.getChildren()[Integer.valueOf(key) - 1];
 		Event event = new Event();
 		event.data = POPUP_CLOSING_DELAY;
 		if (stateMask == SWT.CTRL) {
-			MPart newPart = partService.showPart(textPartManager.getHiddenPart(), PartState.VISIBLE);
+			MPart newPart = partService.showPart(textPartManager.getNextHiddenPart(), PartState.VISIBLE);
 			textPartManager.setActivePart(newPart);
 		}
 		label.notifyListeners(SWT.MouseDown, event);

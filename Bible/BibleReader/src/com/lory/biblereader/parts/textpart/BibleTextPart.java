@@ -36,6 +36,7 @@ public class BibleTextPart implements Observer {
 	private MessageService messageService;
 	@Inject
 	private TextPartManager textPartManager;
+	private Composite parent;
 
 	@PostConstruct
 	public void postConstruct(Composite parent, MPart part) {
@@ -46,11 +47,19 @@ public class BibleTextPart implements Observer {
 			loadCurrentChapter();
 		}
 		text.addKeyListener(pagingListener);
+		parent.addListener(SWT.Dispose, (event) -> event.doit = false);
+
+		text.addListener(SWT.Dispose, (event) -> {
+			event.doit = false;
+			part.getParent().setVisible(false);
+			inactivate();
+			textPartManager.setNextPartToActive();
+		});
+
+		text.addListener(SWT.FOCUSED, (event) -> textPartManager.setActivePart(part));
 		restorePersistedState();
 		textPartManager.registerPart(part, this);
 	}
-
-	// TODO focuslistener setActive
 
 	@PersistState
 	private void persist(MPart part) {
@@ -93,7 +102,7 @@ public class BibleTextPart implements Observer {
 
 	@Override
 	public String toString() {
-		if (text == null) {
+		if (text == null || text.isDisposed()) {
 			return "";
 		}
 		return "BibleTextPart\n\ttext: " + text.getText(0, 101) + (text.getText().length() > 100 ? "..." : "");
