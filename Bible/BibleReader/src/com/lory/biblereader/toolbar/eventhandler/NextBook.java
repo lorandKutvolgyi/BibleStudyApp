@@ -5,8 +5,7 @@ import javax.inject.Inject;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.swt.SWT;
 
-import com.lory.biblereader.common.BookChanging;
-import com.lory.biblereader.parts.bookspart.BooksComparator;
+import com.lory.biblereader.parts.bookspart.treesorter.BooksComparator;
 
 public class NextBook {
 	@Inject

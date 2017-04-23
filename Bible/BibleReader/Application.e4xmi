@@ -12,21 +12,21 @@
               <children xsi:type="basic:PartStack" xmi:id="_XF0OsCNLEeW4Abd66DaAtA" elementId="biblereader.partstack.1">
                 <children xsi:type="basic:Part" xmi:id="_33tk4Ff4EeWw0_pvm8Qobg" elementId="biblereader.BibleTextPart.1" accessibilityPhrase="" contributionURI="bundleclass://reader/com.lory.biblereader.parts.textpart.BibleTextPart1" label=""/>
               </children>
-              <children xsi:type="basic:PartStack" xmi:id="_hXr1kCHYEeeUyN1pG4NImw" elementId="biblereader.partstack.4" visible="false">
+              <children xsi:type="basic:PartStack" xmi:id="_hXr1kCHYEeeUyN1pG4NImw" elementId="biblereader.partstack.2" visible="false">
                 <children xsi:type="basic:Part" xmi:id="_iVNNwCHYEeeUyN1pG4NImw" elementId="biblereader.BibleTextPart.2" contributionURI="bundleclass://reader/com.lory.biblereader.parts.textpart.BibleTextPart2" closeable="true"/>
               </children>
-              <children xsi:type="basic:PartStack" xmi:id="_nf5J8CHYEeeUyN1pG4NImw" elementId="biblereader.partstack.1" visible="false">
+              <children xsi:type="basic:PartStack" xmi:id="_nf5J8CHYEeeUyN1pG4NImw" elementId="biblereader.partstack.3" visible="false">
                 <children xsi:type="basic:Part" xmi:id="_nf5J8SHYEeeUyN1pG4NImw" elementId="biblereader.BibleTextPart.3" accessibilityPhrase="" contributionURI="bundleclass://reader/com.lory.biblereader.parts.textpart.BibleTextPart3" label="" closeable="true"/>
               </children>
-              <children xsi:type="basic:PartStack" xmi:id="_nkAN4CHYEeeUyN1pG4NImw" elementId="biblereader.partstack.1" visible="false">
+              <children xsi:type="basic:PartStack" xmi:id="_nkAN4CHYEeeUyN1pG4NImw" elementId="biblereader.partstack.4" visible="false">
                 <children xsi:type="basic:Part" xmi:id="_nkAN4SHYEeeUyN1pG4NImw" elementId="biblereader.BibleTextPart.4" accessibilityPhrase="" contributionURI="bundleclass://reader/com.lory.biblereader.parts.textpart.BibleTextPart4" label="" closeable="true"/>
               </children>
             </children>
             <children xsi:type="basic:PartSashContainer" xmi:id="_x3oDwBw7EeetS7PfnSTHUQ" elementId="biblereader.partsashcontainer.2">
-              <children xsi:type="basic:PartStack" xmi:id="_9Y1dIBw7EeetS7PfnSTHUQ" elementId="biblereader.partstack.2">
+              <children xsi:type="basic:PartStack" xmi:id="_9Y1dIBw7EeetS7PfnSTHUQ" elementId="biblereader.partstack.5">
                 <children xsi:type="basic:Part" xmi:id="_-7KykBw7EeetS7PfnSTHUQ" elementId="biblereader.part.0" contributionURI="bundleclass://reader/com.lory.biblereader.parts.mappart.MapPart"/>
               </children>
-              <children xsi:type="basic:PartStack" xmi:id="_-Pf_YBw7EeetS7PfnSTHUQ" elementId="biblereader.partstack.3">
+              <children xsi:type="basic:PartStack" xmi:id="_-Pf_YBw7EeetS7PfnSTHUQ" elementId="biblereader.partstack.6">
                 <children xsi:type="basic:Part" xmi:id="__lJjsBw7EeetS7PfnSTHUQ" elementId="biblereader.part.1"/>
               </children>
             </children>

@@ -108,7 +108,7 @@ public class ChapterNumberKeyListener extends KeyAdapter {
 		Event event = new Event();
 		event.data = POPUP_CLOSING_DELAY;
 		if (stateMask == SWT.CTRL) {
-			MPart newPart = partService.showPart(textPartManager.getNextHiddenPart(), PartState.VISIBLE);
+			MPart newPart = partService.showPart(textPartManager.getNextHiddenPart(), PartState.ACTIVATE);
 			textPartManager.setActivePart(newPart);
 		}
 		label.notifyListeners(SWT.MouseDown, event);

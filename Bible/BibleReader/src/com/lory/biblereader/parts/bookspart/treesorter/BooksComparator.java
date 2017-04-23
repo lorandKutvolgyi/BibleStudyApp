@@ -1,4 +1,4 @@
-package com.lory.biblereader.parts.bookspart;
+package com.lory.biblereader.parts.bookspart.treesorter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +10,6 @@ import javax.inject.Singleton;
 import org.eclipse.e4.core.di.annotations.Creatable;
 
 import com.lory.biblereader.model.Book;
-import com.lory.biblereader.parts.bookspart.treesorter.AbstractBooksOrder;
-import com.lory.biblereader.parts.bookspart.treesorter.CanonicalBooksOrder;
-import com.lory.biblereader.parts.bookspart.treesorter.HistoricalBooksOrder;
 
 @Creatable
 @Singleton

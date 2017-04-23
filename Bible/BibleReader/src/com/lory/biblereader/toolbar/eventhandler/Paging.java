@@ -1,4 +1,4 @@
-package com.lory.biblereader.common;
+package com.lory.biblereader.toolbar.eventhandler;
 
 import org.eclipse.swt.SWT;
 

@@ -9,9 +9,9 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 
-import com.lory.biblereader.common.BookChanging;
-import com.lory.biblereader.common.Paging;
-import com.lory.biblereader.parts.bookspart.BooksComparator;
+import com.lory.biblereader.parts.bookspart.treesorter.BooksComparator;
+import com.lory.biblereader.toolbar.eventhandler.BookChanging;
+import com.lory.biblereader.toolbar.eventhandler.Paging;
 
 /**
  * EventHandler for paging event.

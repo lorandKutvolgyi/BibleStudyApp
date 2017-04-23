@@ -1,11 +1,11 @@
-package com.lory.biblereader.common;
+package com.lory.biblereader.toolbar.eventhandler;
 
 import org.eclipse.swt.SWT;
 
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.CurrentChapter;
-import com.lory.biblereader.parts.bookspart.BooksComparator;
 import com.lory.biblereader.parts.bookspart.treesorter.AbstractBooksOrder;
+import com.lory.biblereader.parts.bookspart.treesorter.BooksComparator;
 
 public class BookChanging {
 

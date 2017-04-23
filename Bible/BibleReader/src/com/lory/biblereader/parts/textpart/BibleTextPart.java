@@ -41,22 +41,37 @@ public class BibleTextPart implements Observer {
 	@PostConstruct
 	public void postConstruct(Composite parent, MPart part) {
 		this.part = part;
-		text = new Text(parent, SWT.MULTI | SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+		this.parent = parent;
+		text = new Text(parent, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL);
 		text.setEditable(false);
 		if (CurrentChapter.getCurrentChapter() != null) {
 			loadCurrentChapter();
 		}
-		text.addKeyListener(pagingListener);
-		parent.addListener(SWT.Dispose, (event) -> event.doit = false);
-
-		text.addListener(SWT.Dispose, (event) -> {
+		this.parent.getParent().addListener(SWT.Dispose, (event) -> {
 			event.doit = false;
-			part.getParent().setVisible(false);
+		});
+		this.parent.addListener(SWT.Dispose, (event) -> {
+			event.doit = false;
 			inactivate();
 			textPartManager.setNextPartToActive();
+			if (textPartManager.isOnlyChild(part)) {
+				part.getParent().setVisible(false);
+			}
+		});
+		text.addListener(SWT.Dispose, (event) -> {
+			event.doit = false;
+			inactivate();
+			textPartManager.setNextPartToActive();
+			if (textPartManager.isOnlyChild(part)) {
+				part.getParent().setVisible(false);
+			}
+		});
+		text.addListener(SWT.FOCUSED, (event) -> {
+			textPartManager.setActivePart(part);
 		});
 
-		text.addListener(SWT.FOCUSED, (event) -> textPartManager.setActivePart(part));
+		text.addKeyListener(pagingListener);
+
 		restorePersistedState();
 		textPartManager.registerPart(part, this);
 	}
@@ -110,5 +125,9 @@ public class BibleTextPart implements Observer {
 
 	public void activate() {
 		CurrentChapter.setObserver(this);
+	}
+
+	public boolean isDisposed() {
+		return parent.isDisposed();
 	}
 }
