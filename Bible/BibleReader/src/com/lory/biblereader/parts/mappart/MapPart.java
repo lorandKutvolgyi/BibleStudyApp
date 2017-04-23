@@ -18,6 +18,7 @@ public class MapPart {
 		// Image image = new Image(Display.getCurrent(),
 		// "/home/lory/Projects/BibleApp/Bible/BibleReader/resources/images/OLD_TESTAMENT/1.svg");
 		// parent.setBackgroundImage(image);
+
 	}
 
 }
