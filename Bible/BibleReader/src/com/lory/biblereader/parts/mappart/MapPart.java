@@ -10,7 +10,6 @@ import org.eclipse.swt.widgets.Composite;
 public class MapPart {
 	@Inject
 	public MapPart() {
-
 	}
 
 	@PostConstruct
