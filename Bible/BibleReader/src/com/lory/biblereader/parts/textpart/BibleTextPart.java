@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.eclipse.e4.core.services.nls.Translation;
 import org.eclipse.e4.ui.di.PersistState;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
@@ -17,6 +18,7 @@ import com.lory.biblereader.i18n.MessageService;
 import com.lory.biblereader.i18n.Messages;
 import com.lory.biblereader.model.CurrentChapter;
 import com.lory.biblereader.parts.bookspart.eventhandler.BooksKeyListener;
+import com.lory.biblereader.parts.textpart.eventhandler.TextPartListener;
 
 /**
  * Shows the text of the selected chapter.
@@ -36,7 +38,11 @@ public class BibleTextPart implements Observer {
 	private MessageService messageService;
 	@Inject
 	private TextPartManager textPartManager;
+	@Inject
+	private TextPartListener textPartListener;
 	private Composite parent;
+	@Inject
+	private EPartService partService;
 
 	@PostConstruct
 	public void postConstruct(Composite parent, MPart part) {
@@ -47,42 +53,15 @@ public class BibleTextPart implements Observer {
 		if (CurrentChapter.getCurrentChapter() != null) {
 			loadCurrentChapter();
 		}
-		this.parent.getParent().addListener(SWT.Dispose, (event) -> {
-			event.doit = false;
-		});
-		this.parent.addListener(SWT.Dispose, (event) -> {
-			event.doit = false;
-			inactivate();
-			textPartManager.setNextPartToActive();
-			if (textPartManager.isOnlyChild(part)) {
-				part.getParent().setVisible(false);
-			}
-		});
-		text.addListener(SWT.Dispose, (event) -> {
-			event.doit = false;
-			inactivate();
-			textPartManager.setNextPartToActive();
-			if (textPartManager.isOnlyChild(part)) {
-				part.getParent().setVisible(false);
-			}
-		});
-		text.addListener(SWT.FOCUSED, (event) -> {
-			textPartManager.setActivePart(part);
-		});
-
 		text.addKeyListener(pagingListener);
-
 		restorePersistedState();
 		textPartManager.registerPart(part, this);
+		partService.addPartListener(textPartListener);
 	}
 
 	@PersistState
 	private void persist(MPart part) {
-		if (part.equals(textPartManager.getActivePart())) {
-			part.getPersistedState().put("active", "true");
-		} else {
-			part.getPersistedState().put("active", "false");
-		}
+		part.getPersistedState().put("active", "true");
 	}
 
 	private void restorePersistedState() {
@@ -130,4 +109,5 @@ public class BibleTextPart implements Observer {
 	public boolean isDisposed() {
 		return parent.isDisposed();
 	}
+
 }

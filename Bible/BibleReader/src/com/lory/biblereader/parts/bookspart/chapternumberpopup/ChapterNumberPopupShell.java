@@ -6,7 +6,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import org.eclipse.e4.core.di.annotations.Creatable;
-import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
@@ -24,7 +23,6 @@ import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.parts.bookspart.chapternumberpopup.eventhandler.ChapterNumberKeyListener;
 import com.lory.biblereader.parts.bookspart.chapternumberpopup.eventhandler.ChapterNumberMouseListener;
-import com.lory.biblereader.parts.textpart.TextPartManager;
 
 /**
  * Shows the chapter numbers of the selected book.
@@ -38,9 +36,7 @@ public class ChapterNumberPopupShell {
 	private Shell shell;
 	private Display display;
 	@Inject
-	private TextPartManager textPartManager;
-	@Inject
-	private EPartService partService;
+	private ChapterNumberKeyListener chapterNumberKeyListener;
 	private Composite comp;
 
 	public void init(SelectionChangedEvent event, Book selectedBook) {
@@ -49,7 +45,8 @@ public class ChapterNumberPopupShell {
 		shell = new Shell(display.getActiveShell(), SWT.FOCUSED);
 		comp = createMainComposite();
 		initPopup(event, selectedBook, comp);
-		shell.addKeyListener(new ChapterNumberKeyListener(comp, partService, textPartManager));
+		chapterNumberKeyListener.setComposite(comp);
+		shell.addKeyListener(chapterNumberKeyListener);
 	}
 
 	private Composite createMainComposite() {
@@ -115,7 +112,7 @@ public class ChapterNumberPopupShell {
 		for (int i = 1; i <= numOfChapters; i++) {
 			Label label = new Label(comp, SWT.HORIZONTAL);
 			label.setText(Integer.toString(i));
-			label.addMouseListener(new ChapterNumberMouseListener(book, label, i, this, partService, textPartManager));
+			label.addMouseListener(new ChapterNumberMouseListener(book, label, i, this));
 		}
 	}
 

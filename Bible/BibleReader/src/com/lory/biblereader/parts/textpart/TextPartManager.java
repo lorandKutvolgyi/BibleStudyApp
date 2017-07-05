@@ -1,14 +1,18 @@
 package com.lory.biblereader.parts.textpart;
 
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import org.eclipse.e4.core.di.annotations.Creatable;
-import org.eclipse.e4.ui.model.application.ui.MElementContainer;
-import org.eclipse.e4.ui.model.application.ui.MUIElement;
+import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.e4.ui.model.application.ui.basic.MBasicFactory;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
+import org.eclipse.e4.ui.workbench.modeling.EModelService;
 
 @Creatable
 @Singleton
@@ -17,28 +21,21 @@ public class TextPartManager {
 			(part1, part2) -> part1.getElementId().compareTo(part2.getElementId()));
 	private MPart activePart;
 	private boolean forcedActivation;
-	private Map<MPart, MElementContainer<MUIElement>> stacks = new TreeMap<>(
-			(part1, part2) -> part1.getElementId().compareTo(part2.getElementId()));
+	@Inject
+	private EModelService modelService;
+	@Inject
+	private MApplication application;
 
 	public void registerPart(MPart part, BibleTextPart obj) {
-		stacks.put(part, part.getParent());
 		parts.put(part, obj);
-		if (!forcedActivation && part.getParent().isVisible()) {
+		if (!forcedActivation) {
 			activatePart(part);
 		}
-		System.out.println(parts.size());
-		System.out.println(stacks.size());
-	}
-
-	public MPart getActivePart() {
-		return activePart;
 	}
 
 	public void setActivePart(MPart activePart) {
 		forcedActivation = true;
 		activatePart(activePart);
-		System.out.println(parts.size());
-		System.out.println(stacks.size());
 	}
 
 	private void activatePart(MPart activePart) {
@@ -55,48 +52,17 @@ public class TextPartManager {
 		}
 	}
 
-	public String getNextHiddenPart() {
-		for (MPart part : parts.keySet()) {
-			if (!part.getParent().isVisible()) {
-				part.getParent().setVisible(true);
-				System.out.println(parts.size());
-				System.out.println(stacks.size());
-				return part.getElementId();
-			}
-		}
-		if (stacks.size() < 4) {
-
-		}
-		for (MPart part : parts.keySet()) {
-			if (parts.get(part).isDisposed()) {
-				System.out.println("disposed: " + part.getElementId());
-			}
-		}
-		for (MPart part : parts.keySet()) {
-			if (!part.getParent().equals(stacks.get(part))) {
-				part.setParent(stacks.get(part));
-				return part.getElementId();
-			}
-		}
-		return activePart.getElementId();
-
+	public boolean isRegistered(MPart part) {
+		return parts.containsKey(part);
 	}
 
-	public void setNextPartToActive() {
-		for (MPart part : parts.keySet()) {
-			if (part.getParent().isVisible()) {
-				activatePart(part);
-				System.out.println(parts.size());
-				System.out.println(stacks.size());
-				return;
-			}
-		}
-		System.out.println(parts.size());
-		System.out.println(stacks.size());
+	public MPart newTextPart() {
+		MPart part = MBasicFactory.INSTANCE.createPart();
+		part.setCloseable(true);
+		part.setElementId(String.valueOf(PartIdProvider.getPartId()));
+		part.setContributionURI("bundleclass://reader/com.lory.biblereader.parts.textpart.BibleTextPart");
+		List<MPartStack> stacks = modelService.findElements(application, null, MPartStack.class, null);
+		stacks.get(1).getChildren().add(part);// TODO remove magic number
+		return part;
 	}
-
-	public boolean isOnlyChild(MPart part) {
-		return part.getParent().getChildren().size() == 1;
-	}
-
 }

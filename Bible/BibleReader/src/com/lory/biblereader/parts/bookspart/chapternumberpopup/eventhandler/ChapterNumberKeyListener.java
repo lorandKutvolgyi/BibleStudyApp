@@ -3,7 +3,9 @@ package com.lory.biblereader.parts.bookspart.chapternumberpopup.eventhandler;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import javax.inject.Inject;
+
+import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 import org.eclipse.swt.SWT;
@@ -23,21 +25,18 @@ import com.lory.biblereader.parts.textpart.TextPartManager;
  * @author lorandKutvolgyi
  *
  */
+@Creatable
 public class ChapterNumberKeyListener extends KeyAdapter {
 	private static final int CACHE_CLEARING_DELAY = 1000;
 	private static final int POPUP_CLOSING_DELAY = 1000;
 	private static final int MAXIMUM_CACHE_SIZE = 3;
 	private final List<Character> cache = new ArrayList<>(3);
-	private final Composite composite;
+	private Composite composite;
 	private Display display;
+	@Inject
 	private EPartService partService;
+	@Inject
 	private TextPartManager textPartManager;
-
-	public ChapterNumberKeyListener(Composite composite, EPartService partService, TextPartManager textPartManager) {
-		this.composite = composite;
-		this.partService = partService;
-		this.textPartManager = textPartManager;
-	}
 
 	@Override
 	public void keyPressed(final KeyEvent event) {
@@ -108,13 +107,16 @@ public class ChapterNumberKeyListener extends KeyAdapter {
 		Event event = new Event();
 		event.data = POPUP_CLOSING_DELAY;
 		if (stateMask == SWT.CTRL) {
-			MPart newPart = partService.showPart(textPartManager.getNextHiddenPart(), PartState.ACTIVATE);
-			textPartManager.setActivePart(newPart);
+			partService.showPart(textPartManager.newTextPart(), PartState.ACTIVATE);
 		}
 		label.notifyListeners(SWT.MouseDown, event);
 	}
 
 	void setDisplay(Display display) {
 		this.display = display;
+	}
+
+	public void setComposite(Composite comp) {
+		this.composite = comp;
 	}
 }

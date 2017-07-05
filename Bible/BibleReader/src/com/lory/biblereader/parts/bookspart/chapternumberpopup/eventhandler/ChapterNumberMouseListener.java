@@ -1,6 +1,8 @@
 package com.lory.biblereader.parts.bookspart.chapternumberpopup.eventhandler;
 
-import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import javax.inject.Inject;
+
+import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 import org.eclipse.swt.SWT;
@@ -20,6 +22,7 @@ import com.lory.biblereader.parts.textpart.TextPartManager;
  * @author lorandKutvolgyi
  *
  */
+@Creatable
 public class ChapterNumberMouseListener extends MouseAdapter {
 	private final Book book;
 	private final Label label;
@@ -27,23 +30,20 @@ public class ChapterNumberMouseListener extends MouseAdapter {
 	private final ChapterNumberPopupShell shell;
 	private Display display;
 	private EPartService partService;
+	@Inject
 	private TextPartManager textPartManager;
 
-	public ChapterNumberMouseListener(Book book, Label label, int chapterId, ChapterNumberPopupShell shell,
-			EPartService partService, TextPartManager textPartManager) {
+	public ChapterNumberMouseListener(Book book, Label label, int chapterId, ChapterNumberPopupShell shell) {
 		this.book = book;
 		this.label = label;
 		this.chapterId = chapterId;
 		this.shell = shell;
-		this.partService = partService;
-		this.textPartManager = textPartManager;
 	}
 
 	@Override
 	public void mouseDown(MouseEvent event) {
 		if (event.stateMask == SWT.CTRL) {
-			MPart newPart = partService.showPart(textPartManager.getNextHiddenPart(), PartState.VISIBLE);
-			textPartManager.setActivePart(newPart);
+			partService.showPart(textPartManager.newTextPart(), PartState.CREATE);
 		}
 		CurrentChapter.setCurrentChapter(book.getChapter(chapterId));
 		label.setForeground(getDisplay().getSystemColor(SWT.COLOR_GRAY));
