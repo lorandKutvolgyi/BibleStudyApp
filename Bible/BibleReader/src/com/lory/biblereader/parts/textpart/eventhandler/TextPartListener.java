@@ -1,6 +1,5 @@
 package com.lory.biblereader.parts.textpart.eventhandler;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import org.eclipse.e4.core.di.annotations.Creatable;
@@ -13,9 +12,6 @@ import com.lory.biblereader.parts.textpart.TextPartManager;
 @Singleton
 public class TextPartListener implements IPartListener {
 
-	@Inject
-	private TextPartManager textPartManager;
-
 	@Override
 	public void partActivated(MPart part) {
 		// Do nothing
@@ -23,8 +19,8 @@ public class TextPartListener implements IPartListener {
 
 	@Override
 	public void partBroughtToTop(MPart part) {
-		if (textPartManager.isRegistered(part)) {
-			textPartManager.setActivePart(part);
+		if (TextPartManager.isRegistered(part)) {
+			TextPartManager.setActivePart(part);
 		}
 	}
 

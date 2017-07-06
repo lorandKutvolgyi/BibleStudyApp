@@ -4,47 +4,37 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
-import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.basic.MBasicFactory;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 
-@Creatable
-@Singleton
 public class TextPartManager {
-	private Map<MPart, BibleTextPart> parts = new TreeMap<>(
+	private static Map<MPart, BibleTextPart> parts = new TreeMap<>(
 			(part1, part2) -> part1.getElementId().compareTo(part2.getElementId()));
-	private MPart activePart;
-	private boolean forcedActivation;
-	@Inject
-	private EModelService modelService;
-	@Inject
-	private MApplication application;
+	private static MPart activePart;
+	private static boolean forcedActivation;
 
-	public void registerPart(MPart part, BibleTextPart obj) {
+	public static void registerPart(MPart part, BibleTextPart obj) {
 		parts.put(part, obj);
 		if (!forcedActivation) {
 			activatePart(part);
 		}
 	}
 
-	public void setActivePart(MPart activePart) {
+	public static void setActivePart(MPart activePart) {
 		forcedActivation = true;
 		activatePart(activePart);
 	}
 
-	private void activatePart(MPart activePart) {
-		this.activePart = activePart;
+	private static void activatePart(MPart newActivePart) {
+		activePart = newActivePart;
 		parts.get(activePart).activate();
 		inactivateOtherParts();
 	}
 
-	private void inactivateOtherParts() {
+	private static void inactivateOtherParts() {
 		for (MPart part : parts.keySet()) {
 			if (!part.equals(activePart)) {
 				parts.get(part).inactivate();
@@ -52,11 +42,11 @@ public class TextPartManager {
 		}
 	}
 
-	public boolean isRegistered(MPart part) {
+	public static boolean isRegistered(MPart part) {
 		return parts.containsKey(part);
 	}
 
-	public MPart newTextPart() {
+	public static MPart newTextPart(EModelService modelService, MApplication application) {
 		MPart part = MBasicFactory.INSTANCE.createPart();
 		part.setCloseable(true);
 		part.setElementId(String.valueOf(PartIdProvider.getPartId()));

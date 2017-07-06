@@ -6,6 +6,9 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import org.eclipse.e4.core.di.annotations.Creatable;
+import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.e4.ui.workbench.modeling.EModelService;
+import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
@@ -38,11 +41,17 @@ public class ChapterNumberPopupShell {
 	@Inject
 	private ChapterNumberKeyListener chapterNumberKeyListener;
 	private Composite comp;
+	@Inject
+	private EModelService modelService;
+	@Inject
+	private EPartService partService;
+	@Inject
+	private MApplication application;
 
 	public void init(SelectionChangedEvent event, Book selectedBook) {
 		display = Display.getDefault();
 		close();
-		shell = new Shell(display.getActiveShell(), SWT.FOCUSED);
+		shell = new Shell(display.getActiveShell(), SWT.APPLICATION_MODAL);
 		comp = createMainComposite();
 		initPopup(event, selectedBook, comp);
 		chapterNumberKeyListener.setComposite(comp);
@@ -112,7 +121,8 @@ public class ChapterNumberPopupShell {
 		for (int i = 1; i <= numOfChapters; i++) {
 			Label label = new Label(comp, SWT.HORIZONTAL);
 			label.setText(Integer.toString(i));
-			label.addMouseListener(new ChapterNumberMouseListener(book, label, i, this));
+			label.addMouseListener(
+					new ChapterNumberMouseListener(book, label, i, this, modelService, application, partService));
 		}
 	}
 

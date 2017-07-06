@@ -37,8 +37,6 @@ public class BibleTextPart implements Observer {
 	@Inject
 	private MessageService messageService;
 	@Inject
-	private TextPartManager textPartManager;
-	@Inject
 	private TextPartListener textPartListener;
 	private Composite parent;
 	@Inject
@@ -55,7 +53,7 @@ public class BibleTextPart implements Observer {
 		}
 		text.addKeyListener(pagingListener);
 		restorePersistedState();
-		textPartManager.registerPart(part, this);
+		TextPartManager.registerPart(part, this);
 		partService.addPartListener(textPartListener);
 	}
 
@@ -66,7 +64,7 @@ public class BibleTextPart implements Observer {
 
 	private void restorePersistedState() {
 		if (Boolean.getBoolean(part.getPersistedState().get("active"))) {
-			textPartManager.setActivePart(part);
+			TextPartManager.setActivePart(part);
 			CurrentChapter.setObserver(this);
 		}
 	}

@@ -3,11 +3,7 @@ package com.lory.biblereader.parts.bookspart.chapternumberpopup.eventhandler;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.eclipse.e4.core.di.annotations.Creatable;
-import org.eclipse.e4.ui.workbench.modeling.EPartService;
-import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
@@ -17,8 +13,6 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
-import com.lory.biblereader.parts.textpart.TextPartManager;
-
 /**
  * Event handler for KeyEvents on the ChapterNumberPopupShell.
  *
@@ -27,20 +21,15 @@ import com.lory.biblereader.parts.textpart.TextPartManager;
  */
 @Creatable
 public class ChapterNumberKeyListener extends KeyAdapter {
+	public static final int POPUP_CLOSING_DELAY = 1000;
 	private static final int CACHE_CLEARING_DELAY = 1000;
-	private static final int POPUP_CLOSING_DELAY = 1000;
 	private static final int MAXIMUM_CACHE_SIZE = 3;
 	private final List<Character> cache = new ArrayList<>(3);
 	private Composite composite;
 	private Display display;
-	@Inject
-	private EPartService partService;
-	@Inject
-	private TextPartManager textPartManager;
 
 	@Override
 	public void keyPressed(final KeyEvent event) {
-		int stateMask = -1;
 		if (isEscCharacter(event)) {
 			((Shell) event.getSource()).close();
 		}
@@ -50,14 +39,11 @@ public class ChapterNumberKeyListener extends KeyAdapter {
 		if (isStartingWithZero(event)) {
 			return;
 		}
-		if (isCacheEmpty()) {
-			stateMask = event.stateMask;
-		}
 		if (!isCacheFull()) {
 			cache.add((char) event.keyCode);
 		}
 		if (!composite.isDisposed() && !cache.isEmpty() && isLabelWithCachedNumberExist()) {
-			selectNumLabel(concatCachedChars(), stateMask);
+			selectNumLabel(concatCachedChars(), event.stateMask);
 		}
 		clearCacheWithDelay();
 	}
@@ -76,10 +62,6 @@ public class ChapterNumberKeyListener extends KeyAdapter {
 
 	private boolean isCacheFull() {
 		return cache.size() == MAXIMUM_CACHE_SIZE;
-	}
-
-	private boolean isCacheEmpty() {
-		return cache.size() == 0;
 	}
 
 	private boolean isLabelWithCachedNumberExist() {
@@ -106,9 +88,7 @@ public class ChapterNumberKeyListener extends KeyAdapter {
 		Label label = (Label) composite.getChildren()[Integer.valueOf(key) - 1];
 		Event event = new Event();
 		event.data = POPUP_CLOSING_DELAY;
-		if (stateMask == SWT.CTRL) {
-			partService.showPart(textPartManager.newTextPart(), PartState.ACTIVATE);
-		}
+		event.stateMask = stateMask;
 		label.notifyListeners(SWT.MouseDown, event);
 	}
 
@@ -119,4 +99,5 @@ public class ChapterNumberKeyListener extends KeyAdapter {
 	public void setComposite(Composite comp) {
 		this.composite = comp;
 	}
+
 }
