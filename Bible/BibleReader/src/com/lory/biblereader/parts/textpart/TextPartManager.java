@@ -51,8 +51,9 @@ public class TextPartManager {
 		part.setCloseable(true);
 		part.setElementId(String.valueOf(PartIdProvider.getPartId()));
 		part.setContributionURI("bundleclass://reader/com.lory.biblereader.parts.textpart.BibleTextPart");
-		List<MPartStack> stacks = modelService.findElements(application, null, MPartStack.class, null);
-		stacks.get(1).getChildren().add(part);// TODO remove magic number
+		List<MPartStack> stacks = modelService.findElements(application, "biblereader.partstack.bibletext",
+				MPartStack.class, null);
+		stacks.get(0).getChildren().add(part);
 		return part;
 	}
 }

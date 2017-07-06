@@ -11,6 +11,9 @@ import org.eclipse.e4.ui.di.PersistState;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
@@ -19,6 +22,7 @@ import com.lory.biblereader.i18n.Messages;
 import com.lory.biblereader.model.CurrentChapter;
 import com.lory.biblereader.parts.bookspart.eventhandler.BooksKeyListener;
 import com.lory.biblereader.parts.textpart.eventhandler.TextPartListener;
+import com.lory.biblereader.parts.textpart.eventhandler.TextSearchListener;
 
 /**
  * Shows the text of the selected chapter.
@@ -27,7 +31,8 @@ import com.lory.biblereader.parts.textpart.eventhandler.TextPartListener;
  *
  */
 public class BibleTextPart implements Observer {
-	private Text text;
+	private StyledText text;
+	private Text searchtext;
 	@Inject
 	@Translation
 	private Messages messages;
@@ -38,6 +43,8 @@ public class BibleTextPart implements Observer {
 	private MessageService messageService;
 	@Inject
 	private TextPartListener textPartListener;
+	@Inject
+	private TextSearchListener textSearchListener;
 	private Composite parent;
 	@Inject
 	private EPartService partService;
@@ -46,8 +53,14 @@ public class BibleTextPart implements Observer {
 	public void postConstruct(Composite parent, MPart part) {
 		this.part = part;
 		this.parent = parent;
-		text = new Text(parent, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL);
+		parent.setLayout(new GridLayout(1, true));
+		searchtext = new Text(parent, SWT.SEARCH | SWT.ICON_CANCEL | SWT.ICON_SEARCH);
+		searchtext.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
+		searchtext.addModifyListener(textSearchListener);
+		text = new StyledText(parent, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL);
+		text.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		text.setEditable(false);
+		textSearchListener.setBibleText(text);
 		if (CurrentChapter.getCurrentChapter() != null) {
 			loadCurrentChapter();
 		}
@@ -65,7 +78,7 @@ public class BibleTextPart implements Observer {
 	private void restorePersistedState() {
 		if (Boolean.getBoolean(part.getPersistedState().get("active"))) {
 			TextPartManager.setActivePart(part);
-			CurrentChapter.setObserver(this);
+			// CurrentChapter.setObserver(this);
 		}
 	}
 
@@ -97,7 +110,9 @@ public class BibleTextPart implements Observer {
 		if (text == null || text.isDisposed()) {
 			return "";
 		}
-		return "BibleTextPart\n\ttext: " + text.getText(0, 101) + (text.getText().length() > 100 ? "..." : "");
+		String bibleText = text.getText().isEmpty() ? ""
+				: text.getText(0, text.getText().length() > 100 ? 100 : text.getText().length() - 1);
+		return "BibleTextPart\n\ttext: " + bibleText + (text.getText().length() > 100 ? "..." : "");
 	}
 
 	public void activate() {
