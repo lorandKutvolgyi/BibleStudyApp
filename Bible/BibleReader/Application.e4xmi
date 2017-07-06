@@ -57,4 +57,5 @@
   <addons xmi:id="_d53TNiM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.ui.workbench.handler.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
   <addons xmi:id="_d53TNyM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
   <addons xmi:id="_d53TOCM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
+  <addons xmi:id="_TnWa4GJSEee4PeZ5ZI4vVg" elementId="biblereader.addon.0" contributionURI="bundleclass://reader/com.lory.biblereader.parts.common.EclipseSpecificUtil"/>
 </application:Application>

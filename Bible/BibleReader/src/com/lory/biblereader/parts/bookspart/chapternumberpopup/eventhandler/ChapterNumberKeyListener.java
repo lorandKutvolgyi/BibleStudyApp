@@ -99,5 +99,4 @@ public class ChapterNumberKeyListener extends KeyAdapter {
 	public void setComposite(Composite comp) {
 		this.composite = comp;
 	}
-
 }

@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Label;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.CurrentChapter;
 import com.lory.biblereader.parts.bookspart.chapternumberpopup.ChapterNumberPopupShell;
+import com.lory.biblereader.parts.common.EclipseSpecificUtil;
 import com.lory.biblereader.parts.textpart.TextPartManager;
 
 /**
@@ -23,25 +24,24 @@ import com.lory.biblereader.parts.textpart.TextPartManager;
  *
  */
 public class ChapterNumberMouseListener extends MouseAdapter {
+	private static MPart newTextPart;
 	private final Book book;
 	private final Label label;
 	private final int chapterId;
 	private final ChapterNumberPopupShell shell;
+	private final EPartService partService;
+	private final EModelService modelService;
+	private final MApplication application;
 	private Display display;
-	private EPartService partService;
-	private EModelService modelService;
-	private MApplication application;
-	private static MPart newTextPart;
 
-	public ChapterNumberMouseListener(Book book, Label label, int chapterId, ChapterNumberPopupShell shell,
-			EModelService modelService, MApplication application, EPartService partService) {
+	public ChapterNumberMouseListener(Book book, Label label, ChapterNumberPopupShell shell, EPartService partService) {
 		this.book = book;
 		this.label = label;
-		this.chapterId = chapterId;
+		this.chapterId = Integer.parseInt(label.getText());
 		this.shell = shell;
-		this.modelService = modelService;
-		this.application = application;
 		this.partService = partService;
+		modelService = EclipseSpecificUtil.getModelService();
+		application = EclipseSpecificUtil.getApplication();
 	}
 
 	@Override
