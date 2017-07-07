@@ -27,7 +27,7 @@ public class TextSearchListener implements ModifyListener {
 		if (searchText.length() <= 1) {
 			return;
 		}
-		searchText = String.join("[\\s0-9]*", searchText.split("")).replaceAll("([.?()])", "\\\\$1");
+		searchText = String.join("[\\p{C}0-9]*", searchText.split("")).replaceAll("([.?()])", "\\\\$1");
 		String text = bibleText.getText().toLowerCase();
 		Pattern pattern = Pattern.compile(searchText);
 		Matcher matcher = pattern.matcher(text);
@@ -36,7 +36,7 @@ public class TextSearchListener implements ModifyListener {
 			int end = matcher.end();
 			createStyle(start, end);
 			scrollTo(start);
-			while (matcher.find(end + 1)) {
+			while (matcher.find(end)) {
 				start = matcher.start();
 				end = matcher.end();
 				createStyle(start, end);
@@ -56,18 +56,10 @@ public class TextSearchListener implements ModifyListener {
 	private void createStyle(int start, int end) {
 		StyleRange style = new StyleRange();
 		style.start = start;
-		style.length = (end - start) + numOfNumbers(start, end) - numOfNewLineChars(start, end);
+		style.length = (end - start);
 		style.background = Display.getCurrent().getSystemColor(SWT.COLOR_RED);
 		style.foreground = Display.getCurrent().getSystemColor(SWT.COLOR_WHITE);
 		bibleText.setStyleRange(style);
-	}
-
-	private int numOfNumbers(int start, int end) {
-		return bibleText.getText(start, end - 1).replaceAll("[^0-9]", "").length();
-	}
-
-	private int numOfNewLineChars(int start, int end) {
-		return bibleText.getText(start, end - 1).replaceAll("[\\S]", "").length();
 	}
 
 }
