@@ -110,9 +110,10 @@ public class BibleTextPart implements Observer {
 		if (text == null || text.isDisposed()) {
 			return "";
 		}
-		String bibleText = text.getText().isEmpty() ? ""
-				: text.getText(0, text.getText().length() > 100 ? 100 : text.getText().length() - 1);
-		return "BibleTextPart\n\ttext: " + bibleText + (text.getText().length() > 100 ? "..." : "");
+		String wholeText = text.getText();
+		boolean tooLong = wholeText.length() > 100;
+		String bibleText = wholeText.isEmpty() ? "" : text.getText(0, tooLong ? 100 : wholeText.length() - 1);
+		return "BibleTextPart\n\ttext: " + bibleText + (tooLong ? "..." : "");
 	}
 
 	public void activate() {
