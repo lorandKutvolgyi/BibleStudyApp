@@ -1,5 +1,8 @@
 package com.lory.biblereader.parts.textpart.eventhandler;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
@@ -12,7 +15,6 @@ import org.eclipse.swt.widgets.Text;
 @Creatable
 public class TextSearchListener implements ModifyListener {
 	private StyledText bibleText;
-	private final int TOP = 0;
 
 	public void setBibleText(StyledText text) {
 		this.bibleText = text;
@@ -21,19 +23,23 @@ public class TextSearchListener implements ModifyListener {
 	@Override
 	public void modifyText(ModifyEvent e) {
 		clearStyle();
-		String searchText = ((Text) e.getSource()).getText();
+		String searchText = ((Text) e.getSource()).getText().toLowerCase();
 		if (searchText.length() <= 1) {
 			return;
 		}
-		String text = bibleText.getText();
-		int start = text.indexOf(searchText);
-		if (start > -1) {
-			createStyle(searchText, text, start);
+		searchText = String.join("[\\s0-9]*", searchText.split("")).replaceAll("([.?()])", "\\\\$1");
+		String text = bibleText.getText().toLowerCase();
+		Pattern pattern = Pattern.compile(searchText);
+		Matcher matcher = pattern.matcher(text);
+		if (matcher.find()) {
+			int start = matcher.start();
+			int end = matcher.end();
+			createStyle(start, end);
 			scrollTo(start);
-			start = text.indexOf(searchText, start + 1);
-			while (start != -1) {
-				createStyle(searchText, text, start);
-				start = text.indexOf(searchText, start + 1);
+			while (matcher.find(end + 1)) {
+				start = matcher.start();
+				end = matcher.end();
+				createStyle(start, end);
 			}
 		}
 	}
@@ -47,14 +53,21 @@ public class TextSearchListener implements ModifyListener {
 		bibleText.setStyleRange(null);
 	}
 
-	private void createStyle(String searchText, String text, int start) {
+	private void createStyle(int start, int end) {
 		StyleRange style = new StyleRange();
 		style.start = start;
-		style.length = searchText.length()
-				+ text.substring(style.start, style.start + searchText.length()).replaceAll("\\D", "").length();
+		style.length = (end - start) + numOfNumbers(start, end) - numOfNewLineChars(start, end);
 		style.background = Display.getCurrent().getSystemColor(SWT.COLOR_RED);
 		style.foreground = Display.getCurrent().getSystemColor(SWT.COLOR_WHITE);
 		bibleText.setStyleRange(style);
+	}
+
+	private int numOfNumbers(int start, int end) {
+		return bibleText.getText(start, end - 1).replaceAll("[^0-9]", "").length();
+	}
+
+	private int numOfNewLineChars(int start, int end) {
+		return bibleText.getText(start, end - 1).replaceAll("[\\S]", "").length();
 	}
 
 }
