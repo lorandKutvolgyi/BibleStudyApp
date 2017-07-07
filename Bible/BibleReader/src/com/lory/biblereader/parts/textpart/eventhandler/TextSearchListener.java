@@ -27,7 +27,8 @@ public class TextSearchListener implements ModifyListener {
 		if (searchText.length() <= 1) {
 			return;
 		}
-		searchText = String.join("[\\p{C}0-9]*", searchText.split("")).replaceAll("([.?()])", "\\\\$1");
+		searchText = String.join("[\\p{C}0-9 ]*", searchText.replaceAll(" ", "").split("")).replaceAll("([.?()])",
+				"\\\\$1");
 		String text = bibleText.getText().toLowerCase();
 		Pattern pattern = Pattern.compile(searchText);
 		Matcher matcher = pattern.matcher(text);
