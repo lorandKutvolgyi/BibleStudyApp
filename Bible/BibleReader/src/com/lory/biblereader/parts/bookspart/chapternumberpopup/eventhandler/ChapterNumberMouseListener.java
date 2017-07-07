@@ -57,7 +57,7 @@ public class ChapterNumberMouseListener extends MouseAdapter {
 		}
 		label.setForeground(getDisplay().getSystemColor(SWT.COLOR_GRAY));
 		int delay = event.data == null ? 0 : (int) event.data;
-		closeShell(delay);
+		closeShell(delay, event.stateMask);
 	}
 
 	private Display getDisplay() {
@@ -68,7 +68,7 @@ public class ChapterNumberMouseListener extends MouseAdapter {
 		this.display = display;
 	}
 
-	private void closeShell(int delay) {
+	private void closeShell(int delay, int stateMask) {
 		getDisplay().timerExec(delay, (() -> {
 			synchronized (ChapterNumberMouseListener.class) {
 				if (newTextPart != null) {
@@ -76,7 +76,9 @@ public class ChapterNumberMouseListener extends MouseAdapter {
 					newTextPart = null;
 				}
 			}
-			CurrentChapter.setCurrentChapter(book.getChapter(chapterId));
+			if (stateMask == SWT.CTRL) {
+				CurrentChapter.setCurrentChapter(book.getChapter(chapterId));
+			}
 			shell.close();
 		}));
 	}

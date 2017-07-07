@@ -21,6 +21,7 @@ import com.lory.biblereader.i18n.MessageService;
 import com.lory.biblereader.i18n.Messages;
 import com.lory.biblereader.model.CurrentChapter;
 import com.lory.biblereader.parts.bookspart.eventhandler.BooksKeyListener;
+import com.lory.biblereader.parts.textpart.eventhandler.SearchTextVerifyListener;
 import com.lory.biblereader.parts.textpart.eventhandler.TextPartListener;
 import com.lory.biblereader.parts.textpart.eventhandler.TextSearchListener;
 
@@ -48,6 +49,8 @@ public class BibleTextPart implements Observer {
 	private Composite parent;
 	@Inject
 	private EPartService partService;
+	@Inject
+	private SearchTextVerifyListener searchTextVerifyListener;
 
 	@PostConstruct
 	public void postConstruct(Composite parent, MPart part) {
@@ -57,6 +60,8 @@ public class BibleTextPart implements Observer {
 		searchtext = new Text(parent, SWT.SEARCH | SWT.ICON_CANCEL | SWT.ICON_SEARCH);
 		searchtext.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
 		searchtext.addModifyListener(textSearchListener);
+		searchtext.setMessage(messageService.getMessage("searchTextPlaceholder"));
+		searchtext.addVerifyListener(searchTextVerifyListener);
 		text = new StyledText(parent, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		text.setEditable(false);
