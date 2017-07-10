@@ -92,10 +92,6 @@ public class ChapterNumberKeyListener extends KeyAdapter {
 		label.notifyListeners(SWT.MouseDown, event);
 	}
 
-	void setDisplay(Display display) {
-		this.display = display;
-	}
-
 	public void setComposite(Composite comp) {
 		this.composite = comp;
 	}

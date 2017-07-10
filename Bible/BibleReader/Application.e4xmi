@@ -2,15 +2,15 @@
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_d53TMCM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.ide.application" bindingContexts="_d53TOSM8EeWAgOzJmBnGEA">
   <children xsi:type="basic:TrimmedWindow" xmi:id="_d53TMSM8EeWAgOzJmBnGEA" elementId="readerWindow" label="Bible Study Application" width="500" height="400">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_GRc5oCNLEeW4Abd66DaAtA" elementId="biblereader.perspectivestack.0">
-      <children xsi:type="advanced:Perspective" xmi:id="_JnVQUCNLEeW4Abd66DaAtA" elementId="biblereader.perspective.0">
-        <children xsi:type="basic:PartSashContainer" xmi:id="_NTWPECNLEeW4Abd66DaAtA" elementId="biblereader.partsashcontainer.0">
+      <children xsi:type="advanced:Perspective" xmi:id="_JnVQUCNLEeW4Abd66DaAtA" elementId="biblereader.perspective.0" selectedElement="_NTWPECNLEeW4Abd66DaAtA">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_NTWPECNLEeW4Abd66DaAtA" elementId="biblereader.partsashcontainer.0" selectedElement="_O6yuACNLEeW4Abd66DaAtA">
           <children xsi:type="basic:PartSashContainer" xmi:id="_O6yuACNLEeW4Abd66DaAtA" elementId="biblereader.partsashcontainer.1" selectedElement="_WnWxECNLEeW4Abd66DaAtA" horizontal="true">
             <children xsi:type="basic:PartStack" xmi:id="_WnWxECNLEeW4Abd66DaAtA" elementId="biblereader.partstack.books" selectedElement="_Yj7ygCNLEeW4Abd66DaAtA">
               <children xsi:type="basic:Part" xmi:id="_Yj7ygCNLEeW4Abd66DaAtA" elementId="biblereader.BooksPart" contributionURI="bundleclass://reader/com.lory.biblereader.parts.bookspart.BooksPart" label=""/>
             </children>
             <children xsi:type="basic:PartSashContainer" xmi:id="_SffSQCHYEeeUyN1pG4NImw" elementId="biblereader.partsashcontainer.3" horizontal="true">
-              <children xsi:type="basic:PartStack" xmi:id="_XF0OsCNLEeW4Abd66DaAtA" elementId="biblereader.partstack.bibletext">
-                <children xsi:type="basic:Part" xmi:id="_33tk4Ff4EeWw0_pvm8Qobg" elementId="biblereader.BibleTextPart" accessibilityPhrase="" contributionURI="bundleclass://reader/com.lory.biblereader.parts.textpart.BibleTextPart" label=""/>
+              <children xsi:type="basic:PartStack" xmi:id="_XF0OsCNLEeW4Abd66DaAtA" elementId="biblereader.partstack.bibletext" selectedElement="_33tk4Ff4EeWw0_pvm8Qobg">
+                <children xsi:type="basic:Part" xmi:id="_33tk4Ff4EeWw0_pvm8Qobg" elementId="biblereader.BibleTextPart" accessibilityPhrase="" contributionURI="bundleclass://reader/com.lory.biblereader.parts.textpart.BibleTextPart" label="" closeable="true"/>
               </children>
             </children>
             <children xsi:type="basic:PartSashContainer" xmi:id="_x3oDwBw7EeetS7PfnSTHUQ" elementId="biblereader.partsashcontainer.2">
@@ -57,5 +57,4 @@
   <addons xmi:id="_d53TNiM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.ui.workbench.handler.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
   <addons xmi:id="_d53TNyM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
   <addons xmi:id="_d53TOCM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
-  <addons xmi:id="_TnWa4GJSEee4PeZ5ZI4vVg" elementId="biblereader.addon.0" contributionURI="bundleclass://reader/com.lory.biblereader.parts.common.EclipseSpecificUtil"/>
 </application:Application>

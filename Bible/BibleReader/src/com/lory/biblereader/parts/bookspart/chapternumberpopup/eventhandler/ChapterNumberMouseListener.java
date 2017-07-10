@@ -1,5 +1,9 @@
 package com.lory.biblereader.parts.bookspart.chapternumberpopup.eventhandler;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
@@ -14,7 +18,6 @@ import org.eclipse.swt.widgets.Label;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.CurrentChapter;
 import com.lory.biblereader.parts.bookspart.chapternumberpopup.ChapterNumberPopupShell;
-import com.lory.biblereader.parts.common.EclipseSpecificUtil;
 import com.lory.biblereader.parts.textpart.TextPartManager;
 
 /**
@@ -23,61 +26,63 @@ import com.lory.biblereader.parts.textpart.TextPartManager;
  * @author lorandKutvolgyi
  *
  */
+@Creatable
+@Singleton
 public class ChapterNumberMouseListener extends MouseAdapter {
+	@Inject
+	private static EPartService partService;
+	@Inject
+	private static EModelService modelService;
+	@Inject
+	private static MApplication application;
+	@Inject
+	private TextPartManager textPartManager;
 	private static MPart newTextPart;
-	private final Book book;
-	private final Label label;
-	private final int chapterId;
-	private final ChapterNumberPopupShell shell;
-	private final EPartService partService;
-	private final EModelService modelService;
-	private final MApplication application;
+	private Book book;
+	private int chapterId;
+	private ChapterNumberPopupShell shell;
 	private Display display;
+	private boolean newActivePart;
 
-	public ChapterNumberMouseListener(Book book, Label label, ChapterNumberPopupShell shell, EPartService partService) {
+	public void init(Book book, ChapterNumberPopupShell shell) {
 		this.book = book;
-		this.label = label;
-		this.chapterId = Integer.parseInt(label.getText());
 		this.shell = shell;
-		this.partService = partService;
-		modelService = EclipseSpecificUtil.getModelService();
-		application = EclipseSpecificUtil.getApplication();
 	}
 
 	@Override
 	public void mouseDown(MouseEvent event) {
-		if (event.stateMask == SWT.CTRL) {
+		Label label = (Label) event.getSource();
+		chapterId = Integer.parseInt(label.getText());
+		if (event.stateMask == SWT.CTRL || !textPartManager.isAnyActivePart()) {
 			synchronized (ChapterNumberMouseListener.class) {
 				if (newTextPart == null) {
-					newTextPart = TextPartManager.newTextPart(modelService, application);
+					newTextPart = textPartManager.newTextPart(modelService, application);
 				}
+				newActivePart = true;
 			}
 		} else {
 			CurrentChapter.setCurrentChapter(book.getChapter(chapterId));
 		}
-		label.setForeground(getDisplay().getSystemColor(SWT.COLOR_GRAY));
+		shell.setColor(label, SWT.COLOR_GRAY);
 		int delay = event.data == null ? 0 : (int) event.data;
-		closeShell(delay, event.stateMask);
+		closeShell(delay);
 	}
 
 	private Display getDisplay() {
 		return display == null ? Display.getCurrent() : display;
 	}
 
-	void setDisplay(Display display) {
-		this.display = display;
-	}
-
-	private void closeShell(int delay, int stateMask) {
+	private void closeShell(int delay) {
 		getDisplay().timerExec(delay, (() -> {
 			synchronized (ChapterNumberMouseListener.class) {
 				if (newTextPart != null) {
 					partService.showPart(newTextPart, PartState.ACTIVATE);
 					newTextPart = null;
 				}
-			}
-			if (stateMask == SWT.CTRL) {
-				CurrentChapter.setCurrentChapter(book.getChapter(chapterId));
+				if (newActivePart) {
+					CurrentChapter.setCurrentChapter(book.getChapter(chapterId));
+					newActivePart = false;
+				}
 			}
 			shell.close();
 		}));

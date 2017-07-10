@@ -4,6 +4,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
 import org.eclipse.e4.core.services.nls.Translation;
@@ -51,6 +52,8 @@ public class BibleTextPart implements Observer {
 	private EPartService partService;
 	@Inject
 	private SearchTextVerifyListener searchTextVerifyListener;
+	@Inject
+	private TextPartManager textPartManager;
 
 	@PostConstruct
 	public void postConstruct(Composite parent, MPart part) {
@@ -71,7 +74,7 @@ public class BibleTextPart implements Observer {
 		}
 		text.addKeyListener(pagingListener);
 		restorePersistedState();
-		TextPartManager.registerPart(part, this);
+		textPartManager.registerPart(part, this);
 		partService.addPartListener(textPartListener);
 	}
 
@@ -82,9 +85,15 @@ public class BibleTextPart implements Observer {
 
 	private void restorePersistedState() {
 		if (Boolean.getBoolean(part.getPersistedState().get("active"))) {
-			TextPartManager.setActivePart(part);
+			textPartManager.setActivePart(part);
 			// CurrentChapter.setObserver(this);
 		}
+	}
+
+	@PreDestroy
+	public void preDestroy() {
+		inactivate();
+		textPartManager.inactivatePart(part);
 	}
 
 	public void inactivate() {

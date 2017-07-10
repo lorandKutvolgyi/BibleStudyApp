@@ -6,7 +6,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import org.eclipse.e4.core.di.annotations.Creatable;
-import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
@@ -34,38 +33,44 @@ import com.lory.biblereader.parts.bookspart.chapternumberpopup.eventhandler.Chap
 @Creatable
 @Singleton
 public class ChapterNumberPopupShell {
-	private Shell shell;
-	private Display display;
 	@Inject
 	private ChapterNumberKeyListener chapterNumberKeyListener;
-	private Composite comp;
 	@Inject
-	private static EPartService partService;
+	private ChapterNumberMouseListener chapterNumberMouseListener;
+	private Shell shell;
+	private Display display;
+	private Composite mainComposite;
 
+	/**
+	 * Initializes the view with the given parameters.
+	 * 
+	 * @param event theSelectionChangedEvent
+	 * @param selectedBook the selected Book
+	 */
 	public void init(SelectionChangedEvent event, Book selectedBook) {
 		display = Display.getDefault();
 		close();
 		shell = new Shell(display.getActiveShell(), SWT.APPLICATION_MODAL);
-		comp = createMainComposite();
-		initPopup(event, selectedBook, comp);
-		chapterNumberKeyListener.setComposite(comp);
+		mainComposite = createMainComposite();
+		shell.setLayout(new FillLayout());
+		int numOfChapters = getNumberOfChapters(selectedBook);
+		int height = calculateHeight(numOfChapters);
+		shell.setSize(100, height);
+		shell.setLocation(calculateLocation(getTree(event), height));
+		createLabels(selectedBook, numOfChapters, mainComposite);
+		mainComposite.layout();
+		chapterNumberKeyListener.setComposite(mainComposite);
 		shell.addKeyListener(chapterNumberKeyListener);
+	}
+
+	public void setColor(Label label, int color) {
+		label.setForeground(display.getSystemColor(color));
 	}
 
 	private Composite createMainComposite() {
 		Composite comp = new Composite(shell, SWT.None);
 		comp.setLayout(new RowLayout(SWT.HORIZONTAL));
 		return comp;
-	}
-
-	private void initPopup(SelectionChangedEvent event, final Book selectedBook, Composite comp) {
-		shell.setLayout(new FillLayout());
-		int numOfChapters = getNumberOfChapters(selectedBook);
-		int height = calculateHeight(numOfChapters);
-		shell.setSize(100, height);
-		shell.setLocation(calculateLocation(getTree(event), height));
-		createLabels(selectedBook, numOfChapters, comp);
-		comp.layout();
 	}
 
 	private int getNumberOfChapters(final Book selectedBook) {
@@ -115,7 +120,8 @@ public class ChapterNumberPopupShell {
 		for (int i = 1; i <= numOfChapters; i++) {
 			Label label = new Label(comp, SWT.HORIZONTAL);
 			label.setText(Integer.toString(i));
-			label.addMouseListener(new ChapterNumberMouseListener(book, label, this, partService));
+			chapterNumberMouseListener.init(book, this);
+			label.addMouseListener(chapterNumberMouseListener);
 		}
 	}
 
