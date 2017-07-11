@@ -25,14 +25,12 @@ public class TextPartListener implements IPartListener {
 		if (textPartManager.isRegistered(part)) {
 			textPartManager.setStack(part.getParent().getElementId());
 			textPartManager.activatePart(part);
-			System.out.println("partBroughtToTop: " + part.getElementId());
 		}
 	}
 
 	@Override
 	public void partDeactivated(MPart part) {
 		// Do nothing
-		System.out.println("partDeactivated: " + part.getElementId());
 	}
 
 	@Override
