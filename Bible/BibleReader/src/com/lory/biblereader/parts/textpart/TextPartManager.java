@@ -20,7 +20,7 @@ public class TextPartManager {
 
 	private Map<MPart, BibleTextPart> parts = new TreeMap<>(
 			(part1, part2) -> part1.getElementId().compareTo(part2.getElementId()));
-	private volatile MPart activePart;
+	private MPart activePart;
 	private boolean forcedActivation;
 	private MPartStack stack;
 
@@ -37,7 +37,7 @@ public class TextPartManager {
 		}
 	}
 
-	public void setActivePart(MPart activePart) {
+	public synchronized void setActivePart(MPart activePart) {
 		forcedActivation = true;
 		activatePart(activePart);
 	}
@@ -48,7 +48,7 @@ public class TextPartManager {
 		}
 	}
 
-	private synchronized void activatePart(MPart newActivePart) {
+	public synchronized void activatePart(MPart newActivePart) {
 		activePart = newActivePart;
 		parts.get(activePart).activate();
 		inactivateOtherParts();
@@ -62,15 +62,15 @@ public class TextPartManager {
 		}
 	}
 
-	public boolean isAnyActivePart() {
+	public synchronized boolean isAnyActivePart() {
 		return parts.keySet().stream().anyMatch((mPart) -> mPart == activePart);
 	}
 
-	public boolean isRegistered(MPart part) {
+	public synchronized boolean isRegistered(MPart part) {
 		return parts.containsKey(part);
 	}
 
-	public MPart newTextPart(EModelService modelService, MApplication application) {
+	public synchronized MPart newTextPart(EModelService modelService, MApplication application) {
 		MPart part = MBasicFactory.INSTANCE.createPart();
 		part.setCloseable(true);
 		part.setElementId(String.valueOf(PartIdProvider.getPartId()));
@@ -86,7 +86,7 @@ public class TextPartManager {
 		return part;
 	}
 
-	public void setStack(String stackId) {
+	public synchronized void setStack(String stackId) {
 		stack = modelService.findElements(application, stackId, MPartStack.class, null).get(0);
 	}
 

@@ -17,22 +17,22 @@ public class TextPartListener implements IPartListener {
 
 	@Override
 	public void partActivated(MPart part) {
-		if (textPartManager.isRegistered(part)) {
-			textPartManager.setActivePart(part);
-		}
+		// Do nothing
 	}
 
 	@Override
 	public void partBroughtToTop(MPart part) {
 		if (textPartManager.isRegistered(part)) {
 			textPartManager.setStack(part.getParent().getElementId());
-			textPartManager.setActivePart(part);
+			textPartManager.activatePart(part);
+			System.out.println("partBroughtToTop: " + part.getElementId());
 		}
 	}
 
 	@Override
 	public void partDeactivated(MPart part) {
 		// Do nothing
+		System.out.println("partDeactivated: " + part.getElementId());
 	}
 
 	@Override
