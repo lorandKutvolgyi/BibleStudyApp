@@ -58,33 +58,40 @@ public class ChapterNumberMouseListener extends MouseAdapter {
 				if (newTextPart == null) {
 					newTextPart = textPartManager.newTextPart(modelService, application);
 				}
-				newActivePart = true;
 			}
+			newActivePart = true;
 		} else {
 			CurrentChapter.setCurrentChapter(book.getChapter(chapterId));
+			textPartManager.getChapters().put(textPartManager.getActivePart(), book.getChapter(chapterId));
 		}
 		shell.setColor(label, SWT.COLOR_GRAY);
 		int delay = event.data == null ? 0 : (int) event.data;
-		closeShell(delay);
+		shell.close(delay);
+		if (newActivePart) {
+			showNewPart(delay);
+			newActivePart = false;
+		}
 	}
 
 	private Display getDisplay() {
 		return display == null ? Display.getCurrent() : display;
 	}
 
-	private void closeShell(int delay) {
+	public void setDisplay(Display display) {
+		this.display = display;
+	}
+
+	private void showNewPart(int delay) {
 		getDisplay().timerExec(delay, (() -> {
 			synchronized (ChapterNumberMouseListener.class) {
 				if (newTextPart != null) {
 					partService.showPart(newTextPart, PartState.ACTIVATE);
 					newTextPart = null;
 				}
-				if (newActivePart) {
-					CurrentChapter.setCurrentChapter(book.getChapter(chapterId));
-					newActivePart = false;
-				}
+				CurrentChapter.setCurrentChapter(book.getChapter(chapterId));
+				textPartManager.getChapters().put(textPartManager.getActivePart(), book.getChapter(chapterId));
 			}
-			shell.close();
 		}));
 	}
+
 }

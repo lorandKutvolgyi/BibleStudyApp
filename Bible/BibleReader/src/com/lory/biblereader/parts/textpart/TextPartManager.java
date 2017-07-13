@@ -14,11 +14,16 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 
+import com.lory.biblereader.model.Chapter;
+import com.lory.biblereader.model.CurrentChapter;
+
 @Creatable
 @Singleton
 public class TextPartManager {
 
 	private Map<MPart, BibleTextPart> parts = new TreeMap<>(
+			(part1, part2) -> part1.getElementId().compareTo(part2.getElementId()));
+	private Map<MPart, Chapter> chapters = new TreeMap<>(
 			(part1, part2) -> part1.getElementId().compareTo(part2.getElementId()));
 	private MPart activePart;
 	private boolean forcedActivation;
@@ -32,6 +37,7 @@ public class TextPartManager {
 
 	public synchronized void registerPart(MPart part, BibleTextPart obj) {
 		parts.put(part, obj);
+		chapters.put(part, CurrentChapter.getCurrentChapter());
 		if (!forcedActivation) {
 			activatePart(part);
 		}
@@ -52,9 +58,14 @@ public class TextPartManager {
 		activePart = newActivePart;
 		parts.get(activePart).activate();
 		inactivateOtherParts();
+		setStack(activePart.getParent().getElementId());
+		if (chapters.get(newActivePart) != null
+				&& !chapters.get(newActivePart).equals(CurrentChapter.getCurrentChapter())) {
+			CurrentChapter.setCurrentChapter(chapters.get(newActivePart));
+		}
 	}
 
-	private synchronized void inactivateOtherParts() {
+	private void inactivateOtherParts() {
 		for (MPart part : parts.keySet()) {
 			if (!part.equals(activePart)) {
 				parts.get(part).inactivate();
@@ -64,6 +75,10 @@ public class TextPartManager {
 
 	public synchronized boolean isAnyActivePart() {
 		return parts.keySet().stream().anyMatch((mPart) -> mPart == activePart);
+	}
+
+	public MPart getActivePart() {
+		return activePart;
 	}
 
 	public synchronized boolean isRegistered(MPart part) {
@@ -86,8 +101,12 @@ public class TextPartManager {
 		return part;
 	}
 
-	public synchronized void setStack(String stackId) {
+	private synchronized void setStack(String stackId) {
 		stack = modelService.findElements(application, stackId, MPartStack.class, null).get(0);
+	}
+
+	public Map<MPart, Chapter> getChapters() {
+		return chapters;
 	}
 
 }

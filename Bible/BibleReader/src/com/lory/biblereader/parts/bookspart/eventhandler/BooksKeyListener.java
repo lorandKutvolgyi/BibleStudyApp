@@ -39,7 +39,7 @@ public class BooksKeyListener extends KeyAdapter {
 			treeViewer.setComparator(booksComparator.next());
 			return;
 		}
-		if (isBookChanginigCommand(event)) {
+		if (isBookChangingCommand(event)) {
 			preventTreeEventTriggering(event);
 			BookChanging.change(event.keyCode, booksComparator);
 			return;
@@ -51,7 +51,7 @@ public class BooksKeyListener extends KeyAdapter {
 		}
 	}
 
-	private boolean isBookChanginigCommand(KeyEvent event) {
+	private boolean isBookChangingCommand(KeyEvent event) {
 		return event.stateMask == SWT.SHIFT && (event.keyCode == SWT.ARROW_RIGHT || event.keyCode == SWT.ARROW_LEFT);
 	}
 

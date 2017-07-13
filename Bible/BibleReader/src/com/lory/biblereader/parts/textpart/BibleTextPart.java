@@ -8,9 +8,9 @@ import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
 import org.eclipse.e4.core.services.nls.Translation;
+import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.PersistState;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
-import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.layout.GridData;
@@ -23,7 +23,6 @@ import com.lory.biblereader.i18n.Messages;
 import com.lory.biblereader.model.CurrentChapter;
 import com.lory.biblereader.parts.bookspart.eventhandler.BooksKeyListener;
 import com.lory.biblereader.parts.textpart.eventhandler.SearchTextVerifyListener;
-import com.lory.biblereader.parts.textpart.eventhandler.TextPartListener;
 import com.lory.biblereader.parts.textpart.eventhandler.TextSearchListener;
 
 /**
@@ -44,12 +43,8 @@ public class BibleTextPart implements Observer {
 	@Inject
 	private MessageService messageService;
 	@Inject
-	private TextPartListener textPartListener;
-	@Inject
 	private TextSearchListener textSearchListener;
 	private Composite parent;
-	@Inject
-	private EPartService partService;
 	@Inject
 	private SearchTextVerifyListener searchTextVerifyListener;
 	@Inject
@@ -75,7 +70,6 @@ public class BibleTextPart implements Observer {
 		text.addKeyListener(pagingListener);
 		restorePersistedState();
 		textPartManager.registerPart(part, this);
-		partService.addPartListener(textPartListener);
 	}
 
 	@PersistState
@@ -96,6 +90,12 @@ public class BibleTextPart implements Observer {
 		textPartManager.inactivatePart(part);
 	}
 
+	@Focus
+	void grantFocus() {
+		textPartManager.activatePart(part);
+		System.out.println("focus: " + part);
+	}
+
 	public void inactivate() {
 		CurrentChapter.removeObserver(this);
 	}
@@ -105,8 +105,8 @@ public class BibleTextPart implements Observer {
 	}
 
 	@Override
-	public void update(Observable observable, Object arg) {
-		loadCurrentChapter();
+	public void update(Observable observable, Object arg) {if (CurrentChapter.getCurrentChapter() != null) {
+		loadCurrentChapter();}
 	}
 
 	private void loadCurrentChapter() {

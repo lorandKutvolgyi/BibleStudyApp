@@ -145,6 +145,14 @@ public class ChapterNumberPopupShell {
 		}
 	}
 
+	public void close(int delay) {
+		display.timerExec(delay, (() -> {
+			if (shell != null && !shell.isDisposed()) {
+				shell.close();
+			}
+		}));
+	}
+
 	/**
 	 * Returns true if the widget has been disposed or has not been created, and
 	 * false otherwise.
