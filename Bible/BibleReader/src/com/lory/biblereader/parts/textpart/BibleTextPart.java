@@ -93,7 +93,6 @@ public class BibleTextPart implements Observer {
 	@Focus
 	void grantFocus() {
 		textPartManager.activatePart(part);
-		System.out.println("focus: " + part);
 	}
 
 	public void inactivate() {
@@ -105,8 +104,10 @@ public class BibleTextPart implements Observer {
 	}
 
 	@Override
-	public void update(Observable observable, Object arg) {if (CurrentChapter.getCurrentChapter() != null) {
-		loadCurrentChapter();}
+	public void update(Observable observable, Object arg) {
+		if (CurrentChapter.getCurrentChapter() != null) {
+			loadCurrentChapter();
+		}
 	}
 
 	private void loadCurrentChapter() {
