@@ -77,6 +77,14 @@ public class TextPartManager {
 		return parts.keySet().stream().anyMatch((mPart) -> mPart == activePart);
 	}
 
+	public boolean isAnyVisiblePart() {
+		return parts.keySet().stream().anyMatch((mPart) -> mPart.isToBeRendered());
+	}
+
+	public MPart getAnyVisiblePart() {
+		return parts.keySet().stream().filter((mPart) -> mPart.isToBeRendered()).findAny().get();
+	}
+
 	public MPart getActivePart() {
 		return activePart;
 	}

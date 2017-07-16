@@ -53,7 +53,8 @@ public class ChapterNumberMouseListener extends MouseAdapter {
 	public void mouseDown(MouseEvent event) {
 		Label label = (Label) event.getSource();
 		chapterId = Integer.parseInt(label.getText());
-		if (event.stateMask == SWT.CTRL || !textPartManager.isAnyActivePart()) {
+		if (event.stateMask == SWT.CTRL
+				|| (!textPartManager.isAnyActivePart() && !textPartManager.isAnyVisiblePart())) {
 			synchronized (ChapterNumberMouseListener.class) {
 				if (newTextPart == null) {
 					newTextPart = textPartManager.newTextPart(modelService, application);
@@ -61,6 +62,9 @@ public class ChapterNumberMouseListener extends MouseAdapter {
 			}
 			newActivePart = true;
 		} else {
+			if (!textPartManager.isAnyActivePart() && textPartManager.isAnyVisiblePart()) {
+				textPartManager.activatePart(textPartManager.getAnyVisiblePart());
+			}
 			CurrentChapter.setCurrentChapter(book.getChapter(chapterId));
 			textPartManager.getChapters().put(textPartManager.getActivePart(), book.getChapter(chapterId));
 		}
