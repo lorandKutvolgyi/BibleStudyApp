@@ -24,11 +24,10 @@ public class TextSearchListener implements ModifyListener {
 	public void modifyText(ModifyEvent e) {
 		clearStyle();
 		String searchText = ((Text) e.getSource()).getText().toLowerCase();
-		if (searchText.length() <= 1) {
+		if (searchText.length() < 2) {
 			return;
 		}
-		searchText = String.join("[\\p{C}0-9 ]*", searchText.replaceAll(" ", "").split("")).replaceAll("([.?()])",
-				"\\\\$1");
+		searchText = String.join("[\\p{C}0-9 ]+", searchText.split(" +")).replaceAll("([.?()])", "\\\\$1");
 		String text = bibleText.getText().toLowerCase();
 		Pattern pattern = Pattern.compile(searchText);
 		Matcher matcher = pattern.matcher(text);
@@ -54,7 +53,7 @@ public class TextSearchListener implements ModifyListener {
 		bibleText.setStyleRange(null);
 	}
 
-	private void createStyle(int start, int end) {
+	public void createStyle(int start, int end) {
 		StyleRange style = new StyleRange();
 		style.start = start;
 		style.length = (end - start);

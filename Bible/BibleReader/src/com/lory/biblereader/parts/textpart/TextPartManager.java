@@ -81,8 +81,17 @@ public class TextPartManager {
 		return parts.keySet().stream().anyMatch((mPart) -> mPart.isToBeRendered());
 	}
 
+	public boolean isAnyVisiblePartExcept(MPart currentPart) {
+		return parts.keySet().stream().anyMatch((mPart) -> mPart.isToBeRendered() && !mPart.equals(currentPart));
+	}
+
 	public MPart getAnyVisiblePart() {
 		return parts.keySet().stream().filter((mPart) -> mPart.isToBeRendered()).findAny().get();
+	}
+
+	public MPart getAnyVisiblePartExcept(MPart currentPart) {
+		return parts.keySet().stream().filter((mPart) -> mPart.isToBeRendered() && !mPart.equals(currentPart)).findAny()
+				.get();
 	}
 
 	public MPart getActivePart() {

@@ -74,25 +74,33 @@ public class BibleTextPart implements Observer {
 
 	@PersistState
 	private void persist(MPart part) {
-		part.getPersistedState().put("active", "true");
+		if (textPartManager.getActivePart().equals(part)) {
+			part.getPersistedState().put("active", "true");
+		}
+	}
+
+	@Focus
+	public void partActivated() {
+		if (!part.equals(textPartManager.getActivePart())) {
+			textPartManager.activatePart(part);
+		}
+
 	}
 
 	private void restorePersistedState() {
 		if (Boolean.getBoolean(part.getPersistedState().get("active"))) {
 			textPartManager.setActivePart(part);
-			// CurrentChapter.setObserver(this);
 		}
 	}
 
 	@PreDestroy
 	public void preDestroy() {
-		inactivate();
-		textPartManager.inactivatePart(part);
-	}
-
-	@Focus
-	void grantFocus() {
-		textPartManager.activatePart(part);
+		if (textPartManager.isAnyVisiblePartExcept(part)) {
+			textPartManager.activatePart(textPartManager.getAnyVisiblePartExcept(part));
+		} else {
+			inactivate();
+			textPartManager.inactivatePart(part);
+		}
 	}
 
 	public void inactivate() {
@@ -126,8 +134,9 @@ public class BibleTextPart implements Observer {
 			return "";
 		}
 		String wholeText = text.getText();
-		boolean tooLong = wholeText.length() > 100;
-		String bibleText = wholeText.isEmpty() ? "" : text.getText(0, tooLong ? 100 : wholeText.length() - 1);
+		int maxLength = 100;
+		boolean tooLong = wholeText.length() > maxLength;
+		String bibleText = wholeText.isEmpty() ? "" : text.getText(0, tooLong ? maxLength : wholeText.length() - 1);
 		return "BibleTextPart\n\ttext: " + bibleText + (tooLong ? "..." : "");
 	}
 
