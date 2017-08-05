@@ -39,6 +39,8 @@ public class BooksPart implements Observer {
 	@Inject
 	private BookSelectionListener selectionListener;
 	@Inject
+	private BookClickListener bookClickListener;
+	@Inject
 	private BooksKeyListener booksKeyListener;
 	@Inject
 	private MessageService messageService;
@@ -72,6 +74,7 @@ public class BooksPart implements Observer {
 	private void addListeners() {
 		booksKeyListener.setTreeViewer(books);
 		books.getTree().addKeyListener(booksKeyListener);
+		books.getTree().addMouseListener(bookClickListener);
 		books.addSelectionChangedListener(selectionListener);
 	}
 
@@ -92,7 +95,7 @@ public class BooksPart implements Observer {
 			book = Testament.NEW_TESTAMENT.getBook(title);
 		}
 		if (book != null) {
-			selectionListener.preventSelectionChangeEvent();
+			selectionListener.allowSelectionChangeEvent(false);
 			books.setSelection(
 					new TreeSelection(new TreePath[] { new TreePath(new Object[] { book.getParent(), book }) }));
 			Chapter persistedChapter = book.getChapter(Integer.valueOf(part.getPersistedState().get("chapterId")));
@@ -163,7 +166,7 @@ public class BooksPart implements Observer {
 	public void update(Observable o, Object arg) {
 		Book book = CurrentChapter.getCurrentChapter().getBook();
 		Testament testament = book.getTestament();
-		selectionListener.preventSelectionChangeEvent();
+		selectionListener.allowSelectionChangeEvent(false);
 		books.setSelection(new TreeSelection(new TreePath(new Object[] { testament, book })));
 
 	}

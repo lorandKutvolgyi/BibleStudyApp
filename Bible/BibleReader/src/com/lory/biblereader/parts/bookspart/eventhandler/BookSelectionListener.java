@@ -12,7 +12,7 @@ import com.lory.biblereader.model.Book;
 import com.lory.biblereader.parts.bookspart.chapternumberpopup.ChapterNumberPopupShell;
 
 /**
- * Event handler for book selection event.
+ * Event handler for book selection events triggered on BookTree.
  *
  * @author lorandKutvolgyi
  *
@@ -21,14 +21,14 @@ import com.lory.biblereader.parts.bookspart.chapternumberpopup.ChapterNumberPopu
 @Singleton
 public class BookSelectionListener implements ISelectionChangedListener {
 
-	private boolean selectionChangeEventNotNeeded;
 	@Inject
 	private ChapterNumberPopupShell chapterNumberPopupShell;
 
+	private boolean selectionChangeEventNeeded;
+
 	@Override
 	public void selectionChanged(SelectionChangedEvent event) {
-		if (selectionChangeEventNotNeeded) {
-			selectionChangeEventNotNeeded = false;
+		if (!selectionChangeEventNeeded) {
 			return;
 		}
 		Object selectedElement = getSelectedElement(event);
@@ -41,8 +41,8 @@ public class BookSelectionListener implements ISelectionChangedListener {
 	/**
 	 * Prevent triggering the selection change event.
 	 */
-	public void preventSelectionChangeEvent() {
-		selectionChangeEventNotNeeded = true;
+	public void allowSelectionChangeEvent(boolean allow) {
+		selectionChangeEventNeeded = allow;
 	}
 
 	private Object getSelectedElement(SelectionChangedEvent event) {
@@ -52,6 +52,6 @@ public class BookSelectionListener implements ISelectionChangedListener {
 	@Override
 	public String toString() {
 		return "BookSelectionListener\n\tchapterNumberPopupShell: " + chapterNumberPopupShell
-				+ "\n\tselectionChangeEventNotNeeded: " + selectionChangeEventNotNeeded;
+				+ "\n\tselectionChangeEventNeeded: " + selectionChangeEventNeeded;
 	}
 }

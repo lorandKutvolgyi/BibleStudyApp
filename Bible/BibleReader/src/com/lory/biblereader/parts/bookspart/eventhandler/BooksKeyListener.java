@@ -14,7 +14,7 @@ import com.lory.biblereader.toolbar.eventhandler.BookChanging;
 import com.lory.biblereader.toolbar.eventhandler.Paging;
 
 /**
- * EventHandler for paging event.
+ * EventHandler for key events triggered on BookTree.
  *
  * @author lorandKutvolgyi
  *
@@ -30,11 +30,7 @@ public class BooksKeyListener extends KeyAdapter {
 
 	@Override
 	public void keyPressed(KeyEvent event) {
-		if (event.keyCode == SWT.ARROW_UP || event.keyCode == SWT.ARROW_DOWN || event.keyCode == SWT.ARROW_RIGHT
-				|| event.keyCode == SWT.PAGE_UP || event.keyCode == SWT.PAGE_DOWN
-				|| event.keyCode >= 'a' && event.keyCode <= 'z' || event.keyCode == '.') {
-			bookSelectionListener.preventSelectionChangeEvent();
-		}
+		bookSelectionListener.allowSelectionChangeEvent(event.keyCode == SWT.SPACE || event.keyCode == SWT.CR);
 		if (event.stateMask == SWT.CTRL && event.keyCode == 'o') {
 			treeViewer.setComparator(booksComparator.next());
 			return;

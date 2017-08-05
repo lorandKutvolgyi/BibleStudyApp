@@ -32,23 +32,23 @@ import com.lory.biblereader.parts.textpart.eventhandler.TextSearchListener;
  *
  */
 public class BibleTextPart implements Observer {
-	private StyledText text;
-	private Text searchtext;
-	@Inject
-	@Translation
-	private Messages messages;
-	private MPart part;
 	@Inject
 	private BooksKeyListener pagingListener;
 	@Inject
-	private MessageService messageService;
-	@Inject
 	private TextSearchListener textSearchListener;
-	private Composite parent;
 	@Inject
 	private SearchTextVerifyListener searchTextVerifyListener;
 	@Inject
 	private TextPartManager textPartManager;
+	@Inject
+	private MessageService messageService;
+	@Inject
+	@Translation
+	private Messages messages;
+	private MPart part;
+	private Composite parent;
+	private StyledText text;
+	private Text searchtext;
 
 	@PostConstruct
 	public void postConstruct(Composite parent, MPart part) {
@@ -108,7 +108,9 @@ public class BibleTextPart implements Observer {
 	}
 
 	private void setContent(String text) {
-		this.text.setText(text);
+		if (!this.text.isDisposed()) {
+			this.text.setText(text);
+		}
 	}
 
 	@Override
