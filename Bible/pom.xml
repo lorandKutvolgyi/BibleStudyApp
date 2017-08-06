@@ -15,14 +15,28 @@
 	<properties>
 		<tycho.version>0.26.0</tycho.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<neon-repo.url>http://download.eclipse.org/releases/neon</neon-repo.url>
 		<neon-update-repo.url>http://download.eclipse.org/eclipse/updates/4.6</neon-update-repo.url>
 		<aspectj-repo.url>http://download.eclipse.org/tools/ajdt/46/dev/update</aspectj-repo.url>
 	</properties>
 	<repositories>
 		<repository>
-			<id>neon</id>
-			<url>${neon-repo.url}</url>
+			<id>EclipseNeon-1</id>
+			<url>http://download.eclipse.org/releases/neon/201606221000/</url>
+			<layout>p2</layout>
+		</repository>
+		<repository>
+			<id>EclipseNeon-2</id>
+			<url>http://download.eclipse.org/releases/neon/201609281000/</url>
+			<layout>p2</layout>
+		</repository>
+		<repository>
+			<id>EclipseNeon-3</id>
+			<url>http://download.eclipse.org/releases/neon/201610111000/</url>
+			<layout>p2</layout>
+		</repository>
+		<repository>
+			<id>EclipseNeon-4</id>
+			<url>http://download.eclipse.org/releases/neon/201612211000/</url>
 			<layout>p2</layout>
 		</repository>
 		<repository>

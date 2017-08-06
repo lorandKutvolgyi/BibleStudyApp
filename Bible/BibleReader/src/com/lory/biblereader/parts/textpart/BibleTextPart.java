@@ -33,7 +33,7 @@ import com.lory.biblereader.parts.textpart.eventhandler.TextSearchListener;
  */
 public class BibleTextPart implements Observer {
 	@Inject
-	private BooksKeyListener pagingListener;
+	private BooksKeyListener booksKeyListener;
 	@Inject
 	private TextSearchListener textSearchListener;
 	@Inject
@@ -67,7 +67,7 @@ public class BibleTextPart implements Observer {
 		if (CurrentChapter.getCurrentChapter() != null) {
 			loadCurrentChapter();
 		}
-		text.addKeyListener(pagingListener);
+		text.addKeyListener(booksKeyListener);
 		restorePersistedState();
 		textPartManager.registerPart(part, this);
 	}

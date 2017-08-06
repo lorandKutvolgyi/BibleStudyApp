@@ -15,7 +15,7 @@
             </children>
             <children xsi:type="basic:PartSashContainer" xmi:id="_x3oDwBw7EeetS7PfnSTHUQ" elementId="biblereader.partsashcontainer.2">
               <children xsi:type="basic:PartStack" xmi:id="_9Y1dIBw7EeetS7PfnSTHUQ" elementId="biblereader.partstack.5">
-                <children xsi:type="basic:Part" xmi:id="_-7KykBw7EeetS7PfnSTHUQ" elementId="biblereader.part.0" contributionURI="bundleclass://reader/com.lory.biblereader.parts.mappart.MapPart"/>
+                <children xsi:type="basic:Part" xmi:id="_-7KykBw7EeetS7PfnSTHUQ" elementId="biblereader.part.history" contributionURI="bundleclass://reader/com.lory.biblereader.parts.mapstack.HistoryPart" label="%history" tooltip="%history" closeable="true"/>
               </children>
               <children xsi:type="basic:PartStack" xmi:id="_-Pf_YBw7EeetS7PfnSTHUQ" elementId="biblereader.partstack.6">
                 <children xsi:type="basic:Part" xmi:id="__lJjsBw7EeetS7PfnSTHUQ" elementId="biblereader.part.1"/>
@@ -51,7 +51,7 @@
     <children xmi:id="_d53TOyM8EeWAgOzJmBnGEA" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
   </rootContext>
   <addons xmi:id="_d53TMiM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
-  <addons xmi:id="_d53TMyM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
+  <addons xmi:id="_d53TMyM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.ui.contemappartxts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_d53TNCM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
   <addons xmi:id="_d53TNSM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.ui.workbench.commands.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.CommandProcessingAddon"/>
   <addons xmi:id="_d53TNiM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.ui.workbench.handler.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>

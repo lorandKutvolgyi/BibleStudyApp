@@ -1,5 +1,4 @@
-
-package com.lory.biblereader.parts.mappart;
+package com.lory.biblereader.parts.mapstack;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;

@@ -25,6 +25,7 @@ import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.CurrentChapter;
 import com.lory.biblereader.model.Testament;
 import com.lory.biblereader.model.TreeElement;
+import com.lory.biblereader.parts.bookspart.eventhandler.BookClickListener;
 import com.lory.biblereader.parts.bookspart.eventhandler.BookSelectionListener;
 import com.lory.biblereader.parts.bookspart.eventhandler.BooksKeyListener;
 

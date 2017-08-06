@@ -1,4 +1,4 @@
-package com.lory.biblereader.parts.bookspart;
+package com.lory.biblereader.parts.bookspart.eventhandler;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -6,8 +6,6 @@ import javax.inject.Singleton;
 import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
-
-import com.lory.biblereader.parts.bookspart.eventhandler.BookSelectionListener;
 
 /**
  * EventHandler for mouse click events triggered on BookTree.

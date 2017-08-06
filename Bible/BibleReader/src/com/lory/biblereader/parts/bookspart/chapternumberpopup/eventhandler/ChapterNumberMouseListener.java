@@ -18,6 +18,7 @@ import org.eclipse.swt.widgets.Label;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.CurrentChapter;
 import com.lory.biblereader.parts.bookspart.chapternumberpopup.ChapterNumberPopupShell;
+import com.lory.biblereader.parts.mapstack.History;
 import com.lory.biblereader.parts.textpart.TextPartManager;
 
 /**
@@ -37,6 +38,8 @@ public class ChapterNumberMouseListener extends MouseAdapter {
 	private static MApplication application;
 	@Inject
 	private TextPartManager textPartManager;
+	@Inject
+	private History history;
 	private static MPart newTextPart;
 	private Book book;
 	private int chapterId;
@@ -66,6 +69,7 @@ public class ChapterNumberMouseListener extends MouseAdapter {
 				textPartManager.activatePart(textPartManager.getAnyVisiblePart());
 			}
 			CurrentChapter.setCurrentChapter(book.getChapter(chapterId));
+			history.addChapter(CurrentChapter.getCurrentChapter());
 			textPartManager.getChapters().put(textPartManager.getActivePart(), book.getChapter(chapterId));
 		}
 		shell.setColor(label, SWT.COLOR_GRAY);
@@ -93,6 +97,7 @@ public class ChapterNumberMouseListener extends MouseAdapter {
 					newTextPart = null;
 				}
 				CurrentChapter.setCurrentChapter(book.getChapter(chapterId));
+				history.addChapter(CurrentChapter.getCurrentChapter());
 				textPartManager.getChapters().put(textPartManager.getActivePart(), book.getChapter(chapterId));
 			}
 		}));

@@ -28,7 +28,6 @@ public class TextPartManager {
 	private MPart activePart;
 	private boolean forcedActivation;
 	private MPartStack stack;
-
 	@Inject
 	private static EModelService modelService;
 
