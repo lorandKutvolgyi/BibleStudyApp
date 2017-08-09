@@ -45,7 +45,6 @@ public class ChapterNumberMouseListener extends MouseAdapter {
 	private int chapterId;
 	private ChapterNumberPopupShell shell;
 	private Display display;
-	private boolean newActivePart;
 
 	public void init(Book book, ChapterNumberPopupShell shell) {
 		this.book = book;
@@ -58,26 +57,35 @@ public class ChapterNumberMouseListener extends MouseAdapter {
 		chapterId = Integer.parseInt(label.getText());
 		if (event.stateMask == SWT.CTRL
 				|| (!textPartManager.isAnyActivePart() && !textPartManager.isAnyVisiblePart())) {
-			synchronized (ChapterNumberMouseListener.class) {
-				if (newTextPart == null) {
-					newTextPart = textPartManager.newTextPart(modelService, application);
-				}
-			}
-			newActivePart = true;
+
+			showNewTextPart();
+
 		} else {
 			if (!textPartManager.isAnyActivePart() && textPartManager.isAnyVisiblePart()) {
 				textPartManager.activatePart(textPartManager.getAnyVisiblePart());
 			}
-			CurrentChapter.setCurrentChapter(book.getChapter(chapterId));
-			history.addChapter(CurrentChapter.getCurrentChapter());
-			textPartManager.getChapters().put(textPartManager.getActivePart(), book.getChapter(chapterId));
 		}
+		CurrentChapter.setCurrentChapter(book.getChapter(chapterId));
+		textPartManager.getChapters().put(textPartManager.getActivePart(), book.getChapter(chapterId));
+		history.addChapter(CurrentChapter.getCurrentChapter());
 		shell.setColor(label, SWT.COLOR_GRAY);
 		int delay = event.data == null ? 0 : (int) event.data;
 		shell.close(delay);
-		if (newActivePart) {
-			showNewPart(delay);
-			newActivePart = false;
+		synchronized (ChapterNumberMouseListener.class) {
+			getDisplay().timerExec(delay, (() -> {
+				if (newTextPart != null) {
+					newTextPart = null;
+				}
+			}));
+		}
+	}
+
+	private void showNewTextPart() {
+		synchronized (ChapterNumberMouseListener.class) {
+			if (newTextPart == null) {
+				newTextPart = textPartManager.newTextPart(modelService, application);
+			}
+			partService.showPart(newTextPart, PartState.ACTIVATE);
 		}
 	}
 
@@ -87,20 +95,6 @@ public class ChapterNumberMouseListener extends MouseAdapter {
 
 	public void setDisplay(Display display) {
 		this.display = display;
-	}
-
-	private void showNewPart(int delay) {
-		getDisplay().timerExec(delay, (() -> {
-			synchronized (ChapterNumberMouseListener.class) {
-				if (newTextPart != null) {
-					partService.showPart(newTextPart, PartState.ACTIVATE);
-					newTextPart = null;
-				}
-				CurrentChapter.setCurrentChapter(book.getChapter(chapterId));
-				history.addChapter(CurrentChapter.getCurrentChapter());
-				textPartManager.getChapters().put(textPartManager.getActivePart(), book.getChapter(chapterId));
-			}
-		}));
 	}
 
 }

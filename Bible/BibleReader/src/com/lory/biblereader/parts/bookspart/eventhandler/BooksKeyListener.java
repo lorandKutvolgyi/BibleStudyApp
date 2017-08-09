@@ -10,6 +10,7 @@ import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 
 import com.lory.biblereader.parts.bookspart.treesorter.BooksComparator;
+import com.lory.biblereader.parts.mapstack.History;
 import com.lory.biblereader.toolbar.eventhandler.BookChanging;
 import com.lory.biblereader.toolbar.eventhandler.Paging;
 
@@ -27,6 +28,8 @@ public class BooksKeyListener extends KeyAdapter {
 	@Inject
 	private BooksComparator booksComparator;
 	private TreeViewer treeViewer;
+	@Inject
+	private static History history;
 
 	@Override
 	public void keyPressed(KeyEvent event) {
@@ -37,12 +40,12 @@ public class BooksKeyListener extends KeyAdapter {
 		}
 		if (isBookChangingCommand(event)) {
 			preventTreeEventTriggering(event);
-			BookChanging.change(event.keyCode, booksComparator);
+			BookChanging.change(event.keyCode, booksComparator, history);
 			return;
 		}
 		if (isPagingCommand(event)) {
 			preventTreeEventTriggering(event);
-			Paging.paging(event.keyCode);
+			Paging.paging(event.keyCode, history);
 			return;
 		}
 	}

@@ -5,21 +5,26 @@ import org.eclipse.swt.SWT;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.CurrentChapter;
+import com.lory.biblereader.parts.mapstack.History;
 
 public class Paging {
-	public static void paging(int keyCode) {
+
+	public static void paging(int keyCode, History history) {
 		if (!isSelectedChapter()) {
 			return;
 		}
 		int id = CurrentChapter.getCurrentChapter().getId();
-		changeCurrentChapter(getNewId(keyCode, id));
+		Chapter chapter = changeCurrentChapter(getNewId(keyCode, id));
+		if (chapter != null) {
+			history.addChapter(chapter);
+		}
 	}
 
-	public static boolean isSelectedChapter() {
+	private static boolean isSelectedChapter() {
 		return CurrentChapter.getCurrentChapter() != null;
 	}
 
-	public static int getNewId(int keyCode, int id) {
+	private static int getNewId(int keyCode, int id) {
 		int newId = id;
 		if (keyCode == SWT.ARROW_RIGHT) {
 			newId++;
@@ -29,15 +34,18 @@ public class Paging {
 		return newId;
 	}
 
-	public static void changeCurrentChapter(int newId) {
+	private static Chapter changeCurrentChapter(int newId) {
 		Chapter currentChapter = CurrentChapter.getCurrentChapter();
 		Book book = currentChapter.getBook();
 		if (newId > 0 && newId <= isMax(book)) {
-			CurrentChapter.setCurrentChapter(book.getChapter(newId));
+			Chapter chapter = book.getChapter(newId);
+			CurrentChapter.setCurrentChapter(chapter);
+			return chapter;
 		}
+		return null;
 	}
 
-	public static int isMax(Book book) {
+	private static int isMax(Book book) {
 		int max = book.getChapters().size();
 		return max;
 	}
