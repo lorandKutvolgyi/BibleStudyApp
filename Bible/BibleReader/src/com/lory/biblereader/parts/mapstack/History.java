@@ -29,4 +29,10 @@ public class History extends Observable {
 	public LinkedList<Chapter> getHistory() {
 		return new LinkedList<>(history);
 	}
+
+	public void clear() {
+		history.clear();
+		setChanged();
+		notifyObservers();
+	}
 }

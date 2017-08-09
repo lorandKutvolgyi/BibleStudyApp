@@ -15,7 +15,12 @@
             </children>
             <children xsi:type="basic:PartSashContainer" xmi:id="_x3oDwBw7EeetS7PfnSTHUQ" elementId="biblereader.partsashcontainer.2">
               <children xsi:type="basic:PartStack" xmi:id="_9Y1dIBw7EeetS7PfnSTHUQ" elementId="biblereader.partstack.5">
-                <children xsi:type="basic:Part" xmi:id="_-7KykBw7EeetS7PfnSTHUQ" elementId="biblereader.part.history" contributionURI="bundleclass://reader/com.lory.biblereader.parts.mapstack.HistoryPart" label="%history" tooltip="%history" closeable="true"/>
+                <children xsi:type="basic:Part" xmi:id="_-7KykBw7EeetS7PfnSTHUQ" elementId="biblereader.part.history" contributionURI="bundleclass://reader/com.lory.biblereader.parts.mapstack.HistoryPart" label="%history" tooltip="%history" closeable="true">
+                  <menus xmi:id="_nhDrEH0_EeeYqLgHHocaMg" elementId="biblereader.menu.0" mnemonics="aaa">
+                    <tags>ViewMenu</tags>
+                    <children xsi:type="menu:DirectMenuItem" xmi:id="_qDJ-8H1AEeeYqLgHHocaMg" elementId="biblereader.directmenuitem.clear" label="%clear" tooltip="%clear" mnemonics="%clear" contributionURI="bundleclass://reader/com.lory.biblereader.parts.mapstack.historypart.toolbar.HistoryClearMenuItemHandler"/>
+                  </menus>
+                </children>
               </children>
               <children xsi:type="basic:PartStack" xmi:id="_-Pf_YBw7EeetS7PfnSTHUQ" elementId="biblereader.partstack.6">
                 <children xsi:type="basic:Part" xmi:id="__lJjsBw7EeetS7PfnSTHUQ" elementId="biblereader.part.1"/>

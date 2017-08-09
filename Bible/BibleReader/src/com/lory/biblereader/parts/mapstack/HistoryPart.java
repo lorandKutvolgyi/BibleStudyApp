@@ -1,6 +1,7 @@
 
 package com.lory.biblereader.parts.mapstack;
 
+import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -54,6 +55,10 @@ public class HistoryPart implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
+		if (history.getHistory().isEmpty() && comp.getChildren().length != 0) {
+			Arrays.asList(comp.getChildren()).stream().forEach(control -> control.dispose());
+			return;
+		}
 		if (comp.getChildren().length != 0) {
 			Label label = new Label(comp, SWT.NONE);
 			label.setText(" -> ");
