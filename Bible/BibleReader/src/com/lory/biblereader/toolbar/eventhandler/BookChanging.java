@@ -7,7 +7,7 @@ import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.CurrentChapter;
 import com.lory.biblereader.parts.bookspart.treesorter.AbstractBooksOrder;
 import com.lory.biblereader.parts.bookspart.treesorter.BooksComparator;
-import com.lory.biblereader.parts.mapstack.History;
+import com.lory.biblereader.parts.mapstack.historypart.History;
 
 public class BookChanging {
 

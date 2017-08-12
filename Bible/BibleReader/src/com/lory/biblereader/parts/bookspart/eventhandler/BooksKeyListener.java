@@ -10,7 +10,7 @@ import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 
 import com.lory.biblereader.parts.bookspart.treesorter.BooksComparator;
-import com.lory.biblereader.parts.mapstack.History;
+import com.lory.biblereader.parts.mapstack.historypart.History;
 import com.lory.biblereader.toolbar.eventhandler.BookChanging;
 import com.lory.biblereader.toolbar.eventhandler.Paging;
 

@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Label;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.CurrentChapter;
 import com.lory.biblereader.parts.bookspart.chapternumberpopup.ChapterNumberPopupShell;
-import com.lory.biblereader.parts.mapstack.History;
+import com.lory.biblereader.parts.mapstack.historypart.History;
 import com.lory.biblereader.parts.textpart.TextPartManager;
 
 /**
