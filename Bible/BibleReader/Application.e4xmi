@@ -25,7 +25,7 @@
                 </children>
               </children>
               <children xsi:type="basic:PartStack" xmi:id="_-Pf_YBw7EeetS7PfnSTHUQ" elementId="biblereader.partstack.6">
-                <children xsi:type="basic:Part" xmi:id="__lJjsBw7EeetS7PfnSTHUQ" elementId="biblereader.part.search" contributionURI="bundleclass://reader/com.lory.biblereader.parts.searchstackrt.SearchPart" label="%search" tooltip="%search" closeable="true"/>
+                <children xsi:type="basic:Part" xmi:id="__lJjsBw7EeetS7PfnSTHUQ" elementId="biblereader.part.search" contributionURI="bundleclass://reader/com.lory.biblereader.parts.searchstack.searchpart.SearchPart" label="%search" tooltip="%search" closeable="true"/>
                 <children xsi:type="basic:Part" xmi:id="_m9e_YH9tEee-tMwEAan16g" elementId="biblereader.part.statistics" contributionURI="bundleclabundleclass://reader/com.lory.biblereader.parts.searchstackatisticsPart" label="%statistics" tooltip="%statistics"/>
               </children>
             </children>
