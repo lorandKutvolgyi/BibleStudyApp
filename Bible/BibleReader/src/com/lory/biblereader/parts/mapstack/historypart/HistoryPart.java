@@ -48,14 +48,8 @@ public class HistoryPart implements Observer {
 		createSubComposite();
 
 		scrolled.setContent(subComposite);
-		loadHistory();
+		this.loadHistory();
 		history.addObserver(this);
-	}
-
-	private void loadHistory() {
-		history.getHistory().stream().forEach(chapter -> {
-			addNewElement(chapter);
-		});
 	}
 
 	private void createScrolledComposite() {
@@ -76,6 +70,12 @@ public class HistoryPart implements Observer {
 	private void createSubComposite() {
 		subComposite = new Composite(scrolled, SWT.NONE);
 		subComposite.setLayout(new RowLayout());
+	}
+
+	private void loadHistory() {
+		history.getHistory().stream().forEach(chapter -> {
+			addNewElement(chapter);
+		});
 	}
 
 	@Override
@@ -128,18 +128,6 @@ public class HistoryPart implements Observer {
 	private boolean isFirstElement() {
 		return isHistoryEmpty();
 	}
-
-	// private void createLink() {
-	// Hyperlink link = new Hyperlink(subComposite, SWT.NONE);
-	// link.setBackground(subComposite.getBackground());
-	// Chapter currentChapter = history.getHistory().getLast();
-	// link.setText(messageService.getMessage(currentChapter.getBook().getTitle())
-	// + "-" + currentChapter.getId());
-	// Menu menu = createMenu(link);
-	// link.setMenu(menu);
-	// addListenersToLink(link, currentChapter, menu);
-	// createLink(history.getHistory().getLast());
-	// }
 
 	private void createLink(Chapter chapter) {
 		Hyperlink link = new Hyperlink(subComposite, SWT.NONE);
