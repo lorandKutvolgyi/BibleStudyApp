@@ -101,7 +101,7 @@ public class HistoryPart implements Observer {
 		createArrowLabel();
 		createLink();
 		setupScroll();
-		showElements();
+		layoutElements();
 	}
 
 	private void createArrowLabel() {
@@ -120,6 +120,54 @@ public class HistoryPart implements Observer {
 		link.setBackground(subComposite.getBackground());
 		Chapter currentChapter = history.getHistory().getLast();
 		link.setText(currentChapter.getBook().getTitle() + "-" + currentChapter.getId());
+		Menu menu = createMenu(link);
+		link.setMenu(menu);
+		addListenersToLink(link, currentChapter, menu);
+	}
+
+	private Menu createMenu(Hyperlink link) {
+		Menu menu = new Menu(link);
+		MenuItem item = new MenuItem(menu, SWT.PUSH);
+		item.setText("REMOVE");
+		item.addListener(SWT.Selection, event -> {
+			removeElement(link);
+		});
+		return menu;
+	}
+
+	private void removeElement(Hyperlink link) {
+		int linkIndex = getLinkIndex(link);
+		removeArrowLabel(linkIndex);
+		removeFromHistory(linkIndex);
+		removeLink(link);
+		setupScroll();
+		layoutElements();
+	}
+
+	private void removeArrowLabel(int linkIndex) {
+		if (linkIndex != subComposite.getChildren().length - 1) {
+			subComposite.getChildren()[linkIndex + 1].dispose();
+		} else if (subComposite.getChildren().length != 1) {
+			subComposite.getChildren()[linkIndex - 1].dispose();
+		} else {
+			scrolled.setMinSize(null);
+		}
+	}
+
+	private void removeFromHistory(int linkIndex) {
+		history.removeElement(linkIndex / 2);
+	}
+
+	private void removeLink(Hyperlink link) {
+		link.dispose();
+	}
+
+	private void addListenersToLink(Hyperlink link, Chapter currentChapter, Menu menu) {
+		addLinkListener(link, currentChapter);
+		addMouseListener(link, menu);
+	}
+
+	private void addLinkListener(Hyperlink link, Chapter currentChapter) {
 		link.addHyperlinkListener(new HyperlinkAdapter() {
 
 			@Override
@@ -127,30 +175,17 @@ public class HistoryPart implements Observer {
 				CurrentChapter.setCurrentChapter(currentChapter);
 			}
 		});
+	}
+
+	private void addMouseListener(Hyperlink link, Menu menu) {
 		link.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseDown(MouseEvent e) {
 				if (e.button == 3) {
-					Menu menu = new Menu(link);
-					MenuItem item = new MenuItem(menu, SWT.PUSH);
-					item.setText("REMOVE");
-					item.addListener(SWT.Selection, event -> {
-						int linkIndex = getLinkIndex(link);
-						if (linkIndex != subComposite.getChildren().length - 1) {
-							subComposite.getChildren()[linkIndex + 1].dispose();
-						} else if (subComposite.getChildren().length != 1) {
-							subComposite.getChildren()[linkIndex - 1].dispose();
-						}
-						history.removeElement(linkIndex / 2);
-						link.dispose();
-						subComposite.layout();
-						setupScroll();
-					});
-					link.setMenu(menu);
+					menu.setVisible(true);
 				}
 			}
-
 		});
 	}
 
@@ -160,11 +195,11 @@ public class HistoryPart implements Observer {
 	}
 
 	private void setupScroll() {
-		scrolled.setMinSize(parent.computeSize(scrolled.getClientArea().width, SWT.DEFAULT));
+		scrolled.setMinSize(subComposite.computeSize(scrolled.getClientArea().width, SWT.DEFAULT, true));
 	}
 
-	private void showElements() {
-		subComposite.layout();
+	private void layoutElements() {
+		parent.layout(true, true);
 	}
 
 }
