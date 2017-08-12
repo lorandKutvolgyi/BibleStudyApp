@@ -36,9 +36,6 @@ public class HistoryPart implements Observer {
 	private ScrolledComposite scrolled;
 	private Composite subComposite;
 
-	private int width;
-	private int high;
-
 	@PostConstruct
 	public void postConstruct(Composite parent) {
 		this.parent = parent;
@@ -46,9 +43,6 @@ public class HistoryPart implements Observer {
 
 		createScrolledComposite();
 		createSubComposite();
-
-		this.width = scrolled.getSize().x;
-		this.high = scrolled.getSize().y;
 
 		scrolled.setContent(subComposite);
 		history.addObserver(this);
@@ -91,8 +85,7 @@ public class HistoryPart implements Observer {
 	private void disposeAll() {
 		if (!isHistoryEmpty()) {
 			Arrays.asList(subComposite.getChildren()).stream().forEach(control -> control.dispose());
-			scrolled.setSize(width, high);
-			setupScroll();
+			scrolled.setMinSize(null);
 		}
 	}
 
