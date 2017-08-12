@@ -25,12 +25,15 @@ import org.eclipse.ui.forms.events.HyperlinkAdapter;
 import org.eclipse.ui.forms.events.HyperlinkEvent;
 import org.eclipse.ui.forms.widgets.Hyperlink;
 
+import com.lory.biblereader.i18n.MessageService;
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.CurrentChapter;
 
 public class HistoryPart implements Observer {
 	@Inject
 	private History history;
+	@Inject
+	private MessageService messageService;
 
 	private Composite parent;
 	private ScrolledComposite scrolled;
@@ -119,7 +122,7 @@ public class HistoryPart implements Observer {
 		Hyperlink link = new Hyperlink(subComposite, SWT.NONE);
 		link.setBackground(subComposite.getBackground());
 		Chapter currentChapter = history.getHistory().getLast();
-		link.setText(currentChapter.getBook().getTitle() + "-" + currentChapter.getId());
+		link.setText(messageService.getMessage(currentChapter.getBook().getTitle()) + "-" + currentChapter.getId());
 		Menu menu = createMenu(link);
 		link.setMenu(menu);
 		addListenersToLink(link, currentChapter, menu);
@@ -128,7 +131,7 @@ public class HistoryPart implements Observer {
 	private Menu createMenu(Hyperlink link) {
 		Menu menu = new Menu(link);
 		MenuItem item = new MenuItem(menu, SWT.PUSH);
-		item.setText("REMOVE");
+		item.setText(messageService.getMessage("remove"));
 		item.addListener(SWT.Selection, event -> {
 			removeElement(link);
 		});
