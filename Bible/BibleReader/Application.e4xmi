@@ -13,8 +13,8 @@
                 <children xsi:type="basic:Part" xmi:id="_33tk4Ff4EeWw0_pvm8Qobg" elementId="biblereader.BibleTextPart" accessibilityPhrase="" contributionURI="bundleclass://reader/com.lory.biblereader.parts.textpart.BibleTextPart" label="" closeable="true"/>
               </children>
             </children>
-            <children xsi:type="basic:PartSashContainer" xmi:id="_x3oDwBw7EeetS7PfnSTHUQ" elementId="biblereader.partsashcontainer.2">
-              <children xsi:type="basic:PartStack" xmi:id="_9Y1dIBw7EeetS7PfnSTHUQ" elementId="biblereader.partstack.5">
+            <children xsi:type="basic:PartSashContainer" xmi:id="_x3oDwBw7EeetS7PfnSTHUQ" elementId="biblereader.partsashcontainer.2" selectedElement="_9Y1dIBw7EeetS7PfnSTHUQ">
+              <children xsi:type="basic:PartStack" xmi:id="_9Y1dIBw7EeetS7PfnSTHUQ" elementId="biblereader.partstack.5" selectedElement="_kM8xcH9tEee-tMwEAan16g">
                 <children xsi:type="basic:Part" xmi:id="_kM8xcH9tEee-tMwEAan16g" elementId="biblereader.part.map" contributionURI="bundleclass://reader/com.lory.biblereader.parts.mapstack.mappart.MapPart" label="%map" tooltip="%map" closeable="true"/>
                 <children xsi:type="basic:Part" xmi:id="_lkjdkH9tEee-tMwEAan16g" elementId="biblereader.part.bookmark" contributionURI="bundleclass://reader/com.lory.biblereader.parts.mapstack.bookmarkpart.BookmarkPart" label="%bookmark" tooltip="%bookmark" closeable="true"/>
                 <children xsi:type="basic:Part" xmi:id="_-7KykBw7EeetS7PfnSTHUQ" elementId="biblereader.part.history" contributionURI="bundleclass://reader/com.lory.biblereader.parts.mapstack.historypart.HistoryPart" label="%history" tooltip="%history" closeable="true">

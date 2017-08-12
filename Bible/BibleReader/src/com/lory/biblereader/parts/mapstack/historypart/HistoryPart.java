@@ -48,7 +48,14 @@ public class HistoryPart implements Observer {
 		createSubComposite();
 
 		scrolled.setContent(subComposite);
+		loadHistory();
 		history.addObserver(this);
+	}
+
+	private void loadHistory() {
+		history.getHistory().stream().forEach(chapter -> {
+			addNewElement(chapter);
+		});
 	}
 
 	private void createScrolledComposite() {
@@ -101,31 +108,46 @@ public class HistoryPart implements Observer {
 	}
 
 	private void addNewElement() {
+		addNewElement(history.getHistory().getLast());
+	}
+
+	private void addNewElement(Chapter chapter) {
 		createArrowLabel();
-		createLink();
+		createLink(chapter);
 		setupScroll();
 		layoutElements();
 	}
 
 	private void createArrowLabel() {
-		if (isFirstElement()) {
+		if (!isFirstElement()) {
 			Label label = new Label(subComposite, SWT.NONE);
 			label.setText(" -> ");
 		}
 	}
 
 	private boolean isFirstElement() {
-		return !isHistoryEmpty();
+		return isHistoryEmpty();
 	}
 
-	private void createLink() {
+	// private void createLink() {
+	// Hyperlink link = new Hyperlink(subComposite, SWT.NONE);
+	// link.setBackground(subComposite.getBackground());
+	// Chapter currentChapter = history.getHistory().getLast();
+	// link.setText(messageService.getMessage(currentChapter.getBook().getTitle())
+	// + "-" + currentChapter.getId());
+	// Menu menu = createMenu(link);
+	// link.setMenu(menu);
+	// addListenersToLink(link, currentChapter, menu);
+	// createLink(history.getHistory().getLast());
+	// }
+
+	private void createLink(Chapter chapter) {
 		Hyperlink link = new Hyperlink(subComposite, SWT.NONE);
 		link.setBackground(subComposite.getBackground());
-		Chapter currentChapter = history.getHistory().getLast();
-		link.setText(messageService.getMessage(currentChapter.getBook().getTitle()) + "-" + currentChapter.getId());
+		link.setText(messageService.getMessage(chapter.getBook().getTitle()) + "-" + chapter.getId());
 		Menu menu = createMenu(link);
 		link.setMenu(menu);
-		addListenersToLink(link, currentChapter, menu);
+		addListenersToLink(link, chapter, menu);
 	}
 
 	private Menu createMenu(Hyperlink link) {
