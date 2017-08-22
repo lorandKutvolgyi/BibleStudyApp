@@ -84,4 +84,6 @@ public class Messages {
 	public String searchTextPlaceholder;
 
 	public String remove;
+
+	public String newBookMark;
 }

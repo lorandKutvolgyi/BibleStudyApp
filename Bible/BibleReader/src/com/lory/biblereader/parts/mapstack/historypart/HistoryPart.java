@@ -28,12 +28,16 @@ import org.eclipse.ui.forms.widgets.Hyperlink;
 import com.lory.biblereader.i18n.MessageService;
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.CurrentChapter;
+import com.lory.biblereader.parts.mapstack.bookmarkpart.BookMark;
+import com.lory.biblereader.parts.mapstack.bookmarkpart.BookMarkManager;
 
 public class HistoryPart implements Observer {
 	@Inject
 	private History history;
 	@Inject
 	private MessageService messageService;
+	@Inject
+	private BookMarkManager bookMarkManager;
 
 	private Composite parent;
 	private ScrolledComposite scrolled;
@@ -43,10 +47,8 @@ public class HistoryPart implements Observer {
 	public void postConstruct(Composite parent) {
 		this.parent = parent;
 		this.parent.setLayout(new FillLayout());
-
 		createScrolledComposite();
 		createSubComposite();
-
 		scrolled.setContent(subComposite);
 		this.loadHistory();
 		history.addObserver(this);
@@ -59,7 +61,6 @@ public class HistoryPart implements Observer {
 		scrolled.setExpandHorizontal(true);
 		scrolled.setLayout(new FillLayout());
 		scrolled.addControlListener(new ControlAdapter() {
-
 			@Override
 			public void controlResized(ControlEvent e) {
 				setupScroll();
@@ -81,7 +82,7 @@ public class HistoryPart implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (isClearHappened()) {
-			disposeAll();
+			disposeAllIfNeeded();
 			return;
 		}
 		assert (isAddHappened());
@@ -92,11 +93,19 @@ public class HistoryPart implements Observer {
 		return history.getHistory().isEmpty();
 	}
 
-	private void disposeAll() {
+	private void disposeAllIfNeeded() {
 		if (!isHistoryEmpty()) {
-			Arrays.asList(subComposite.getChildren()).stream().forEach(control -> control.dispose());
-			scrolled.setMinSize(null);
+			disposeAll();
+			removeScroll();
 		}
+	}
+
+	private void disposeAll() {
+		Arrays.asList(subComposite.getChildren()).stream().forEach(control -> control.dispose());
+	}
+
+	private void removeScroll() {
+		scrolled.setMinSize(null);
 	}
 
 	private boolean isHistoryEmpty() {
@@ -133,18 +142,26 @@ public class HistoryPart implements Observer {
 		Hyperlink link = new Hyperlink(subComposite, SWT.NONE);
 		link.setBackground(subComposite.getBackground());
 		link.setText(messageService.getMessage(chapter.getBook().getTitle()) + "-" + chapter.getId());
-		Menu menu = createMenu(link);
+		Menu menu = createMenu(link, chapter);
 		link.setMenu(menu);
 		addListenersToLink(link, chapter, menu);
 	}
 
-	private Menu createMenu(Hyperlink link) {
+	private Menu createMenu(Hyperlink link, Chapter chapter) {
 		Menu menu = new Menu(link);
-		MenuItem item = new MenuItem(menu, SWT.PUSH);
-		item.setText(messageService.getMessage("remove"));
-		item.addListener(SWT.Selection, event -> {
+
+		MenuItem remove = new MenuItem(menu, SWT.PUSH);
+		remove.setText(messageService.getMessage("remove"));
+		remove.addListener(SWT.Selection, event -> {
 			removeElement(link);
 		});
+
+		MenuItem addToBookMark = new MenuItem(menu, SWT.PUSH);
+		addToBookMark.setText("hhhhghghghh");
+		addToBookMark.addListener(SWT.Selection, event -> {
+			bookMarkManager.storeBookMark(new BookMark(chapter, 1, messageService));
+		});
+
 		return menu;
 	}
 
@@ -163,7 +180,7 @@ public class HistoryPart implements Observer {
 		} else if (subComposite.getChildren().length != 1) {
 			subComposite.getChildren()[linkIndex - 1].dispose();
 		} else {
-			scrolled.setMinSize(null);
+			removeScroll();
 		}
 	}
 
@@ -182,7 +199,6 @@ public class HistoryPart implements Observer {
 
 	private void addLinkListener(Hyperlink link, Chapter currentChapter) {
 		link.addHyperlinkListener(new HyperlinkAdapter() {
-
 			@Override
 			public void linkActivated(HyperlinkEvent e) {
 				CurrentChapter.setCurrentChapter(currentChapter);
@@ -192,7 +208,6 @@ public class HistoryPart implements Observer {
 
 	private void addMouseListener(Hyperlink link, Menu menu) {
 		link.addMouseListener(new MouseAdapter() {
-
 			@Override
 			public void mouseDown(MouseEvent e) {
 				if (e.button == 3) {

@@ -81,7 +81,7 @@ public class ChapterSqlDao implements ChapterDao {
 	private Chapter createChapterByResult(Book book, ResultSet result) throws SQLException {
 		int id = result.getInt("Chapter");
 		String content = result.getString("Content");
-		return new Chapter(id, content, book);
+		return Chapter.createNewChapter(id, content, book);
 	}
 
 	@Override

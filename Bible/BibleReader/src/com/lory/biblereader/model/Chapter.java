@@ -1,20 +1,33 @@
 package com.lory.biblereader.model;
 
+import java.io.Serializable;
+
 /**
  * Represents a chapter of a book in the Bible.
  *
  * @author lorandKutvolgyi
  *
  */
-public class Chapter {
+public class Chapter implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	private final int id;
 	private final String text;
 	private final Book book;
 
-	public Chapter(int id, String text, Book book) {
+	private Chapter(int id, String text, Book book) {
 		this.id = id;
 		this.text = text;
 		this.book = book;
+	}
+
+	public static Chapter createNewChapter(int id, String text, Book book) {
+		return new Chapter(id, text, book);
+	}
+
+	public static Chapter createCompareObject(int id, Book book) {
+		return createNewChapter(id, null, book);
 	}
 
 	public int getId() {
