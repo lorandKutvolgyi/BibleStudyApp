@@ -3,6 +3,7 @@ package com.lory.biblereader.parts.mapstack.bookmarkpart;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import com.lory.biblereader.i18n.MessageService;
 import com.lory.biblereader.model.Chapter;
@@ -10,21 +11,21 @@ import com.lory.biblereader.model.TreeElement;
 
 public class BookMark implements TreeElement {
 	private Chapter chapter;
-	private Integer verse;
+	private List<Integer> verses;
 	private BookMarkCategory category;
 	private LocalDateTime date;
 	private MessageService messageService;
 
-	public BookMark(Chapter chapter, Integer verse, MessageService messageService) {
+	public BookMark(Chapter chapter, List<Integer> verses, MessageService messageService) {
 		this.chapter = chapter;
-		this.verse = verse;
+		this.verses = verses;
 		this.date = LocalDateTime.now();
 		this.messageService = messageService;
 	}
 
-	public BookMark(Chapter chapter, Integer verse, BookMarkCategory category, MessageService messageService) {
+	public BookMark(Chapter chapter, List<Integer> verse, BookMarkCategory category, MessageService messageService) {
 		this.chapter = chapter;
-		this.verse = verse;
+		this.verses = verse;
 		this.category = category;
 		this.date = LocalDateTime.now();
 		this.messageService = messageService;
@@ -34,8 +35,8 @@ public class BookMark implements TreeElement {
 		return chapter;
 	}
 
-	public Integer getVerse() {
-		return verse;
+	public List<Integer> getVerses() {
+		return verses;
 	}
 
 	public BookMarkCategory getCategory() {
@@ -48,7 +49,8 @@ public class BookMark implements TreeElement {
 
 	@Override
 	public String getText() {
-		return messageService.getMessage(chapter.getBook().getTitle()) + ": " + chapter.getId();
+		return messageService.getMessage(chapter.getBook().getTitle()) + ": " + chapter.getId() + " "
+				+ BookMarkUtil.getVersesAsString(verses);
 	}
 
 	@Override
@@ -63,7 +65,7 @@ public class BookMark implements TreeElement {
 
 	@Override
 	public String toString() {
-		return "BookMark [chapter=" + chapter + ", verse=" + verse + ", category=" + category + ", date=" + date + "]";
+		return "BookMark [chapter=" + chapter + ", verse=" + verses + ", category=" + category + ", date=" + date + "]";
 	}
 
 	@Override
@@ -72,7 +74,7 @@ public class BookMark implements TreeElement {
 		int result = 1;
 		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((chapter == null) ? 0 : chapter.hashCode());
-		result = prime * result + ((verse == null) ? 0 : verse.hashCode());
+		result = prime * result + ((verses == null) ? 0 : verses.hashCode());
 		return result;
 	}
 
@@ -102,11 +104,11 @@ public class BookMark implements TreeElement {
 		} else if (!chapter.equals(other.chapter)) {
 			return false;
 		}
-		if (verse == null) {
-			if (other.verse != null) {
+		if (verses == null) {
+			if (other.verses != null) {
 				return false;
 			}
-		} else if (!verse.equals(other.verse)) {
+		} else if (!verses.equals(other.verses)) {
 			return false;
 		}
 		return true;

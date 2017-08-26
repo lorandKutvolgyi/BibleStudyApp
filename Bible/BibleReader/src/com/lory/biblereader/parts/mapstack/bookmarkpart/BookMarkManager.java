@@ -2,6 +2,7 @@ package com.lory.biblereader.parts.mapstack.bookmarkpart;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Observable;
@@ -52,13 +53,16 @@ public class BookMarkManager extends Observable {
 		for (Entry<String, String> entry : state.entrySet()) {
 			if (!entry.getKey().startsWith("Cat:")) {
 				BookMarkCategory category = new BookMarkCategory(entry.getKey().toString(), this);
-				String[] bookMarks = entry.getValue().substring(0, entry.getValue().length() - 1).split(",");
+				String[] bookMarks = entry.getValue().substring(0, entry.getValue().length() - 1).split(";");
 				bookMarksByCategory.put(category, new HashSet<>());
 				for (String bookMarkText : bookMarks) {
-					String[] chapterElements = bookMarkText.split(":");
-					Chapter chapter = Bible.getChapter(chapterElements[0], Integer.valueOf(chapterElements[1]));
-					Set<BookMark> bookMarksByCategory = getBookMarksByCategory(category);
-					bookMarksByCategory.add(new BookMark(chapter, null, category, messageService));
+					String[] bookAndOthers = bookMarkText.split(":");
+					String[] chapterAndVerses = bookAndOthers[1].split("\\(");
+					String chapterAsString = chapterAndVerses[0];
+					String versesAsString = chapterAndVerses[1].substring(0, chapterAndVerses[1].length() - 1);
+					List<Integer> verses = BookMarkUtil.getVersesAsIntegers(versesAsString);
+					Chapter chapter = Bible.getChapter(bookAndOthers[0], Integer.valueOf(chapterAsString));
+					getBookMarksByCategory(category).add(new BookMark(chapter, verses, category, messageService));
 				}
 			}
 		}
@@ -88,4 +92,5 @@ public class BookMarkManager extends Observable {
 	private boolean isCategoryExist(BookMarkCategory category) {
 		return bookMarksByCategory.containsKey(category);
 	}
+
 }

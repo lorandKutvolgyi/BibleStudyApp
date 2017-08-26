@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
 
 import com.lory.biblereader.i18n.MessageService;
 import com.lory.biblereader.model.Bible;
@@ -22,6 +23,8 @@ import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
 
 public class BookMarkSelectionPopup {
+	private static final String PLACEHOLDER_FOR_CATEGORY = "Category";
+	private static final String PLACEHOLDER_FOR_VERSES = "Verses (1,4-6)";
 	private MessageService messageService;
 	private Shell shell;
 	private BookMarkManager bookMarkManager;
@@ -29,8 +32,9 @@ public class BookMarkSelectionPopup {
 	private Combo books;
 	private Combo chapters;
 	private Button cancel;
-	private Combo verses;
+	private Text verses;
 	private Group group;
+	private Button ok;
 
 	public BookMarkSelectionPopup(MessageService messageService, BookMarkManager bookMarkManager) {
 		this.messageService = messageService;
@@ -41,7 +45,7 @@ public class BookMarkSelectionPopup {
 		createCategoriesCombo();
 		createBooksCombo();
 		createChaptersCombo();
-		createVersesCombo();
+		createVersesText();
 		createButtons();
 	}
 
@@ -93,8 +97,8 @@ public class BookMarkSelectionPopup {
 		chapters.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 	}
 
-	private void createVersesCombo() {
-		verses = new Combo(group, SWT.DROP_DOWN | SWT.READ_ONLY);
+	private void createVersesText() {
+		verses = new Text(group, SWT.BORDER);
 		verses.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 	}
 
@@ -114,9 +118,10 @@ public class BookMarkSelectionPopup {
 	}
 
 	private void createOkButton(Composite buttons) {
-		Button ok = new Button(buttons, SWT.PUSH);
+		ok = new Button(buttons, SWT.PUSH);
 		ok.setText("Ok");
 		ok.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		setListenerToOk();
 	}
 
 	private void createCancelButton(Composite buttons) {
@@ -140,26 +145,45 @@ public class BookMarkSelectionPopup {
 		});
 	}
 
+	private void setListenerToOk() {
+		ok.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				ok.setEnabled(false);
+				cancel.setEnabled(false);
+				bookMarkManager.storeBookMark(new BookMark(
+						Bible.getBooks().get(books.getSelectionIndex()).getChapters().get(chapters.getSelectionIndex()),
+						BookMarkUtil.getVersesAsIntegers(verses.getText()), messageService));
+				shell.close();
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+		});
+	}
+
 	public void open() {
 		fillCategoriesCombo();
 		fillBooksCombo(0);
-		fillChaptersCombo(0);
+		fillChaptersCombo(1);
 
 		shell.open();
 		cancel.setFocus();
 
 		addPlaceHolderToCategories();
+		addPlaceHolderToVerses();
 	}
 
 	public void open(Chapter chapter) {
+		shell.open();
+		cancel.setFocus();
 		fillCategoriesCombo();
 		fillBooksCombo(Bible.getBooks().indexOf(chapter.getBook()));
 		fillChaptersCombo(chapter.getId());
-
-		shell.open();
-		cancel.setFocus();
-
 		addPlaceHolderToCategories();
+		addPlaceHolderToVerses();
 	}
 
 	private void fillCategoriesCombo() {
@@ -167,7 +191,7 @@ public class BookMarkSelectionPopup {
 				.forEach(text -> categories.setItems(text));
 
 		categories.setForeground(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
-		categories.setText("Category");
+		categories.setText(PLACEHOLDER_FOR_CATEGORY);
 	}
 
 	private void fillBooksCombo(int selection) {
@@ -178,10 +202,10 @@ public class BookMarkSelectionPopup {
 	}
 
 	private void fillChaptersCombo(int selection) {
-		for (Chapter chapter : Bible.getBooks().get(0).getChapters()) {
+		for (Chapter chapter : Bible.getBooks().get(books.getSelectionIndex()).getChapters()) {
 			chapters.add(String.valueOf(chapter.getId()));
 		}
-		chapters.select(selection);
+		chapters.select(selection - 1);
 	}
 
 	private void addPlaceHolderToCategories() {
@@ -198,8 +222,8 @@ public class BookMarkSelectionPopup {
 			@Override
 			public void focusLost(FocusEvent e) {
 				String text = categories.getText();
-				if (text.isEmpty()) {
-					categories.setText("Category");
+				if (text.isEmpty() && !categories.getListVisible()) {
+					categories.setText(PLACEHOLDER_FOR_CATEGORY);
 					categories.setForeground(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
 				}
 			}
@@ -207,12 +231,36 @@ public class BookMarkSelectionPopup {
 			@Override
 			public void focusGained(FocusEvent e) {
 				String text = categories.getText();
-				if (text.equals("Category")) {
+				if (text.equals(PLACEHOLDER_FOR_CATEGORY)) {
 					categories.setText("");
-					categories.setForeground(Display.getDefault().getSystemColor(SWT.COLOR_BLACK));
 				}
+				categories.setForeground(Display.getDefault().getSystemColor(SWT.COLOR_BLACK));
 			}
 		});
 	}
 
+	private void addPlaceHolderToVerses() {
+		verses.setText(PLACEHOLDER_FOR_VERSES);
+		verses.setForeground(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
+		verses.addFocusListener(new FocusListener() {
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				String text = verses.getText();
+				if (text.isEmpty()) {
+					verses.setText(PLACEHOLDER_FOR_VERSES);
+					verses.setForeground(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
+				}
+			}
+
+			@Override
+			public void focusGained(FocusEvent e) {
+				String text = verses.getText();
+				if (text.equals(PLACEHOLDER_FOR_VERSES)) {
+					verses.setText("");
+				}
+				verses.setForeground(Display.getDefault().getSystemColor(SWT.COLOR_BLACK));
+			}
+		});
+	}
 }

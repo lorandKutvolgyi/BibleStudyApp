@@ -56,7 +56,8 @@ public class BookMarkPart implements Observer {
 					categoryAndDate.getValue().toString());
 			StringBuilder builder = new StringBuilder();
 			for (BookMark bookMark : bookMarkManager.getBookMarksByCategory(categoryAndDate.getKey())) {
-				builder.append(bookMark.getChapter().getBook().getTitle() + ":" + bookMark.getChapter().getId() + ",");
+				builder.append(bookMark.getChapter().getBook().getTitle() + ":" + bookMark.getChapter().getId() + "("
+						+ BookMarkUtil.getVerrsesAsString(bookMark) + ");");
 			}
 			part.getPersistedState().put(categoryAndDate.getKey().getText(), builder.toString());
 		}

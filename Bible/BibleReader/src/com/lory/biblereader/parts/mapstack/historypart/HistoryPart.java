@@ -28,8 +28,8 @@ import org.eclipse.ui.forms.widgets.Hyperlink;
 import com.lory.biblereader.i18n.MessageService;
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.CurrentChapter;
-import com.lory.biblereader.parts.mapstack.bookmarkpart.BookMark;
 import com.lory.biblereader.parts.mapstack.bookmarkpart.BookMarkManager;
+import com.lory.biblereader.parts.mapstack.bookmarkpart.BookMarkSelectionPopup;
 
 public class HistoryPart implements Observer {
 	@Inject
@@ -157,9 +157,9 @@ public class HistoryPart implements Observer {
 		});
 
 		MenuItem addToBookMark = new MenuItem(menu, SWT.PUSH);
-		addToBookMark.setText("hhhhghghghh");
+		addToBookMark.setText("Add bookmark");
 		addToBookMark.addListener(SWT.Selection, event -> {
-			bookMarkManager.storeBookMark(new BookMark(chapter, 1, messageService));
+			new BookMarkSelectionPopup(messageService, bookMarkManager).open(chapter);
 		});
 
 		return menu;
