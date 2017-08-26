@@ -14,11 +14,11 @@ import org.slf4j.LoggerFactory;
 public class BibleLogger {
 	private final static Logger LOGGER = LoggerFactory.getLogger(BibleLogger.class);
 
-	@Pointcut("(execution(public * com.lory.biblereader..*.*(..)) && !execution(* com.lory.biblereader..*.toString(..))) && !execution(* *..*Test.*(..))")
+	@Pointcut("(execution(public * com.lory.biblereader..*.*(..)) && !execution(* com.lory.biblereader..*.toString(..))) && !execution(* *..*Test.*(..))&& !execution(* com.lory.biblereader..*.hashCode(..))&& !execution(* com.lory.biblereader..*.equals(..))")
 	public void publicMethodExecution() {
 	}
 
-	@Pointcut("(execution(* com.lory.biblereader..*.*(..)) && !execution(* com.lory.biblereader..*.toString(..))) && !execution(* *..*Test.*(..))")
+	@Pointcut("(execution(* com.lory.biblereader..*.*(..)) && !execution(* com.lory.biblereader..*.toString(..))) && !execution(* *..*Test.*(..)) && !execution(* com.lory.biblereader..*.hashCode(..))&& !execution(* com.lory.biblereader..*.equals(..))")
 	public void methodExecution() {
 	}
 

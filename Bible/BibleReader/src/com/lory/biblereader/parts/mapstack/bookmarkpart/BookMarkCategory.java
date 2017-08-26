@@ -33,4 +33,31 @@ public class BookMarkCategory implements TreeElement, Comparable<BookMarkCategor
 		return category.compareTo(bookMarkCategory.getText());
 	}
 
+	@Override
+	public int hashCode() {
+		return category == null ? 0 : category.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		BookMarkCategory other = (BookMarkCategory) obj;
+		if (category == null) {
+			if (other.category != null) {
+				return false;
+			}
+		} else if (!category.equals(other.category)) {
+			return false;
+		}
+		return true;
+	}
+
 }

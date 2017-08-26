@@ -22,7 +22,7 @@ import com.lory.biblereader.model.Chapter;
 public class BookMarkManager extends Observable {
 	private Map<BookMarkCategory, Set<BookMark>> bookMarksByCategory = new TreeMap<>();
 	private Map<BookMarkCategory, LocalDateTime> categoriesWithCreationDate = new TreeMap<>();
-	private BookMarkCategory DEFAULT_CATEGORY = new BookMarkCategory("Others", this);
+	private final BookMarkCategory DEFAULT_CATEGORY = new BookMarkCategory("Others", this);
 
 	public void storeBookMark(BookMark bookMark) {
 		if (!hasBookMark(bookMark)) {
@@ -91,6 +91,10 @@ public class BookMarkManager extends Observable {
 
 	private boolean isCategoryExist(BookMarkCategory category) {
 		return bookMarksByCategory.containsKey(category);
+	}
+
+	public BookMarkCategory getDefaultCategory() {
+		return DEFAULT_CATEGORY;
 	}
 
 }

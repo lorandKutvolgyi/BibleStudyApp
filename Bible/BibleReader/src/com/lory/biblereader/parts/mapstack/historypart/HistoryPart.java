@@ -157,7 +157,7 @@ public class HistoryPart implements Observer {
 		});
 
 		MenuItem addToBookMark = new MenuItem(menu, SWT.PUSH);
-		addToBookMark.setText("Add bookmark");
+		addToBookMark.setText(messageService.getMessage("newBookMark"));
 		addToBookMark.addListener(SWT.Selection, event -> {
 			new BookMarkSelectionPopup(messageService, bookMarkManager).open(chapter);
 		});

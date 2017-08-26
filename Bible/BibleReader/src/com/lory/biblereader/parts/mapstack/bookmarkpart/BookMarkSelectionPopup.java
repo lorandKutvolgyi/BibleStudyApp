@@ -1,5 +1,7 @@
 package com.lory.biblereader.parts.mapstack.bookmarkpart;
 
+import java.util.List;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.FocusListener;
@@ -52,10 +54,10 @@ public class BookMarkSelectionPopup {
 	private void createPopupShell() {
 		shell = new Shell(Display.getDefault().getActiveShell(), SWT.APPLICATION_MODAL);
 		FillLayout fillLayout = new FillLayout(SWT.VERTICAL);
-		shell.setLayout(fillLayout);
 		fillLayout.marginHeight = 5;
 		fillLayout.marginWidth = 5;
 		fillLayout.spacing = 1;
+		shell.setLayout(fillLayout);
 		shell.setSize(340, 140);
 	}
 
@@ -100,6 +102,11 @@ public class BookMarkSelectionPopup {
 	private void createVersesText() {
 		verses = new Text(group, SWT.BORDER);
 		verses.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		verses.addVerifyListener(event -> {
+			event.doit = event.character == '-' || event.character == ','
+					|| (event.character > '0' && event.character < '9') || event.text.equals(PLACEHOLDER_FOR_VERSES)
+					|| event.text.equals("");
+		});
 	}
 
 	private void createButtons() {
@@ -131,11 +138,20 @@ public class BookMarkSelectionPopup {
 		setListenerToCancel();
 	}
 
-	private void setListenerToCancel() {
-		cancel.addSelectionListener(new SelectionListener() {
+	private void setListenerToOk() {
+		ok.addSelectionListener(new SelectionListener() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				ok.setEnabled(false);
+				cancel.setEnabled(false);
+				Chapter chapter = Bible.getBooks().get(books.getSelectionIndex()).getChapters()
+						.get(chapters.getSelectionIndex());
+				List<Integer> versesAsIntegers = BookMarkUtil
+						.getVersesAsIntegers(isVersesEmpty() ? "" : verses.getText());
+				BookMarkCategory category = isCategoriesEmpty() ? bookMarkManager.getDefaultCategory()
+						: new BookMarkCategory(categories.getText(), bookMarkManager);
+				bookMarkManager.storeBookMark(new BookMark(chapter, versesAsIntegers, category, messageService));
 				shell.close();
 			}
 
@@ -145,16 +161,25 @@ public class BookMarkSelectionPopup {
 		});
 	}
 
-	private void setListenerToOk() {
-		ok.addSelectionListener(new SelectionListener() {
+	private boolean isVersesEmpty() {
+		boolean empty = verses.getText().isEmpty();
+		boolean placeholder = verses.getText().equals(PLACEHOLDER_FOR_VERSES)
+				&& verses.getForeground().equals(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
+		return empty || placeholder;
+	}
+
+	private boolean isCategoriesEmpty() {
+		boolean empty = categories.getText().isEmpty();
+		boolean placeholder = categories.getText().equals(PLACEHOLDER_FOR_CATEGORY)
+				&& categories.getForeground().equals(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
+		return empty || placeholder;
+	}
+
+	private void setListenerToCancel() {
+		cancel.addSelectionListener(new SelectionListener() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				ok.setEnabled(false);
-				cancel.setEnabled(false);
-				bookMarkManager.storeBookMark(new BookMark(
-						Bible.getBooks().get(books.getSelectionIndex()).getChapters().get(chapters.getSelectionIndex()),
-						BookMarkUtil.getVersesAsIntegers(verses.getText()), messageService));
 				shell.close();
 			}
 
@@ -179,9 +204,11 @@ public class BookMarkSelectionPopup {
 	public void open(Chapter chapter) {
 		shell.open();
 		cancel.setFocus();
+
 		fillCategoriesCombo();
 		fillBooksCombo(Bible.getBooks().indexOf(chapter.getBook()));
 		fillChaptersCombo(chapter.getId());
+
 		addPlaceHolderToCategories();
 		addPlaceHolderToVerses();
 	}

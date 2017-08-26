@@ -40,6 +40,9 @@ public class BookMarkUtil extends Observable {
 		List<Integer> result = new ArrayList<>();
 		String[] parts = verses.split(",");
 		for (String part : parts) {
+			if (part.isEmpty()) {
+				continue;
+			}
 			if (part.contains("-")) {
 				String[] subPart = part.split("-");
 				for (int i = Integer.parseInt(subPart[0]); i <= Integer.parseInt(subPart[1]); i++) {

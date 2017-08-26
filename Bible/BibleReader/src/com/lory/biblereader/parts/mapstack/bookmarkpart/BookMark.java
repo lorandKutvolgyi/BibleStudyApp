@@ -16,16 +16,9 @@ public class BookMark implements TreeElement {
 	private LocalDateTime date;
 	private MessageService messageService;
 
-	public BookMark(Chapter chapter, List<Integer> verses, MessageService messageService) {
+	public BookMark(Chapter chapter, List<Integer> verses, BookMarkCategory category, MessageService messageService) {
 		this.chapter = chapter;
 		this.verses = verses;
-		this.date = LocalDateTime.now();
-		this.messageService = messageService;
-	}
-
-	public BookMark(Chapter chapter, List<Integer> verse, BookMarkCategory category, MessageService messageService) {
-		this.chapter = chapter;
-		this.verses = verse;
 		this.category = category;
 		this.date = LocalDateTime.now();
 		this.messageService = messageService;
@@ -65,7 +58,8 @@ public class BookMark implements TreeElement {
 
 	@Override
 	public String toString() {
-		return "BookMark [chapter=" + chapter + ", verse=" + verses + ", category=" + category + ", date=" + date + "]";
+		return "BookMark [chapter=" + chapter + ", verses=" + verses + ", category=" + category + ", date=" + date
+				+ "]";
 	}
 
 	@Override
