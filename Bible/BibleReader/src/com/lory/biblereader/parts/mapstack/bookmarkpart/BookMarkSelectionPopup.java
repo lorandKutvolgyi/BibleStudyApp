@@ -25,9 +25,9 @@ import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
 
 public class BookMarkSelectionPopup {
-	private static final String PLACEHOLDER_FOR_CATEGORY = "Category";
-	private static final String PLACEHOLDER_FOR_VERSES = "Verses (1,4-6)";
 	private MessageService messageService;
+	private final String PLACEHOLDER_FOR_CATEGORY;
+	private final String PLACEHOLDER_FOR_VERSES;
 	private Shell shell;
 	private BookMarkManager bookMarkManager;
 	private Combo categories;
@@ -36,11 +36,14 @@ public class BookMarkSelectionPopup {
 	private Button cancel;
 	private Text verses;
 	private Group group;
-	private Button ok;
+	private Button save;
 
 	public BookMarkSelectionPopup(MessageService messageService, BookMarkManager bookMarkManager) {
 		this.messageService = messageService;
 		this.bookMarkManager = bookMarkManager;
+
+		PLACEHOLDER_FOR_CATEGORY = messageService.getMessage("label");
+		PLACEHOLDER_FOR_VERSES = messageService.getMessage("verses");
 
 		createPopupShell();
 		createGroup();
@@ -63,7 +66,7 @@ public class BookMarkSelectionPopup {
 
 	private void createGroup() {
 		group = new Group(shell, SWT.SHADOW_ETCHED_IN);
-		group.setText("New bookmark");
+		group.setText(messageService.getMessage("newBookMark"));
 		GridLayout groupLayout = new GridLayout(3, false);
 		groupLayout.verticalSpacing = 10;
 		group.setLayout(groupLayout);
@@ -111,7 +114,7 @@ public class BookMarkSelectionPopup {
 
 	private void createButtons() {
 		Composite buttons = createButtonComposite();
-		createOkButton(buttons);
+		createSaveButton(buttons);
 		createCancelButton(buttons);
 	}
 
@@ -124,26 +127,26 @@ public class BookMarkSelectionPopup {
 		return buttons;
 	}
 
-	private void createOkButton(Composite buttons) {
-		ok = new Button(buttons, SWT.PUSH);
-		ok.setText("Ok");
-		ok.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-		setListenerToOk();
+	private void createSaveButton(Composite buttons) {
+		save = new Button(buttons, SWT.PUSH);
+		save.setText(messageService.getMessage("save"));
+		save.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		setListenerToSave();
 	}
 
 	private void createCancelButton(Composite buttons) {
 		cancel = new Button(buttons, SWT.PUSH);
-		cancel.setText("Cancel");
+		cancel.setText(messageService.getMessage("cancel"));
 		cancel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 		setListenerToCancel();
 	}
 
-	private void setListenerToOk() {
-		ok.addSelectionListener(new SelectionListener() {
+	private void setListenerToSave() {
+		save.addSelectionListener(new SelectionListener() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				ok.setEnabled(false);
+				save.setEnabled(false);
 				cancel.setEnabled(false);
 				Chapter chapter = Bible.getBooks().get(books.getSelectionIndex()).getChapters()
 						.get(chapters.getSelectionIndex());

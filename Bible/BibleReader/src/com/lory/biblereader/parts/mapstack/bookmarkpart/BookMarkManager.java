@@ -9,6 +9,8 @@ import java.util.Observable;
 import java.util.Set;
 import java.util.TreeMap;
 
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import org.eclipse.e4.core.di.annotations.Creatable;
@@ -20,9 +22,16 @@ import com.lory.biblereader.model.Chapter;
 @Creatable
 @Singleton
 public class BookMarkManager extends Observable {
+	@Inject
+	private MessageService messageService;
 	private Map<BookMarkCategory, Set<BookMark>> bookMarksByCategory = new TreeMap<>();
 	private Map<BookMarkCategory, LocalDateTime> categoriesWithCreationDate = new TreeMap<>();
-	private final BookMarkCategory DEFAULT_CATEGORY = new BookMarkCategory("Others", this);
+	private BookMarkCategory DEFAULT_CATEGORY;
+
+	@PostConstruct
+	private void postConstruct() {
+		DEFAULT_CATEGORY = new BookMarkCategory(messageService.getMessage("withoutLabel"), this);
+	}
 
 	public void storeBookMark(BookMark bookMark) {
 		if (!hasBookMark(bookMark)) {

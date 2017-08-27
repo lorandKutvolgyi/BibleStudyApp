@@ -79,11 +79,17 @@ public class Messages {
 	public String OldTestament;
 	public String NewTestament;
 
-	public String Books;
-
 	public String searchTextPlaceholder;
 
 	public String remove;
 
 	public String newBookMark;
+
+	public String save;
+	public String cancel;
+
+	public String label;
+	public String verses;
+
+	public String withoutLabel;
 }

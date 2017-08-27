@@ -49,15 +49,10 @@ public class BooksPart implements Observer {
 
 	@PostConstruct
 	public void postConstruct(MPart part, final Composite parent) {
-		setPartTitle(part);
 		setLayout(parent);
 		createBooksTree(parent);
 		restorePersistedState(part);
 		CurrentChapter.setObserver(this);
-	}
-
-	private void setPartTitle(MPart part) {
-		part.setLabel(messageService.getMessage("Books"));
 	}
 
 	private void setLayout(final Composite parent) {
