@@ -92,4 +92,6 @@ public class Messages {
 	public String verses;
 
 	public String withoutLabel;
+
+	public String edit;
 }

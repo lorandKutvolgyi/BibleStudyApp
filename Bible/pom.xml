@@ -15,33 +15,29 @@
 	<properties>
 		<tycho.version>0.26.0</tycho.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<neon-update-repo.url>http://download.eclipse.org/eclipse/updates/4.6</neon-update-repo.url>
-		<aspectj-repo.url>http://download.eclipse.org/tools/ajdt/46/dev/update</aspectj-repo.url>
+		<oxygen-update-repo.url>http://download.eclipse.org/eclipse/updates/4.7</oxygen-update-repo.url>
+		<aspectj-repo.url>http://download.eclipse.org/tools/ajdt/47/dev/update</aspectj-repo.url>
 	</properties>
 	<repositories>
 		<repository>
-			<id>EclipseNeon-1</id>
-			<url>http://download.eclipse.org/releases/neon/201606221000/</url>
+			<id>EclipseOxygen-1</id>
+			<url>http://download.eclipse.org/releases/oxygen/</url>
 			<layout>p2</layout>
 		</repository>
 		<repository>
-			<id>EclipseNeon-2</id>
-			<url>http://download.eclipse.org/releases/neon/201609281000/</url>
+			<id>EclipseOxygen-2</id>
+			<url>http://download.eclipse.org/releases/oxygen/201706281000</url>
+			<layout>p2</layout>
+		</repository>
+
+		<repository>
+			<id>Nebula</id>
+			<url>http://download.eclipse.org/nebula/releases/1.4.0/</url>
 			<layout>p2</layout>
 		</repository>
 		<repository>
-			<id>EclipseNeon-3</id>
-			<url>http://download.eclipse.org/releases/neon/201610111000/</url>
-			<layout>p2</layout>
-		</repository>
-		<repository>
-			<id>EclipseNeon-4</id>
-			<url>http://download.eclipse.org/releases/neon/201612211000/</url>
-			<layout>p2</layout>
-		</repository>
-		<repository>
-			<id>neon_update</id>
-			<url>${neon-update-repo.url}</url>
+			<id>oxygen_update</id>
+			<url>${oxygen-update-repo.url}</url>
 			<layout>p2</layout>
 		</repository>
 		<repository>

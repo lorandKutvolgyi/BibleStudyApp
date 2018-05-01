@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import com.lory.biblereader.model.OldTestamentBooks;
 import com.lory.biblereader.model.Testament;
+import com.lory.biblereader.parts.leftstack.bookspart.treesorter.HistoricalBooksOrder;
 
 /**
  * Unit test for {@link HistoricalBooksOrder}.

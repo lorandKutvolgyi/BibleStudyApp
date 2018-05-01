@@ -26,6 +26,7 @@ public enum NewTestamentBooks implements Book {
 
 	private static ChapterDao dao = ChapterDaoFactory.getInstance();
 	private final String title;
+	private List<Chapter> chapters;
 
 	private NewTestamentBooks(String title) {
 		this.title = title;
@@ -43,7 +44,10 @@ public enum NewTestamentBooks implements Book {
 
 	@Override
 	public List<Chapter> getChapters() {
-		return dao.findAllChapters(this);
+		if (chapters == null) {
+			chapters = dao.findAllChapters(this);
+		}
+		return chapters;
 	}
 
 	@Override

@@ -5,9 +5,9 @@ import org.eclipse.swt.SWT;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.CurrentChapter;
-import com.lory.biblereader.parts.bookspart.treesorter.AbstractBooksOrder;
-import com.lory.biblereader.parts.bookspart.treesorter.BooksComparator;
-import com.lory.biblereader.parts.mapstack.historypart.History;
+import com.lory.biblereader.parts.leftstack.bookspart.treesorter.AbstractBooksOrder;
+import com.lory.biblereader.parts.leftstack.bookspart.treesorter.BooksComparator;
+import com.lory.biblereader.parts.upperrightstack.historypart.History;
 
 public class BookChanging {
 

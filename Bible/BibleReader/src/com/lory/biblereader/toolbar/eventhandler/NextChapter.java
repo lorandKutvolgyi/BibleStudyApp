@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.swt.SWT;
 
-import com.lory.biblereader.parts.mapstack.historypart.History;
+import com.lory.biblereader.parts.upperrightstack.historypart.History;
 
 public class NextChapter {
 	@Inject

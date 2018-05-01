@@ -117,6 +117,26 @@
       <plugin id="org.eclipse.m2e.maven.runtime.slf4j.simple"/>
       <plugin id="org.eclipse.m2e.model.edit"/>
       <plugin id="org.eclipse.m2e.workspace.cli"/>
+      <plugin id="org.eclipse.nebula.cwt"/>
+      <plugin id="org.eclipse.nebula.effects.stw"/>
+      <plugin id="org.eclipse.nebula.jface.cdatetime"/>
+      <plugin id="org.eclipse.nebula.paperclips.core"/>
+      <plugin id="org.eclipse.nebula.paperclips.widgets"/>
+      <plugin id="org.eclipse.nebula.widgets.cdatetime"/>
+      <plugin id="org.eclipse.nebula.widgets.compositetable"/>
+      <plugin id="org.eclipse.nebula.widgets.gallery"/>
+      <plugin id="org.eclipse.nebula.widgets.ganttchart"/>
+      <plugin id="org.eclipse.nebula.widgets.geomap"/>
+      <plugin id="org.eclipse.nebula.widgets.grid"/>
+      <plugin id="org.eclipse.nebula.widgets.oscilloscope"/>
+      <plugin id="org.eclipse.nebula.widgets.oscilloscope.source"/>
+      <plugin id="org.eclipse.nebula.widgets.pgroup"/>
+      <plugin id="org.eclipse.nebula.widgets.pshelf"/>
+      <plugin id="org.eclipse.nebula.widgets.pshelf.css"/>
+      <plugin id="org.eclipse.nebula.widgets.richtext"/>
+      <plugin id="org.eclipse.nebula.widgets.tablecombo"/>
+      <plugin id="org.eclipse.nebula.widgets.xviewer"/>
+      <plugin id="org.eclipse.nebula.widgets.xviewer.core"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.compatibility.state" fragment="true"/>
       <plugin id="org.eclipse.osgi.services"/>
