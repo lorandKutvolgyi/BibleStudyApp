@@ -24,12 +24,6 @@ import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.parts.leftstack.bookspart.chapternumberpopup.eventhandler.ChapterNumberKeyListener;
 import com.lory.biblereader.parts.leftstack.bookspart.chapternumberpopup.eventhandler.ChapterNumberMouseListener;
 
-/**
- * Shows the chapter numbers of the selected book.
- *
- * @author lorandKutvolgyi
- *
- */
 @Creatable
 @Singleton
 public class ChapterNumberPopupShell {
@@ -41,12 +35,6 @@ public class ChapterNumberPopupShell {
 	private Display display;
 	private Composite mainComposite;
 
-	/**
-	 * Initializes the view with the given parameters.
-	 * 
-	 * @param event theSelectionChangedEvent
-	 * @param selectedBook the selected Book
-	 */
 	public void init(SelectionChangedEvent event, Book selectedBook) {
 		display = Display.getDefault();
 		close();
@@ -126,8 +114,6 @@ public class ChapterNumberPopupShell {
 	}
 
 	/**
-	 * Opens the shell.
-	 *
 	 * @see @link org.eclipse.swt.widgets.Shell#open()
 	 */
 	public void open() {
@@ -135,8 +121,6 @@ public class ChapterNumberPopupShell {
 	}
 
 	/**
-	 * Closes the shell.
-	 *
 	 * @see org.eclipse.swt.widgets.Shell#close()
 	 */
 	public void close() {
@@ -154,13 +138,7 @@ public class ChapterNumberPopupShell {
 	}
 
 	/**
-	 * Returns true if the widget has been disposed or has not been created, and
-	 * false otherwise.
-	 *
 	 * @see org.eclipse.swt.widgets.Shell#isDisposed()
-	 *
-	 * @return true if the widget has been disposed or has not been created, and
-	 *         false otherwise
 	 */
 	public boolean isDisposed() {
 		return shell == null || shell.isDisposed();

@@ -2,7 +2,9 @@ package com.lory.biblereader.parts.middlestack.textpart;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -13,6 +15,8 @@ import org.eclipse.e4.ui.model.application.ui.basic.MBasicFactory;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
+import org.eclipse.e4.ui.workbench.modeling.EPartService;
+import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.CurrentChapter;
@@ -21,54 +25,70 @@ import com.lory.biblereader.model.CurrentChapter;
 @Singleton
 public class TextPartManager {
 
-	private Map<MPart, BibleTextPart> parts = new TreeMap<>(
-			(part1, part2) -> part1.getElementId().compareTo(part2.getElementId()));
-	private Map<MPart, Chapter> chapters = new TreeMap<>(
-			(part1, part2) -> part1.getElementId().compareTo(part2.getElementId()));
+	private Map<MPart, BibleTextPart> parts;
+	private Map<MPart, Chapter> chapters;
 	private MPart activePart;
-	private boolean forcedActivation;
 	private MPartStack stack;
+
+	@Inject
+	private static EPartService partService;
+
 	@Inject
 	private static EModelService modelService;
 
 	@Inject
 	private static MApplication application;
 
-	public synchronized void registerPart(MPart part, BibleTextPart obj) {
-		parts.put(part, obj);
-		chapters.put(part, CurrentChapter.getCurrentChapter());
-		if (!forcedActivation) {
-			activatePart(part);
-		}
+	public TextPartManager() {
+		parts = new TreeMap<>((part1, part2) -> part1.getElementId().compareTo(part2.getElementId()));
+		chapters = new TreeMap<>((part1, part2) -> part1.getElementId().compareTo(part2.getElementId()));
 	}
 
-	public synchronized void setActivePart(MPart activePart) {
-		forcedActivation = true;
-		activatePart(activePart);
+	public synchronized void registerPart(MPart part, BibleTextPart obj, String bookTitle, String chapterId) {
+		parts.put(part, obj);
+		if (bookTitle != null && chapterId != null) {
+			activatePart(part);
+			CurrentChapter.setCurrentChapter(bookTitle, Integer.parseInt(chapterId));
+			chapters.put(part, CurrentChapter.getCurrentChapter());
+		} else {
+			chapters.put(part, CurrentChapter.getCurrentChapter());
+			activatePart(part);
+		}
 	}
 
 	public synchronized void inactivatePart(MPart part) {
 		if (part.equals(activePart)) {
 			activePart = null;
 		}
+		CurrentChapter.removeObserver(parts.get(part));
 	}
 
 	public synchronized void activatePart(MPart newActivePart) {
 		activePart = newActivePart;
-		parts.get(activePart).activate();
+		CurrentChapter.setObserver(parts.get(newActivePart));
 		inactivateOtherParts();
 		setStack(activePart.getParent().getElementId());
-		if (chapters.get(newActivePart) != null
-				&& !chapters.get(newActivePart).equals(CurrentChapter.getCurrentChapter())) {
+		if (chapters.get(newActivePart) != null) {
 			CurrentChapter.setCurrentChapter(chapters.get(newActivePart));
+		}
+		partService.showPart(newActivePart, PartState.ACTIVATE);
+	}
+
+	private synchronized void inactivateOtherParts() {
+		for (MPart part : parts.keySet()) {
+			if (!part.equals(activePart)) {
+				CurrentChapter.removeObserver(parts.get(part));
+			}
 		}
 	}
 
-	private void inactivateOtherParts() {
-		for (MPart part : parts.keySet()) {
-			if (!part.equals(activePart)) {
-				parts.get(part).inactivate();
-			}
+	public synchronized void loadCurrentChapter(MPart part) {
+		BibleTextPart bibleTextPart = parts.get(part);
+		Chapter currentChapter = CurrentChapter.getCurrentChapter();
+		if (currentChapter != null) {
+			bibleTextPart.setContent(currentChapter.getText());
+			chapters.put(part, currentChapter);
+			bibleTextPart.refreshTitle(currentChapter.getBook().getTitle(), currentChapter.getId());
 		}
 	}
 
@@ -76,19 +96,19 @@ public class TextPartManager {
 		return parts.keySet().stream().anyMatch((mPart) -> mPart == activePart);
 	}
 
-	public boolean isAnyVisiblePart() {
+	public synchronized boolean isAnyVisiblePart() {
 		return parts.keySet().stream().anyMatch((mPart) -> mPart.isToBeRendered());
 	}
 
-	public boolean isAnyVisiblePartExcept(MPart currentPart) {
+	public synchronized boolean isAnyVisiblePartExcept(MPart currentPart) {
 		return parts.keySet().stream().anyMatch((mPart) -> mPart.isToBeRendered() && !mPart.equals(currentPart));
 	}
 
-	public MPart getAnyVisiblePart() {
+	public synchronized MPart getAnyVisiblePart() {
 		return parts.keySet().stream().filter((mPart) -> mPart.isToBeRendered()).findAny().get();
 	}
 
-	public MPart getAnyVisiblePartExcept(MPart currentPart) {
+	public synchronized MPart getAnyVisiblePartExcept(MPart currentPart) {
 		return parts.keySet().stream().filter((mPart) -> mPart.isToBeRendered() && !mPart.equals(currentPart)).findAny()
 				.get();
 	}
@@ -97,14 +117,10 @@ public class TextPartManager {
 		return activePart;
 	}
 
-	public synchronized boolean isRegistered(MPart part) {
-		return parts.containsKey(part);
-	}
-
 	public synchronized MPart newTextPart(EModelService modelService, MApplication application) {
 		MPart part = MBasicFactory.INSTANCE.createPart();
 		part.setCloseable(true);
-		part.setElementId(String.valueOf(PartIdProvider.getPartId()));
+		part.setElementId(getElementId());
 		part.setContributionURI("bundleclass://reader/com.lory.biblereader.parts.middlestack.textpart.BibleTextPart");
 		List<MPartStack> stacks = modelService.findElements(application, "biblereader.partstack.bibletext",
 				MPartStack.class, null);
@@ -115,6 +131,15 @@ public class TextPartManager {
 			stacks.get(0).getChildren().add(part);
 		}
 		return part;
+	}
+
+	private synchronized String getElementId() {
+		String result = String.valueOf(PartIdProvider.getPartId());
+		Set<String> ids = parts.keySet().stream().map(part -> part.getElementId()).collect(Collectors.toSet());
+		while (ids.contains(result)) {
+			result = String.valueOf(PartIdProvider.getPartId());
+		}
+		return result;
 	}
 
 	private synchronized void setStack(String stackId) {

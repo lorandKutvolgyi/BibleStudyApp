@@ -22,10 +22,6 @@ public class Chapter {
 		return new Chapter(id, text, book);
 	}
 
-	public static Chapter createCompareObject(int id, Book book) {
-		return createNewChapter(id, null, book);
-	}
-
 	public int getId() {
 		return id;
 	}
@@ -40,7 +36,7 @@ public class Chapter {
 
 	@Override
 	public String toString() {
-		return "Chapter\n\tid: " + id + "\n\ttext: " + text + "\n\tbook: " + book != null ? book.getTitle() : "";
+		return "Chapter\n\tid: " + id + "\n\tbook: " + book != null ? book.getTitle() : "";
 	}
 
 	@Override

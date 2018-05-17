@@ -1,4 +1,4 @@
-package com.lory.biblereader.parts.bookspart.treesorter;
+package com.lory.biblereader.parts.leftstack.bookspart.treesorter;
 
 import org.junit.Assert;
 import org.junit.Before;

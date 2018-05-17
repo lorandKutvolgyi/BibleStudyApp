@@ -13,15 +13,9 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
-/**
- * Event handler for KeyEvents on the ChapterNumberPopupShell.
- *
- * @author lorandKutvolgyi
- *
- */
 @Creatable
 public class ChapterNumberKeyListener extends KeyAdapter {
-	public static final int POPUP_CLOSING_DELAY = 1000;
+	private static final int POPUP_CLOSING_DELAY = 1000;
 	private static final int CACHE_CLEARING_DELAY = 1000;
 	private static final int MAXIMUM_CACHE_SIZE = 3;
 	private final List<Character> cache = new ArrayList<>(3);

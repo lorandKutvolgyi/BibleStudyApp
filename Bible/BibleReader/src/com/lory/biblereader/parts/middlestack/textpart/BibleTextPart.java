@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.Text;
 
 import com.lory.biblereader.i18n.MessageService;
 import com.lory.biblereader.i18n.Messages;
-import com.lory.biblereader.model.CurrentChapter;
+import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.parts.leftstack.bookspart.eventhandler.BooksKeyListener;
 import com.lory.biblereader.parts.middlestack.textpart.eventhandler.SearchTextVerifyListener;
 import com.lory.biblereader.parts.middlestack.textpart.eventhandler.TextSearchListener;
@@ -64,19 +64,9 @@ public class BibleTextPart implements Observer {
 		text.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		text.setEditable(false);
 		textSearchListener.setBibleText(text);
-		if (CurrentChapter.getCurrentChapter() != null) {
-			loadCurrentChapter();
-		}
 		text.addKeyListener(booksKeyListener);
-		restorePersistedState();
-		textPartManager.registerPart(part, this);
-	}
-
-	@PersistState
-	private void persist(MPart part) {
-		if (textPartManager.getActivePart().equals(part)) {
-			part.getPersistedState().put("active", "true");
-		}
+		textPartManager.registerPart(part, this, part.getPersistedState().get("title"),
+				part.getPersistedState().get("id"));
 	}
 
 	@Focus
@@ -84,13 +74,13 @@ public class BibleTextPart implements Observer {
 		if (!part.equals(textPartManager.getActivePart())) {
 			textPartManager.activatePart(part);
 		}
-
 	}
 
-	private void restorePersistedState() {
-		if (Boolean.getBoolean(part.getPersistedState().get("active"))) {
-			textPartManager.setActivePart(part);
-		}
+	@PersistState
+	private void persist(MPart part) {
+		Chapter chapter = textPartManager.getChapters().get(part);
+		part.getPersistedState().put("title", chapter.getBook().getTitle());
+		part.getPersistedState().put("id", String.valueOf(chapter.getId()));
 	}
 
 	@PreDestroy
@@ -98,16 +88,11 @@ public class BibleTextPart implements Observer {
 		if (textPartManager.isAnyVisiblePartExcept(part)) {
 			textPartManager.activatePart(textPartManager.getAnyVisiblePartExcept(part));
 		} else {
-			inactivate();
 			textPartManager.inactivatePart(part);
 		}
 	}
 
-	public void inactivate() {
-		CurrentChapter.removeObserver(this);
-	}
-
-	private void setContent(String text) {
+	public void setContent(String text) {
 		if (!this.text.isDisposed()) {
 			this.text.setText(text);
 		}
@@ -115,19 +100,11 @@ public class BibleTextPart implements Observer {
 
 	@Override
 	public void update(Observable observable, Object arg) {
-		if (CurrentChapter.getCurrentChapter() != null) {
-			loadCurrentChapter();
-		}
+		textPartManager.loadCurrentChapter(part);
 	}
 
-	private void loadCurrentChapter() {
-		setContent(CurrentChapter.getCurrentChapter().getText());
-		refreshTitle();
-	}
-
-	private void refreshTitle() {
-		part.setLabel(messageService.getMessage(CurrentChapter.getCurrentChapter().getBook().getTitle()) + " "
-				+ CurrentChapter.getCurrentChapter().getId());
+	public void refreshTitle(String bookTitle, int chapterId) {
+		part.setLabel(messageService.getMessage(bookTitle) + " " + chapterId);
 	}
 
 	@Override
@@ -140,10 +117,6 @@ public class BibleTextPart implements Observer {
 		boolean tooLong = wholeText.length() > maxLength;
 		String bibleText = wholeText.isEmpty() ? "" : text.getText(0, tooLong ? maxLength : wholeText.length() - 1);
 		return "BibleTextPart\n\ttext: " + bibleText + (tooLong ? "..." : "");
-	}
-
-	public void activate() {
-		CurrentChapter.setObserver(this);
 	}
 
 	public boolean isDisposed() {

@@ -38,9 +38,6 @@ public class BookSelectionListener implements ISelectionChangedListener {
 		}
 	}
 
-	/**
-	 * Prevent triggering the selection change event.
-	 */
 	public void allowSelectionChangeEvent(boolean allow) {
 		selectionChangeEventNeeded = allow;
 	}

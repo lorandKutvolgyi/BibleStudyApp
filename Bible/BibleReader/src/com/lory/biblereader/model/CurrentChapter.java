@@ -3,13 +3,6 @@ package com.lory.biblereader.model;
 import java.util.Observable;
 import java.util.Observer;
 
-/**
- * Represents the current chapter which is selected in the tree of BooksPart and
- * of content is shown in the TextPart.
- *
- * @author lorandKutvolgyi
- *
- */
 public class CurrentChapter extends Observable {
 	private static CurrentChapter instance = new CurrentChapter();
 	private Chapter chapter;
@@ -17,11 +10,6 @@ public class CurrentChapter extends Observable {
 	private CurrentChapter() {
 	}
 
-	/**
-	 * Factory for current chapter.
-	 *
-	 * @return the current chapter instance
-	 */
 	public static Chapter getCurrentChapter() {
 		return instance.chapter;
 	}
@@ -30,6 +18,11 @@ public class CurrentChapter extends Observable {
 		instance.chapter = chapter;
 		instance.setChanged();
 		instance.notifyObservers();
+	}
+
+	public static void setCurrentChapter(String bookTitle, int chapterId) {
+		Book book = Bible.getBookByTitle(bookTitle);
+		setCurrentChapter(book.getChapter(chapterId));
 	}
 
 	public static void setObserver(Observer observer) {
