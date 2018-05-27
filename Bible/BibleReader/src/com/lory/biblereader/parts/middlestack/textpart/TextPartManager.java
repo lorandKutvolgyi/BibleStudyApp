@@ -18,6 +18,7 @@ import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 
+import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.CurrentChapter;
 
@@ -27,6 +28,12 @@ public class TextPartManager {
 
 	@Inject
 	private CurrentChapter currentChapter;
+	@Inject
+	private static EPartService partService;
+	@Inject
+	private static EModelService modelService;
+	@Inject
+	private static MApplication application;
 
 	private static final String STACK_ID = "biblereader.partstack.bibletext";
 	private static final String BIBLE_TEXT_PART_URI = "bundleclass://reader/com.lory.biblereader.parts.middlestack.textpart.BibleTextPart";
@@ -35,22 +42,13 @@ public class TextPartManager {
 	private MPart activePart;
 	private MPartStack stack;
 
-	@Inject
-	private static EPartService partService;
-
-	@Inject
-	private static EModelService modelService;
-
-	@Inject
-	private static MApplication application;
-
 	public TextPartManager() {
 		parts = new TreeMap<>((part1, part2) -> part1.getElementId().compareTo(part2.getElementId()));
 		chapters = new TreeMap<>((part1, part2) -> part1.getElementId().compareTo(part2.getElementId()));
 	}
 
-	public synchronized void registerPart(MPart part, BibleTextPart obj, String bookTitle, String chapterId) {
-		parts.put(part, obj);
+	public synchronized void registerPart(MPart part, BibleTextPart bibleTextPart, String bookTitle, String chapterId) {
+		parts.put(part, bibleTextPart);
 		if (bookTitle != null && chapterId != null) {
 			registerPartWithGivenContent(part, bookTitle, chapterId);
 		} else {
@@ -110,16 +108,17 @@ public class TextPartManager {
 		return activePart;
 	}
 
-	public synchronized MPart newTextPart(EModelService modelService, MApplication application) {
+	public synchronized MPart createNewTextPart(EModelService modelService, MApplication application) {
 		MPart part = createNewPart();
 		List<MPartStack> stacks = findBibleTextPartStack(modelService, application);
-		if (stacks.isEmpty()) {
-			stack.getChildren().add(part);
-		} else {
-			stacks.get(0).setVisible(true);
-			stacks.get(0).getChildren().add(part);
-		}
+		addPartToStack(part, stacks);
 		return part;
+	}
+
+	public synchronized void modifyPartContent(Book book, int chapterId) {
+		Chapter chapter = book.getChapter(chapterId);
+		currentChapter.setChapter(chapter);
+		chapters.put(activePart, chapter);
 	}
 
 	public synchronized Map<MPart, Chapter> getChapters() {
@@ -158,16 +157,25 @@ public class TextPartManager {
 	private MPart createNewPart() {
 		MPart part = MBasicFactory.INSTANCE.createPart();
 		part.setContributionURI(BIBLE_TEXT_PART_URI);
-		part.setElementId(getElementId());
+		part.setElementId(createUniqueElementId());
 		part.setCloseable(true);
 		return part;
+	}
+
+	private void addPartToStack(MPart part, List<MPartStack> stacks) {
+		if (stacks.isEmpty()) {
+			stack.getChildren().add(part);
+		} else {
+			stacks.get(0).setVisible(true);
+			stacks.get(0).getChildren().add(part);
+		}
 	}
 
 	private List<MPartStack> findBibleTextPartStack(EModelService modelService, MApplication application) {
 		return modelService.findElements(application, STACK_ID, MPartStack.class, null);
 	}
 
-	private String getElementId() {
+	private String createUniqueElementId() {
 		String result = String.valueOf(PartIdProvider.getPartId());
 		Set<String> ids = parts.keySet().stream().map(part -> part.getElementId()).collect(Collectors.toSet());
 		while (ids.contains(result)) {

@@ -1,7 +1,5 @@
 package com.lory.biblereader.parts.leftstack.bookspart.chapternumberpopup;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -20,7 +18,6 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Tree;
 
 import com.lory.biblereader.model.Book;
-import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.parts.leftstack.bookspart.chapternumberpopup.eventhandler.ChapterNumberKeyListener;
 import com.lory.biblereader.parts.leftstack.bookspart.chapternumberpopup.eventhandler.ChapterNumberMouseListener;
 
@@ -33,39 +30,60 @@ public class ChapterNumberPopupShell {
 	@Inject
 	private ChapterNumberMouseListener chapterNumberMouseListener;
 
+	private Display display = Display.getDefault();
 	private Shell shell;
-	private Display display;
-	private Composite mainComposite;
 
 	public void init(SelectionChangedEvent event, Book selectedBook) {
-		display = Display.getDefault();
 		close();
-		shell = new Shell(display.getActiveShell(), SWT.APPLICATION_MODAL);
-		mainComposite = createMainComposite();
-		shell.setLayout(new FillLayout());
-		int numOfChapters = getNumberOfChapters(selectedBook);
-		int height = calculateHeight(numOfChapters);
-		shell.setSize(100, height);
-		shell.setLocation(calculateLocation(getTree(event), height));
-		createLabels(selectedBook, numOfChapters, mainComposite);
-		mainComposite.layout();
-		chapterNumberKeyListener.setComposite(mainComposite);
-		shell.addKeyListener(chapterNumberKeyListener);
+		createNewShell(event, selectedBook);
+		initChapterNumberKeyListener(selectedBook);
 	}
 
 	public void setColor(Label label, int color) {
 		label.setForeground(display.getSystemColor(color));
 	}
 
-	private Composite createMainComposite() {
+	public void open() {
+		shell.open();
+	}
+
+	public void close() {
+		if (shell != null && !shell.isDisposed()) {
+			shell.close();
+		}
+	}
+
+	public void close(int delay) {
+		display.timerExec(delay, (() -> {
+			if (shell != null && !shell.isDisposed()) {
+				shell.close();
+			}
+		}));
+	}
+
+	private void createNewShell(SelectionChangedEvent event, Book selectedBook) {
+		shell = new Shell(display.getActiveShell(), SWT.APPLICATION_MODAL);
+		shell.setLayout(new FillLayout());
+		int height = calculateHeight(getNumberOfChapters(selectedBook));
+		shell.setSize(100, height);
+		shell.setLocation(calculateLocation(getTree(event), height));
+	}
+
+	private void initChapterNumberKeyListener(Book selectedBook) {
+		chapterNumberKeyListener.setComposite(createMainComposite(selectedBook));
+		shell.addKeyListener(chapterNumberKeyListener);
+	}
+
+	private Composite createMainComposite(Book selectedBook) {
 		Composite comp = new Composite(shell, SWT.None);
 		comp.setLayout(new RowLayout(SWT.HORIZONTAL));
+		createLabels(selectedBook, getNumberOfChapters(selectedBook), comp);
+		comp.layout();
 		return comp;
 	}
 
 	private int getNumberOfChapters(final Book selectedBook) {
-		List<Chapter> chapters = selectedBook.getChapters();
-		return chapters.size();
+		return selectedBook.getChapters().size();
 	}
 
 	private int calculateHeight(int numOfLabels) {
@@ -75,12 +93,20 @@ public class ChapterNumberPopupShell {
 			return rowHeight;
 		}
 		if (numOfLabels <= 100) {
-			int rowCapacityOfTwoDigitNums = 6;
-			int numOfFullRows = (numOfLabels - firstRowCapacity) / rowCapacityOfTwoDigitNums + 1;
-			boolean rowFragmentExist = (numOfLabels - firstRowCapacity) % rowCapacityOfTwoDigitNums != 0;
-			int rowsHeight = (numOfFullRows + (rowFragmentExist ? 1 : 0)) * rowHeight;
-			return rowsHeight;
+			return getRowsHeightInCaseOfLessThan100Labels(numOfLabels, rowHeight, firstRowCapacity);
 		}
+		return getRowsHeightInCaseOfMoreThan100Labels(numOfLabels, rowHeight);
+	}
+
+	private int getRowsHeightInCaseOfLessThan100Labels(int numOfLabels, int rowHeight, int firstRowCapacity) {
+		int rowCapacityOfTwoDigitNums = 6;
+		int numOfFullRows = (numOfLabels - firstRowCapacity) / rowCapacityOfTwoDigitNums + 1;
+		boolean rowFragmentExist = (numOfLabels - firstRowCapacity) % rowCapacityOfTwoDigitNums != 0;
+		int rowsHeight = (numOfFullRows + (rowFragmentExist ? 1 : 0)) * rowHeight;
+		return rowsHeight;
+	}
+
+	private int getRowsHeightInCaseOfMoreThan100Labels(int numOfLabels, int rowHeight) {
 		int rowCapacityOfThreeDigitNums = 4;
 		int rowsOfHundredLabels = 15;
 		int numOfFullRows = (numOfLabels - 100) / rowCapacityOfThreeDigitNums + rowsOfHundredLabels;
@@ -115,25 +141,4 @@ public class ChapterNumberPopupShell {
 		}
 	}
 
-	public void open() {
-		shell.open();
-	}
-
-	public void close() {
-		if (shell != null && !shell.isDisposed()) {
-			shell.close();
-		}
-	}
-
-	public void close(int delay) {
-		display.timerExec(delay, (() -> {
-			if (shell != null && !shell.isDisposed()) {
-				shell.close();
-			}
-		}));
-	}
-
-	public boolean isDisposed() {
-		return shell == null || shell.isDisposed();
-	}
 }

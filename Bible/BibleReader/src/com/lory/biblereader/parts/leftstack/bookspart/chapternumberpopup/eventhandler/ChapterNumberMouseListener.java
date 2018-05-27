@@ -40,7 +40,6 @@ public class ChapterNumberMouseListener extends MouseAdapter {
 
 	private static MPart newTextPart;
 	private Book book;
-	private int chapterId;
 	private ChapterNumberPopupShell shell;
 	private Display display;
 
@@ -51,25 +50,55 @@ public class ChapterNumberMouseListener extends MouseAdapter {
 
 	@Override
 	public void mouseDown(MouseEvent event) {
-		Label label = (Label) event.getSource();
-		chapterId = Integer.parseInt(label.getText());
-		if (event.stateMask == SWT.CTRL
-				|| (!textPartManager.isAnyActivePart() && !textPartManager.isAnyVisiblePart())) {
-
+		if (isNewTabNeeded(event)) {
 			showNewTextPart();
-		} else if (!textPartManager.isAnyActivePart() && textPartManager.isAnyVisiblePart()) {
+		} else if (isNewActiveTabNeeded()) {
 			textPartManager.activatePart(textPartManager.getAnyVisiblePart());
 		}
 
-		currentChapter.setChapter(book.getChapter(chapterId));
-
-		textPartManager.getChapters().put(textPartManager.getActivePart(), book.getChapter(chapterId));
-
+		textPartManager.modifyPartContent(book, getChapterId(getLabel(event)));
 		history.addChapter(currentChapter.getChapter());
-		shell.setColor(label, SWT.COLOR_GRAY);
-		int delay = event.data == null ? 0 : (int) event.data;
-		shell.close(delay);
-		synchronized (ChapterNumberMouseListener.class) {
+
+		shell.setColor(getLabel(event), SWT.COLOR_GRAY);
+		shell.close(getDelay(event));
+
+		resetNewTextPart(getDelay(event));
+	}
+
+	public void setDisplay(Display display) {
+		this.display = display;
+	}
+
+	private boolean isNewTabNeeded(MouseEvent event) {
+		return event.stateMask == SWT.CTRL
+				|| (!textPartManager.isAnyActivePart() && !textPartManager.isAnyVisiblePart());
+	}
+
+	private synchronized void showNewTextPart() {
+		if (newTextPart == null) {
+			newTextPart = textPartManager.createNewTextPart(modelService, application);
+			partService.showPart(newTextPart, PartState.ACTIVATE);
+		}
+	}
+
+	private boolean isNewActiveTabNeeded() {
+		return !textPartManager.isAnyActivePart() && textPartManager.isAnyVisiblePart();
+	}
+
+	private int getChapterId(Label label) {
+		return Integer.parseInt(label.getText());
+	}
+
+	private Label getLabel(MouseEvent event) {
+		return (Label) event.getSource();
+	}
+
+	private int getDelay(MouseEvent event) {
+		return event.data == null ? 0 : (int) event.data;
+	}
+
+	private void resetNewTextPart(int delay) {
+		synchronized (this) {
 			getDisplay().timerExec(delay, (() -> {
 				if (newTextPart != null) {
 					newTextPart = null;
@@ -78,21 +107,7 @@ public class ChapterNumberMouseListener extends MouseAdapter {
 		}
 	}
 
-	private void showNewTextPart() {
-		synchronized (ChapterNumberMouseListener.class) {
-			if (newTextPart == null) {
-				newTextPart = textPartManager.newTextPart(modelService, application);
-			}
-			partService.showPart(newTextPart, PartState.ACTIVATE);
-		}
-	}
-
 	private Display getDisplay() {
 		return display == null ? Display.getCurrent() : display;
 	}
-
-	public void setDisplay(Display display) {
-		this.display = display;
-	}
-
 }
