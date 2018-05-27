@@ -38,6 +38,8 @@ public class HistoryPart implements Observer {
 	private MessageService messageService;
 	@Inject
 	private BookMarkManager bookMarkManager;
+	@Inject
+	private CurrentChapter currentChapter;
 
 	private Composite parent;
 	private ScrolledComposite scrolled;
@@ -203,7 +205,7 @@ public class HistoryPart implements Observer {
 		link.addHyperlinkListener(new HyperlinkAdapter() {
 			@Override
 			public void linkActivated(HyperlinkEvent e) {
-				CurrentChapter.setCurrentChapter(currentChapter);
+				HistoryPart.this.currentChapter.setChapter(currentChapter);
 			}
 		});
 	}

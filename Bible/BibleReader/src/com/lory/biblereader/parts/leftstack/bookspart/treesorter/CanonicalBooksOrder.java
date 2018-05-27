@@ -10,12 +10,6 @@ import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.NewTestamentBooks;
 import com.lory.biblereader.model.OldTestamentBooks;
 
-/**
- * Represents the canonical order of the tree in the BooksPart.
- *
- * @author lorandKutvolgyi
- *
- */
 @Creatable
 @Singleton
 public class CanonicalBooksOrder extends AbstractBooksOrder {

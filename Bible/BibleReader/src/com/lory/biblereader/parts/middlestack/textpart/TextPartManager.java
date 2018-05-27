@@ -25,6 +25,11 @@ import com.lory.biblereader.model.CurrentChapter;
 @Singleton
 public class TextPartManager {
 
+	@Inject
+	private CurrentChapter currentChapter;
+
+	private static final String STACK_ID = "biblereader.partstack.bibletext";
+	private static final String BIBLE_TEXT_PART_URI = "bundleclass://reader/com.lory.biblereader.parts.middlestack.textpart.BibleTextPart";
 	private Map<MPart, BibleTextPart> parts;
 	private Map<MPart, Chapter> chapters;
 	private MPart activePart;
@@ -47,48 +52,36 @@ public class TextPartManager {
 	public synchronized void registerPart(MPart part, BibleTextPart obj, String bookTitle, String chapterId) {
 		parts.put(part, obj);
 		if (bookTitle != null && chapterId != null) {
-			activatePart(part);
-			CurrentChapter.setCurrentChapter(bookTitle, Integer.parseInt(chapterId));
-			chapters.put(part, CurrentChapter.getCurrentChapter());
+			registerPartWithGivenContent(part, bookTitle, chapterId);
 		} else {
-			chapters.put(part, CurrentChapter.getCurrentChapter());
-			activatePart(part);
+			registerPartWithCurrentChapterContent(part);
 		}
 	}
 
-	public synchronized void inactivatePart(MPart part) {
+	public synchronized void removePart(MPart part) {
 		if (part.equals(activePart)) {
 			activePart = null;
 		}
-		CurrentChapter.removeObserver(parts.get(part));
+		currentChapter.removeObserver(parts.get(part));
+		parts.remove(part);
+		chapters.remove(part);
 	}
 
 	public synchronized void activatePart(MPart newActivePart) {
 		activePart = newActivePart;
-		CurrentChapter.setObserver(parts.get(newActivePart));
+		currentChapter.setObserver(parts.get(newActivePart));
 		inactivateOtherParts();
 		setStack(activePart.getParent().getElementId());
+		partService.showPart(newActivePart, PartState.VISIBLE);
 		if (chapters.get(newActivePart) != null) {
-			CurrentChapter.setCurrentChapter(chapters.get(newActivePart));
-		}
-		partService.showPart(newActivePart, PartState.ACTIVATE);
-	}
-
-	private synchronized void inactivateOtherParts() {
-		for (MPart part : parts.keySet()) {
-			if (!part.equals(activePart)) {
-				CurrentChapter.removeObserver(parts.get(part));
-			}
+			currentChapter.setChapter(chapters.get(newActivePart));
 		}
 	}
 
 	public synchronized void loadCurrentChapter(MPart part) {
-		BibleTextPart bibleTextPart = parts.get(part);
-		Chapter currentChapter = CurrentChapter.getCurrentChapter();
-		if (currentChapter != null) {
-			bibleTextPart.setContent(currentChapter.getText());
-			chapters.put(part, currentChapter);
-			bibleTextPart.refreshTitle(currentChapter.getBook().getTitle(), currentChapter.getId());
+		if (currentChapter.getChapter() != null) {
+			loadTextIntoBibleTextPart(part, currentChapter.getChapter());
+			chapters.put(part, currentChapter.getChapter());
 		}
 	}
 
@@ -113,17 +106,13 @@ public class TextPartManager {
 				.get();
 	}
 
-	public MPart getActivePart() {
+	public synchronized MPart getActivePart() {
 		return activePart;
 	}
 
 	public synchronized MPart newTextPart(EModelService modelService, MApplication application) {
-		MPart part = MBasicFactory.INSTANCE.createPart();
-		part.setCloseable(true);
-		part.setElementId(getElementId());
-		part.setContributionURI("bundleclass://reader/com.lory.biblereader.parts.middlestack.textpart.BibleTextPart");
-		List<MPartStack> stacks = modelService.findElements(application, "biblereader.partstack.bibletext",
-				MPartStack.class, null);
+		MPart part = createNewPart();
+		List<MPartStack> stacks = findBibleTextPartStack(modelService, application);
 		if (stacks.isEmpty()) {
 			stack.getChildren().add(part);
 		} else {
@@ -133,21 +122,58 @@ public class TextPartManager {
 		return part;
 	}
 
-	private synchronized String getElementId() {
+	public synchronized Map<MPart, Chapter> getChapters() {
+		return chapters;
+	}
+
+	private void registerPartWithGivenContent(MPart part, String bookTitle, String chapterId) {
+		activatePart(part);
+		currentChapter.setChapter(bookTitle, Integer.parseInt(chapterId));
+		chapters.put(part, currentChapter.getChapter());
+	}
+
+	private void registerPartWithCurrentChapterContent(MPart part) {
+		chapters.put(part, currentChapter.getChapter());
+		activatePart(part);
+	}
+
+	private void inactivateOtherParts() {
+		for (MPart part : parts.keySet()) {
+			if (!part.equals(activePart)) {
+				currentChapter.removeObserver(parts.get(part));
+			}
+		}
+	}
+
+	private void setStack(String stackId) {
+		stack = modelService.findElements(application, stackId, MPartStack.class, null).get(0);
+	}
+
+	private void loadTextIntoBibleTextPart(MPart part, Chapter currentChapter) {
+		BibleTextPart bibleTextPart = parts.get(part);
+		bibleTextPart.setContent(currentChapter.getText());
+		bibleTextPart.refreshTitle(currentChapter.getBook().getTitle(), currentChapter.getId());
+	}
+
+	private MPart createNewPart() {
+		MPart part = MBasicFactory.INSTANCE.createPart();
+		part.setContributionURI(BIBLE_TEXT_PART_URI);
+		part.setElementId(getElementId());
+		part.setCloseable(true);
+		return part;
+	}
+
+	private List<MPartStack> findBibleTextPartStack(EModelService modelService, MApplication application) {
+		return modelService.findElements(application, STACK_ID, MPartStack.class, null);
+	}
+
+	private String getElementId() {
 		String result = String.valueOf(PartIdProvider.getPartId());
 		Set<String> ids = parts.keySet().stream().map(part -> part.getElementId()).collect(Collectors.toSet());
 		while (ids.contains(result)) {
 			result = String.valueOf(PartIdProvider.getPartId());
 		}
 		return result;
-	}
-
-	private synchronized void setStack(String stackId) {
-		stack = modelService.findElements(application, stackId, MPartStack.class, null).get(0);
-	}
-
-	public Map<MPart, Chapter> getChapters() {
-		return chapters;
 	}
 
 }

@@ -25,13 +25,8 @@ import com.lory.biblereader.parts.leftstack.bookspart.eventhandler.BooksKeyListe
 import com.lory.biblereader.parts.middlestack.textpart.eventhandler.SearchTextVerifyListener;
 import com.lory.biblereader.parts.middlestack.textpart.eventhandler.TextSearchListener;
 
-/**
- * Shows the text of the selected chapter.
- *
- * @author lorandKutvolgyi
- *
- */
 public class BibleTextPart implements Observer {
+
 	@Inject
 	private BooksKeyListener booksKeyListener;
 	@Inject
@@ -45,26 +40,47 @@ public class BibleTextPart implements Observer {
 	@Inject
 	@Translation
 	private Messages messages;
+
 	private MPart part;
 	private Composite parent;
 	private StyledText text;
-	private Text searchtext;
 
 	@PostConstruct
 	public void postConstruct(Composite parent, MPart part) {
+		initPart(part);
+		initParent(parent);
+		createSearchText(parent);
+		createText(parent);
+		registerPart(part);
+	}
+
+	private void initPart(MPart part) {
 		this.part = part;
+	}
+
+	private void initParent(Composite parent) {
 		this.parent = parent;
 		parent.setLayout(new GridLayout(1, true));
-		searchtext = new Text(parent, SWT.SEARCH | SWT.ICON_CANCEL | SWT.ICON_SEARCH);
+	}
+
+	private Text createSearchText(Composite parent) {
+		Text searchtext = new Text(parent, SWT.SEARCH | SWT.ICON_CANCEL | SWT.ICON_SEARCH);
 		searchtext.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
 		searchtext.addModifyListener(textSearchListener);
 		searchtext.setMessage(messageService.getMessage("searchTextPlaceholder"));
 		searchtext.addVerifyListener(searchTextVerifyListener);
+		return searchtext;
+	}
+
+	private void createText(Composite parent) {
 		text = new StyledText(parent, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		text.setEditable(false);
-		textSearchListener.setBibleText(text);
 		text.addKeyListener(booksKeyListener);
+		textSearchListener.setBibleText(text);
+	}
+
+	private void registerPart(MPart part) {
 		textPartManager.registerPart(part, this, part.getPersistedState().get("title"),
 				part.getPersistedState().get("id"));
 	}
@@ -85,10 +101,9 @@ public class BibleTextPart implements Observer {
 
 	@PreDestroy
 	public void preDestroy() {
+		textPartManager.removePart(part);
 		if (textPartManager.isAnyVisiblePartExcept(part)) {
 			textPartManager.activatePart(textPartManager.getAnyVisiblePartExcept(part));
-		} else {
-			textPartManager.inactivatePart(part);
 		}
 	}
 
@@ -109,14 +124,7 @@ public class BibleTextPart implements Observer {
 
 	@Override
 	public String toString() {
-		if (text == null || text.isDisposed()) {
-			return "";
-		}
-		String wholeText = text.getText();
-		int maxLength = 100;
-		boolean tooLong = wholeText.length() > maxLength;
-		String bibleText = wholeText.isEmpty() ? "" : text.getText(0, tooLong ? maxLength : wholeText.length() - 1);
-		return "BibleTextPart\n\ttext: " + bibleText + (tooLong ? "..." : "");
+		return "BibleTextPart: " + (part == null || part.getLabel() == null ? "null" : part.getLabel());
 	}
 
 	public boolean isDisposed() {

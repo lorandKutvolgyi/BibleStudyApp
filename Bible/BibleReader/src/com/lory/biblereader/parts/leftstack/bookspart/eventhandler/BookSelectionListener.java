@@ -11,12 +11,6 @@ import org.eclipse.jface.viewers.TreeSelection;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.parts.leftstack.bookspart.chapternumberpopup.ChapterNumberPopupShell;
 
-/**
- * Event handler for book selection events triggered on BookTree.
- *
- * @author lorandKutvolgyi
- *
- */
 @Creatable
 @Singleton
 public class BookSelectionListener implements ISelectionChangedListener {

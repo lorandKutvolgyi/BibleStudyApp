@@ -14,53 +14,68 @@ import org.eclipse.swt.widgets.Tree;
 
 import com.lory.biblereader.i18n.MessageService;
 import com.lory.biblereader.model.Book;
+import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.dao.ChapterSqlDao;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkManager;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkSelectionPopup;
 
-/**
- * EventHandler for mouse click events triggered on BookTree.
- *
- * @author lorandKutvolgyi
- *
- */
 @Creatable
 @Singleton
 public class BookClickListener extends MouseAdapter {
+
 	@Inject
 	private BookSelectionListener bookSelectionListener;
 	@Inject
 	private MessageService messageService;
 	@Inject
 	private BookMarkManager bookMarkManager;
+
 	private ChapterSqlDao chapterSqlDao = new ChapterSqlDao();
 
 	@Override
 	public void mouseDown(MouseEvent event) {
-		if (event.button == 3 && isBook(event)) {
-			Menu menu = createMenu((Control) event.getSource(), event);
-			menu.setVisible(true);
+		if (isRightClickOnBook(event)) {
+			createMenu(event);
 			bookSelectionListener.allowSelectionChangeEvent(false);
 		} else {
 			bookSelectionListener.allowSelectionChangeEvent(true);
 		}
 	}
 
-	private Menu createMenu(Control control, MouseEvent mouseEvent) {
+	private boolean isRightClickOnBook(MouseEvent event) {
+		return isRightClick(event) && isBookSource(event);
+	}
+
+	private boolean isRightClick(MouseEvent event) {
+		return event.button == 3;
+	}
+
+	private boolean isBookSource(MouseEvent e) {
+		return ((Tree) e.getSource()).getSelection()[0].getParentItem() != null;
+	}
+
+	private void createMenu(MouseEvent mouseEvent) {
+		Control control = (Control) mouseEvent.getSource();
 		Menu menu = new Menu(control);
+		createAddToBookMarkMenuItem(mouseEvent, menu);
+		menu.setVisible(true);
+	}
+
+	private void createAddToBookMarkMenuItem(MouseEvent mouseEvent, Menu menu) {
 		MenuItem addToBookMark = new MenuItem(menu, SWT.PUSH);
 		addToBookMark.setText(messageService.getMessage("newBookMark"));
 		addToBookMark.addListener(SWT.Selection, event -> {
 			BookMarkSelectionPopup bookMarkSelectionPopup = new BookMarkSelectionPopup(messageService, bookMarkManager);
-			bookMarkSelectionPopup.open(chapterSqlDao
-					.findChapterById((Book) ((Tree) mouseEvent.getSource()).getSelection()[0].getData(), 1));
+			bookMarkSelectionPopup.open(getChapter(mouseEvent));
 		});
-
-		return menu;
 	}
 
-	private boolean isBook(MouseEvent e) {
-		return ((Tree) e.getSource()).getSelection()[0].getParentItem() != null;
+	private Chapter getChapter(MouseEvent mouseEvent) {
+		return chapterSqlDao.findChapterById(getSelectedBook(mouseEvent), 1);
+	}
+
+	private Book getSelectedBook(MouseEvent mouseEvent) {
+		return (Book) ((Tree) mouseEvent.getSource()).getSelection()[0].getData();
 	}
 
 }

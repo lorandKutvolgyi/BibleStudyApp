@@ -21,15 +21,10 @@ import com.lory.biblereader.parts.leftstack.bookspart.chapternumberpopup.Chapter
 import com.lory.biblereader.parts.middlestack.textpart.TextPartManager;
 import com.lory.biblereader.parts.upperrightstack.historypart.History;
 
-/**
- * Event handler for chapter number selection.
- *
- * @author lorandKutvolgyi
- *
- */
 @Creatable
 @Singleton
 public class ChapterNumberMouseListener extends MouseAdapter {
+
 	@Inject
 	private static EPartService partService;
 	@Inject
@@ -40,6 +35,9 @@ public class ChapterNumberMouseListener extends MouseAdapter {
 	private TextPartManager textPartManager;
 	@Inject
 	private History history;
+	@Inject
+	private CurrentChapter currentChapter;
+
 	private static MPart newTextPart;
 	private Book book;
 	private int chapterId;
@@ -59,14 +57,15 @@ public class ChapterNumberMouseListener extends MouseAdapter {
 				|| (!textPartManager.isAnyActivePart() && !textPartManager.isAnyVisiblePart())) {
 
 			showNewTextPart();
-
 		} else if (!textPartManager.isAnyActivePart() && textPartManager.isAnyVisiblePart()) {
 			textPartManager.activatePart(textPartManager.getAnyVisiblePart());
 		}
 
-		CurrentChapter.setCurrentChapter(book.getChapter(chapterId));
+		currentChapter.setChapter(book.getChapter(chapterId));
+
 		textPartManager.getChapters().put(textPartManager.getActivePart(), book.getChapter(chapterId));
-		history.addChapter(CurrentChapter.getCurrentChapter());
+
+		history.addChapter(currentChapter.getChapter());
 		shell.setColor(label, SWT.COLOR_GRAY);
 		int delay = event.data == null ? 0 : (int) event.data;
 		shell.close(delay);

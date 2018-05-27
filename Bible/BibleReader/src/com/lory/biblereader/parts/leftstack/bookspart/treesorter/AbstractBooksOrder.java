@@ -9,12 +9,6 @@ import org.eclipse.jface.viewers.ViewerComparator;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Testament;
 
-/**
- * Represents the books order in the tree of BooksPart. Intended to subclass it.
- *
- * @author lorandKutvolgyi
- *
- */
 public abstract class AbstractBooksOrder extends ViewerComparator {
 	private List<Testament> testaments = new ArrayList<>();
 	private List<Book> books = new ArrayList<>();

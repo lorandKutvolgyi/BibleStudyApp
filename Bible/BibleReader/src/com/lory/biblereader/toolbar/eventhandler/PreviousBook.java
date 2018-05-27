@@ -13,9 +13,11 @@ public class PreviousBook {
 	private BooksComparator booksComparator;
 	@Inject
 	private static History history;
+	@Inject
+	private static BookChanging bookChanging;
 
 	@Execute
 	public void execute() {
-		BookChanging.change(SWT.ARROW_LEFT, booksComparator, history);
+		bookChanging.change(SWT.ARROW_LEFT, booksComparator, history);
 	}
 }

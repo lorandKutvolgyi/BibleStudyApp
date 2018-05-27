@@ -14,40 +14,60 @@ import com.lory.biblereader.parts.upperrightstack.historypart.History;
 import com.lory.biblereader.toolbar.eventhandler.BookChanging;
 import com.lory.biblereader.toolbar.eventhandler.Paging;
 
-/**
- * EventHandler for key events triggered on BookTree.
- *
- * @author lorandKutvolgyi
- *
- */
 @Creatable
 @Singleton
 public class BooksKeyListener extends KeyAdapter {
+
 	@Inject
 	private BookSelectionListener bookSelectionListener;
 	@Inject
 	private BooksComparator booksComparator;
-	private TreeViewer treeViewer;
 	@Inject
 	private static History history;
+	@Inject
+	private static BookChanging bookChanging;
+	@Inject
+	private static Paging paging;
+
+	private TreeViewer treeViewer;
 
 	@Override
 	public void keyPressed(KeyEvent event) {
-		bookSelectionListener.allowSelectionChangeEvent(event.keyCode == SWT.SPACE || event.keyCode == SWT.CR);
-		if (event.stateMask == SWT.CTRL && event.keyCode == 'o') {
-			treeViewer.setComparator(booksComparator.next());
+		bookSelectionListener.allowSelectionChangeEvent(isSpaceOrEnterPressed(event));
+		if (isBooksOrderChangingCommand(event)) {
+			changeBooksOrder();
 			return;
 		}
 		if (isBookChangingCommand(event)) {
 			preventTreeEventTriggering(event);
-			BookChanging.change(event.keyCode, booksComparator, history);
+			changeBook(event);
 			return;
 		}
 		if (isPagingCommand(event)) {
 			preventTreeEventTriggering(event);
-			Paging.paging(event.keyCode, history);
+			page(event);
 			return;
 		}
+	}
+
+	private boolean isSpaceOrEnterPressed(KeyEvent event) {
+		return event.keyCode == SWT.SPACE || event.keyCode == SWT.CR;
+	}
+
+	private void changeBooksOrder() {
+		treeViewer.setComparator(booksComparator.next());
+	}
+
+	private void changeBook(KeyEvent event) {
+		bookChanging.change(event.keyCode, booksComparator, history);
+	}
+
+	private void page(KeyEvent event) {
+		paging.paging(event.keyCode, history);
+	}
+
+	private boolean isBooksOrderChangingCommand(KeyEvent event) {
+		return event.stateMask == SWT.CTRL && event.keyCode == 'o';
 	}
 
 	private boolean isBookChangingCommand(KeyEvent event) {
@@ -65,5 +85,4 @@ public class BooksKeyListener extends KeyAdapter {
 	public void setTreeViewer(TreeViewer treeViewer) {
 		this.treeViewer = treeViewer;
 	}
-
 }

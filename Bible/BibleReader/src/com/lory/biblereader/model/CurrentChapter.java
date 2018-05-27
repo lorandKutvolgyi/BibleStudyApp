@@ -3,34 +3,37 @@ package com.lory.biblereader.model;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.inject.Singleton;
+
+import org.eclipse.e4.core.di.annotations.Creatable;
+
+@Creatable
+@Singleton
 public class CurrentChapter extends Observable {
-	private static CurrentChapter instance = new CurrentChapter();
+
 	private Chapter chapter;
 
-	private CurrentChapter() {
+	public Chapter getChapter() {
+		return chapter;
 	}
 
-	public static Chapter getCurrentChapter() {
-		return instance.chapter;
+	public void setChapter(Chapter chapter) {
+		this.chapter = chapter;
+		setChanged();
+		notifyObservers();
 	}
 
-	public static void setCurrentChapter(Chapter chapter) {
-		instance.chapter = chapter;
-		instance.setChanged();
-		instance.notifyObservers();
-	}
-
-	public static void setCurrentChapter(String bookTitle, int chapterId) {
+	public void setChapter(String bookTitle, int chapterId) {
 		Book book = Bible.getBookByTitle(bookTitle);
-		setCurrentChapter(book.getChapter(chapterId));
+		setChapter(book.getChapter(chapterId));
 	}
 
-	public static void setObserver(Observer observer) {
-		instance.addObserver(observer);
+	public void setObserver(Observer observer) {
+		addObserver(observer);
 	}
 
-	public static void removeObserver(Observer observer) {
-		instance.deleteObserver(observer);
+	public void removeObserver(Observer observer) {
+		deleteObserver(observer);
 	}
 
 	@Override

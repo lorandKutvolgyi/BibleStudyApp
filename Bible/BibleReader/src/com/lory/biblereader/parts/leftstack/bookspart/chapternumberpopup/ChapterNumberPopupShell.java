@@ -27,10 +27,12 @@ import com.lory.biblereader.parts.leftstack.bookspart.chapternumberpopup.eventha
 @Creatable
 @Singleton
 public class ChapterNumberPopupShell {
+
 	@Inject
 	private ChapterNumberKeyListener chapterNumberKeyListener;
 	@Inject
 	private ChapterNumberMouseListener chapterNumberMouseListener;
+
 	private Shell shell;
 	private Display display;
 	private Composite mainComposite;
@@ -113,16 +115,10 @@ public class ChapterNumberPopupShell {
 		}
 	}
 
-	/**
-	 * @see @link org.eclipse.swt.widgets.Shell#open()
-	 */
 	public void open() {
 		shell.open();
 	}
 
-	/**
-	 * @see org.eclipse.swt.widgets.Shell#close()
-	 */
 	public void close() {
 		if (shell != null && !shell.isDisposed()) {
 			shell.close();
@@ -137,9 +133,6 @@ public class ChapterNumberPopupShell {
 		}));
 	}
 
-	/**
-	 * @see org.eclipse.swt.widgets.Shell#isDisposed()
-	 */
 	public boolean isDisposed() {
 		return shell == null || shell.isDisposed();
 	}

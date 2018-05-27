@@ -9,13 +9,12 @@ import javax.inject.Singleton;
 
 import org.eclipse.e4.core.di.annotations.Creatable;
 
-import com.lory.biblereader.model.Book;
-
 @Creatable
 @Singleton
 public class BooksComparator {
 	private final List<AbstractBooksOrder> comparators = new ArrayList<>();
 	private int index = 0;
+
 	@Inject
 	private HistoricalBooksOrder historicalBooksOrder;
 	@Inject
@@ -31,10 +30,6 @@ public class BooksComparator {
 		return comparators;
 	}
 
-	public int getIndex() {
-		return index;
-	}
-
 	public AbstractBooksOrder next() {
 		if (index == comparators.size() - 1) {
 			index = -1;
@@ -44,9 +39,5 @@ public class BooksComparator {
 
 	public AbstractBooksOrder current() {
 		return comparators.get(index);
-	}
-
-	public Book nextBook(Book book) {
-		return current().getBooks().get(current().getBooks().indexOf(book));
 	}
 }

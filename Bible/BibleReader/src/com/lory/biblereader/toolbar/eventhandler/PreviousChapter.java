@@ -10,10 +10,12 @@ import com.lory.biblereader.parts.upperrightstack.historypart.History;
 public class PreviousChapter {
 	@Inject
 	private static History history;
+	@Inject
+	private static Paging paging;
 
 	@Execute
 	public void execute() {
-		Paging.paging(SWT.ARROW_LEFT, history);
+		paging.paging(SWT.ARROW_LEFT, history);
 	}
 
 }

@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.Shell;
 
 @Creatable
 public class ChapterNumberKeyListener extends KeyAdapter {
+
 	private static final int POPUP_CLOSING_DELAY = 1000;
 	private static final int CACHE_CLEARING_DELAY = 1000;
 	private static final int MAXIMUM_CACHE_SIZE = 3;

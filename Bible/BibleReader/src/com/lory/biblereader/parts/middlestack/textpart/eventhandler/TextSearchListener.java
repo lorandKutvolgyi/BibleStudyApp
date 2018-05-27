@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Text;
 
 @Creatable
 public class TextSearchListener implements ModifyListener {
+
 	private StyledText bibleText;
 
 	public void setBibleText(StyledText text) {
@@ -32,25 +33,24 @@ public class TextSearchListener implements ModifyListener {
 		Pattern pattern = Pattern.compile(searchText);
 		Matcher matcher = pattern.matcher(text);
 		if (matcher.find()) {
-			int start = matcher.start();
-			int end = matcher.end();
-			createStyle(start, end);
-			scrollTo(start);
-			while (matcher.find(end)) {
-				start = matcher.start();
-				end = matcher.end();
-				createStyle(start, end);
-			}
+			markFoundTextParts(matcher);
 		}
-	}
-
-	private void scrollTo(int start) {
-		int firstFound = bibleText.getLineAtOffset(start);
-		bibleText.setTopIndex(firstFound);
 	}
 
 	private void clearStyle() {
 		bibleText.setStyleRange(null);
+	}
+
+	private void markFoundTextParts(Matcher matcher) {
+		scrollTo(matcher.start());
+		do {
+			createStyle(matcher.start(), matcher.end());
+		} while (matcher.find(matcher.end()));
+	}
+
+	private void scrollTo(int start) {
+		int firstFoundLine = bibleText.getLineAtOffset(start);
+		bibleText.setTopIndex(firstFoundLine);
 	}
 
 	public void createStyle(int start, int end) {
@@ -61,5 +61,4 @@ public class TextSearchListener implements ModifyListener {
 		style.foreground = Display.getCurrent().getSystemColor(SWT.COLOR_WHITE);
 		bibleText.setStyleRange(style);
 	}
-
 }

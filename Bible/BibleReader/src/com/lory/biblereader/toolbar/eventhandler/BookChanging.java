@@ -1,5 +1,9 @@
 package com.lory.biblereader.toolbar.eventhandler;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.swt.SWT;
 
 import com.lory.biblereader.model.Book;
@@ -9,21 +13,26 @@ import com.lory.biblereader.parts.leftstack.bookspart.treesorter.AbstractBooksOr
 import com.lory.biblereader.parts.leftstack.bookspart.treesorter.BooksComparator;
 import com.lory.biblereader.parts.upperrightstack.historypart.History;
 
+@Creatable
+@Singleton
 public class BookChanging {
 
-	public static void change(int keyCode, BooksComparator booksComparator, History history) {
+	@Inject
+	private CurrentChapter currentChapter;
+
+	public void change(int keyCode, BooksComparator booksComparator, History history) {
 		if (!isSelectedChapter()) {
 			return;
 		}
 		AbstractBooksOrder comparator = booksComparator.current();
-		Book book = CurrentChapter.getCurrentChapter().getBook();
+		Book book = currentChapter.getChapter().getBook();
 		int index = comparator.getBooks().indexOf(book);
 		Chapter chapter = getBook(comparator, index, keyCode).getChapter(1);
-		CurrentChapter.setCurrentChapter(chapter);
+		currentChapter.setChapter(chapter);
 		history.addChapter(chapter);
 	}
 
-	private static Book getBook(AbstractBooksOrder comparator, int index, int keyCode) {
+	private Book getBook(AbstractBooksOrder comparator, int index, int keyCode) {
 		int newIndex;
 		if (keyCode == SWT.ARROW_LEFT) {
 			newIndex = index == 0 ? comparator.getBooks().size() - 1 : index - 1;
@@ -34,7 +43,7 @@ public class BookChanging {
 		return comparator.getBooks().get(newIndex);
 	}
 
-	private static boolean isSelectedChapter() {
-		return CurrentChapter.getCurrentChapter() != null;
+	private boolean isSelectedChapter() {
+		return currentChapter.getChapter() != null;
 	}
 }
