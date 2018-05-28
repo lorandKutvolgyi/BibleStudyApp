@@ -8,6 +8,7 @@ import org.eclipse.swt.SWT;
 import com.lory.biblereader.parts.upperrightstack.historypart.History;
 
 public class PreviousChapter {
+
 	@Inject
 	private static History history;
 	@Inject

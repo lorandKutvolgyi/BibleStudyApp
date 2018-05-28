@@ -10,6 +10,7 @@ import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.TreeElement;
 
 public class BookMark implements TreeElement {
+
 	private Chapter chapter;
 	private List<Integer> verses;
 	private BookMarkCategory category;
@@ -107,5 +108,4 @@ public class BookMark implements TreeElement {
 		}
 		return true;
 	}
-
 }

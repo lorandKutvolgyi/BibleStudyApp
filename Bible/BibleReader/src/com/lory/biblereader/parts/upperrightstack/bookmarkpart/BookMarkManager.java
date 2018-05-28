@@ -22,6 +22,7 @@ import com.lory.biblereader.model.Chapter;
 @Creatable
 @Singleton
 public class BookMarkManager extends Observable {
+
 	@Inject
 	private MessageService messageService;
 	private Map<BookMarkCategory, Set<BookMark>> bookMarksByCategory = new TreeMap<>();

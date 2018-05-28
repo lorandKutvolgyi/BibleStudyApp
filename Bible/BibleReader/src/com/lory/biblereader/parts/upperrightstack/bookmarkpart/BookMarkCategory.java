@@ -5,6 +5,7 @@ import java.util.Collection;
 import com.lory.biblereader.model.TreeElement;
 
 public class BookMarkCategory implements TreeElement, Comparable<BookMarkCategory> {
+
 	private String category;
 	private BookMarkManager bookMarkManager;
 

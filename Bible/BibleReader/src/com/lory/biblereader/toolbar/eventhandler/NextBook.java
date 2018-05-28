@@ -9,6 +9,7 @@ import com.lory.biblereader.parts.leftstack.bookspart.treesorter.BooksComparator
 import com.lory.biblereader.parts.upperrightstack.historypart.History;
 
 public class NextBook {
+
 	@Inject
 	private BooksComparator booksComparator;
 	@Inject

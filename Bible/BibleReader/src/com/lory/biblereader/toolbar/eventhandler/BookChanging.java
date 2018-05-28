@@ -24,10 +24,10 @@ public class BookChanging {
 		if (!isSelectedChapter()) {
 			return;
 		}
-		AbstractBooksOrder comparator = booksComparator.current();
+		AbstractBooksOrder order = booksComparator.current();
 		Book book = currentChapter.getChapter().getBook();
-		int index = comparator.getBooks().indexOf(book);
-		Chapter chapter = getBook(comparator, index, keyCode).getChapter(1);
+		int index = order.getBooks().indexOf(book);
+		Chapter chapter = getBook(order, index, keyCode).getChapter(1);
 		currentChapter.setChapter(chapter);
 		history.addChapter(chapter);
 	}

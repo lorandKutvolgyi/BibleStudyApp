@@ -5,7 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Bible {
+
 	public static List<Book> books = new ArrayList<>();
+
 	static {
 		books.addAll(Arrays.asList(OldTestamentBooks.values()));
 		books.addAll(Arrays.asList(NewTestamentBooks.values()));

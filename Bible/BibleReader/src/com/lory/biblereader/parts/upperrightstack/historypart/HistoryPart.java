@@ -32,6 +32,7 @@ import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkManager;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkSelectionPopup;
 
 public class HistoryPart implements Observer {
+
 	@Inject
 	private History history;
 	@Inject

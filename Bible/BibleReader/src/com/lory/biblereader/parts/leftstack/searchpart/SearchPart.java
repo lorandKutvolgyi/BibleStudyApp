@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import org.eclipse.swt.widgets.Composite;
 
 public class SearchPart {
+
 	@Inject
 	public SearchPart() {
 

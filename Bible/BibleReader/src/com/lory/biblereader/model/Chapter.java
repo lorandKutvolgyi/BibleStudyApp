@@ -1,11 +1,5 @@
 package com.lory.biblereader.model;
 
-/**
- * Represents a chapter of a book in the Bible.
- *
- * @author lorandKutvolgyi
- *
- */
 public class Chapter {
 
 	private final int id;

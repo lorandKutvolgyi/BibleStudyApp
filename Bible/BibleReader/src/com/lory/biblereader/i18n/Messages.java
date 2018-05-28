@@ -1,13 +1,7 @@
 package com.lory.biblereader.i18n;
 
-/**
- * Message keys for I18N. All fields have to be the same as a property in the
- * properties files.
- *
- * @author lorandKutvolgyi
- *
- */
 public class Messages {
+
 	public String GENESIS;
 	public String EXODUS;
 	public String LEVITICUS;

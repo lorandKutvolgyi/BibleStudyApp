@@ -12,6 +12,7 @@ import com.lory.biblereader.model.Chapter;
 @Creatable
 @Singleton
 public class History extends Observable {
+
 	private LinkedList<Chapter> history = new LinkedList<>();
 
 	public void addChapter(Chapter chapter) {

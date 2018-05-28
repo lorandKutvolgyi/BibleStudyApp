@@ -4,74 +4,71 @@ import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Set;
 
-/**
- * Represents the Testaments of the Bible.
- *
- * @author lorandKutvolgyi
- *
- */
 public enum Testament implements TreeElement {
-    OLD_TESTAMENT("OldTestament") {
-        private final Set<? extends Book> books = EnumSet.allOf(OldTestamentBooks.class);
 
-        @Override
-        public Set<? extends Book> getBooks() {
-            return books;
-        }
+	OLD_TESTAMENT("OldTestament") {
 
-    },
-    NEW_TESTAMENT("NewTestament") {
-        private final Set<? extends Book> books = EnumSet.allOf(NewTestamentBooks.class);
+		private final Set<? extends Book> books = EnumSet.allOf(OldTestamentBooks.class);
 
-        @Override
-        public Set<? extends Book> getBooks() {
-            return books;
-        }
-    };
-    private String name;
+		@Override
+		public Set<? extends Book> getBooks() {
+			return books;
+		}
 
-    private Testament(String name) {
-        this.name = name;
-    }
+	},
 
-    public String getName() {
-        return name;
-    }
+	NEW_TESTAMENT("NewTestament") {
+		private final Set<? extends Book> books = EnumSet.allOf(NewTestamentBooks.class);
 
-    @Override
-    public String getText() {
-        return name;
-    }
+		@Override
+		public Set<? extends Book> getBooks() {
+			return books;
+		}
+	};
 
-    @Override
-    public Collection<? extends TreeElement> getChildren() {
-        return getBooks();
-    }
+	private String name;
 
-    @Override
-    public TreeElement getParent() {
-        return null;
-    }
+	private Testament(String name) {
+		this.name = name;
+	}
 
-    public Book getBook(String title) {
-        for (Book book : getBooks()) {
-            if (title != null && title.equals(book.getTitle())) {
-                return book;
-            }
-        }
-        return null;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public static Testament getTestament(String name) {
-        for (Testament testament : Testament.values()) {
-            String testamentName = testament.getName();
-            if (testamentName.equals(name)) {
-                return testament;
-            }
-        }
-        return null;
-    }
+	@Override
+	public String getText() {
+		return name;
+	}
 
-    public abstract Set<? extends Book> getBooks();
+	@Override
+	public Collection<? extends TreeElement> getChildren() {
+		return getBooks();
+	}
+
+	@Override
+	public TreeElement getParent() {
+		return null;
+	}
+
+	public Book getBook(String title) {
+		for (Book book : getBooks()) {
+			if (title != null && title.equals(book.getTitle())) {
+				return book;
+			}
+		}
+		return null;
+	}
+
+	public static Testament getTestament(String name) {
+		for (Testament testament : Testament.values()) {
+			if (testament.getName().equals(name)) {
+				return testament;
+			}
+		}
+		return null;
+	}
+
+	public abstract Set<? extends Book> getBooks();
 
 }

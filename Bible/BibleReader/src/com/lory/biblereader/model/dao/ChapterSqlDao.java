@@ -14,12 +14,6 @@ import java.util.Properties;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
 
-/**
- * Data access object for chapters of the Bible using MySql Database.
- *
- * @author lorandKutvolgyi
- *
- */
 public class ChapterSqlDao implements ChapterDao {
 
 	private Connection connection;

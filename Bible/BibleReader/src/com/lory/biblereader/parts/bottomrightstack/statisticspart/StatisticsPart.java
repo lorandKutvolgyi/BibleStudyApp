@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import org.eclipse.swt.widgets.Composite;
 
 public class StatisticsPart {
+
 	@Inject
 	public StatisticsPart() {
 
