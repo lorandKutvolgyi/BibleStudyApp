@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Bible {
 
-	public static List<Book> books = new ArrayList<>();
+	private static List<Book> books = new ArrayList<>();
 
 	static {
 		books.addAll(Arrays.asList(OldTestamentBooks.values()));

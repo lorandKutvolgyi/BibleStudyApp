@@ -10,6 +10,7 @@ import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Testament;
 
 public abstract class AbstractBooksOrder extends ViewerComparator {
+
 	private List<Testament> testaments = new ArrayList<>();
 	private List<Book> books = new ArrayList<>();
 

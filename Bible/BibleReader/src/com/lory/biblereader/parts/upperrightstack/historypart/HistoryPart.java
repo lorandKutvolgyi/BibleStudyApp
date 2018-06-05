@@ -28,6 +28,7 @@ import org.eclipse.ui.forms.widgets.Hyperlink;
 import com.lory.biblereader.i18n.MessageService;
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.CurrentChapter;
+import com.lory.biblereader.parts.leftstack.bookspart.treesorter.BooksComparator;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkManager;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkSelectionPopup;
 
@@ -41,9 +42,11 @@ public class HistoryPart implements Observer {
 	private BookMarkManager bookMarkManager;
 	@Inject
 	private CurrentChapter currentChapter;
+	@Inject
+	private BooksComparator booksComparator;
 
 	private Composite parent;
-	private ScrolledComposite scrolled;
+	private ScrolledComposite scrolledComposite;
 	private Composite subComposite;
 
 	@PostConstruct
@@ -52,36 +55,9 @@ public class HistoryPart implements Observer {
 		this.parent.setLayout(new FillLayout());
 		createScrolledComposite();
 		createSubComposite();
-		scrolled.setContent(subComposite);
-		this.loadHistory();
+		scrolledComposite.setContent(subComposite);
+		loadHistory();
 		history.addObserver(this);
-	}
-
-	private void createScrolledComposite() {
-		scrolled = new ScrolledComposite(parent, SWT.V_SCROLL);
-		scrolled.setAlwaysShowScrollBars(false);
-		scrolled.setExpandVertical(true);
-		scrolled.setExpandHorizontal(true);
-		scrolled.setLayout(new FillLayout());
-		scrolled.addControlListener(new ControlAdapter() {
-			@Override
-			public void controlResized(ControlEvent e) {
-				setupScroll();
-			}
-		});
-	}
-
-	private void createSubComposite() {
-		subComposite = new Composite(scrolled, SWT.NONE);
-		subComposite.setLayout(new RowLayout());
-	}
-
-	private void loadHistory() {
-		if (!scrolled.isDisposed()) {
-			history.getHistory().stream().forEach(chapter -> {
-				addNewElement(chapter);
-			});
-		}
 	}
 
 	@Override
@@ -92,6 +68,31 @@ public class HistoryPart implements Observer {
 		}
 		assert (isAddHappened());
 		addNewElement();
+	}
+
+	private void createScrolledComposite() {
+		scrolledComposite = new ScrolledComposite(parent, SWT.V_SCROLL);
+		scrolledComposite.setAlwaysShowScrollBars(false);
+		scrolledComposite.setExpandVertical(true);
+		scrolledComposite.setExpandHorizontal(true);
+		scrolledComposite.setLayout(new FillLayout());
+		scrolledComposite.addControlListener(new ControlAdapter() {
+			@Override
+			public void controlResized(ControlEvent e) {
+				setupScroll();
+			}
+		});
+	}
+
+	private void createSubComposite() {
+		subComposite = new Composite(scrolledComposite, SWT.NONE);
+		subComposite.setLayout(new RowLayout());
+	}
+
+	private void loadHistory() {
+		if (!scrolledComposite.isDisposed()) {
+			history.getHistory().stream().forEach(chapter -> addNewElement(chapter));
+		}
 	}
 
 	private boolean isClearHappened() {
@@ -105,24 +106,17 @@ public class HistoryPart implements Observer {
 		}
 	}
 
-	private void disposeAll() {
-		Arrays.asList(subComposite.getChildren()).stream().forEach(control -> control.dispose());
-	}
-
-	private void removeScroll() {
-		scrolled.setMinSize(null);
-	}
-
-	private boolean isHistoryEmpty() {
-		return subComposite.getChildren().length == 0;
-	}
-
 	private boolean isAddHappened() {
 		return !isClearHappened();
 	}
 
 	private void addNewElement() {
 		addNewElement(history.getHistory().getLast());
+	}
+
+	private void setupScroll() {
+		scrolledComposite
+				.setMinSize(subComposite.computeSize(scrolledComposite.getClientArea().width, SWT.DEFAULT, true));
 	}
 
 	private void addNewElement(Chapter chapter) {
@@ -132,15 +126,23 @@ public class HistoryPart implements Observer {
 		layoutElements();
 	}
 
+	private boolean isHistoryEmpty() {
+		return subComposite.getChildren().length == 0;
+	}
+
+	private void disposeAll() {
+		Arrays.asList(subComposite.getChildren()).stream().forEach(control -> control.dispose());
+	}
+
+	private void removeScroll() {
+		scrolledComposite.setMinSize(null);
+	}
+
 	private void createArrowLabel() {
 		if (!isFirstElement()) {
 			Label label = new Label(subComposite, SWT.NONE);
 			label.setText(" -> ");
 		}
-	}
-
-	private boolean isFirstElement() {
-		return isHistoryEmpty();
 	}
 
 	private void createLink(Chapter chapter) {
@@ -152,22 +154,32 @@ public class HistoryPart implements Observer {
 		addListenersToLink(link, chapter, menu);
 	}
 
+	private void layoutElements() {
+		parent.layout(true, true);
+	}
+
+	private boolean isFirstElement() {
+		return isHistoryEmpty();
+	}
+
 	private Menu createMenu(Hyperlink link, Chapter chapter) {
 		Menu menu = new Menu(link);
 
 		MenuItem remove = new MenuItem(menu, SWT.PUSH);
 		remove.setText(messageService.getMessage("remove"));
-		remove.addListener(SWT.Selection, event -> {
-			removeElement(link);
-		});
+		remove.addListener(SWT.Selection, event -> removeElement(link));
 
 		MenuItem addToBookMark = new MenuItem(menu, SWT.PUSH);
 		addToBookMark.setText(messageService.getMessage("newBookMark"));
-		addToBookMark.addListener(SWT.Selection, event -> {
-			new BookMarkSelectionPopup(messageService, bookMarkManager).open(chapter);
-		});
+		addToBookMark.addListener(SWT.Selection,
+				event -> new BookMarkSelectionPopup(messageService, bookMarkManager, booksComparator).open(chapter));
 
 		return menu;
+	}
+
+	private void addListenersToLink(Hyperlink link, Chapter currentChapter, Menu menu) {
+		addLinkListener(link, currentChapter);
+		addMouseListener(link, menu);
 	}
 
 	private void removeElement(Hyperlink link) {
@@ -177,29 +189,6 @@ public class HistoryPart implements Observer {
 		removeLink(link);
 		setupScroll();
 		layoutElements();
-	}
-
-	private void removeArrowLabel(int linkIndex) {
-		if (linkIndex != subComposite.getChildren().length - 1) {
-			subComposite.getChildren()[linkIndex + 1].dispose();
-		} else if (subComposite.getChildren().length != 1) {
-			subComposite.getChildren()[linkIndex - 1].dispose();
-		} else {
-			removeScroll();
-		}
-	}
-
-	private void removeFromHistory(int linkIndex) {
-		history.removeElement(linkIndex / 2);
-	}
-
-	private void removeLink(Hyperlink link) {
-		link.dispose();
-	}
-
-	private void addListenersToLink(Hyperlink link, Chapter currentChapter, Menu menu) {
-		addLinkListener(link, currentChapter);
-		addMouseListener(link, menu);
 	}
 
 	private void addLinkListener(Hyperlink link, Chapter currentChapter) {
@@ -223,16 +212,25 @@ public class HistoryPart implements Observer {
 	}
 
 	private int getLinkIndex(Control link) {
-		return Arrays.asList(subComposite.getChildren()).stream().filter(comtrol -> link.equals(comtrol))
+		return Arrays.asList(subComposite.getChildren()).stream().filter(control -> link.equals(control))
 				.mapToInt(control -> Arrays.asList(subComposite.getChildren()).indexOf(control)).findFirst().getAsInt();
 	}
 
-	private void setupScroll() {
-		scrolled.setMinSize(subComposite.computeSize(scrolled.getClientArea().width, SWT.DEFAULT, true));
+	private void removeArrowLabel(int linkIndex) {
+		if (linkIndex != subComposite.getChildren().length - 1) {
+			subComposite.getChildren()[linkIndex + 1].dispose();
+		} else if (subComposite.getChildren().length != 1) {
+			subComposite.getChildren()[linkIndex - 1].dispose();
+		} else {
+			removeScroll();
+		}
 	}
 
-	private void layoutElements() {
-		parent.layout(true, true);
+	private void removeFromHistory(int linkIndex) {
+		history.removeElement(linkIndex / 2);
 	}
 
+	private void removeLink(Hyperlink link) {
+		link.dispose();
+	}
 }

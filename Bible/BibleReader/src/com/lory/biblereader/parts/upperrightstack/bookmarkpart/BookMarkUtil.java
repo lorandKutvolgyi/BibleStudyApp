@@ -6,7 +6,7 @@ import java.util.Observable;
 
 public class BookMarkUtil extends Observable {
 
-	public static String getVerrsesAsString(BookMark bookMark) {
+	public static String getVersesAsString(BookMark bookMark) {
 		return getVersesAsString(bookMark.getVerses());
 	}
 
@@ -14,26 +14,39 @@ public class BookMarkUtil extends Observable {
 		StringBuilder result = new StringBuilder();
 		Integer previous = null;
 		for (Integer verse : verses) {
-			if (previous != null) {
-				if (previous + 1 == verse) {
-					if (!result.toString().endsWith("-")) {
-						result.append("-");
-					}
-					if (verses.get(verses.size() - 1).equals(verse)) {
-						result.append(verse);
-					}
-				} else {
-					if (result.toString().endsWith("-")) {
-						result.append(previous);
-					}
-					result.append("," + verse);
-				}
+			if (isFirstVerse(previous)) {
+				handleFirstVerse(result, verse);
 			} else {
-				result.append(verse);
+				handleNotFirstVerses(verses, result, previous, verse);
 			}
 			previous = verse;
 		}
 		return result.toString();
+	}
+
+	private static boolean isFirstVerse(Integer previous) {
+		return previous == null;
+	}
+
+	private static void handleFirstVerse(StringBuilder result, Integer verse) {
+		result.append(verse);
+	}
+
+	private static void handleNotFirstVerses(List<Integer> verses, StringBuilder result, Integer previous,
+			Integer verse) {
+		if (previous + 1 == verse) {
+			if (!result.toString().endsWith("-")) {
+				result.append("-");
+			}
+			if (verses.get(verses.size() - 1).equals(verse)) {
+				result.append(verse);
+			}
+		} else {
+			if (result.toString().endsWith("-")) {
+				result.append(previous);
+			}
+			result.append("," + verse);
+		}
 	}
 
 	public static List<Integer> getVersesAsIntegers(String verses) {
@@ -43,15 +56,27 @@ public class BookMarkUtil extends Observable {
 			if (part.isEmpty()) {
 				continue;
 			}
-			if (part.contains("-")) {
-				String[] subPart = part.split("-");
-				for (int i = Integer.parseInt(subPart[0]); i <= Integer.parseInt(subPart[1]); i++) {
-					result.add(i);
-				}
+			if (isRange(part)) {
+				addElementsOfRange(result, part);
 			} else {
-				result.add(Integer.parseInt(part));
+				addSingleVerse(result, part);
 			}
 		}
 		return result;
+	}
+
+	private static boolean isRange(String part) {
+		return part.contains("-");
+	}
+
+	private static void addElementsOfRange(List<Integer> result, String part) {
+		String[] subPart = part.split("-");
+		for (int i = Integer.parseInt(subPart[0]); i <= Integer.parseInt(subPart[1]); i++) {
+			result.add(i);
+		}
+	}
+
+	private static void addSingleVerse(List<Integer> result, String part) {
+		result.add(Integer.parseInt(part));
 	}
 }

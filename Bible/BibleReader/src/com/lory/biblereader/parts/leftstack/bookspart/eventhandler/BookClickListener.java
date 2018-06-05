@@ -16,6 +16,7 @@ import com.lory.biblereader.i18n.MessageService;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.dao.ChapterSqlDao;
+import com.lory.biblereader.parts.leftstack.bookspart.treesorter.BooksComparator;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkManager;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkSelectionPopup;
 
@@ -29,6 +30,8 @@ public class BookClickListener extends MouseAdapter {
 	private MessageService messageService;
 	@Inject
 	private BookMarkManager bookMarkManager;
+	@Inject
+	private BooksComparator booksComparator;
 
 	private ChapterSqlDao chapterSqlDao = new ChapterSqlDao();
 
@@ -65,7 +68,8 @@ public class BookClickListener extends MouseAdapter {
 		MenuItem addToBookMark = new MenuItem(menu, SWT.PUSH);
 		addToBookMark.setText(messageService.getMessage("newBookMark"));
 		addToBookMark.addListener(SWT.Selection, event -> {
-			BookMarkSelectionPopup bookMarkSelectionPopup = new BookMarkSelectionPopup(messageService, bookMarkManager);
+			BookMarkSelectionPopup bookMarkSelectionPopup = new BookMarkSelectionPopup(messageService, bookMarkManager,
+					booksComparator);
 			bookMarkSelectionPopup.open(getChapter(mouseEvent));
 		});
 	}

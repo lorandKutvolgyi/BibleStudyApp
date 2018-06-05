@@ -13,6 +13,7 @@ import com.lory.biblereader.model.OldTestamentBooks;
 @Creatable
 @Singleton
 public class CanonicalBooksOrder extends AbstractBooksOrder {
+
 	public CanonicalBooksOrder() {
 		List<Book> books = getBooks();
 		books.add(OldTestamentBooks.GENESIS);

@@ -10,27 +10,28 @@ import javax.inject.Inject;
 
 import org.eclipse.e4.ui.di.PersistState;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
-import org.eclipse.jface.viewers.ITreeContentProvider;
-import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
 import com.lory.biblereader.i18n.MessageService;
-import com.lory.biblereader.model.TreeElement;
+import com.lory.biblereader.parts.leftstack.bookspart.treesorter.BooksComparator;
+import com.lory.biblereader.parts.upperrightstack.bookmarkpart.listener.BookMarkSelectionListener;
+import com.lory.biblereader.parts.upperrightstack.bookmarkpart.treeprovider.BookMarkLabelProvider;
+import com.lory.biblereader.parts.upperrightstack.bookmarkpart.treeprovider.TreeContentProvider;
 
 public class BookMarkPart implements Observer {
+
 	@Inject
 	private BookMarkManager bookMarkManager;
 	@Inject
 	private MessageService messageService;
+	@Inject
+	private BooksComparator booksComparator;
+
 	private TreeViewer categories;
 
 	@PostConstruct
@@ -43,24 +44,26 @@ public class BookMarkPart implements Observer {
 		update(bookMarkManager, null);
 	}
 
-	private void restorePersistedState(MPart part) {
-		bookMarkManager.restoreCategories(part.getPersistedState());
-		bookMarkManager.restoreBookMarks(part.getPersistedState(), messageService);
+	@Override
+	public void update(Observable o, Object arg) {
+		categories.setInput(bookMarkManager.getCategories());
+		categories.expandAll();
 	}
 
 	@PersistState
 	private void persist(MPart part) {
 		part.getPersistedState().clear();
 		for (Entry<BookMarkCategory, LocalDateTime> categoryAndDate : bookMarkManager.getCategories().entrySet()) {
-			part.getPersistedState().put("Cat:" + categoryAndDate.getKey().getText(),
-					categoryAndDate.getValue().toString());
-			StringBuilder builder = new StringBuilder();
-			for (BookMark bookMark : bookMarkManager.getBookMarksByCategory(categoryAndDate.getKey())) {
-				builder.append(bookMark.getChapter().getBook().getTitle() + ":" + bookMark.getChapter().getId() + "("
-						+ BookMarkUtil.getVerrsesAsString(bookMark) + ");");
-			}
-			part.getPersistedState().put(categoryAndDate.getKey().getText(), builder.toString());
+			String category = categoryAndDate.getKey().getText();
+			String date = categoryAndDate.getValue().toString();
+			part.getPersistedState().put("Cat:" + category, date);
+			part.getPersistedState().put(category, getBookMarks(categoryAndDate));
 		}
+	}
+
+	private void restorePersistedState(MPart part) {
+		bookMarkManager.restoreCategoriesWithDate(part.getPersistedState());
+		bookMarkManager.restoreCategoriesWithBookMarks(part.getPersistedState(), messageService);
 	}
 
 	private void setLayout(final Composite parent) {
@@ -69,80 +72,26 @@ public class BookMarkPart implements Observer {
 
 	private void createTree(Composite parent) {
 		categories = new TreeViewer(parent, SWT.V_SCROLL);
-		GridData layoutData = new GridData(SWT.FILL, SWT.FILL, true, true);
-		categories.getTree().setLayoutData(layoutData);
+		categories.getTree().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		categories.setLabelProvider(new BookMarkLabelProvider());
-		categories.setContentProvider(new TreeContentProvider());
+		categories.setContentProvider(new TreeContentProvider(bookMarkManager));
 		categories.expandAll();
 	}
 
 	private void createButton(Composite parent) {
 		Button button = new Button(parent, SWT.NONE);
 		button.setText(messageService.getMessage("newBookMark"));
-		button.addSelectionListener(new SelectionListener() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				BookMarkSelectionPopup bookMarkSelectionPopup = new BookMarkSelectionPopup(messageService,
-						bookMarkManager);
-				bookMarkSelectionPopup.open();
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-			}
-
-		});
+		button.addSelectionListener(new BookMarkSelectionListener(messageService, bookMarkManager, booksComparator));
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
-		categories.setInput(bookMarkManager.getCategories());
-		categories.expandAll();
-	}
-
-	private class BookMarkLabelProvider extends LabelProvider {
-
-		@Override
-		public Image getImage(Object element) {
-			return super.getImage(element);
+	private String getBookMarks(Entry<BookMarkCategory, LocalDateTime> categoryAndDate) {
+		StringBuilder builder = new StringBuilder();
+		for (BookMark bookMark : bookMarkManager.getBookMarksByCategory(categoryAndDate.getKey())) {
+			String title = bookMark.getChapter().getBook().getTitle();
+			int chapter = bookMark.getChapter().getId();
+			String versesAsString = BookMarkUtil.getVersesAsString(bookMark);
+			builder.append(title + ":" + chapter + "(" + versesAsString + ");");
 		}
-
-		@Override
-		public String getText(Object element) {
-			return ((TreeElement) element).getText();
-		}
-	}
-
-	private class TreeContentProvider implements ITreeContentProvider {
-
-		@Override
-		public void dispose() {
-		}
-
-		@Override
-		public Object[] getChildren(Object parentElement) {
-			return ((TreeElement) parentElement).getChildren().toArray();
-		}
-
-		@Override
-		public Object[] getElements(Object inputElement) {
-			return bookMarkManager.getCategories().keySet().toArray();
-		}
-
-		@Override
-		public Object getParent(Object element) {
-			return ((TreeElement) element).getParent();
-		}
-
-		@Override
-		public boolean hasChildren(Object element) {
-			return !((TreeElement) element).getChildren().isEmpty();
-		}
-
-		@Override
-		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-		}
-
+		return builder.toString();
 	}
 }
