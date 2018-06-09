@@ -25,7 +25,9 @@ public class BookMarkManager extends Observable {
 
 	@Inject
 	private MessageService messageService;
-
+	@Inject
+	private Bible bible;
+	
 	private Map<BookMarkCategory, Set<BookMark>> bookMarksByCategory = new TreeMap<>();
 	private Map<BookMarkCategory, LocalDateTime> categoriesWithCreationDate = new TreeMap<>();
 	private BookMarkCategory DEFAULT_CATEGORY;
@@ -137,7 +139,7 @@ public class BookMarkManager extends Observable {
 
 	private Chapter getChapter(String[] bookAndOthers, String[] chapterAndVerses) {
 		String chapterAsString = chapterAndVerses[0];
-		Chapter chapter = Bible.getChapter(bookAndOthers[0], Integer.valueOf(chapterAsString));
+		Chapter chapter = bible.getChapter(bookAndOthers[0], Integer.valueOf(chapterAsString));
 		return chapter;
 	}
 

@@ -18,6 +18,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
 import com.lory.biblereader.i18n.MessageService;
+import com.lory.biblereader.model.Bible;
 import com.lory.biblereader.parts.leftstack.bookspart.treesorter.BooksComparator;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.listener.BookMarkSelectionListener;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.treeprovider.BookMarkLabelProvider;
@@ -31,6 +32,8 @@ public class BookMarkPart implements Observer {
 	private MessageService messageService;
 	@Inject
 	private BooksComparator booksComparator;
+	@Inject
+	private Bible bible;
 
 	private TreeViewer categories;
 
@@ -81,7 +84,8 @@ public class BookMarkPart implements Observer {
 	private void createButton(Composite parent) {
 		Button button = new Button(parent, SWT.NONE);
 		button.setText(messageService.getMessage("newBookMark"));
-		button.addSelectionListener(new BookMarkSelectionListener(messageService, bookMarkManager, booksComparator));
+		button.addSelectionListener(
+				new BookMarkSelectionListener(messageService, bookMarkManager, booksComparator, bible));
 	}
 
 	private String getBookMarks(Entry<BookMarkCategory, LocalDateTime> categoryAndDate) {

@@ -3,6 +3,7 @@ package com.lory.biblereader.model;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import org.eclipse.e4.core.di.annotations.Creatable;
@@ -11,6 +12,9 @@ import org.eclipse.e4.core.di.annotations.Creatable;
 @Singleton
 public class CurrentChapter extends Observable {
 
+	@Inject
+	private Bible bible;
+	
 	private Chapter chapter;
 
 	public Chapter getChapter() {
@@ -24,7 +28,7 @@ public class CurrentChapter extends Observable {
 	}
 
 	public void setChapter(String bookTitle, int chapterId) {
-		Book book = Bible.getBookByTitle(bookTitle);
+		Book book = bible.getBookByTitle(bookTitle);
 		setChapter(book.getChapter(chapterId));
 	}
 

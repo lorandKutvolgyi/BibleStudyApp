@@ -6,7 +6,6 @@ import java.util.Observer;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
-import org.eclipse.e4.ui.di.PersistState;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.jface.viewers.TreePath;
 import org.eclipse.jface.viewers.TreeSelection;
@@ -16,7 +15,6 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 
 import com.lory.biblereader.i18n.MessageService;
-import com.lory.biblereader.model.Bible;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.CurrentChapter;
 import com.lory.biblereader.model.Testament;
@@ -45,7 +43,6 @@ public class BooksPart implements Observer {
 	public void postConstruct(MPart part, final Composite parent) {
 		setLayout(parent);
 		initBooksTreeViewer(parent);
-		restorePersistedState(part);
 		currentChapter.setObserver(this);
 	}
 
@@ -70,33 +67,6 @@ public class BooksPart implements Observer {
 		booksTreeViewer.getTree().addKeyListener(booksKeyListener);
 		booksTreeViewer.getTree().addMouseListener(bookClickListener);
 		booksTreeViewer.addSelectionChangedListener(selectionListener);
-	}
-
-	@PersistState
-	private void persist(MPart part) {
-		if (isCurrentChapterSet()) {
-			part.getPersistedState().put("bookTitle", currentChapter.getChapter().getBook().getTitle());
-		}
-	}
-
-	private boolean isCurrentChapterSet() {
-		return currentChapter.getChapter() != null;
-	}
-
-	private void restorePersistedState(MPart part) {
-		Book book = Bible.getBookByTitle(restoreBookTitle(part));
-		if (book != null) {
-			selectionListener.allowSelectionChangeEvent(false);
-			booksTreeViewer.setSelection(createTreeSelection(book));
-		}
-	}
-
-	private String restoreBookTitle(MPart part) {
-		return part.getPersistedState().get("bookTitle");
-	}
-
-	private TreeSelection createTreeSelection(Book book) {
-		return new TreeSelection(new TreePath[] { new TreePath(new Object[] { book.getParent(), book }) });
 	}
 
 	public TreeViewer getBooks() {

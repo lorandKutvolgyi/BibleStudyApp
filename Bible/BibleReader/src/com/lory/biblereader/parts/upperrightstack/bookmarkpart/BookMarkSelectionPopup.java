@@ -31,6 +31,7 @@ public class BookMarkSelectionPopup {
 	private MessageService messageService;
 	private BookMarkManager bookMarkManager;
 	private BooksComparator booksComparator;
+	private Bible bible;
 	private final String placeholderForCategories;
 	private final String placeholderForVerses;
 	private Shell shell;
@@ -43,12 +44,13 @@ public class BookMarkSelectionPopup {
 	private Button save;
 
 	public BookMarkSelectionPopup(MessageService messageService, BookMarkManager bookMarkManager,
-			BooksComparator booksComparator) {
+			BooksComparator booksComparator, Bible bible) {
 		this.messageService = messageService;
 		this.bookMarkManager = bookMarkManager;
 		this.booksComparator = booksComparator;
 		this.placeholderForCategories = messageService.getMessage("label");
 		this.placeholderForVerses = messageService.getMessage("verses");
+		this.bible = bible;
 
 		createPopupShell();
 		createGroup();
@@ -97,7 +99,7 @@ public class BookMarkSelectionPopup {
 		books = new Combo(group, SWT.DROP_DOWN | SWT.READ_ONLY);
 		books.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		books.setVisibleItemCount(10);
-		books.addSelectionListener(new BooksComboSelectionListener(books, chapters));
+		books.addSelectionListener(new BooksComboSelectionListener(books, chapters, bible));
 	}
 
 	private void createChaptersCombo() {
@@ -135,7 +137,7 @@ public class BookMarkSelectionPopup {
 		save = new Button(buttons, SWT.PUSH);
 		save.setText(messageService.getMessage("save"));
 		save.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-		save.addSelectionListener(new SaveButtonSelectionListener(this, bookMarkManager, messageService));
+		save.addSelectionListener(new SaveButtonSelectionListener(this, bookMarkManager, messageService, bible));
 	}
 
 	private void createCancelButton(Composite buttons) {
@@ -153,7 +155,7 @@ public class BookMarkSelectionPopup {
 	public void open(Chapter chapter) {
 		shell.open();
 		cancel.setFocus();
-		books.select(Bible.getBooks().indexOf(chapter.getBook()));
+		books.select(bible.getBooks().indexOf(chapter.getBook()));
 		fillChaptersCombo();
 		chapters.select(chapter.getId() - 1);
 		addPlaceHolderToCategories();
@@ -169,13 +171,13 @@ public class BookMarkSelectionPopup {
 	}
 
 	private void fillBooksCombo() {
-		for (Book book : Bible.getBooks()) {
+		for (Book book : bible.getBooks()) {
 			books.add(messageService.getMessage(book.getTitle()));
 		}
 	}
 
 	private void fillChaptersCombo() {
-		List<Chapter> chapters2 = Bible.getBooks().get(books.getSelectionIndex()).getChapters();
+		List<Chapter> chapters2 = bible.getBooks().get(books.getSelectionIndex()).getChapters();
 		for (int i = 1; i <= chapters2.size(); i++) {
 			chapters.add(String.valueOf(i));
 		}

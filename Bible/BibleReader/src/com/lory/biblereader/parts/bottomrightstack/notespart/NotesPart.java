@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import org.eclipse.nebula.widgets.richtext.RichTextEditor;
 import org.eclipse.nebula.widgets.richtext.RichTextViewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
@@ -40,7 +39,6 @@ public class NotesPart {
 				shell.setLayout(new GridLayout(1, false));
 				RichTextEditor editor = new RichTextEditor(shell);
 				editor.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-				editor.getEditorConfiguration().setBrowser(new Browser(shell, 0));
 				Button button = new Button(shell, SWT.PUSH);
 				button.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, true, false));
 				button.setText(messageService.getMessage("save"));

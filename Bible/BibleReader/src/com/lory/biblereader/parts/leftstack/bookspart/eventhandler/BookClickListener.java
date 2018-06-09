@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Tree;
 
 import com.lory.biblereader.i18n.MessageService;
+import com.lory.biblereader.model.Bible;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.dao.ChapterSqlDao;
@@ -32,6 +33,8 @@ public class BookClickListener extends MouseAdapter {
 	private BookMarkManager bookMarkManager;
 	@Inject
 	private BooksComparator booksComparator;
+	@Inject
+	private Bible bible;
 
 	private ChapterSqlDao chapterSqlDao = new ChapterSqlDao();
 
@@ -69,7 +72,7 @@ public class BookClickListener extends MouseAdapter {
 		addToBookMark.setText(messageService.getMessage("newBookMark"));
 		addToBookMark.addListener(SWT.Selection, event -> {
 			BookMarkSelectionPopup bookMarkSelectionPopup = new BookMarkSelectionPopup(messageService, bookMarkManager,
-					booksComparator);
+					booksComparator, bible);
 			bookMarkSelectionPopup.open(getChapter(mouseEvent));
 		});
 	}

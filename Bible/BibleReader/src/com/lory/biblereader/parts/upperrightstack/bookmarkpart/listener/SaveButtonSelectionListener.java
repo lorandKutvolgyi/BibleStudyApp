@@ -25,14 +25,16 @@ public class SaveButtonSelectionListener implements SelectionListener {
 	private MessageService messageService;
 	private Text verses;
 	private Combo categories;
+	private Bible bible;
 
 	public SaveButtonSelectionListener(BookMarkSelectionPopup popup, BookMarkManager bookMarkManager,
-			MessageService messageService) {
+			MessageService messageService, Bible bible) {
 		this.popup = popup;
 		this.bookMarkManager = bookMarkManager;
 		this.messageService = messageService;
 		this.verses = popup.getVerses();
 		this.categories = popup.getCategories();
+		this.bible = bible;
 	}
 
 	@Override
@@ -41,7 +43,7 @@ public class SaveButtonSelectionListener implements SelectionListener {
 		popup.getCancel().setEnabled(false);
 		int bookIndex = popup.getBooks().getSelectionIndex();
 		int chapterIndex = popup.getChapters().getSelectionIndex();
-		Chapter chapter = Bible.getBooks().get(bookIndex).getChapters().get(chapterIndex);
+		Chapter chapter = bible.getBooks().get(bookIndex).getChapters().get(chapterIndex);
 		List<Integer> versesAsIntegers = BookMarkUtil.getVersesAsIntegers(isVersesEmpty() ? "" : verses.getText());
 		BookMarkCategory category = isCategoriesEmpty() ? bookMarkManager.getDefaultCategory()
 				: new BookMarkCategory(categories.getText(), bookMarkManager);

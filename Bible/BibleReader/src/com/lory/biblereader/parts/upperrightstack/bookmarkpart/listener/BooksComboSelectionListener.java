@@ -9,18 +9,20 @@ import com.lory.biblereader.model.Chapter;
 
 public class BooksComboSelectionListener implements SelectionListener {
 
-	private Combo chapters;
+	private Bible bible;
 	private Combo books;
+	private Combo chapters;
 
-	public BooksComboSelectionListener(Combo books, Combo chapters) {
+	public BooksComboSelectionListener(Combo books, Combo chapters, Bible bible) {
 		this.books = books;
 		this.chapters = chapters;
+		this.bible = bible;
 	}
 
 	@Override
 	public void widgetSelected(SelectionEvent e) {
 		chapters.removeAll();
-		for (Chapter chapter : Bible.getBooks().get(books.getSelectionIndex()).getChapters()) {
+		for (Chapter chapter : bible.getBooks().get(books.getSelectionIndex()).getChapters()) {
 			chapters.add(String.valueOf(chapter.getId()));
 		}
 		chapters.select(0);
