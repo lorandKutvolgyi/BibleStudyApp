@@ -24,8 +24,8 @@ public class MessageServiceTest {
 
 	@Test
 	public void testGetMessageWhenMessageKeyExistsShouldReturnTheMessage() {
-		messages.EPHESIANS = "Efezus";
-		assertEquals("Efezus", underTest.getMessage("EPHESIANS"));
+		messages.Eph = "Efezus";
+		assertEquals("Efezus", underTest.getMessage("Eph"));
 	}
 
 	@Test(expected = IllegalArgumentException.class)

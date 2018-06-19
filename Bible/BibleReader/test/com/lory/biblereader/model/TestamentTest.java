@@ -31,7 +31,7 @@ public class TestamentTest {
 
 	@Test
 	public void testGetBookWhenTitleIsCorrectShouldReturnTheBook() {
-		assertEquals(OldTestamentBooks.GENESIS, Testament.OLD_TESTAMENT.getBook("GENESIS"));
+		assertEquals(OldTestamentBooks.GENESIS, Testament.OLD_TESTAMENT.getBook("Gen"));
 	}
 
 	@Test

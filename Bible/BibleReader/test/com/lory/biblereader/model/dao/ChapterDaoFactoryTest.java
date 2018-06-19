@@ -12,8 +12,8 @@ import org.junit.Test;
  */
 public class ChapterDaoFactoryTest {
 
-    @Test
-    public void testGetInstanceShouldReturnChapterDao() {
-        assertTrue(BibleDaoFactory.getInstance() instanceof ChapterDao);
-    }
+	@Test
+	public void testGetInstanceShouldReturnChapterDao() {
+		assertTrue(BibleDaoFactory.getInstance() instanceof BibleDao);
+	}
 }
