@@ -16,7 +16,6 @@
    <windowImages/>
 
    <launcher>
-      <solaris/>
       <win useIco="false">
          <bmp/>
       </win>
@@ -30,12 +29,9 @@
       <plugin id="javax.annotation"/>
       <plugin id="javax.inject"/>
       <plugin id="javax.xml"/>
-      <plugin id="log4jproperties" fragment="true"/>
-      <plugin id="logger"/>
       <plugin id="org.apache.ant"/>
       <plugin id="org.apache.batik.css"/>
       <plugin id="org.apache.batik.util"/>
-      <plugin id="org.apache.batik.util.gui"/>
       <plugin id="org.apache.commons.jxpath"/>
       <plugin id="org.apache.log4j"/>
       <plugin id="org.apache.xerces"/>
@@ -117,26 +113,7 @@
       <plugin id="org.eclipse.m2e.maven.runtime.slf4j.simple"/>
       <plugin id="org.eclipse.m2e.model.edit"/>
       <plugin id="org.eclipse.m2e.workspace.cli"/>
-      <plugin id="org.eclipse.nebula.cwt"/>
-      <plugin id="org.eclipse.nebula.effects.stw"/>
-      <plugin id="org.eclipse.nebula.jface.cdatetime"/>
-      <plugin id="org.eclipse.nebula.paperclips.core"/>
-      <plugin id="org.eclipse.nebula.paperclips.widgets"/>
-      <plugin id="org.eclipse.nebula.widgets.cdatetime"/>
-      <plugin id="org.eclipse.nebula.widgets.compositetable"/>
-      <plugin id="org.eclipse.nebula.widgets.gallery"/>
-      <plugin id="org.eclipse.nebula.widgets.ganttchart"/>
-      <plugin id="org.eclipse.nebula.widgets.geomap"/>
-      <plugin id="org.eclipse.nebula.widgets.grid"/>
-      <plugin id="org.eclipse.nebula.widgets.oscilloscope"/>
-      <plugin id="org.eclipse.nebula.widgets.oscilloscope.source"/>
-      <plugin id="org.eclipse.nebula.widgets.pgroup"/>
-      <plugin id="org.eclipse.nebula.widgets.pshelf"/>
-      <plugin id="org.eclipse.nebula.widgets.pshelf.css"/>
       <plugin id="org.eclipse.nebula.widgets.richtext"/>
-      <plugin id="org.eclipse.nebula.widgets.tablecombo"/>
-      <plugin id="org.eclipse.nebula.widgets.xviewer"/>
-      <plugin id="org.eclipse.nebula.widgets.xviewer.core"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.compatibility.state" fragment="true"/>
       <plugin id="org.eclipse.osgi.services"/>
@@ -161,8 +138,9 @@
       <plugin id="org.eclipse.wst.xml.core"/>
       <plugin id="org.eclipse.wst.xsd.core"/>
       <plugin id="org.eclipse.xsd"/>
-      <plugin id="org.slf4j.api"/>
+      <plugin id="org.slf4j.api" version="1.7.10.v20170428-1633"/>
       <plugin id="org.slf4j.impl.log4j12" fragment="true"/>
+      <plugin id="org.slf4j.log4j"/>
       <plugin id="org.tukaani.xz"/>
       <plugin id="org.w3c.css.sac"/>
       <plugin id="org.w3c.dom.events"/>
@@ -172,7 +150,6 @@
    </plugins>
 
    <configurations>
-      <plugin id="logger" autoStart="true" startLevel="1" />
       <plugin id="org.apache.log4j" autoStart="true" startLevel="1" />
       <plugin id="org.aspectj.ajde" autoStart="true" startLevel="1" />
       <plugin id="org.aspectj.runtime" autoStart="true" startLevel="1" />
@@ -185,7 +162,6 @@
       <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
       <plugin id="org.eclipse.equinox.weaving.aspectj" autoStart="true" startLevel="1" />
       <plugin id="org.slf4j.api" autoStart="true" startLevel="1" />
-      <plugin id="reader" autoStart="false" startLevel="0" />
    </configurations>
 
    <preferencesInfo>

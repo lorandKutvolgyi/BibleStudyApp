@@ -15,18 +15,15 @@
 	<properties>
 		<tycho.version>0.26.0</tycho.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<oxygen-update-repo.url>http://download.eclipse.org/eclipse/updates/4.7</oxygen-update-repo.url>
-		<aspectj-repo.url>http://download.eclipse.org/tools/ajdt/47/dev/update</aspectj-repo.url>
+		<update-repo.url>http://download.eclipse.org/eclipse/updates/4.8</update-repo.url>
+		<aspectj-repo.url>http://download.eclipse.org/tools/ajdt/48/dev/update</aspectj-repo.url>
+		<a>http://download.eclipse.org/tools/orbit/downloads/drops/R20180606145124/repository</a>
+		<b>http://oneclicklabs.io/repo/eclipse/plugin/log4j</b>
 	</properties>
 	<repositories>
 		<repository>
-			<id>EclipseOxygen-1</id>
-			<url>http://download.eclipse.org/releases/oxygen/</url>
-			<layout>p2</layout>
-		</repository>
-		<repository>
-			<id>EclipseOxygen-2</id>
-			<url>http://download.eclipse.org/releases/oxygen/201706281000</url>
+			<id>Eclipse</id>
+			<url>http://download.eclipse.org/releases/photon/</url>
 			<layout>p2</layout>
 		</repository>
 		<repository>
@@ -35,13 +32,23 @@
 			<layout>p2</layout>
 		</repository>
 		<repository>
-			<id>oxygen_update</id>
-			<url>${oxygen-update-repo.url}</url>
+			<id>update</id>
+			<url>${update-repo.url}</url>
 			<layout>p2</layout>
 		</repository>
 		<repository>
 			<id>aspectj</id>
 			<url>${aspectj-repo.url}</url>
+			<layout>p2</layout>
+		</repository>
+		<repository>
+			<id>orbit</id>
+			<url>${a}</url>
+			<layout>p2</layout>
+		</repository>
+		<repository>
+			<id>log4j</id>
+			<url>${b}</url>
 			<layout>p2</layout>
 		</repository>
 	</repositories>

@@ -36,12 +36,7 @@
     </children>
     <mainMenu xmi:id="_P5x4EBo0EeeuaO7Y1kMvqw" elementId="biblereader.menu.2">
       <children xsi:type="menu:Menu" xmi:id="_THOEcBo0EeeuaO7Y1kMvqw" elementId="biblereader.menu.translations" label="%translations">
-        <children xsi:type="menu:Menu" xmi:id="_C38VoCHYEeeUyN1pG4NImw" elementId="biblereader.menu.hungarian" label="%hungarian">
-          <children xsi:type="menu:DirectMenuItem" xmi:id="_13hcUCVFEeeDM4f575PFtA" elementId="biblereader.directmenuitem.karoly" label="%karoly"/>
-        </children>
-        <children xsi:type="menu:Menu" xmi:id="_G3AMMCHYEeeUyN1pG4NImw" elementId="biblereader.menu.english" label="%english">
-          <children xsi:type="menu:DirectMenuItem" xmi:id="_L--boCVGEeeDM4f575PFtA" elementId="biblereader.directmenuitem.niv" label="%NIV"/>
-        </children>
+        <children xsi:type="menu:DynamicMenuContribution" xmi:id="_PKgEEHMdEeiNPaidIWbpwg" elementId="reader.dynamicmenucontribution.0" contributionURI="bundleclass://reader/com.lory.biblereader.menu.Translation"/>
       </children>
     </mainMenu>
     <trimBars xmi:id="__LiGoBw3EeetS7PfnSTHUQ" elementId="biblereader.trimbar.0">
@@ -50,8 +45,6 @@
         <children xsi:type="menu:DirectToolItem" xmi:id="_FoIGAB-uEeeCcr4eHJsE8w" elementId="biblereader.directtoolitem.nextchapter" label="Next chapter" iconURI="platform:/plugin/reader/resources/referenceForward.gif" tooltip="%next.chapter" contributionURI="bundleclass://reader/com.lory.biblereader.toolbar.eventhandler.NextChapter"/>
         <children xsi:type="menu:DirectToolItem" xmi:id="_1zCKsB-vEeeCcr4eHJsE8w" elementId="biblereader.directtoolitem.previousbook" label="Previous book" iconURI="platform:/plugin/reader/resources/adviceBack.gif" tooltip="%previous.book" contributionURI="bundleclass://reader/com.lory.biblereader.toolbar.eventhandler.PreviousBook"/>
         <children xsi:type="menu:DirectToolItem" xmi:id="_c-KGYB-wEeeCcr4eHJsE8w" elementId="biblereader.directtoolitem.nextbook" label="Next book" iconURI="platform:/plugin/reader/resources/adviceForward.gif" tooltip="%next.book" contributionURI="bundleclass://reader/com.lory.biblereader.toolbar.eventhandler.NextBook"/>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_D0G8ACFhEeefyc0XSHCBbQ" elementId="biblereader.directtoolitem.english" label="English" iconURI="platform:/plugin/org.apache.batik.util.gui/org/apache/batik/util/gui/resources/flags/flag_en.gif" tooltip="%english"/>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_hRBF8CFhEeefyc0XSHCBbQ" elementId="biblereader.directtoolitem.hungarian" label="Hungarian" iconURI="platform:/plugin/org.apache.batik.util.gui/org/apache/batik/util/gui/resources/flags/flag_hu.gif" tooltip="%hungarian"/>
       </children>
     </trimBars>
   </children>

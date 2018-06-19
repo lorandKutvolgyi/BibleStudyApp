@@ -19,13 +19,14 @@ import org.eclipse.swt.widgets.Shell;
 import com.lory.biblereader.i18n.MessageService;
 
 public class NotesPart {
+
 	@Inject
 	private MessageService messageService;
 
 	@PostConstruct
 	public void postConstruct(Composite parent) {
 		parent.setLayout(new GridLayout(1, false));
-		RichTextViewer text = new RichTextViewer(parent, SWT.NONE);
+		RichTextViewer text = new RichTextViewer(parent, SWT.WEBKIT);
 		text.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 		text.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		Button button = new Button(parent, SWT.PUSH);
@@ -37,7 +38,7 @@ public class NotesPart {
 			public void widgetSelected(SelectionEvent e) {
 				Shell shell = new Shell(Display.getCurrent().getActiveShell());
 				shell.setLayout(new GridLayout(1, false));
-				RichTextEditor editor = new RichTextEditor(shell);
+				RichTextEditor editor = new RichTextEditor(shell, SWT.WEBKIT);
 				editor.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 				Button button = new Button(shell, SWT.PUSH);
 				button.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, true, false));

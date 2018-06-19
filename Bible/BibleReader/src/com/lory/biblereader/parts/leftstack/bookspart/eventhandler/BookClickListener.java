@@ -35,8 +35,8 @@ public class BookClickListener extends MouseAdapter {
 	private BooksComparator booksComparator;
 	@Inject
 	private Bible bible;
-
-	private ChapterSqlDao chapterSqlDao = new ChapterSqlDao();
+	@Inject
+	private ChapterSqlDao dao;
 
 	@Override
 	public void mouseDown(MouseEvent event) {
@@ -78,7 +78,7 @@ public class BookClickListener extends MouseAdapter {
 	}
 
 	private Chapter getChapter(MouseEvent mouseEvent) {
-		return chapterSqlDao.findChapterById(getSelectedBook(mouseEvent), 1);
+		return dao.findChapterById(getSelectedBook(mouseEvent), 1);
 	}
 
 	private Book getSelectedBook(MouseEvent mouseEvent) {

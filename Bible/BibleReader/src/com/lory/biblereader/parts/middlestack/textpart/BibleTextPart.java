@@ -64,7 +64,7 @@ public class BibleTextPart implements Observer {
 	}
 
 	private Text createSearchText(Composite parent) {
-		Text searchtext = new Text(parent, SWT.SEARCH | SWT.ICON_CANCEL | SWT.ICON_SEARCH);
+		Text searchtext = new Text(parent, SWT.SEARCH | SWT.ICON_CANCEL);
 		searchtext.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
 		searchtext.addModifyListener(textSearchListener);
 		searchtext.setMessage(messageService.getMessage("searchTextPlaceholder"));
@@ -95,8 +95,10 @@ public class BibleTextPart implements Observer {
 	@PersistState
 	private void persist(MPart part) {
 		Chapter chapter = textPartManager.getChapters().get(part);
-		part.getPersistedState().put("title", chapter.getBook().getTitle());
-		part.getPersistedState().put("id", String.valueOf(chapter.getId()));
+		if (chapter != null) {
+			part.getPersistedState().put("title", chapter.getBook().getTitle());
+			part.getPersistedState().put("id", String.valueOf(chapter.getId()));
+		}
 	}
 
 	@PreDestroy
