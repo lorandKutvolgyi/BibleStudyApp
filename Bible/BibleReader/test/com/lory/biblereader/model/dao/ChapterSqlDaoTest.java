@@ -13,18 +13,18 @@ import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.NewTestamentBooks;
 
 /**
- * Integration test for {@link ChapterSqlDao}. The database server have to work
+ * Integration test for {@link BibleDao}. The database server have to work
  * to make this test work.
  *
  * @author lorandKutvolgyi
  *
  */
 public class ChapterSqlDaoTest {
-    private ChapterSqlDao underTest;
+    private BibleDao underTest;
 
     @Before
     public void setUp() {
-        underTest = new ChapterSqlDao();
+        underTest = new BibleDao();
     }
 
     @Test
@@ -46,13 +46,13 @@ public class ChapterSqlDaoTest {
 
     @Test
     public void testFindAllShouldReturnAllChaptersOfTheBook() {
-        List<Chapter> chapters = underTest.findAllChapters(NewTestamentBooks.I_JOHN);
+        List<Chapter> chapters = underTest.getBookSize(NewTestamentBooks.I_JOHN);
         assertEquals(5, chapters.size());
     }
 
     @Test
     public void testFindAllShouldReturnCorrectChapters() {
-        List<Chapter> chapters = underTest.findAllChapters(NewTestamentBooks.I_JOHN);
+        List<Chapter> chapters = underTest.getBookSize(NewTestamentBooks.I_JOHN);
         assertTrue(isCorrectChapters(chapters));
     }
 

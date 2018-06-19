@@ -7,27 +7,18 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
-
-import javax.annotation.PostConstruct;
-import javax.inject.Singleton;
-
-import org.eclipse.e4.core.di.annotations.Creatable;
 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.TreeMultimap;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
+import com.lory.biblereader.model.TranslationManager;
 
-@Creatable
-@Singleton
-public class ChapterSqlDao {
+public class BibleDao {
 
 	private Connection connection;
 	private final Properties prop = new Properties();
-	private String activeTranslation;
 
 	static {
 		try {
@@ -37,14 +28,13 @@ public class ChapterSqlDao {
 		}
 	}
 
-	@PostConstruct
-	public void init() {
+	public BibleDao() {
 		loadProperties();
 		createConnection(prop.getProperty("url"), prop.getProperty("username"), prop.getProperty("password"));
 	}
 
 	private void loadProperties() {
-		Class<? extends ChapterSqlDao> clazz = getClass();
+		Class<? extends BibleDao> clazz = getClass();
 		try (InputStream input = clazz.getResourceAsStream("db_connection.properties")) {
 			prop.load(input);
 		} catch (IOException ex) {
@@ -74,7 +64,9 @@ public class ChapterSqlDao {
 
 	private PreparedStatement createStatement(Book book, int id) throws SQLException {
 		PreparedStatement stmt = connection.prepareStatement(
-				"SELECT chapter, contents FROM " + activeTranslation + " WHERE chapter=? AND book=?;");
+				"SELECT chapter, string_agg(verse || ' ' || contents, '\n' ORDER BY verse) as contents FROM study_app."
+						+ TranslationManager.getActiveTranslationAbbreviation().toLowerCase()
+						+ " WHERE chapter=? AND book=? GROUP BY chapter;");
 		stmt.setInt(1, id);
 		stmt.setString(2, book.getTitle());
 		return stmt;
@@ -94,21 +86,19 @@ public class ChapterSqlDao {
 		return Chapter.createNewChapter(id, content, book);
 	}
 
-	public List<Chapter> findAllChapters(Book book) {
-		List<Chapter> chapters = new ArrayList<>();
+	public int getBookSize(Book book) {
+		int size = 0;
 		try {
-			PreparedStatement stmt = connection.prepareStatement(
-					"SELECT chapter, contents FROM " + activeTranslation + " WHERE book=? ORDER BY chapter;");
+			PreparedStatement stmt = connection.prepareStatement("SELECT max(chapter) as max FROM study_app."
+					+ TranslationManager.getActiveTranslationAbbreviation().toLowerCase() + " WHERE book=?;");
 			stmt.setString(1, book.getTitle());
 			ResultSet result = stmt.executeQuery();
-			while (result.next()) {
-				Chapter chapter = createChapterByResult(book, result);
-				chapters.add(chapter);
-			}
+			result.next();
+			size = result.getInt("max");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return chapters;
+		return size;
 	}
 
 	public Multimap<String, String> getAvailableTranslations() {

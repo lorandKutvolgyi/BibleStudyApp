@@ -2,25 +2,15 @@ package com.lory.biblereader.model;
 
 import java.util.Locale;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
-import org.eclipse.e4.core.di.annotations.Creatable;
-
 import com.google.common.collect.Multimap;
-import com.lory.biblereader.model.dao.ChapterSqlDao;
+import com.lory.biblereader.model.dao.BibleDaoFactory;
 
-@Creatable
-@Singleton
 public class TranslationManager {
 
-	@Inject
-	private ChapterSqlDao dao;
+	private static String activeTranslation;
 
-	private String activeTranslation;
-
-	public Multimap<String, String> getAvailableTranslations() {
-		Multimap<String, String> availableTranslations = dao.getAvailableTranslations();
+	public static Multimap<String, String> getAvailableTranslations() {
+		Multimap<String, String> availableTranslations = BibleDaoFactory.getInstance().getAvailableTranslations();
 		if (activeTranslation == null) {
 			String defaultLang = Locale.getDefault().getLanguage().toUpperCase();
 			activeTranslation = availableTranslations.get(defaultLang).stream().findFirst().get();
@@ -28,15 +18,16 @@ public class TranslationManager {
 		return availableTranslations;
 	}
 
-	public void setActiveTranslationAbbreviation(String abbrev) {
-		this.activeTranslation = activeTranslation + ":" + dao.getDescription(abbrev.toLowerCase());
+	public static void setActiveTranslationAbbreviation(String abbrev) {
+		activeTranslation = activeTranslation + ":"
+				+ BibleDaoFactory.getInstance().getDescription(abbrev.toLowerCase());
 	}
 
-	public String getActiveTranslationAbbreviation() {
+	public static String getActiveTranslationAbbreviation() {
 		return activeTranslation.split(":")[0];
 	}
 
-	public String getActiveTranslationDescription() {
+	public static String getActiveTranslationDescription() {
 		return activeTranslation.split(":")[1];
 	}
 }

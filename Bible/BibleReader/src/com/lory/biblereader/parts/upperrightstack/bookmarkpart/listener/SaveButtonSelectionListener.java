@@ -42,8 +42,8 @@ public class SaveButtonSelectionListener implements SelectionListener {
 		popup.getSave().setEnabled(false);
 		popup.getCancel().setEnabled(false);
 		int bookIndex = popup.getBooks().getSelectionIndex();
-		int chapterIndex = popup.getChapters().getSelectionIndex();
-		Chapter chapter = bible.getBooks().get(bookIndex).getChapters().get(chapterIndex);
+		int chapterIndex = popup.getChapters().getSelectionIndex() + 1;
+		Chapter chapter = bible.getBooks().get(bookIndex).getChapter(chapterIndex);
 		List<Integer> versesAsIntegers = BookMarkUtil.getVersesAsIntegers(isVersesEmpty() ? "" : verses.getText());
 		BookMarkCategory category = isCategoriesEmpty() ? bookMarkManager.getDefaultCategory()
 				: new BookMarkCategory(categories.getText(), bookMarkManager);

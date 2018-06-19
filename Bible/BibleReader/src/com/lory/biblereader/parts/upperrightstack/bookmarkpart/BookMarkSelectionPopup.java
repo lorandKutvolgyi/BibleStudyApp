@@ -1,7 +1,5 @@
 package com.lory.biblereader.parts.upperrightstack.bookmarkpart;
 
-import java.util.List;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
@@ -177,8 +175,8 @@ public class BookMarkSelectionPopup {
 	}
 
 	private void fillChaptersCombo() {
-		List<Chapter> chapters2 = bible.getBooks().get(books.getSelectionIndex()).getChapters();
-		for (int i = 1; i <= chapters2.size(); i++) {
+		int size = bible.getBooks().get(books.getSelectionIndex()).getBookSize();
+		for (int i = 1; i <= size; i++) {
 			chapters.add(String.valueOf(i));
 		}
 	}

@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 /**
- * Unit test for {@link ChapterDaoFactory}.
+ * Unit test for {@link BibleDaoFactory}.
  *
  * @author lorandKutvolgyi
  *
@@ -14,6 +14,6 @@ public class ChapterDaoFactoryTest {
 
     @Test
     public void testGetInstanceShouldReturnChapterDao() {
-        assertTrue(ChapterDaoFactory.getInstance() instanceof ChapterDao);
+        assertTrue(BibleDaoFactory.getInstance() instanceof ChapterDao);
     }
 }

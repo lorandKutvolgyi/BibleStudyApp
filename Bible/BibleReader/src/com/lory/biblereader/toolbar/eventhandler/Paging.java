@@ -54,6 +54,6 @@ public class Paging {
 	}
 
 	private int isMax(Book book) {
-		return book.getChapters().size();
+		return book.getBookSize();
 	}
 }

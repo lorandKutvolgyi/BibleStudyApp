@@ -5,7 +5,6 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Combo;
 
 import com.lory.biblereader.model.Bible;
-import com.lory.biblereader.model.Chapter;
 
 public class BooksComboSelectionListener implements SelectionListener {
 
@@ -22,8 +21,8 @@ public class BooksComboSelectionListener implements SelectionListener {
 	@Override
 	public void widgetSelected(SelectionEvent e) {
 		chapters.removeAll();
-		for (Chapter chapter : bible.getBooks().get(books.getSelectionIndex()).getChapters()) {
-			chapters.add(String.valueOf(chapter.getId()));
+		for (int i = 1; i <= bible.getBooks().get(books.getSelectionIndex()).getBookSize(); i++) {
+			chapters.add(String.valueOf(i));
 		}
 		chapters.select(0);
 	}

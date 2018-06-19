@@ -2,8 +2,6 @@ package com.lory.biblereader.menu;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.eclipse.e4.ui.di.AboutToShow;
 import org.eclipse.e4.ui.model.application.ui.menu.MDirectMenuItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MMenu;
@@ -15,12 +13,9 @@ import com.lory.biblereader.model.TranslationManager;
 
 public class Translation {
 
-	@Inject
-	private TranslationManager translationManager;
-
 	@AboutToShow
 	public void aboutToShow(List<MMenuElement> items) {
-		Multimap<String, String> availableTranslations = translationManager.getAvailableTranslations();
+		Multimap<String, String> availableTranslations = TranslationManager.getAvailableTranslations();
 		availableTranslations.asMap().keySet().stream().forEach(lang -> {
 			MMenu menu = MMenuFactory.INSTANCE.createMenu();
 			menu.setLabel(lang);

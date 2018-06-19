@@ -2,44 +2,42 @@ package com.lory.biblereader.model;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
-import com.lory.biblereader.model.dao.ChapterDao;
-import com.lory.biblereader.model.dao.ChapterDaoFactory;
+import com.lory.biblereader.model.dao.BibleDao;
+import com.lory.biblereader.model.dao.BibleDaoFactory;
 
 public enum NewTestamentBooks implements Book {
 
-	MATTHEW("MATTHEW"),
-	MARK("MARK"),
-	LUKE("LUKE"),
-	JOHN("JOHN"),
-	ACTS("ACTS"),
-	ROMANS("ROMANS"),
-	I_CORINTHIANS("I_CORINTHIANS"),
-	II_CORINTHIANS("II_CORINTHIANS"),
-	GALATIANS("GALATIANS"),
-	EPHESIANS("EPHESIANS"),
-	PHILIPPIANS("PHILIPPIANS"),
-	COLOSSIANS("COLOSSIANS"),
-	I_THESSALONIANS("I_THESSALONIANS"),
-	II_THESSALONIANS("II_THESSALONIANS"),
-	I_TIMOTHY("I_TIMOTHY"),
-	II_TIMOTHY("II_TIMOTHY"),
-	TITUS("TITUS"),
-	PHILEMON("PHILEMON"),
-	HEBREWS("HEBREWS"),
-	JAMES("JAMES"),
-	I_PETER("I_PETER"),
-	II_PETER("II_PETER"),
-	I_JOHN("I_JOHN"),
-	II_JOHN("II_JOHN"),
-	III_JOHN("III_JOHN"),
-	JUDE("JUDE"),
-	REVELATION("REVELATION");
+	MATTHEW("Matt"),
+	MARK("Mark"),
+	LUKE("Luke"),
+	JOHN("John"),
+	ACTS("Acts"),
+	ROMANS("Rom"),
+	I_CORINTHIANS("I_Cor"),
+	II_CORINTHIANS("II_Cor"),
+	GALATIANS("Gal"),
+	EPHESIANS("Eph"),
+	PHILIPPIANS("Phil"),
+	COLOSSIANS("Col"),
+	I_THESSALONIANS("I_Thess"),
+	II_THESSALONIANS("II_Thess"),
+	I_TIMOTHY("I_Tim"),
+	II_TIMOTHY("II_Tim"),
+	TITUS("Titus"),
+	PHILEMON("Phlm"),
+	HEBREWS("Heb"),
+	JAMES("Jas"),
+	I_PETER("I_Pet"),
+	II_PETER("II_Pet"),
+	I_JOHN("I_John"),
+	II_JOHN("II_John"),
+	III_JOHN("III_John"),
+	JUDE("Jude"),
+	REVELATION("Rev");
 
-	private static ChapterDao dao = ChapterDaoFactory.getInstance();
+	private static BibleDao dao = BibleDaoFactory.getInstance();
 	private final String title;
-	private List<Chapter> chapters;
 
 	private NewTestamentBooks(String title) {
 		this.title = title;
@@ -56,11 +54,8 @@ public enum NewTestamentBooks implements Book {
 	}
 
 	@Override
-	public List<Chapter> getChapters() {
-		if (chapters == null) {
-			chapters = dao.findAllChapters(this);
-		}
-		return chapters;
+	public int getBookSize() {
+		return dao.getBookSize(this);
 	}
 
 	@Override

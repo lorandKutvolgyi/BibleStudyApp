@@ -16,7 +16,7 @@ import com.lory.biblereader.i18n.MessageService;
 import com.lory.biblereader.model.Bible;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
-import com.lory.biblereader.model.dao.ChapterSqlDao;
+import com.lory.biblereader.model.dao.BibleDaoFactory;
 import com.lory.biblereader.parts.leftstack.bookspart.treesorter.BooksComparator;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkManager;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkSelectionPopup;
@@ -35,8 +35,6 @@ public class BookClickListener extends MouseAdapter {
 	private BooksComparator booksComparator;
 	@Inject
 	private Bible bible;
-	@Inject
-	private ChapterSqlDao dao;
 
 	@Override
 	public void mouseDown(MouseEvent event) {
@@ -78,7 +76,7 @@ public class BookClickListener extends MouseAdapter {
 	}
 
 	private Chapter getChapter(MouseEvent mouseEvent) {
-		return dao.findChapterById(getSelectedBook(mouseEvent), 1);
+		return BibleDaoFactory.getInstance().findChapterById(getSelectedBook(mouseEvent), 1);
 	}
 
 	private Book getSelectedBook(MouseEvent mouseEvent) {

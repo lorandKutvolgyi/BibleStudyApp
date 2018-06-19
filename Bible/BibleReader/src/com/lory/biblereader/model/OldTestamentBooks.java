@@ -2,56 +2,54 @@ package com.lory.biblereader.model;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
-import com.lory.biblereader.model.dao.ChapterDao;
-import com.lory.biblereader.model.dao.ChapterDaoFactory;
+import com.lory.biblereader.model.dao.BibleDao;
+import com.lory.biblereader.model.dao.BibleDaoFactory;
 
 public enum OldTestamentBooks implements Book {
 
-	GENESIS("GENESIS"),
-	EXODUS("EXODUS"),
-	LEVITICUS("LEVITICUS"),
-	NUMBERS("NUMBERS"),
-	DEUTERONOMY("DEUTERONOMY"),
-	JOSHUA("JOSHUA"),
-	JUDGES("JUDGES"),
-	RUTH("RUTH"),
-	I_SAMUEL("I_SAMUEL"),
-	II_SAMUEL("II_SAMUEL"),
-	I_KINGS("I_KINGS"),
-	II_KINGS("II_KINGS"),
-	I_CHRONICLES("I_CHRONICLES"),
-	II_CHRONICLES("II_CHRONICLES"),
-	EZRA("EZRA"),
-	NEHEMIAH("NEHEMIAH"),
-	ESTHER("ESTHER"),
-	JOB("JOB"),
-	PSALMS("PSALMS"),
-	PROVERBS("PROVERBS"),
-	ECCLESIASTES("ECCLESIASTES"),
-	SONG_OF_SOLOMON("SONG_OF_SOLOMON"),
-	ISAIAH("ISAIAH"),
-	JEREMIAH("JEREMIAH"),
-	LAMENTATIONS("LAMENTATIONS"),
-	EZEKIEL("EZEKIEL"),
-	DANIEL("DANIEL"),
-	HOSEA("HOSEA"),
-	JOEL("JOEL"),
-	AMOS("AMOS"),
-	OBADIAH("OBADIAH"),
-	JONAH("JONAH"),
-	MICAH("MICAH"),
-	NAHUM("NAHUM"),
-	HABAKKUK("HABAKKUK"),
-	ZEPHANIAH("ZEPHANIAH"),
-	HAGGAI("HAGGAI"),
-	ZECHARIAH("ZECHARIAH"),
-	MALACHI("MALACHI");
+	GENESIS("Gen"),
+	EXODUS("Exod"),
+	LEVITICUS("Lev"),
+	NUMBERS("Num"),
+	DEUTERONOMY("Deut"),
+	JOSHUA("Josh"),
+	JUDGES("Judg"),
+	RUTH("Ruth"),
+	I_SAMUEL("I_Sam"),
+	II_SAMUEL("II_Sam"),
+	I_KINGS("I_Kgs"),
+	II_KINGS("II_Kgs"),
+	I_CHRONICLES("I_Chr"),
+	II_CHRONICLES("II_Chr"),
+	EZRA("Ezra"),
+	NEHEMIAH("Neh"),
+	ESTHER("Esth"),
+	JOB("Job"),
+	PSALMS("Ps"),
+	PROVERBS("Prov"),
+	ECCLESIASTES("Eccl"),
+	SONG_OF_SOLOMON("Song"),
+	ISAIAH("Isa"),
+	JEREMIAH("Jer"),
+	LAMENTATIONS("Lam"),
+	EZEKIEL("Ezek"),
+	DANIEL("Dan"),
+	HOSEA("Hos"),
+	JOEL("Joel"),
+	AMOS("Amos"),
+	OBADIAH("Obad"),
+	JONAH("Jonah"),
+	MICAH("Mic"),
+	NAHUM("Nah"),
+	HABAKKUK("Hab"),
+	ZEPHANIAH("Zeph"),
+	HAGGAI("Hag"),
+	ZECHARIAH("Zech"),
+	MALACHI("Mal");
 
-	private static ChapterDao dao = ChapterDaoFactory.getInstance();
+	private BibleDao dao = BibleDaoFactory.getInstance();
 	private String title;
-	private List<Chapter> chapters;
 
 	private OldTestamentBooks(String title) {
 		this.title = title;
@@ -68,11 +66,8 @@ public enum OldTestamentBooks implements Book {
 	}
 
 	@Override
-	public List<Chapter> getChapters() {
-		if (chapters == null) {
-			chapters = dao.findAllChapters(this);
-		}
-		return chapters;
+	public int getBookSize() {
+		return dao.getBookSize(this);
 	}
 
 	@Override
