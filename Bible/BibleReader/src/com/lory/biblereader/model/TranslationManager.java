@@ -19,8 +19,7 @@ public class TranslationManager {
 	}
 
 	public static void setActiveTranslationAbbreviation(String abbrev) {
-		activeTranslation = activeTranslation + ":"
-				+ BibleDaoFactory.getInstance().getDescription(abbrev.toLowerCase());
+		activeTranslation = abbrev + ":" + BibleDaoFactory.getInstance().getDescription(abbrev);
 	}
 
 	public static String getActiveTranslationAbbreviation() {

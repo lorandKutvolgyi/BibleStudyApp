@@ -8,3 +8,4 @@ Require-Bundle: org.slf4j.api;bundle-version="1.7.10",
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Eclipse-SupplementBundle: reader
 Export-Package: com.lory.logging;aspects=BibleLogger;uses:="org.aspectj.lang"
+Automatic-Module-Name: logger

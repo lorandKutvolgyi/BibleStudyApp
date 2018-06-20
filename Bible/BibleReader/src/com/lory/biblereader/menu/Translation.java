@@ -3,6 +3,7 @@ package com.lory.biblereader.menu;
 import java.util.List;
 
 import org.eclipse.e4.ui.di.AboutToShow;
+import org.eclipse.e4.ui.model.application.ui.menu.ItemType;
 import org.eclipse.e4.ui.model.application.ui.menu.MDirectMenuItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MMenu;
 import org.eclipse.e4.ui.model.application.ui.menu.MMenuElement;
@@ -17,18 +18,31 @@ public class Translation {
 	public void aboutToShow(List<MMenuElement> items) {
 		Multimap<String, String> availableTranslations = TranslationManager.getAvailableTranslations();
 		availableTranslations.asMap().keySet().stream().forEach(lang -> {
-			MMenu menu = MMenuFactory.INSTANCE.createMenu();
-			menu.setLabel(lang);
-			availableTranslations.get(lang).stream().forEach(translation -> {
-				MDirectMenuItem dynamicItem = MMenuFactory.INSTANCE.createDirectMenuItem();
-				dynamicItem.setLabel(translation.split(":")[0]);
-				dynamicItem.setTooltip(translation.split(":")[1]);
-				menu.getChildren().add(dynamicItem);
-			});
+			MMenu menu = createMenu(lang);
+			fillMenuWithSubMenuItems(availableTranslations, lang, menu);
 			items.add(menu);
 		});
-//		dynamicItem.setContributorURI("platform:/plugin/at.descher.test");
-//		dynamicItem.setContributionURI("bundleclass://at.descher.test/at.descher.test.DirectMenuItem");
+	}
+
+	private MMenu createMenu(String lang) {
+		MMenu menu = MMenuFactory.INSTANCE.createMenu();
+		menu.setLabel(lang);
+		return menu;
+	}
+
+	private void fillMenuWithSubMenuItems(Multimap<String, String> availableTranslations, String lang, MMenu menu) {
+		availableTranslations.get(lang).stream().sorted().forEach(translation -> {
+			menu.getChildren().add(createSubMenuItems(translation));
+		});
+	}
+
+	private MDirectMenuItem createSubMenuItems(String translation) {
+		MDirectMenuItem item = MMenuFactory.INSTANCE.createDirectMenuItem();
+		item.setContributionURI("bundleclass://reader/com.lory.biblereader.menu.TranslationSelectionHandler");
+		item.setLabel(translation.split(":")[0]);
+		item.setTooltip(translation.split(":")[1]);
+		item.setType(ItemType.RADIO);
+		return item;
 	}
 
 }

@@ -7,7 +7,7 @@
           <children xsi:type="basic:PartSashContainer" xmi:id="_O6yuACNLEeW4Abd66DaAtA" elementId="biblereader.partsashcontainer.1" selectedElement="_WnWxECNLEeW4Abd66DaAtA" horizontal="true">
             <children xsi:type="basic:PartStack" xmi:id="_WnWxECNLEeW4Abd66DaAtA" elementId="biblereader.partstack.books" selectedElement="_Yj7ygCNLEeW4Abd66DaAtA">
               <children xsi:type="basic:Part" xmi:id="_Yj7ygCNLEeW4Abd66DaAtA" elementId="biblereader.BooksPart" contributionURI="bundleclass://reader/com.lory.biblereader.parts.leftstack.bookspart.BooksPart" label="%books" tooltip="%books"/>
-              <children xsi:type="basic:Part" xmi:id="__lJjsBw7EeetS7PfnSTHUQ" elementId="biblereader.part.search" contributionURI="bundleclass://reader/com.lory.biblereader.parts.leftstackstack.SearchPart" label="%search" tooltip="%search" closeable="true"/>
+              <children xsi:type="basic:Part" xmi:id="__lJjsBw7EeetS7PfnSTHUQ" elementId="biblereader.part.search" contributionURI="bundleclass://reader/com.lory.biblereader.parts.leftstack.searchpart.SearchPart" label="%search" tooltip="%search" closeable="true"/>
             </children>
             <children xsi:type="basic:PartSashContainer" xmi:id="_SffSQCHYEeeUyN1pG4NImw" elementId="biblereader.partsashcontainer.3" horizontal="true">
               <children xsi:type="basic:PartStack" xmi:id="_XF0OsCNLEeW4Abd66DaAtA" elementId="biblereader.partstack.bibletext" selectedElement="_33tk4Ff4EeWw0_pvm8Qobg">
