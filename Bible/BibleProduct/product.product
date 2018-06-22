@@ -25,22 +25,30 @@
    </vm>
 
    <plugins>
+      <plugin id="Bible"/>
+      <plugin id="ch.qos.logback.classic"/>
+      <plugin id="ch.qos.logback.core"/>
+      <plugin id="ch.qos.logback.slf4j" fragment="true"/>
+      <plugin id="com.google.guava"/>
       <plugin id="com.ibm.icu"/>
       <plugin id="javax.annotation"/>
       <plugin id="javax.inject"/>
       <plugin id="javax.xml"/>
-      <plugin id="org.apache.ant"/>
+      <plugin id="log4jproperties" fragment="true"/>
+      <plugin id="logger"/>
+      <plugin id="org.apache.batik.constants"/>
       <plugin id="org.apache.batik.css"/>
+      <plugin id="org.apache.batik.i18n"/>
       <plugin id="org.apache.batik.util"/>
+      <plugin id="org.apache.commons.io"/>
       <plugin id="org.apache.commons.jxpath"/>
+      <plugin id="org.apache.commons.logging"/>
       <plugin id="org.apache.log4j"/>
       <plugin id="org.apache.xerces"/>
       <plugin id="org.apache.xml.resolver"/>
       <plugin id="org.apache.xml.serializer"/>
-      <plugin id="org.aspectj.ajde"/>
+      <plugin id="org.apache.xmlgraphics"/>
       <plugin id="org.aspectj.runtime"/>
-      <plugin id="org.aspectj.weaver"/>
-      <plugin id="org.eclipse.aspectj"/>
       <plugin id="org.eclipse.compare.core"/>
       <plugin id="org.eclipse.core.commands"/>
       <plugin id="org.eclipse.core.contenttype"/>
@@ -60,6 +68,7 @@
       <plugin id="org.eclipse.e4.core.di"/>
       <plugin id="org.eclipse.e4.core.di.annotations"/>
       <plugin id="org.eclipse.e4.core.di.extensions"/>
+      <plugin id="org.eclipse.e4.core.di.extensions.supplier"/>
       <plugin id="org.eclipse.e4.core.services"/>
       <plugin id="org.eclipse.e4.emf.xpath"/>
       <plugin id="org.eclipse.e4.ui.bindings"/>
@@ -85,8 +94,6 @@
       <plugin id="org.eclipse.equinox.app"/>
       <plugin id="org.eclipse.equinox.bidi"/>
       <plugin id="org.eclipse.equinox.common"/>
-      <plugin id="org.eclipse.equinox.ds"/>
-      <plugin id="org.eclipse.equinox.event"/>
       <plugin id="org.eclipse.equinox.p2.core"/>
       <plugin id="org.eclipse.equinox.p2.engine"/>
       <plugin id="org.eclipse.equinox.p2.metadata"/>
@@ -95,9 +102,7 @@
       <plugin id="org.eclipse.equinox.preferences"/>
       <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.equinox.security"/>
-      <plugin id="org.eclipse.equinox.simpleconfigurator"/>
-      <plugin id="org.eclipse.equinox.util"/>
-      <plugin id="org.eclipse.equinox.weaving.aspectj"/>
+      <plugin id="org.eclipse.equinox.security.linux.x86_64" fragment="true"/>
       <plugin id="org.eclipse.equinox.weaving.hook" fragment="true"/>
       <plugin id="org.eclipse.help"/>
       <plugin id="org.eclipse.jem.util"/>
@@ -108,6 +113,7 @@
       <plugin id="org.eclipse.m2e.archetype.common"/>
       <plugin id="org.eclipse.m2e.core"/>
       <plugin id="org.eclipse.m2e.core.ui"/>
+      <plugin id="org.eclipse.m2e.logback.appender" fragment="true"/>
       <plugin id="org.eclipse.m2e.maven.indexer"/>
       <plugin id="org.eclipse.m2e.maven.runtime"/>
       <plugin id="org.eclipse.m2e.maven.runtime.slf4j.simple"/>
@@ -138,9 +144,11 @@
       <plugin id="org.eclipse.wst.xml.core"/>
       <plugin id="org.eclipse.wst.xsd.core"/>
       <plugin id="org.eclipse.xsd"/>
-      <plugin id="org.slf4j.api" version="1.7.10.v20170428-1633"/>
+      <plugin id="org.slf4j.api"/>
+      <plugin id="org.slf4j.apis.log4j"/>
+      <plugin id="org.slf4j.binding.simple" fragment="true"/>
       <plugin id="org.slf4j.impl.log4j12" fragment="true"/>
-      <plugin id="org.slf4j.log4j"/>
+      <plugin id="org.slf4j.nop" fragment="true"/>
       <plugin id="org.tukaani.xz"/>
       <plugin id="org.w3c.css.sac"/>
       <plugin id="org.w3c.dom.events"/>
@@ -149,20 +157,6 @@
       <plugin id="reader"/>
    </plugins>
 
-   <configurations>
-      <plugin id="org.apache.log4j" autoStart="true" startLevel="1" />
-      <plugin id="org.aspectj.ajde" autoStart="true" startLevel="1" />
-      <plugin id="org.aspectj.runtime" autoStart="true" startLevel="1" />
-      <plugin id="org.aspectj.weaver" autoStart="true" startLevel="1" />
-      <plugin id="org.eclipse.aspectj" autoStart="true" startLevel="1" />
-      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="0" />
-      <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="2" />
-      <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="2" />
-      <plugin id="org.eclipse.equinox.event" autoStart="true" startLevel="2" />
-      <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
-      <plugin id="org.eclipse.equinox.weaving.aspectj" autoStart="true" startLevel="1" />
-      <plugin id="org.slf4j.api" autoStart="true" startLevel="1" />
-   </configurations>
 
    <preferencesInfo>
       <targetfile overwrite="false"/>

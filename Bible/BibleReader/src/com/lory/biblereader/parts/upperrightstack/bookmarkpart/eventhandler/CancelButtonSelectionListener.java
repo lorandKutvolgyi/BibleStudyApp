@@ -1,4 +1,4 @@
-package com.lory.biblereader.parts.upperrightstack.bookmarkpart.listener;
+package com.lory.biblereader.parts.upperrightstack.bookmarkpart.eventhandler;
 
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;

@@ -4,13 +4,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import org.eclipse.e4.core.di.annotations.Creatable;
 
+import com.lory.biblereader.menu.TranslationManager;
+
 @Creatable
 @Singleton
 public class Bible {
+
+	@Inject
+	private TranslationManager translationManager;
 
 	private List<Book> books = new ArrayList<>();
 
@@ -25,7 +31,7 @@ public class Bible {
 
 	public Chapter getChapter(String title, int chapterNumber) {
 		Book book = getBookByTitle(title);
-		return book.getChapter(chapterNumber);
+		return book.getChapter(chapterNumber, null, translationManager);
 	}
 
 	public List<Book> getBooks() {

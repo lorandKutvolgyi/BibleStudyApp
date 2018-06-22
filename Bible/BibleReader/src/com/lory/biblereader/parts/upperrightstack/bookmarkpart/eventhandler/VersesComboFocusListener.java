@@ -1,4 +1,4 @@
-package com.lory.biblereader.parts.upperrightstack.bookmarkpart.listener;
+package com.lory.biblereader.parts.upperrightstack.bookmarkpart.eventhandler;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusEvent;

@@ -18,8 +18,10 @@ import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 
+import com.lory.biblereader.menu.TranslationManager;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
+import com.lory.biblereader.model.ChapterContext;
 import com.lory.biblereader.model.CurrentChapter;
 
 @Creatable
@@ -34,6 +36,8 @@ public class TextPartManager {
 	private static EModelService modelService;
 	@Inject
 	private static MApplication application;
+	@Inject
+	private TranslationManager translationManager;
 
 	private static final String STACK_ID = "biblereader.partstack.bibletext";
 	private static final String BIBLE_TEXT_PART_URI = "bundleclass://reader/com.lory.biblereader.parts.middlestack.textpart.BibleTextPart";
@@ -47,10 +51,10 @@ public class TextPartManager {
 		chapters = new TreeMap<>((part1, part2) -> part1.getElementId().compareTo(part2.getElementId()));
 	}
 
-	public synchronized void registerPart(MPart part, BibleTextPart bibleTextPart, String bookTitle, String chapterId) {
+	public synchronized void registerPart(MPart part, BibleTextPart bibleTextPart, ChapterContext chapter) {
 		parts.put(part, bibleTextPart);
-		if (bookTitle != null && chapterId != null) {
-			registerPartWithGivenContent(part, bookTitle, chapterId);
+		if (chapter != null) {
+			registerPartWithGivenContent(part, chapter.getBookTitle(), chapter.getId(), chapter.getTranslation());
 		} else {
 			registerPartWithCurrentChapterContent(part);
 		}
@@ -116,7 +120,7 @@ public class TextPartManager {
 	}
 
 	public synchronized void modifyPartContent(Book book, int chapterId) {
-		Chapter chapter = book.getChapter(chapterId);
+		Chapter chapter = book.getChapter(chapterId, null, translationManager);
 		currentChapter.setChapter(chapter);
 		chapters.put(activePart, chapter);
 	}
@@ -125,9 +129,9 @@ public class TextPartManager {
 		return chapters;
 	}
 
-	private void registerPartWithGivenContent(MPart part, String bookTitle, String chapterId) {
+	private void registerPartWithGivenContent(MPart part, String bookTitle, String chapterId, String translation) {
 		activatePart(part);
-		currentChapter.setChapter(bookTitle, Integer.parseInt(chapterId));
+		currentChapter.setChapter(bookTitle, Integer.parseInt(chapterId), translation);
 		chapters.put(part, currentChapter.getChapter());
 	}
 
@@ -152,6 +156,10 @@ public class TextPartManager {
 		BibleTextPart bibleTextPart = parts.get(part);
 		bibleTextPart.setContent(currentChapter.getText());
 		bibleTextPart.refreshTitle(currentChapter.getBook().getTitle(), currentChapter.getId());
+		if (currentChapter.getTranslation() == null) {
+			currentChapter.setTranslation(translationManager.getActiveTranslationAbbreviation());
+		}
+		bibleTextPart.showTranslation(currentChapter);
 	}
 
 	private MPart createNewPart() {

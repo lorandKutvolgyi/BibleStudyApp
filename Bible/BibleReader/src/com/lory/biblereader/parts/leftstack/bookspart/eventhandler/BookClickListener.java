@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Tree;
 
 import com.lory.biblereader.i18n.MessageService;
+import com.lory.biblereader.menu.TranslationManager;
 import com.lory.biblereader.model.Bible;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
@@ -35,6 +36,8 @@ public class BookClickListener extends MouseAdapter {
 	private BooksComparator booksComparator;
 	@Inject
 	private Bible bible;
+	@Inject
+	private TranslationManager translationManager;
 
 	@Override
 	public void mouseDown(MouseEvent event) {
@@ -70,13 +73,13 @@ public class BookClickListener extends MouseAdapter {
 		addToBookMark.setText(messageService.getMessage("newBookMark"));
 		addToBookMark.addListener(SWT.Selection, event -> {
 			BookMarkSelectionPopup bookMarkSelectionPopup = new BookMarkSelectionPopup(messageService, bookMarkManager,
-					booksComparator, bible);
+					booksComparator, bible, translationManager);
 			bookMarkSelectionPopup.open(getChapter(mouseEvent));
 		});
 	}
 
 	private Chapter getChapter(MouseEvent mouseEvent) {
-		return BibleDaoFactory.getInstance().findChapterById(getSelectedBook(mouseEvent), 1);
+		return BibleDaoFactory.getInstance().findChapterById(getSelectedBook(mouseEvent), 1, null, translationManager);
 	}
 
 	private Book getSelectedBook(MouseEvent mouseEvent) {

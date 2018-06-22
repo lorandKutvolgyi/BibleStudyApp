@@ -6,6 +6,7 @@ import javax.inject.Singleton;
 import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.swt.SWT;
 
+import com.lory.biblereader.menu.TranslationManager;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.CurrentChapter;
@@ -17,6 +18,8 @@ public class Paging {
 
 	@Inject
 	private CurrentChapter currentChapter;
+	@Inject
+	private TranslationManager translationManager;
 
 	public void paging(int keyCode, History history) {
 		if (!isSelectedChapter()) {
@@ -46,7 +49,7 @@ public class Paging {
 	private Chapter changeCurrentChapter(int newId) {
 		Book book = currentChapter.getChapter().getBook();
 		if (newId > 0 && newId <= isMax(book)) {
-			Chapter chapter = book.getChapter(newId);
+			Chapter chapter = book.getChapter(newId, null, translationManager);
 			currentChapter.setChapter(chapter);
 			return chapter;
 		}
@@ -54,6 +57,6 @@ public class Paging {
 	}
 
 	private int isMax(Book book) {
-		return book.getBookSize();
+		return book.getBookSize(translationManager);
 	}
 }

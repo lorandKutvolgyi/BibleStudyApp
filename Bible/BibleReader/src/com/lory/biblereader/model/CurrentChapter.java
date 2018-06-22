@@ -8,13 +8,17 @@ import javax.inject.Singleton;
 
 import org.eclipse.e4.core.di.annotations.Creatable;
 
+import com.lory.biblereader.menu.TranslationManager;
+
 @Creatable
 @Singleton
 public class CurrentChapter extends Observable {
 
 	@Inject
 	private Bible bible;
-	
+	@Inject
+	private TranslationManager translationManager;
+
 	private Chapter chapter;
 
 	public Chapter getChapter() {
@@ -27,9 +31,9 @@ public class CurrentChapter extends Observable {
 		notifyObservers();
 	}
 
-	public void setChapter(String bookTitle, int chapterId) {
+	public void setChapter(String bookTitle, int chapterId, String translation) {
 		Book book = bible.getBookByTitle(bookTitle);
-		setChapter(book.getChapter(chapterId));
+		setChapter(book.getChapter(chapterId, translation, translationManager));
 	}
 
 	public void setObserver(Observer observer) {

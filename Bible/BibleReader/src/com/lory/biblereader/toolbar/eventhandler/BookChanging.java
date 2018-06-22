@@ -6,6 +6,7 @@ import javax.inject.Singleton;
 import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.swt.SWT;
 
+import com.lory.biblereader.menu.TranslationManager;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.CurrentChapter;
@@ -19,6 +20,8 @@ public class BookChanging {
 
 	@Inject
 	private CurrentChapter currentChapter;
+	@Inject
+	private TranslationManager translationManager;
 
 	public void change(int keyCode, BooksComparator booksComparator, History history) {
 		if (!isSelectedChapter()) {
@@ -27,7 +30,7 @@ public class BookChanging {
 		AbstractBooksOrder order = booksComparator.current();
 		Book book = currentChapter.getChapter().getBook();
 		int index = order.getBooks().indexOf(book);
-		Chapter chapter = getBook(order, index, keyCode).getChapter(1);
+		Chapter chapter = getBook(order, index, keyCode).getChapter(1, null, translationManager);
 		currentChapter.setChapter(chapter);
 		history.addChapter(chapter);
 	}

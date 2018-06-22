@@ -26,6 +26,7 @@ import org.eclipse.ui.forms.events.HyperlinkEvent;
 import org.eclipse.ui.forms.widgets.Hyperlink;
 
 import com.lory.biblereader.i18n.MessageService;
+import com.lory.biblereader.menu.TranslationManager;
 import com.lory.biblereader.model.Bible;
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.CurrentChapter;
@@ -47,6 +48,8 @@ public class HistoryPart implements Observer {
 	private BooksComparator booksComparator;
 	@Inject
 	private Bible bible;
+	@Inject
+	private TranslationManager translationManager;
 
 	private Composite parent;
 	private ScrolledComposite scrolledComposite;
@@ -174,9 +177,8 @@ public class HistoryPart implements Observer {
 
 		MenuItem addToBookMark = new MenuItem(menu, SWT.PUSH);
 		addToBookMark.setText(messageService.getMessage("newBookMark"));
-		addToBookMark.addListener(SWT.Selection,
-				event -> new BookMarkSelectionPopup(messageService, bookMarkManager, booksComparator, bible)
-						.open(chapter));
+		addToBookMark.addListener(SWT.Selection, event -> new BookMarkSelectionPopup(messageService, bookMarkManager,
+				booksComparator, bible, translationManager).open(chapter));
 
 		return menu;
 	}

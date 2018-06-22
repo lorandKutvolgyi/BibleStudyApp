@@ -38,7 +38,13 @@ public class TextSearchListener implements ModifyListener {
 	}
 
 	private void clearStyle() {
-		bibleText.setStyleRange(null);
+		System.out.println(bibleText.getText().length());
+		StyleRange style = new StyleRange();
+		style.start = 0;
+		style.length = bibleText.getText().length();
+		style.foreground = null;
+		bibleText.setStyleRange(style);
+		bibleText.redraw();
 	}
 
 	private void markFoundTextParts(Matcher matcher) {

@@ -14,15 +14,16 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import com.lory.biblereader.i18n.MessageService;
+import com.lory.biblereader.menu.TranslationManager;
 import com.lory.biblereader.model.Bible;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.parts.leftstack.bookspart.treesorter.BooksComparator;
-import com.lory.biblereader.parts.upperrightstack.bookmarkpart.listener.BooksComboSelectionListener;
-import com.lory.biblereader.parts.upperrightstack.bookmarkpart.listener.CancelButtonSelectionListener;
-import com.lory.biblereader.parts.upperrightstack.bookmarkpart.listener.CategoriesFocusListener;
-import com.lory.biblereader.parts.upperrightstack.bookmarkpart.listener.SaveButtonSelectionListener;
-import com.lory.biblereader.parts.upperrightstack.bookmarkpart.listener.VersesComboFocusListener;
+import com.lory.biblereader.parts.upperrightstack.bookmarkpart.eventhandler.BooksComboSelectionListener;
+import com.lory.biblereader.parts.upperrightstack.bookmarkpart.eventhandler.CancelButtonSelectionListener;
+import com.lory.biblereader.parts.upperrightstack.bookmarkpart.eventhandler.CategoriesFocusListener;
+import com.lory.biblereader.parts.upperrightstack.bookmarkpart.eventhandler.SaveButtonSelectionListener;
+import com.lory.biblereader.parts.upperrightstack.bookmarkpart.eventhandler.VersesComboFocusListener;
 
 public class BookMarkSelectionPopup {
 
@@ -30,6 +31,7 @@ public class BookMarkSelectionPopup {
 	private BookMarkManager bookMarkManager;
 	private BooksComparator booksComparator;
 	private Bible bible;
+	private TranslationManager translationManager;
 	private final String placeholderForCategories;
 	private final String placeholderForVerses;
 	private Shell shell;
@@ -42,13 +44,14 @@ public class BookMarkSelectionPopup {
 	private Button save;
 
 	public BookMarkSelectionPopup(MessageService messageService, BookMarkManager bookMarkManager,
-			BooksComparator booksComparator, Bible bible) {
+			BooksComparator booksComparator, Bible bible, TranslationManager translationManager) {
 		this.messageService = messageService;
 		this.bookMarkManager = bookMarkManager;
 		this.booksComparator = booksComparator;
 		this.placeholderForCategories = messageService.getMessage("label");
 		this.placeholderForVerses = messageService.getMessage("verses");
 		this.bible = bible;
+		this.translationManager = translationManager;
 
 		createPopupShell();
 		createGroup();
@@ -97,7 +100,7 @@ public class BookMarkSelectionPopup {
 		books = new Combo(group, SWT.DROP_DOWN | SWT.READ_ONLY);
 		books.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		books.setVisibleItemCount(10);
-		books.addSelectionListener(new BooksComboSelectionListener(books, chapters, bible));
+		books.addSelectionListener(new BooksComboSelectionListener(books, chapters, bible, translationManager));
 	}
 
 	private void createChaptersCombo() {
@@ -135,7 +138,8 @@ public class BookMarkSelectionPopup {
 		save = new Button(buttons, SWT.PUSH);
 		save.setText(messageService.getMessage("save"));
 		save.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-		save.addSelectionListener(new SaveButtonSelectionListener(this, bookMarkManager, messageService, bible));
+		save.addSelectionListener(
+				new SaveButtonSelectionListener(this, bookMarkManager, messageService, bible, translationManager));
 	}
 
 	private void createCancelButton(Composite buttons) {
@@ -147,7 +151,7 @@ public class BookMarkSelectionPopup {
 
 	public void open() {
 		Book firstBook = booksComparator.current().getBooks().get(0);
-		open(firstBook.getChapter(1));
+		open(firstBook.getChapter(1, null, translationManager));
 	}
 
 	public void open(Chapter chapter) {
@@ -175,7 +179,7 @@ public class BookMarkSelectionPopup {
 	}
 
 	private void fillChaptersCombo() {
-		int size = bible.getBooks().get(books.getSelectionIndex()).getBookSize();
+		int size = bible.getBooks().get(books.getSelectionIndex()).getBookSize(translationManager);
 		for (int i = 1; i <= size; i++) {
 			chapters.add(String.valueOf(i));
 		}

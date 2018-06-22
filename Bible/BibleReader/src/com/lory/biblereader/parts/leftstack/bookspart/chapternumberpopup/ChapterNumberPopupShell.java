@@ -17,6 +17,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Tree;
 
+import com.lory.biblereader.menu.TranslationManager;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.parts.leftstack.bookspart.chapternumberpopup.eventhandler.ChapterNumberKeyListener;
 import com.lory.biblereader.parts.leftstack.bookspart.chapternumberpopup.eventhandler.ChapterNumberMouseListener;
@@ -29,6 +30,8 @@ public class ChapterNumberPopupShell {
 	private ChapterNumberKeyListener chapterNumberKeyListener;
 	@Inject
 	private ChapterNumberMouseListener chapterNumberMouseListener;
+	@Inject
+	private TranslationManager translationManager;
 
 	private Display display = Display.getDefault();
 	private Shell shell;
@@ -83,7 +86,7 @@ public class ChapterNumberPopupShell {
 	}
 
 	private int getNumberOfChapters(final Book selectedBook) {
-		return selectedBook.getBookSize();
+		return selectedBook.getBookSize(translationManager);
 	}
 
 	private int calculateHeight(int numOfLabels) {

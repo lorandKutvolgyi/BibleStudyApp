@@ -11,7 +11,11 @@
             </children>
             <children xsi:type="basic:PartSashContainer" xmi:id="_SffSQCHYEeeUyN1pG4NImw" elementId="biblereader.partsashcontainer.3" horizontal="true">
               <children xsi:type="basic:PartStack" xmi:id="_XF0OsCNLEeW4Abd66DaAtA" elementId="biblereader.partstack.bibletext" selectedElement="_33tk4Ff4EeWw0_pvm8Qobg">
-                <children xsi:type="basic:Part" xmi:id="_33tk4Ff4EeWw0_pvm8Qobg" elementId="biblereader.BibleTextPart" accessibilityPhrase="" contributionURI="bundleclass://reader/com.lory.biblereader.parts.middlestack.textpart.BibleTextPart" label="" closeable="true"/>
+                <children xsi:type="basic:Part" xmi:id="_33tk4Ff4EeWw0_pvm8Qobg" elementId="biblereader.BibleTextPart" accessibilityPhrase="" contributionURI="bundleclass://reader/com.lory.biblereader.parts.middlestack.textpart.BibleTextPart" label="" bindingContexts="_d53TOyM8EeWAgOzJmBnGEA _d53TOiM8EeWAgOzJmBnGEA" closeable="true">
+                  <menus xsi:type="menu:PopupMenu" xmi:id="_sMnA0HVsEeiIKIvIk2QO-w" elementId="reader.popupmenu.textpart.context" accessibilityPhrase="" label="" tooltip="" mnemonics="context">
+                    <children xsi:type="menu:DirectMenuItem" xmi:id="_8PjgAHVsEeiIKIvIk2QO-w" elementId="reader.directmenuitem.compare" label="%compare" contributionURI="bundleclass://reader/com.lory.biblereader.parts.middlestack.textpart.eventhandler.ComparingContextMenu"/>
+                  </menus>
+                </children>
               </children>
             </children>
             <children xsi:type="basic:PartSashContainer" xmi:id="_x3oDwBw7EeetS7PfnSTHUQ" elementId="biblereader.partsashcontainer.2" selectedElement="_9Y1dIBw7EeetS7PfnSTHUQ">
@@ -21,7 +25,7 @@
                 <children xsi:type="basic:Part" xmi:id="_-7KykBw7EeetS7PfnSTHUQ" elementId="biblereader.part.history" contributionURI="bundleclass://reader/com.lory.biblereader.parts.upperrightstack.historypart.HistoryPart" label="%history" tooltip="%history" closeable="true">
                   <menus xmi:id="_nhDrEH0_EeeYqLgHHocaMg" elementId="biblereader.menu.0" mnemonics="aaa">
                     <tags>ViewMenu</tags>
-                    <children xsi:type="menu:DirectMenuItem" xmi:id="_qDJ-8H1AEeeYqLgHHocaMg" elementId="biblereader.directmenuitem.clear" label="%clear" tooltip="%clear" mnemonics="%clebundleclass://reader/com.lory.biblereader.parts.upperrightstack.historypart.toolbar.HistoryClearMenuItemHandler"/>
+                    <children xsi:type="menu:DirectMenuItem" xmi:id="_qDJ-8H1AEeeYqLgHHocaMg" elementId="biblereader.directmenuitem.clear" label="%clear" tooltip="%clear" mnemonics="%clebundleclass://reader/com.lory.biblereader.parts.upperrightstack.historypart.contextmenumenu.HistoryClearMenuItemHandler"/>
                   </menus>
                 </children>
               </children>
@@ -34,9 +38,9 @@
         </children>
       </children>
     </children>
-    <mainMenu xmi:id="_P5x4EBo0EeeuaO7Y1kMvqw" elementId="biblereader.menu.2">
+    <mainMenu xmi:id="_P5x4EBo0EeeuaO7Y1kMvqw" elementId="biblereader.menu.2" accessibilityPhrase="">
       <children xsi:type="menu:Menu" xmi:id="_THOEcBo0EeeuaO7Y1kMvqw" elementId="biblereader.menu.translations" label="%translations">
-        <children xsi:type="menu:DynamicMenuContribution" xmi:id="_PKgEEHMdEeiNPaidIWbpwg" elementId="reader.dynamicmenucontribution.0" contributionURI="bundleclass://reader/com.lory.biblereader.menu.Translation"/>
+        <children xsi:type="menu:DynamicMenuContribution" xmi:id="_PKgEEHMdEeiNPaidIWbpwg" elementId="reader.dynamicmenucontribution.0" label="" contributionURI="bundleclass://reader/com.lory.biblereader.menu.Translation"/>
       </children>
     </mainMenu>
     <trimBars xmi:id="__LiGoBw3EeetS7PfnSTHUQ" elementId="biblereader.trimbar.0">
@@ -47,10 +51,17 @@
         <children xsi:type="menu:DirectToolItem" xmi:id="_c-KGYB-wEeeCcr4eHJsE8w" elementId="biblereader.directtoolitem.nextbook" label="Next book" iconURI="platform:/plugin/reader/resources/adviceForward.gif" tooltip="%next.book" contributionURI="bundleclass://reader/com.lory.biblereader.toolbar.eventhandler.NextBook"/>
       </children>
     </trimBars>
+    <trimBars xmi:id="_lts-IHU0EeikzJ5LpnWjuA" elementId="reader.trimbar.0" side="Bottom">
+      <children xsi:type="menu:ToolControl" xmi:id="_p5CWIHU0EeikzJ5LpnWjuA" elementId="reader.toolcontrol.0" contributionURI="bundleclass://reader/com.lory.biblereader.status.StatusBar">
+        <persistedState key="activeTranslation"/>
+      </children>
+    </trimBars>
   </children>
   <rootContext xmi:id="_d53TOSM8EeWAgOzJmBnGEA" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
     <children xmi:id="_d53TOiM8EeWAgOzJmBnGEA" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
-    <children xmi:id="_d53TOyM8EeWAgOzJmBnGEA" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
+    <children xmi:id="_d53TOyM8EeWAgOzJmBnGEA" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs">
+      <children xmi:id="_qpi5UHVxEeiIKIvIk2QO-w" elementId="reader.bindingcontext.compare" name="compare"/>
+    </children>
   </rootContext>
   <addons xmi:id="_d53TMiM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_d53TMyM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.ui.contemappartxts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
