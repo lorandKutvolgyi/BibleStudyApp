@@ -53,7 +53,7 @@ public class BibleDao {
 	public Chapter findChapterById(Book book, int id, String translation, TranslationManager translationManager) {
 		Chapter chapter = null;
 		try {
-			PreparedStatement stmt = createStatement(book, id, translation, translationManager);
+			PreparedStatement stmt = createFindChapterByIdStatement(book, id, translation, translationManager);
 			ResultSet result = executeQuery(book, id, stmt);
 			chapter = createChapterByResult(book, result, translation, translationManager);
 		} catch (SQLException e) {
@@ -62,12 +62,49 @@ public class BibleDao {
 		return chapter;
 	}
 
-	private PreparedStatement createStatement(Book book, int id, String translation,
+	public String findVerseByChapterAndId(Chapter chapter, String verseId, String translation) {
+		String verse = null;
+		try {
+			PreparedStatement stmt = createFindVerseByChapterAndIdStatement(chapter, verseId,
+					"study_app." + translation);
+			ResultSet result = executeFindVerseByChapterAndIdQuery(chapter, verseId, stmt);
+			verse = createVerseByResult(result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return verse;
+	}
+
+	private String createVerseByResult(ResultSet result) throws SQLException {
+		return result.getString("contents");
+	}
+
+	private ResultSet executeFindVerseByChapterAndIdQuery(Chapter chapter, String verseId, PreparedStatement stmt)
+			throws SQLException {
+		ResultSet result = stmt.executeQuery();
+		if (!result.next()) {
+			throw new IllegalArgumentException(
+					"Verse " + verseId + " does not exist. Book " + chapter.getBook() + " Chapter: " + chapter.getId());
+		}
+		return result;
+	}
+
+	private PreparedStatement createFindVerseByChapterAndIdStatement(Chapter chapter, String verseId, String tableName)
+			throws SQLException {
+		PreparedStatement stmt = connection
+				.prepareStatement("SELECT contents FROM " + tableName + " WHERE chapter=? AND book=? AND verse=?;");
+		stmt.setInt(1, chapter.getId());
+		stmt.setString(2, chapter.getBook().getTitle());
+		stmt.setInt(3, Integer.parseInt(verseId));
+		return stmt;
+	}
+
+	private PreparedStatement createFindChapterByIdStatement(Book book, int id, String translation,
 			TranslationManager translationManager) throws SQLException {
 		String tableName = translation != null ? "study_app." + translation
 				: "study_app." + translationManager.getActiveTranslationAbbreviation().toLowerCase();
 		PreparedStatement stmt = connection.prepareStatement(
-				"SELECT chapter, string_agg(verse || ' ' || contents, '\n' ORDER BY verse) as contents FROM "
+				"SELECT chapter, string_agg('<div id='||verse||'><span class=''nonsearchable''>'||verse ||'</span>' || ' ' || contents || '</div>', '' ORDER BY verse) as contents FROM "
 						+ tableName + " WHERE chapter=? AND book=? GROUP BY chapter;");
 		stmt.setInt(1, id);
 		stmt.setString(2, book.getTitle());

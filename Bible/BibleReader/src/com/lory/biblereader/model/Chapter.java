@@ -36,7 +36,7 @@ public class Chapter {
 
 	@Override
 	public String toString() {
-		return "Chapter\n\tid: " + id + "\n\tbook: " + book != null ? book.getTitle() : "";
+		return "Chapter\n\tid: " + id + "\n\tbook: " + (book != null ? book.getTitle() : "");
 	}
 
 	@Override
@@ -52,30 +52,40 @@ public class Chapter {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Chapter other = (Chapter) obj;
 		if (book == null) {
-			if (other.book != null)
+			if (other.book != null) {
 				return false;
-		} else if (!book.equals(other.book))
+			}
+		} else if (!book.equals(other.book)) {
 			return false;
-		if (id != other.id)
+		}
+		if (id != other.id) {
 			return false;
+		}
 		if (text == null) {
-			if (other.text != null)
+			if (other.text != null) {
 				return false;
-		} else if (!text.equals(other.text))
+			}
+		} else if (!text.equals(other.text)) {
 			return false;
+		}
 		if (translation == null) {
-			if (other.translation != null)
+			if (other.translation != null) {
 				return false;
-		} else if (!translation.equals(other.translation))
+			}
+		} else if (!translation.equals(other.translation)) {
 			return false;
+		}
 		return true;
 	}
 

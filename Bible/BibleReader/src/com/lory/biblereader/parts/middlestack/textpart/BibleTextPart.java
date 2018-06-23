@@ -13,7 +13,9 @@ import org.eclipse.e4.ui.di.PersistState;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.EMenuService;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -50,14 +52,12 @@ public class BibleTextPart implements Observer {
 	private static EMenuService menuService;
 	private MPart part;
 	private Composite parent;
-	private StyledText text;
+	private Browser text;
 	private Label translationLabel;
 
 	@PostConstruct
 	public void postConstruct(Composite parent, MPart part, EMenuService menuService) {
-		if (BibleTextPart.menuService == null) {
-			BibleTextPart.menuService = menuService;
-		}
+		initMenuService(menuService);
 		initPart(part);
 		initParent(parent);
 		createTranslationLabel(parent);
@@ -67,8 +67,10 @@ public class BibleTextPart implements Observer {
 		registerMenu();
 	}
 
-	private void registerMenu() {
-		BibleTextPart.menuService.registerContextMenu(text, "reader.popupmenu.textpart.context");
+	private void initMenuService(EMenuService menuService) {
+		if (BibleTextPart.menuService == null) {
+			BibleTextPart.menuService = menuService;
+		}
 	}
 
 	private void initPart(MPart part) {
@@ -95,10 +97,20 @@ public class BibleTextPart implements Observer {
 	}
 
 	private void createText(Composite parent) {
-		text = new StyledText(parent, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL);
+		text = new Browser(parent, SWT.NONE);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		text.setEditable(false);
 		text.addKeyListener(booksKeyListener);
+		text.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseDown(MouseEvent event) {
+				if (event.button == 3) {
+					String script = "var element = document.elementFromPoint(" + event.x + "," + event.y
+							+ ");return element.getAttribute('id');";
+					String verseId = (String) text.evaluate(script);
+					textPartManager.setComparingVerseId(verseId);
+				}
+			}
+		});
 		textSearchListener.setBibleText(text);
 	}
 
@@ -177,4 +189,7 @@ public class BibleTextPart implements Observer {
 		return parent.isDisposed();
 	}
 
+	private void registerMenu() {
+		BibleTextPart.menuService.registerContextMenu(text, "reader.popupmenu.textpart.context");
+	}
 }

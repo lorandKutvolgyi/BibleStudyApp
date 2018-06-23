@@ -5,8 +5,8 @@ import java.util.regex.Pattern;
 
 import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.StyleRange;
-import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Display;
@@ -15,9 +15,9 @@ import org.eclipse.swt.widgets.Text;
 @Creatable
 public class TextSearchListener implements ModifyListener {
 
-	private StyledText bibleText;
+	private Browser bibleText;
 
-	public void setBibleText(StyledText text) {
+	public void setBibleText(Browser text) {
 		this.bibleText = text;
 	}
 
@@ -38,13 +38,8 @@ public class TextSearchListener implements ModifyListener {
 	}
 
 	private void clearStyle() {
-		System.out.println(bibleText.getText().length());
-		StyleRange style = new StyleRange();
-		style.start = 0;
-		style.length = bibleText.getText().length();
-		style.foreground = null;
-		bibleText.setStyleRange(style);
-		bibleText.redraw();
+//		bibleText.set
+//		bibleText.redraw();
 	}
 
 	private void markFoundTextParts(Matcher matcher) {
@@ -55,8 +50,8 @@ public class TextSearchListener implements ModifyListener {
 	}
 
 	private void scrollTo(int start) {
-		int firstFoundLine = bibleText.getLineAtOffset(start);
-		bibleText.setTopIndex(firstFoundLine);
+//		int firstFoundLine = bibleText.getLineAtOffset(start);
+//		bibleText.setTopIndex(firstFoundLine);
 	}
 
 	public void createStyle(int start, int end) {
@@ -65,6 +60,6 @@ public class TextSearchListener implements ModifyListener {
 		style.length = (end - start);
 		style.background = Display.getCurrent().getSystemColor(SWT.COLOR_RED);
 		style.foreground = Display.getCurrent().getSystemColor(SWT.COLOR_WHITE);
-		bibleText.setStyleRange(style);
+//		bibleText.setStyleRange(style);
 	}
 }

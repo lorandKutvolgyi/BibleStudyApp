@@ -45,6 +45,7 @@ public class TextPartManager {
 	private Map<MPart, Chapter> chapters;
 	private MPart activePart;
 	private MPartStack stack;
+	private String comparingVerseId;
 
 	public TextPartManager() {
 		parts = new TreeMap<>((part1, part2) -> part1.getElementId().compareTo(part2.getElementId()));
@@ -127,6 +128,14 @@ public class TextPartManager {
 
 	public synchronized Map<MPart, Chapter> getChapters() {
 		return chapters;
+	}
+
+	public String getComparingVerseId() {
+		return comparingVerseId;
+	}
+
+	public void setComparingVerseId(String comparingVerseId) {
+		this.comparingVerseId = comparingVerseId;
 	}
 
 	private void registerPartWithGivenContent(MPart part, String bookTitle, String chapterId, String translation) {
