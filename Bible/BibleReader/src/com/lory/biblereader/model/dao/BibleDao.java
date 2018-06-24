@@ -14,6 +14,7 @@ import com.google.common.collect.TreeMultimap;
 import com.lory.biblereader.menu.TranslationManager;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
+import com.lory.biblereader.parts.middlestack.textpart.eventhandler.VerseContext;
 
 public class BibleDao {
 
@@ -53,9 +54,22 @@ public class BibleDao {
 	public Chapter findChapterById(Book book, int id, String translation, TranslationManager translationManager) {
 		Chapter chapter = null;
 		try {
-			PreparedStatement stmt = createFindChapterByIdStatement(book, id, translation, translationManager);
-			ResultSet result = executeQuery(book, id, stmt);
-			chapter = createChapterByResult(book, result, translation, translationManager);
+			String tableName = translation != null ? "study_app." + translation
+					: "study_app." + translationManager.getActiveTranslationAbbreviation().toLowerCase();
+			PreparedStatement stmt = connection.prepareStatement(
+					"SELECT chapter, string_agg('<div id='||verse||'><span class=''nonsearchable''>'||verse ||'</span>' || ' ' || contents || '</div>', '' ORDER BY verse) as contents FROM "
+							+ tableName + " WHERE chapter=? AND book=? GROUP BY chapter;");
+			stmt.setInt(1, id);
+			stmt.setString(2, book.getTitle());
+			ResultSet result = stmt.executeQuery();
+			if (!result.next()) {
+				throw new IllegalArgumentException("Chapter " + id + " does not exist in the book " + book);
+			}
+			int chapterId = result.getInt("chapter");
+			String content = result.getString("contents");
+			String usedTranslation = translation != null ? translation
+					: translationManager.getActiveTranslationAbbreviation();
+			return new Chapter(chapterId, content, book, usedTranslation);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -65,75 +79,69 @@ public class BibleDao {
 	public String findVerseByChapterAndId(Chapter chapter, String verseId, String translation) {
 		String verse = null;
 		try {
-			PreparedStatement stmt = createFindVerseByChapterAndIdStatement(chapter, verseId,
-					"study_app." + translation);
-			ResultSet result = executeFindVerseByChapterAndIdQuery(chapter, verseId, stmt);
-			verse = createVerseByResult(result);
+			PreparedStatement stmt = connection.prepareStatement(
+					"SELECT contents FROM study_app." + translation + " WHERE chapter=? AND book=? AND verse=?;");
+			stmt.setInt(1, chapter.getId());
+			stmt.setString(2, chapter.getBook().getTitle());
+			stmt.setInt(3, Integer.parseInt(verseId));
+			ResultSet result = stmt.executeQuery();
+			if (!result.next()) {
+				throw new IllegalArgumentException("Verse " + verseId + " does not exist. Book " + chapter.getBook()
+						+ " Chapter: " + chapter.getId());
+			}
+			verse = result.getString("contents");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return verse;
 	}
 
-	private String createVerseByResult(ResultSet result) throws SQLException {
-		return result.getString("contents");
-	}
-
-	private ResultSet executeFindVerseByChapterAndIdQuery(Chapter chapter, String verseId, PreparedStatement stmt)
-			throws SQLException {
-		ResultSet result = stmt.executeQuery();
-		if (!result.next()) {
-			throw new IllegalArgumentException(
-					"Verse " + verseId + " does not exist. Book " + chapter.getBook() + " Chapter: " + chapter.getId());
+	public String findVerseByContext(VerseContext context) {
+		String verse = null;
+		try {
+			PreparedStatement stmt = connection.prepareStatement("SELECT contents FROM study_app."
+					+ context.getTranslation() + " WHERE chapter=? AND book=? AND verse=?;");
+			stmt.setInt(1, context.getChapterId());
+			stmt.setString(2, context.getBookTitle());
+			stmt.setInt(3, context.getVerseId());
+			ResultSet result = stmt.executeQuery();
+			if (!result.next()) {
+				throw new IllegalArgumentException("Verse " + context.getVerseId() + " does not exist. Book "
+						+ context.getBookTitle() + " Chapter: " + context.getChapterId());
+			}
+			verse = result.getString("contents");
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		return result;
-	}
-
-	private PreparedStatement createFindVerseByChapterAndIdStatement(Chapter chapter, String verseId, String tableName)
-			throws SQLException {
-		PreparedStatement stmt = connection
-				.prepareStatement("SELECT contents FROM " + tableName + " WHERE chapter=? AND book=? AND verse=?;");
-		stmt.setInt(1, chapter.getId());
-		stmt.setString(2, chapter.getBook().getTitle());
-		stmt.setInt(3, Integer.parseInt(verseId));
-		return stmt;
-	}
-
-	private PreparedStatement createFindChapterByIdStatement(Book book, int id, String translation,
-			TranslationManager translationManager) throws SQLException {
-		String tableName = translation != null ? "study_app." + translation
-				: "study_app." + translationManager.getActiveTranslationAbbreviation().toLowerCase();
-		PreparedStatement stmt = connection.prepareStatement(
-				"SELECT chapter, string_agg('<div id='||verse||'><span class=''nonsearchable''>'||verse ||'</span>' || ' ' || contents || '</div>', '' ORDER BY verse) as contents FROM "
-						+ tableName + " WHERE chapter=? AND book=? GROUP BY chapter;");
-		stmt.setInt(1, id);
-		stmt.setString(2, book.getTitle());
-		return stmt;
-	}
-
-	private ResultSet executeQuery(Book book, int id, PreparedStatement stmt) throws SQLException {
-		ResultSet result = stmt.executeQuery();
-		if (!result.next()) {
-			throw new IllegalArgumentException("Chapter " + id + " does not exist in the book " + book);
-		}
-		return result;
-	}
-
-	private Chapter createChapterByResult(Book book, ResultSet result, String translation,
-			TranslationManager translationManager) throws SQLException {
-		int id = result.getInt("chapter");
-		String content = result.getString("contents");
-		String usedTranslation = translation != null ? translation
-				: translationManager.getActiveTranslationAbbreviation();
-		return new Chapter(id, content, book, usedTranslation);
+		return verse;
 	}
 
 	public int getBookSize(Book book, TranslationManager translationManager) {
+		return getBookSize(book.getTitle(), translationManager.getActiveTranslationAbbreviation().toLowerCase());
+	}
+
+	public int getBookSize(String bookTitle, String translation) {
 		int size = 0;
 		try {
-			PreparedStatement stmt = connection.prepareStatement("SELECT max(chapter) as max FROM study_app."
-					+ translationManager.getActiveTranslationAbbreviation().toLowerCase() + " WHERE book=?;");
-			stmt.setString(1, book.getTitle());
+			PreparedStatement stmt = connection
+					.prepareStatement("SELECT max(chapter) as max FROM study_app." + translation + " WHERE book=?;");
+			stmt.setString(1, bookTitle);
+			ResultSet result = stmt.executeQuery();
+			result.next();
+			size = result.getInt("max");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return size;
+	}
+
+	public int getChapterSize(String bookTitle, int chapterId, String translation) {
+		int size = 0;
+		try {
+			PreparedStatement stmt = connection.prepareStatement(
+					"SELECT max(verse) as max FROM study_app." + translation + " WHERE book=? AND chapter=?;");
+			stmt.setString(1, bookTitle);
+			stmt.setInt(2, chapterId);
 			ResultSet result = stmt.executeQuery();
 			result.next();
 			size = result.getInt("max");
@@ -146,36 +154,21 @@ public class BibleDao {
 	public Multimap<String, String> getAvailableTranslations() {
 		Multimap<String, String> translations = TreeMultimap.create();
 		try {
-			PreparedStatement stmt = createStatement();
-			ResultSet result = executeQuery(stmt);
-			translations = getTranslationByResult(result);
+			PreparedStatement stmt = connection
+					.prepareStatement("SELECT language, abbrev, description FROM  study_app.translations;");
+			ResultSet result = stmt.executeQuery();
+			if (!result.next()) {
+				throw new IllegalStateException("There is no translation downloaded");
+			}
+			do {
+				String lang = result.getString("language");
+				String translation = result.getString("abbrev");
+				String description = result.getString("description");
+				translations.put(lang, translation + ":" + description);
+			} while (result.next());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return translations;
-	}
-
-	private PreparedStatement createStatement() throws SQLException {
-		return connection.prepareStatement("SELECT language, abbrev, description FROM  study_app.translations;");
-	}
-
-	private ResultSet executeQuery(PreparedStatement stmt) throws SQLException {
-		ResultSet result = stmt.executeQuery();
-		if (!result.next()) {
-			throw new IllegalStateException("There is no translation downloaded");
-		}
-		return result;
-	}
-
-	private Multimap<String, String> getTranslationByResult(ResultSet result) throws SQLException {
-		Multimap<String, String> translations = TreeMultimap.create();
-		do {
-			String lang = result.getString("language");
-			String translation = result.getString("abbrev");
-			String description = result.getString("description");
-			translations.put(lang, translation + ":" + description);
-		} while (result.next());
-
 		return translations;
 	}
 
@@ -196,5 +189,4 @@ public class BibleDao {
 	public String toString() {
 		return "ChapterSqlDao\n\tconnection: " + (connection != null);
 	}
-
 }
