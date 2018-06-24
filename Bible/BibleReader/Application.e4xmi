@@ -13,7 +13,7 @@
               <children xsi:type="basic:PartStack" xmi:id="_XF0OsCNLEeW4Abd66DaAtA" elementId="biblereader.partstack.bibletext" selectedElement="_33tk4Ff4EeWw0_pvm8Qobg">
                 <children xsi:type="basic:Part" xmi:id="_33tk4Ff4EeWw0_pvm8Qobg" elementId="biblereader.BibleTextPart" accessibilityPhrase="" contributionURI="bundleclass://reader/com.lory.biblereader.parts.middlestack.textpart.BibleTextPart" label="" bindingContexts="_d53TOyM8EeWAgOzJmBnGEA _d53TOiM8EeWAgOzJmBnGEA" closeable="true">
                   <menus xsi:type="menu:PopupMenu" xmi:id="_sMnA0HVsEeiIKIvIk2QO-w" elementId="reader.popupmenu.textpart.context" accessibilityPhrase="" label="" tooltip="" mnemonics="context">
-                    <children xsi:type="menu:DirectMenuItem" xmi:id="_8PjgAHVsEeiIKIvIk2QO-w" elementId="reader.directmenuitem.compare" label="%compare" contributionURI="bundleclass://reader/com.lory.biblereader.parts.middlestack.textpart.eventhandler.ComparingContextMenu">
+                    <children xsi:type="menu:DirectMenuItem" xmi:id="_8PjgAHVsEeiIKIvIk2QO-w" elementId="reader.directmenuitem.compare" label="%compare" contributionURI="bundleclass://reader/com.lory.biblereader.parts.middlestack.textpart.contextmenu.ComparingContextMenu">
                       <visibleWhen xsi:type="ui:ImperativeExpression" xmi:id="_QErs8HZVEeip7OwKmNjTdQ" contributionURI="bundleclass://reader/com.lory.biblereader.parts.middlestack.textpart.contextmenu.ContextMenuInterseptor"/>
                     </children>
                   </menus>
@@ -70,5 +70,4 @@
   <addons xmi:id="_d53TNiM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.ui.workbench.handler.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
   <addons xmi:id="_d53TNyM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
   <addons xmi:id="_d53TOCM8EeWAgOzJmBnGEA" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
-  <addons xmi:id="_F57oYHbSEeiqJLwGLDMXyw" elementId="reader.addon.0" contributionURI="bundleclass://reader/com.lory.biblereader.service.ServiceFacade"/>
 </application:Application>

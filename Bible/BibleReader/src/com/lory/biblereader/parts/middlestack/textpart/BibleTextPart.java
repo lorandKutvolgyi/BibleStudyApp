@@ -7,7 +7,6 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
-import org.eclipse.e4.core.services.nls.Translation;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.PersistState;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
@@ -23,41 +22,43 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import com.lory.biblereader.i18n.MessageService;
-import com.lory.biblereader.i18n.Messages;
 import com.lory.biblereader.menu.TranslationManager;
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.ChapterContext;
 import com.lory.biblereader.model.dao.BibleDao;
 import com.lory.biblereader.parts.leftstack.bookspart.eventhandler.BooksKeyListener;
-import com.lory.biblereader.parts.middlestack.textpart.eventhandler.JavaScriptCreator;
+import com.lory.biblereader.parts.middlestack.textpart.contextmenu.JavaScriptCreator;
 import com.lory.biblereader.parts.middlestack.textpart.eventhandler.SearchTextVerifyListener;
 import com.lory.biblereader.parts.middlestack.textpart.eventhandler.TextSearchListener;
 
 public class BibleTextPart implements Observer {
 
-	@Inject
-	private BooksKeyListener booksKeyListener;
-	@Inject
-	private TextSearchListener textSearchListener;
-	@Inject
-	private SearchTextVerifyListener searchTextVerifyListener;
-	@Inject
-	private TextPartManager textPartManager;
-	@Inject
-	private MessageService messageService;
-	@Inject
-	private TranslationManager translationManager;
-	@Inject
-	private BibleDao bibleDao;
-	@Inject
-	@Translation
-	private Messages messages;
-
+	// Must be static because if every each part implementation use different one
+	// it does not work correctly
 	private static EMenuService menuService;
+
 	private MPart part;
 	private Composite parent;
 	private Browser text;
 	private Label translationLabel;
+	private final BooksKeyListener booksKeyListener;
+	private final TextPartManager textPartManager;
+	private final MessageService messageService;
+	private final TranslationManager translationManager;
+	private final BibleDao bibleDao;
+	protected TextSearchListener textSearchListener;
+	protected SearchTextVerifyListener searchTextVerifyListener;
+
+	@Inject
+	public BibleTextPart(BibleTextPartServiceFacade services) {
+		booksKeyListener = services.getBooksKeyListener();
+		textPartManager = services.getTextPartManager();
+		messageService = services.getMessageService();
+		translationManager = services.getTranslationManager();
+		bibleDao = services.getBibleDao();
+		textSearchListener = services.getTextSearchListener();
+		searchTextVerifyListener = services.getSearchTextVerifyListener();
+	}
 
 	@PostConstruct
 	public void postConstruct(Composite parent, MPart part, EMenuService menuService) {

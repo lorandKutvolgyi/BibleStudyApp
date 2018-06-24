@@ -44,6 +44,7 @@ public class TextPartManager {
 
 	private static final String STACK_ID = "biblereader.partstack.bibletext";
 	private static final String BIBLE_TEXT_PART_URI = "bundleclass://reader/com.lory.biblereader.parts.middlestack.textpart.BibleTextPart";
+	private static long partId = 1;
 	private Map<MPart, BibleTextPart> parts;
 	private Map<MPart, Chapter> chapters;
 	private MPart activePart;
@@ -196,11 +197,15 @@ public class TextPartManager {
 	}
 
 	private String createUniqueElementId() {
-		String result = String.valueOf(PartIdProvider.getPartId());
+		String result = String.valueOf(getPartId());
 		Set<String> ids = parts.keySet().stream().map(part -> part.getElementId()).collect(Collectors.toSet());
 		while (ids.contains(result)) {
-			result = String.valueOf(PartIdProvider.getPartId());
+			result = String.valueOf(getPartId());
 		}
 		return result;
+	}
+
+	private static long getPartId() {
+		return partId++;
 	}
 }

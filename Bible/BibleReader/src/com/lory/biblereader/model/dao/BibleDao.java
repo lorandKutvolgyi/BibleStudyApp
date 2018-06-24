@@ -18,7 +18,7 @@ import com.google.common.collect.TreeMultimap;
 import com.lory.biblereader.menu.TranslationManager;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
-import com.lory.biblereader.parts.middlestack.textpart.eventhandler.VerseContext;
+import com.lory.biblereader.parts.middlestack.textpart.contextmenu.VerseContext;
 
 @Creatable
 @Singleton
