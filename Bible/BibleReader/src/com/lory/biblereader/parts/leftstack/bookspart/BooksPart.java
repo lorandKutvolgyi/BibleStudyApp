@@ -26,18 +26,22 @@ import com.lory.biblereader.parts.leftstack.bookspart.treeprovider.ViewerTreeCon
 
 public class BooksPart implements Observer {
 
-	@Inject
 	private BookSelectionListener selectionListener;
-	@Inject
 	private BookClickListener bookClickListener;
-	@Inject
 	private BooksKeyListener booksKeyListener;
-	@Inject
 	private MessageService messageService;
-	@Inject
 	private CurrentChapter currentChapter;
 
 	private TreeViewer booksTreeViewer;
+
+	@Inject
+	public BooksPart(BooksPartServiceFacade services) {
+		selectionListener = services.getSelectionListener();
+		bookClickListener = services.getBookClickListener();
+		booksKeyListener = services.getBooksKeyListener();
+		messageService = services.getMessageService();
+		currentChapter = services.getCurrentChapter();
+	}
 
 	@PostConstruct
 	public void postConstruct(MPart part, final Composite parent) {

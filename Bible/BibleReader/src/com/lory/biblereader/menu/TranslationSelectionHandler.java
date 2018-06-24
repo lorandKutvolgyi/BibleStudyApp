@@ -12,7 +12,7 @@ public class TranslationSelectionHandler {
 	@Inject
 	private TranslationManager translationManager;
 
-	private static String selectedTranslation;
+	private String selectedTranslation;
 
 	@Execute
 	public void execute() {
