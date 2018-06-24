@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+	<changeSet id="11" author="lkutvolg">
+		<sql>
+			UPDATE JOSHUA SET short_content ="Isten parancsa és ígérete Józsuénak, felkészülés a honfoglalásra" WHERE chapter=1;
+			UPDATE JOSHUA SET short_content ="Kémek küldése Jerikóba, Ráháb" WHERE chapter=2;
+			UPDATE JOSHUA SET short_content ="Átkelés a Jordánon" WHERE chapter=3;
+			UPDATE JOSHUA SET short_content ="Az Úr ládája átkel a Jordánon" WHERE chapter=4;
+			UPDATE JOSHUA SET short_content ="Körülmetélkedés és páskaünnep Kánaánban" WHERE chapter=5;
+			UPDATE JOSHUA SET short_content ="Jerikó bevétele" WHERE chapter=6;
+			UPDATE JOSHUA SET short_content ="Vereség Ajnál" WHERE chapter=7;
+			UPDATE JOSHUA SET short_content="Aj elfoglalása" WHERE chapter=8;
+			UPDATE JOSHUA SET short_content="A gibeóniak csele" WHERE chapter=9;
+			UPDATE JOSHUA SET short_content ="Józsué megvédi a gibeóniakat" WHERE chapter=10;
+			UPDATE JOSHUA SET short_content ="Józsué elfoglalja az egész országot" WHERE chapter=11;
+			UPDATE JOSHUA SET short_content ="A legyőzött királyok felsorolása" WHERE chapter=12;
+			UPDATE JOSHUA SET short_content ="Oltárépítés a Jordánon túl" WHERE chapter=22;
+			UPDATE JOSHUA SET short_content ="Józsué intelmei" WHERE chapter=23;
+			UPDATE JOSHUA SET short_content ="Szövetségkötés, Józsué halála" WHERE chapter=24;
+		</sql>
+	</changeSet>
+</databaseChangeLog>

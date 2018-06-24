@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+	<changeSet id="17" author="lkutvolg">
+		<sql>
+			UPDATE I_SAMUEL SET short_content ="Sámuel születése" WHERE chapter=1;
+			UPDATE I_SAMUEL SET short_content ="Anna hálaéneke, Éli fiainak a bűnei" WHERE chapter=2;
+			UPDATE I_SAMUEL SET short_content ="Isten kijelentése Sámuelnek" WHERE chapter=3;
+			UPDATE I_SAMUEL SET short_content ="A filiszteusok elveszik Isten ládáját,A jövendolés betljesedi Éli háza népén" WHERE chapter=4;
+			UPDATE I_SAMUEL SET short_content ="Isten ládája a filiszteusoknál" WHERE chapter=5;
+			UPDATE I_SAMUEL SET short_content ="A filiszteusok visszaküldik a szövetség ládáját" WHERE chapter=6;
+			UPDATE I_SAMUEL SET short_content ="Izráel legyőzi a filiszteusokat" WHERE chapter=7;
+			UPDATE I_SAMUEL SET short_content ="Izráel királyt akar magának" WHERE chapter=8;
+			UPDATE I_SAMUEL SET short_content ="Sémuel és Saul találkozása" WHERE chapter=9;
+			UPDATE I_SAMUEL SET short_content ="Saul király lesz" WHERE chapter=10;
+			UPDATE I_SAMUEL SET short_content ="Saul legyőzi az ammóniakat, megújítják Saul királyságát" WHERE chapter=11;
+			UPDATE I_SAMUEL SET short_content ="Sámuel búcsúbeszéde" WHERE chapter=12;
+			UPDATE I_SAMUEL SET short_content ="Saul megtámadja a filiszteusokat,áldozatot mutat be" WHERE chapter=13;
+			UPDATE I_SAMUEL SET short_content ="Izrael győzelmei, Jonatán hőstette" WHERE chapter=14;
+			UPDATE I_SAMUEL SET short_content ="Isten elveszi a királyságot Saultól" WHERE chapter=15;
+		</sql>
+	</changeSet>
+</databaseChangeLog>

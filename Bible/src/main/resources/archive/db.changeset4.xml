@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+	<changeSet id="4" author="lkutvolg">
+		<sql>
+			INSERT INTO parts_EXODUS (Chapter_start,Verse_start,Chapter_end,Verse_end,Part)
+			VALUES(1,1,1,22,"Izrael sorsa rosszra fordul"),
+			(2,1,4,31,"Mózes a szabadító"),
+			(5,1,15,21,"Izrael megszabadulása"),
+			(15,22,19,25,"Út a Sínai hegyhez"),
+			(20,1,23,33,"A Törvény"),
+			(24,1,24,18,"A szövetségkötés"),
+			(25,1,31,18,"Utasítások a hajlék elkészítésére"),
+			(32,1,34,35,"A szövetség megszegése és megújítása"),
+			(35,1,40,38,"A hajlékra vonatkozó utasítások végrehajtása");
+		</sql>
+	</changeSet>
+</databaseChangeLog>
