@@ -18,6 +18,7 @@ import com.lory.biblereader.menu.TranslationManager;
 import com.lory.biblereader.model.Bible;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
+import com.lory.biblereader.model.dao.BibleDao;
 import com.lory.biblereader.parts.leftstack.bookspart.treesorter.BooksComparator;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.eventhandler.BooksComboSelectionListener;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.eventhandler.CancelButtonSelectionListener;
@@ -42,9 +43,10 @@ public class BookMarkSelectionPopup {
 	private Text verses;
 	private Group group;
 	private Button save;
+	private BibleDao bibleDao;
 
 	public BookMarkSelectionPopup(MessageService messageService, BookMarkManager bookMarkManager,
-			BooksComparator booksComparator, Bible bible, TranslationManager translationManager) {
+			BooksComparator booksComparator, Bible bible, TranslationManager translationManager, BibleDao bibleDao) {
 		this.messageService = messageService;
 		this.bookMarkManager = bookMarkManager;
 		this.booksComparator = booksComparator;
@@ -52,6 +54,7 @@ public class BookMarkSelectionPopup {
 		this.placeholderForVerses = messageService.getMessage("verses");
 		this.bible = bible;
 		this.translationManager = translationManager;
+		this.bibleDao = bibleDao;
 
 		createPopupShell();
 		createGroup();
@@ -100,7 +103,8 @@ public class BookMarkSelectionPopup {
 		books = new Combo(group, SWT.DROP_DOWN | SWT.READ_ONLY);
 		books.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		books.setVisibleItemCount(10);
-		books.addSelectionListener(new BooksComboSelectionListener(books, chapters, bible, translationManager));
+		books.addSelectionListener(
+				new BooksComboSelectionListener(books, chapters, bible, translationManager, bibleDao));
 	}
 
 	private void createChaptersCombo() {
@@ -138,8 +142,8 @@ public class BookMarkSelectionPopup {
 		save = new Button(buttons, SWT.PUSH);
 		save.setText(messageService.getMessage("save"));
 		save.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-		save.addSelectionListener(
-				new SaveButtonSelectionListener(this, bookMarkManager, messageService, bible, translationManager));
+		save.addSelectionListener(new SaveButtonSelectionListener(this, bookMarkManager, messageService, bible,
+				translationManager, bibleDao));
 	}
 
 	private void createCancelButton(Composite buttons) {
@@ -151,7 +155,7 @@ public class BookMarkSelectionPopup {
 
 	public void open() {
 		Book firstBook = booksComparator.current().getBooks().get(0);
-		open(firstBook.getChapter(1, null, translationManager));
+		open(firstBook.getChapter(1, null, translationManager, bibleDao));
 	}
 
 	public void open(Chapter chapter) {
@@ -179,7 +183,7 @@ public class BookMarkSelectionPopup {
 	}
 
 	private void fillChaptersCombo() {
-		int size = bible.getBooks().get(books.getSelectionIndex()).getBookSize(translationManager);
+		int size = bible.getBooks().get(books.getSelectionIndex()).getBookSize(translationManager, bibleDao);
 		for (int i = 1; i <= size; i++) {
 			chapters.add(String.valueOf(i));
 		}

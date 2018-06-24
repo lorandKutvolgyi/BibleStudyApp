@@ -17,7 +17,7 @@ import com.lory.biblereader.menu.TranslationManager;
 import com.lory.biblereader.model.Bible;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
-import com.lory.biblereader.model.dao.BibleDaoFactory;
+import com.lory.biblereader.model.dao.BibleDao;
 import com.lory.biblereader.parts.leftstack.bookspart.treesorter.BooksComparator;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkManager;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkSelectionPopup;
@@ -38,6 +38,8 @@ public class BookClickListener extends MouseAdapter {
 	private Bible bible;
 	@Inject
 	private TranslationManager translationManager;
+	@Inject
+	private BibleDao bibleDao;
 
 	@Override
 	public void mouseDown(MouseEvent event) {
@@ -73,13 +75,13 @@ public class BookClickListener extends MouseAdapter {
 		addToBookMark.setText(messageService.getMessage("newBookMark"));
 		addToBookMark.addListener(SWT.Selection, event -> {
 			BookMarkSelectionPopup bookMarkSelectionPopup = new BookMarkSelectionPopup(messageService, bookMarkManager,
-					booksComparator, bible, translationManager);
+					booksComparator, bible, translationManager, bibleDao);
 			bookMarkSelectionPopup.open(getChapter(mouseEvent));
 		});
 	}
 
 	private Chapter getChapter(MouseEvent mouseEvent) {
-		return BibleDaoFactory.getInstance().findChapterById(getSelectedBook(mouseEvent), 1, null, translationManager);
+		return bibleDao.findChapterById(getSelectedBook(mouseEvent), 1, null, translationManager);
 	}
 
 	private Book getSelectedBook(MouseEvent mouseEvent) {

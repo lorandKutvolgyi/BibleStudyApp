@@ -3,17 +3,20 @@ package com.lory.biblereader.parts.middlestack.textpart.eventhandler;
 import org.eclipse.swt.widgets.Shell;
 
 import com.lory.biblereader.model.Chapter;
-import com.lory.biblereader.model.dao.BibleDaoFactory;
+import com.lory.biblereader.model.dao.BibleDao;
 
 public class HtmlCreator {
+
 	private Shell shell;
 	private Chapter chapter;
 	private String verse;
+	private BibleDao bibleDao;
 
-	public HtmlCreator(Shell shell, Chapter chapter, String verse) {
+	public HtmlCreator(Shell shell, Chapter chapter, String verse, BibleDao bibleDao) {
 		this.shell = shell;
 		this.chapter = chapter;
 		this.verse = verse;
+		this.bibleDao = bibleDao;
 	}
 
 	// @formatter:off
@@ -61,7 +64,7 @@ public class HtmlCreator {
 				+         "<button name='previous' class='" + translation 
 				+         "' onclick='previousOnclick(\"" + translation  +"\")'><</button>"
 				+         "<span data-book='"+chapter.getBook().getTitle()+"' data-chapter='"+chapter.getId()+"' data-verse='"+verse+"'>" 
-				+             BibleDaoFactory.getInstance().findVerseByChapterAndId(chapter, verse, translation) 
+				+             bibleDao.findVerseByChapterAndId(chapter, verse, translation) 
 				+         "</span>"
 				+         "<button name='next' class='" + translation
 				+         "' onclick='nextOnclick(\"" + translation  +"\")'>></button>"

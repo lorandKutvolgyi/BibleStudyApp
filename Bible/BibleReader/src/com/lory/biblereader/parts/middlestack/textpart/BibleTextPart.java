@@ -27,6 +27,7 @@ import com.lory.biblereader.i18n.Messages;
 import com.lory.biblereader.menu.TranslationManager;
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.ChapterContext;
+import com.lory.biblereader.model.dao.BibleDao;
 import com.lory.biblereader.parts.leftstack.bookspart.eventhandler.BooksKeyListener;
 import com.lory.biblereader.parts.middlestack.textpart.eventhandler.JavaScriptCreator;
 import com.lory.biblereader.parts.middlestack.textpart.eventhandler.SearchTextVerifyListener;
@@ -46,6 +47,8 @@ public class BibleTextPart implements Observer {
 	private MessageService messageService;
 	@Inject
 	private TranslationManager translationManager;
+	@Inject
+	private BibleDao bibleDao;
 	@Inject
 	@Translation
 	private Messages messages;
@@ -105,7 +108,7 @@ public class BibleTextPart implements Observer {
 			@Override
 			public void mouseDown(MouseEvent event) {
 				if (event.button == 3) {
-					String script = new JavaScriptCreator().getVerseIdScript(event.x, event.y);
+					String script = new JavaScriptCreator(bibleDao).getVerseIdScript(event.x, event.y);
 					String verseId = (String) text.evaluate(script);
 					textPartManager.setComparingVerseId(verseId);
 				}

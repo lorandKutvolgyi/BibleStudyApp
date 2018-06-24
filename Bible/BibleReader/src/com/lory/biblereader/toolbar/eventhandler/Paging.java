@@ -10,6 +10,7 @@ import com.lory.biblereader.menu.TranslationManager;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.CurrentChapter;
+import com.lory.biblereader.model.dao.BibleDao;
 import com.lory.biblereader.parts.upperrightstack.historypart.History;
 
 @Creatable
@@ -20,6 +21,8 @@ public class Paging {
 	private CurrentChapter currentChapter;
 	@Inject
 	private TranslationManager translationManager;
+	@Inject
+	private BibleDao bibleDao;
 
 	public void paging(int keyCode, History history) {
 		if (!isSelectedChapter()) {
@@ -48,15 +51,15 @@ public class Paging {
 
 	private Chapter changeCurrentChapter(int newId) {
 		Book book = currentChapter.getChapter().getBook();
-		if (newId > 0 && newId <= isMax(book)) {
-			Chapter chapter = book.getChapter(newId, null, translationManager);
+		if (newId > 0 && newId <= getMax(book)) {
+			Chapter chapter = book.getChapter(newId, null, translationManager, bibleDao);
 			currentChapter.setChapter(chapter);
 			return chapter;
 		}
 		return null;
 	}
 
-	private int isMax(Book book) {
-		return book.getBookSize(translationManager);
+	private int getMax(Book book) {
+		return book.getBookSize(translationManager, bibleDao);
 	}
 }

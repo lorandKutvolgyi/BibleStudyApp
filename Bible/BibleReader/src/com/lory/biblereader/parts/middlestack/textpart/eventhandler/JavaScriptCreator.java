@@ -1,8 +1,14 @@
 package com.lory.biblereader.parts.middlestack.textpart.eventhandler;
 
-import com.lory.biblereader.model.dao.BibleDaoFactory;
+import com.lory.biblereader.model.dao.BibleDao;
 
 public class JavaScriptCreator {
+
+	private BibleDao bibleDao;
+
+	public JavaScriptCreator(BibleDao bibleDao) {
+		this.bibleDao = bibleDao;
+	}
 
 	public String getVerseChangeScript(VerseContext verseContext) {
 		if (verseContext == null) {
@@ -49,7 +55,7 @@ public class JavaScriptCreator {
 		script.append("span.setAttribute('data-chapter','" + verseContext.getChapterId() + "');");
 		script.append("span.setAttribute('data-verse','" + verseContext.getVerseId() + "');");
 		script.append("span.innerHTML = '<i>" + verseContext.getChapterId() + ":" + verseContext.getVerseId() + "</i>");
-		script.append("<br/>" + BibleDaoFactory.getInstance().findVerseByContext(verseContext) + "';");
+		script.append("<br/>" + bibleDao.findVerseByContext(verseContext) + "';");
 
 		return script;
 	}

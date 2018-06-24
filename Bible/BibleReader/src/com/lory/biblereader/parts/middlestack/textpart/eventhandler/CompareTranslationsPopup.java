@@ -11,6 +11,7 @@ import com.google.common.collect.Multimap;
 import com.lory.biblereader.i18n.MessageService;
 import com.lory.biblereader.menu.TranslationManager;
 import com.lory.biblereader.model.Chapter;
+import com.lory.biblereader.model.dao.BibleDao;
 import com.lory.biblereader.service.DisplayService;
 
 public class CompareTranslationsPopup {
@@ -23,14 +24,16 @@ public class CompareTranslationsPopup {
 	private MessageService messageService;
 	private DisplayService displayService;
 	private Browser browser;
+	private BibleDao bibleDao;
 
 	public CompareTranslationsPopup(Chapter chapter, String verse, TranslationManager translationManager,
-			MessageService messageService, DisplayService displayService) {
+			MessageService messageService, DisplayService displayService, BibleDao bibleDao) {
 		this.chapter = chapter;
 		this.verse = verse;
 		this.translationManager = translationManager;
 		this.messageService = messageService;
 		this.displayService = displayService;
+		this.bibleDao = bibleDao;
 	}
 
 	public void open() {
@@ -60,12 +63,12 @@ public class CompareTranslationsPopup {
 
 	// step function will be called by javascript code
 	private void createStepFunction() {
-		new StepFunction(browser, "step");
+		new StepFunction(browser, "step", bibleDao);
 	}
 
 	private StringBuilder createBrowserContent() {
 		String activeTranslation = translationManager.getActiveTranslationAbbreviation();
-		HtmlCreator creator = new HtmlCreator(shell, chapter, verse);
+		HtmlCreator creator = new HtmlCreator(shell, chapter, verse, bibleDao);
 		StringBuilder content = new StringBuilder(creator.createStartHtml())
 				.append(creator.createHtml(activeTranslation));
 		Multimap<String, String> availableTranslations = translationManager.getAvailableTranslations();

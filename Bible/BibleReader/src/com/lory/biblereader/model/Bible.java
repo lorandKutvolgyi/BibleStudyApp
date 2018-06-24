@@ -10,6 +10,7 @@ import javax.inject.Singleton;
 import org.eclipse.e4.core.di.annotations.Creatable;
 
 import com.lory.biblereader.menu.TranslationManager;
+import com.lory.biblereader.model.dao.BibleDao;
 
 @Creatable
 @Singleton
@@ -17,6 +18,8 @@ public class Bible {
 
 	@Inject
 	private TranslationManager translationManager;
+	@Inject
+	private BibleDao bibleDao;
 
 	private List<Book> books = new ArrayList<>();
 
@@ -31,7 +34,7 @@ public class Bible {
 
 	public Chapter getChapter(String title, int chapterNumber) {
 		Book book = getBookByTitle(title);
-		return book.getChapter(chapterNumber, null, translationManager);
+		return book.getChapter(chapterNumber, null, translationManager, bibleDao);
 	}
 
 	public List<Book> getBooks() {

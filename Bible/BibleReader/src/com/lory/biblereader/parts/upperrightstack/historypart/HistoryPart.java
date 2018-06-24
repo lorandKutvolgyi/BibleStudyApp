@@ -30,6 +30,7 @@ import com.lory.biblereader.menu.TranslationManager;
 import com.lory.biblereader.model.Bible;
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.CurrentChapter;
+import com.lory.biblereader.model.dao.BibleDao;
 import com.lory.biblereader.parts.leftstack.bookspart.treesorter.BooksComparator;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkManager;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkSelectionPopup;
@@ -50,6 +51,8 @@ public class HistoryPart implements Observer {
 	private Bible bible;
 	@Inject
 	private TranslationManager translationManager;
+	@Inject
+	private BibleDao bibleDao;
 
 	private Composite parent;
 	private ScrolledComposite scrolledComposite;
@@ -178,7 +181,7 @@ public class HistoryPart implements Observer {
 		MenuItem addToBookMark = new MenuItem(menu, SWT.PUSH);
 		addToBookMark.setText(messageService.getMessage("newBookMark"));
 		addToBookMark.addListener(SWT.Selection, event -> new BookMarkSelectionPopup(messageService, bookMarkManager,
-				booksComparator, bible, translationManager).open(chapter));
+				booksComparator, bible, translationManager, bibleDao).open(chapter));
 
 		return menu;
 	}

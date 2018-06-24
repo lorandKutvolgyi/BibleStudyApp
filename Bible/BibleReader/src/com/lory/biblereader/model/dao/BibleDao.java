@@ -9,6 +9,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import javax.inject.Singleton;
+
+import org.eclipse.e4.core.di.annotations.Creatable;
+
 import com.google.common.collect.Multimap;
 import com.google.common.collect.TreeMultimap;
 import com.lory.biblereader.menu.TranslationManager;
@@ -16,6 +20,8 @@ import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.parts.middlestack.textpart.eventhandler.VerseContext;
 
+@Creatable
+@Singleton
 public class BibleDao {
 
 	private Connection connection;

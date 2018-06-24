@@ -3,21 +3,25 @@ package com.lory.biblereader.menu;
 import java.util.Locale;
 import java.util.Observable;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import org.eclipse.e4.core.di.annotations.Creatable;
 
 import com.google.common.collect.Multimap;
-import com.lory.biblereader.model.dao.BibleDaoFactory;
+import com.lory.biblereader.model.dao.BibleDao;
 
 @Creatable
 @Singleton
 public class TranslationManager extends Observable {
 
+	@Inject
+	private BibleDao bibleDao;
+
 	private String activeTranslation;
 
 	public Multimap<String, String> getAvailableTranslations() {
-		Multimap<String, String> availableTranslations = BibleDaoFactory.getInstance().getAvailableTranslations();
+		Multimap<String, String> availableTranslations = bibleDao.getAvailableTranslations();
 		if (activeTranslation == null) {
 			String defaultLang = Locale.getDefault().getLanguage().toUpperCase();
 			activeTranslation = availableTranslations.get(defaultLang).stream().findFirst().orElse(null);
@@ -28,7 +32,7 @@ public class TranslationManager extends Observable {
 	}
 
 	public void setActiveTranslationAbbreviation(String abbrev) {
-		activeTranslation = abbrev + ":" + BibleDaoFactory.getInstance().getDescription(abbrev);
+		activeTranslation = abbrev + ":" + bibleDao.getDescription(abbrev);
 		setChanged();
 		notifyObservers();
 	}

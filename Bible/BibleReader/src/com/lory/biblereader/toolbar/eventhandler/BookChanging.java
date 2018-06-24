@@ -10,6 +10,7 @@ import com.lory.biblereader.menu.TranslationManager;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.CurrentChapter;
+import com.lory.biblereader.model.dao.BibleDao;
 import com.lory.biblereader.parts.leftstack.bookspart.treesorter.AbstractBooksOrder;
 import com.lory.biblereader.parts.leftstack.bookspart.treesorter.BooksComparator;
 import com.lory.biblereader.parts.upperrightstack.historypart.History;
@@ -22,6 +23,8 @@ public class BookChanging {
 	private CurrentChapter currentChapter;
 	@Inject
 	private TranslationManager translationManager;
+	@Inject
+	private BibleDao bibleDao;
 
 	public void change(int keyCode, BooksComparator booksComparator, History history) {
 		if (!isSelectedChapter()) {
@@ -30,7 +33,7 @@ public class BookChanging {
 		AbstractBooksOrder order = booksComparator.current();
 		Book book = currentChapter.getChapter().getBook();
 		int index = order.getBooks().indexOf(book);
-		Chapter chapter = getBook(order, index, keyCode).getChapter(1, null, translationManager);
+		Chapter chapter = getBook(order, index, keyCode).getChapter(1, null, translationManager, bibleDao);
 		currentChapter.setChapter(chapter);
 		history.addChapter(chapter);
 	}

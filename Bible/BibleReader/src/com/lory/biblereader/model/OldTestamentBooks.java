@@ -5,7 +5,6 @@ import java.util.Collections;
 
 import com.lory.biblereader.menu.TranslationManager;
 import com.lory.biblereader.model.dao.BibleDao;
-import com.lory.biblereader.model.dao.BibleDaoFactory;
 
 public enum OldTestamentBooks implements Book {
 
@@ -49,7 +48,6 @@ public enum OldTestamentBooks implements Book {
 	ZECHARIAH("Zech"),
 	MALACHI("Mal");
 
-	private static BibleDao dao = BibleDaoFactory.getInstance();
 	private String title;
 
 	private OldTestamentBooks(String title) {
@@ -67,12 +65,12 @@ public enum OldTestamentBooks implements Book {
 	}
 
 	@Override
-	public int getBookSize(TranslationManager translationManager) {
+	public int getBookSize(TranslationManager translationManager, BibleDao dao) {
 		return dao.getBookSize(this, translationManager);
 	}
 
 	@Override
-	public Chapter getChapter(int id, String translation, TranslationManager translationManager) {
+	public Chapter getChapter(int id, String translation, TranslationManager translationManager, BibleDao dao) {
 		return dao.findChapterById(this, id, translation, translationManager);
 	}
 

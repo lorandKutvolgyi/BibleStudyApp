@@ -23,6 +23,7 @@ import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.ChapterContext;
 import com.lory.biblereader.model.CurrentChapter;
+import com.lory.biblereader.model.dao.BibleDao;
 
 @Creatable
 @Singleton
@@ -38,6 +39,8 @@ public class TextPartManager {
 	private static MApplication application;
 	@Inject
 	private TranslationManager translationManager;
+	@Inject
+	private BibleDao bibleDao;
 
 	private static final String STACK_ID = "biblereader.partstack.bibletext";
 	private static final String BIBLE_TEXT_PART_URI = "bundleclass://reader/com.lory.biblereader.parts.middlestack.textpart.BibleTextPart";
@@ -121,7 +124,7 @@ public class TextPartManager {
 	}
 
 	public synchronized void modifyPartContent(Book book, int chapterId) {
-		Chapter chapter = book.getChapter(chapterId, null, translationManager);
+		Chapter chapter = book.getChapter(chapterId, null, translationManager, bibleDao);
 		currentChapter.setChapter(chapter);
 		chapters.put(activePart, chapter);
 	}

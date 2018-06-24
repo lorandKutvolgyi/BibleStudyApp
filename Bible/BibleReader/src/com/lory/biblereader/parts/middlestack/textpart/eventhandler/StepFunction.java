@@ -3,14 +3,17 @@ package com.lory.biblereader.parts.middlestack.textpart.eventhandler;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.BrowserFunction;
 
-import com.lory.biblereader.model.dao.BibleDaoFactory;
+import com.lory.biblereader.model.dao.BibleDao;
 
 public class StepFunction extends BrowserFunction {
-	private Browser browser = null;
 
-	public StepFunction(Browser browser, String name) {
+	private Browser browser = null;
+	private BibleDao bibleDao;
+
+	public StepFunction(Browser browser, String name, BibleDao bibleDao) {
 		super(browser, name);
 		this.browser = browser;
+		this.bibleDao = bibleDao;
 	}
 
 	@Override
@@ -25,7 +28,7 @@ public class StepFunction extends BrowserFunction {
 		} else {
 			context = stepForward(translation, book, chapter, verse);
 		}
-		browser.evaluate(new JavaScriptCreator().getVerseChangeScript(context));
+		browser.evaluate(new JavaScriptCreator(bibleDao).getVerseChangeScript(context));
 		return null;
 	}
 
@@ -72,14 +75,14 @@ public class StepFunction extends BrowserFunction {
 	}
 
 	private int getLastVerse(String translation, String book, int chapter) {
-		return BibleDaoFactory.getInstance().getChapterSize(book, chapter, translation);
+		return bibleDao.getChapterSize(book, chapter, translation);
 	}
 
 	private boolean isLastVerse(String translation, String book, int chapter, int verse) {
-		return verse == BibleDaoFactory.getInstance().getChapterSize(book, chapter, translation);
+		return verse == bibleDao.getChapterSize(book, chapter, translation);
 	}
 
 	private boolean isLastChapter(String translation, String book, int chapter) {
-		return chapter == BibleDaoFactory.getInstance().getBookSize(book, translation);
+		return chapter == bibleDao.getBookSize(book, translation);
 	}
 }
