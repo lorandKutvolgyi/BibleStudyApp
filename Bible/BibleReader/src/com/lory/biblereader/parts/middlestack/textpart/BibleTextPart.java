@@ -28,6 +28,7 @@ import com.lory.biblereader.menu.TranslationManager;
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.ChapterContext;
 import com.lory.biblereader.parts.leftstack.bookspart.eventhandler.BooksKeyListener;
+import com.lory.biblereader.parts.middlestack.textpart.eventhandler.JavaScriptCreator;
 import com.lory.biblereader.parts.middlestack.textpart.eventhandler.SearchTextVerifyListener;
 import com.lory.biblereader.parts.middlestack.textpart.eventhandler.TextSearchListener;
 
@@ -104,12 +105,12 @@ public class BibleTextPart implements Observer {
 			@Override
 			public void mouseDown(MouseEvent event) {
 				if (event.button == 3) {
-					String script = "var element = document.elementFromPoint(" + event.x + "," + event.y
-							+ ");return element.getAttribute('id');";
+					String script = new JavaScriptCreator().getVerseIdScript(event.x, event.y);
 					String verseId = (String) text.evaluate(script);
 					textPartManager.setComparingVerseId(verseId);
 				}
 			}
+
 		});
 		textSearchListener.setBibleText(text);
 	}
