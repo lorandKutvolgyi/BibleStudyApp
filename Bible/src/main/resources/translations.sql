@@ -71,11 +71,10 @@ ALTER TABLE ONLY study_app.translations ALTER COLUMN id SET DEFAULT nextval('stu
 -- Data for Name: translations; Type: TABLE DATA; Schema: study_app; Owner: postgres
 --
 
-COPY study_app.translations (id, abbrev, description, language) FROM stdin;
-47	ASV	American Standard Version (1901)	EN
-48	HunKar	Hungarian Vizsoly (Karoli) Biblia (1590)	HU
-49	HunUj	Magyar Bibliatársulat újfordítású Bibliája	HU
-\.
+INSERT INTO study_app.translations (id, abbrev, description, language) VALUES
+(47,'ASV','American Standard Version (1901)','EN'),
+(48,'HunKar','Hungarian Vizsoly (Karoli) Biblia (1590)','HU'),
+(49,'HunUj','Magyar Bibliatársulat újfordítású Bibliája','HU');
 
 
 --

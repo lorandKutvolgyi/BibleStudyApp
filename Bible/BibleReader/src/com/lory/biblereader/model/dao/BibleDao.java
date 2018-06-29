@@ -27,16 +27,9 @@ public class BibleDao {
 	private Connection connection;
 	private final Properties prop = new Properties();
 
-	static {
-		try {
-			Class.forName("org.postgresql.Driver");
-		} catch (ClassNotFoundException e) {
-			System.err.println("PostgreSQL DataSource unable to load PostgreSQL JDBC Driver");
-		}
-	}
-
 	public BibleDao() {
 		loadProperties();
+		loadDriverClass();
 		createConnection(prop.getProperty("url"), prop.getProperty("username"), prop.getProperty("password"));
 	}
 
@@ -46,6 +39,14 @@ public class BibleDao {
 			prop.load(input);
 		} catch (IOException ex) {
 			ex.printStackTrace();// TODO userfrendly message in a popup
+		}
+	}
+
+	private void loadDriverClass() {
+		try {
+			Class.forName(prop.getProperty("driver"));
+		} catch (ClassNotFoundException e) {
+			System.err.println("PostgreSQL DataSource unable to load PostgreSQL JDBC Driver");
 		}
 	}
 

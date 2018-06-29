@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.3.23
 -- Dumped by pg_dump version 9.3.23
--- Started on 2018-06-24 19:49:49 CEST
+-- Started on 2018-06-27 12:10:35 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -19,7 +19,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- TOC entry 188 (class 1259 OID 94194)
+-- TOC entry 185 (class 1259 OID 94194)
 -- Name: asv_reference; Type: TABLE; Schema: study_app; Owner: postgres; Tablespace: 
 --
 
@@ -35,7 +35,7 @@ CREATE TABLE study_app.asv_reference (
 ALTER TABLE study_app.asv_reference OWNER TO postgres;
 
 --
--- TOC entry 187 (class 1259 OID 94192)
+-- TOC entry 184 (class 1259 OID 94192)
 -- Name: asv_reference_id_seq; Type: SEQUENCE; Schema: study_app; Owner: postgres
 --
 
@@ -50,8 +50,8 @@ CREATE SEQUENCE study_app.asv_reference_id_seq
 ALTER TABLE study_app.asv_reference_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2076 (class 0 OID 0)
--- Dependencies: 187
+-- TOC entry 2074 (class 0 OID 0)
+-- Dependencies: 184
 -- Name: asv_reference_id_seq; Type: SEQUENCE OWNED BY; Schema: study_app; Owner: postgres
 --
 
@@ -59,7 +59,7 @@ ALTER SEQUENCE study_app.asv_reference_id_seq OWNED BY study_app.asv_reference.i
 
 
 --
--- TOC entry 1959 (class 2604 OID 94197)
+-- TOC entry 1957 (class 2604 OID 94197)
 -- Name: id; Type: DEFAULT; Schema: study_app; Owner: postgres
 --
 
@@ -67,18 +67,16 @@ ALTER TABLE ONLY study_app.asv_reference ALTER COLUMN id SET DEFAULT nextval('st
 
 
 --
--- TOC entry 2070 (class 0 OID 94194)
--- Dependencies: 188
+-- TOC entry 2068 (class 0 OID 94194)
+-- Dependencies: 185
 -- Data for Name: asv_reference; Type: TABLE DATA; Schema: study_app; Owner: postgres
 --
 
-COPY study_app.asv_reference (id, book, chapter, verse, refs) FROM stdin;
-\.
 
 
 --
--- TOC entry 2077 (class 0 OID 0)
--- Dependencies: 187
+-- TOC entry 2075 (class 0 OID 0)
+-- Dependencies: 184
 -- Name: asv_reference_id_seq; Type: SEQUENCE SET; Schema: study_app; Owner: postgres
 --
 
@@ -86,7 +84,7 @@ SELECT pg_catalog.setval('study_app.asv_reference_id_seq', 1, false);
 
 
 --
--- TOC entry 1961 (class 2606 OID 94202)
+-- TOC entry 1959 (class 2606 OID 94202)
 -- Name: asv_reference_pkey; Type: CONSTRAINT; Schema: study_app; Owner: postgres; Tablespace: 
 --
 
@@ -94,7 +92,7 @@ ALTER TABLE ONLY study_app.asv_reference
     ADD CONSTRAINT asv_reference_pkey PRIMARY KEY (id);
 
 
--- Completed on 2018-06-24 19:49:49 CEST
+-- Completed on 2018-06-27 12:10:35 CEST
 
 --
 -- PostgreSQL database dump complete

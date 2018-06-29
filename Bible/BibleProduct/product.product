@@ -25,7 +25,6 @@
    </vm>
 
    <plugins>
-      <plugin id="Bible"/>
       <plugin id="ch.qos.logback.classic"/>
       <plugin id="ch.qos.logback.core"/>
       <plugin id="ch.qos.logback.slf4j" fragment="true"/>
@@ -148,7 +147,6 @@
       <plugin id="org.slf4j.apis.log4j"/>
       <plugin id="org.slf4j.binding.simple" fragment="true"/>
       <plugin id="org.slf4j.impl.log4j12" fragment="true"/>
-      <plugin id="org.slf4j.nop" fragment="true"/>
       <plugin id="org.tukaani.xz"/>
       <plugin id="org.w3c.css.sac"/>
       <plugin id="org.w3c.dom.events"/>

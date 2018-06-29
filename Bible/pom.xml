@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.lorandkutvolgyi</groupId>
@@ -14,11 +15,12 @@
 	</modules>
 	<properties>
 		<tycho.version>0.26.0</tycho.version>
+		<postgresql.version>42.2.2</postgresql.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<update-repo.url>http://download.eclipse.org/eclipse/updates/4.8</update-repo.url>
 		<aspectj-repo.url>http://download.eclipse.org/tools/ajdt/48/dev/update</aspectj-repo.url>
-		<a>http://download.eclipse.org/tools/orbit/downloads/drops/R20180606145124/repository</a>
-		<b>http://oneclicklabs.io/repo/eclipse/plugin/log4j</b>
+		<orbit>http://download.eclipse.org/tools/orbit/downloads/drops/R20180606145124/repository</orbit>
+		<log4j>http://oneclicklabs.io/repo/eclipse/plugin/log4j</log4j>
 	</properties>
 	<repositories>
 		<repository>
@@ -43,15 +45,22 @@
 		</repository>
 		<repository>
 			<id>orbit</id>
-			<url>${a}</url>
+			<url>${orbit}</url>
 			<layout>p2</layout>
 		</repository>
 		<repository>
 			<id>log4j</id>
-			<url>${b}</url>
+			<url>${log4j}</url>
 			<layout>p2</layout>
 		</repository>
 	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>${postgresql.version}</version>
+		</dependency>
+	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
@@ -93,6 +102,24 @@
 						</environment>
 					</environments>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<version>3.6.1</version>
+				<configuration>
+					<changelogSchemaName>study_app</changelogSchemaName>
+					<propertyFile>db.properties</propertyFile>
+				</configuration>
+				<inherited>false</inherited>
+				<executions>
+					<execution>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>update</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

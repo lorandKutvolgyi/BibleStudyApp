@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.3.23
 -- Dumped by pg_dump version 9.3.23
--- Started on 2018-06-24 19:50:29 CEST
+-- Started on 2018-06-27 12:11:45 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -19,7 +19,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- TOC entry 196 (class 1259 OID 94283)
+-- TOC entry 193 (class 1259 OID 94283)
 -- Name: hunkar_note; Type: TABLE; Schema: study_app; Owner: postgres; Tablespace: 
 --
 
@@ -35,7 +35,7 @@ CREATE TABLE study_app.hunkar_note (
 ALTER TABLE study_app.hunkar_note OWNER TO postgres;
 
 --
--- TOC entry 195 (class 1259 OID 94281)
+-- TOC entry 192 (class 1259 OID 94281)
 -- Name: hunkar_note_id_seq; Type: SEQUENCE; Schema: study_app; Owner: postgres
 --
 
@@ -50,8 +50,8 @@ CREATE SEQUENCE study_app.hunkar_note_id_seq
 ALTER TABLE study_app.hunkar_note_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2076 (class 0 OID 0)
--- Dependencies: 195
+-- TOC entry 2074 (class 0 OID 0)
+-- Dependencies: 192
 -- Name: hunkar_note_id_seq; Type: SEQUENCE OWNED BY; Schema: study_app; Owner: postgres
 --
 
@@ -59,7 +59,7 @@ ALTER SEQUENCE study_app.hunkar_note_id_seq OWNED BY study_app.hunkar_note.id;
 
 
 --
--- TOC entry 1959 (class 2604 OID 94286)
+-- TOC entry 1957 (class 2604 OID 94286)
 -- Name: id; Type: DEFAULT; Schema: study_app; Owner: postgres
 --
 
@@ -67,18 +67,16 @@ ALTER TABLE ONLY study_app.hunkar_note ALTER COLUMN id SET DEFAULT nextval('stud
 
 
 --
--- TOC entry 2070 (class 0 OID 94283)
--- Dependencies: 196
+-- TOC entry 2068 (class 0 OID 94283)
+-- Dependencies: 193
 -- Data for Name: hunkar_note; Type: TABLE DATA; Schema: study_app; Owner: postgres
 --
 
-COPY study_app.hunkar_note (id, book, chapter, verse, note) FROM stdin;
-\.
 
 
 --
--- TOC entry 2077 (class 0 OID 0)
--- Dependencies: 195
+-- TOC entry 2075 (class 0 OID 0)
+-- Dependencies: 192
 -- Name: hunkar_note_id_seq; Type: SEQUENCE SET; Schema: study_app; Owner: postgres
 --
 
@@ -86,7 +84,7 @@ SELECT pg_catalog.setval('study_app.hunkar_note_id_seq', 1, false);
 
 
 --
--- TOC entry 1961 (class 2606 OID 94291)
+-- TOC entry 1959 (class 2606 OID 94291)
 -- Name: hunkar_note_pkey; Type: CONSTRAINT; Schema: study_app; Owner: postgres; Tablespace: 
 --
 
@@ -94,7 +92,7 @@ ALTER TABLE ONLY study_app.hunkar_note
     ADD CONSTRAINT hunkar_note_pkey PRIMARY KEY (id);
 
 
--- Completed on 2018-06-24 19:50:30 CEST
+-- Completed on 2018-06-27 12:11:45 CEST
 
 --
 -- PostgreSQL database dump complete
