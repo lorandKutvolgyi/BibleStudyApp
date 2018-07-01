@@ -1,6 +1,5 @@
 package com.lory.biblereader.menu;
 
-import java.util.Locale;
 import java.util.Observable;
 
 import javax.inject.Inject;
@@ -22,12 +21,13 @@ public class TranslationManager extends Observable {
 
 	public Multimap<String, String> getAvailableTranslations() {
 		Multimap<String, String> availableTranslations = bibleDao.getAvailableTranslations();
-		if (activeTranslation == null) {
-			String defaultLang = Locale.getDefault().getLanguage().toUpperCase();
-			activeTranslation = availableTranslations.get(defaultLang).stream().findFirst().orElse(null);
-			setChanged();
-			notifyObservers();
-		}
+//		if (activeTranslation == null) {
+//			String defaultLang = Locale.getDefault().getLanguage().toUpperCase();
+//			activeTranslation = availableTranslations.get(defaultLang).stream().findFirst().orElse(null);
+//			// TODO change it from null to a default english translation
+//			setChanged();
+//			notifyObservers();
+//		}
 		return availableTranslations;
 	}
 
