@@ -20,15 +20,7 @@ public class TranslationManager extends Observable {
 	private String activeTranslation;
 
 	public Multimap<String, String> getAvailableTranslations() {
-		Multimap<String, String> availableTranslations = bibleDao.getAvailableTranslations();
-//		if (activeTranslation == null) {
-//			String defaultLang = Locale.getDefault().getLanguage().toUpperCase();
-//			activeTranslation = availableTranslations.get(defaultLang).stream().findFirst().orElse(null);
-//			// TODO change it from null to a default english translation
-//			setChanged();
-//			notifyObservers();
-//		}
-		return availableTranslations;
+		return bibleDao.getAvailableTranslations();
 	}
 
 	public void setActiveTranslationAbbreviation(String abbrev) {
