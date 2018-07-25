@@ -42,7 +42,9 @@ public class JavaScriptCreator {
 		script.append("   }                                                                                         ");
 
 		script.append("   var element = document.elementFromPoint(" + x + "," + y + ");                             ");
-		script.append("   return element.closest(\"div\").getAttribute('id');                                       ");
+		script.append("   if (element.closest('div') !==null) {                                                     ");
+		script.append("       return element.closest('div').getAttribute('id');                                     ");
+		script.append("   }                                                                                         ");
 
 		return script.toString();
 	}

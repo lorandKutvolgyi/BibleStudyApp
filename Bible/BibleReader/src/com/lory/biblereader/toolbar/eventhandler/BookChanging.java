@@ -33,7 +33,8 @@ public class BookChanging {
 		AbstractBooksOrder order = booksComparator.current();
 		Book book = currentChapter.getChapter().getBook();
 		int index = order.getBooks().indexOf(book);
-		Chapter chapter = getBook(order, index, keyCode).getChapter(1, null, translationManager, bibleDao);
+		String translation = currentChapter.getChapter().getTranslation();
+		Chapter chapter = getBook(order, index, keyCode).getChapter(1, translation, translationManager, bibleDao);
 		currentChapter.setChapter(chapter);
 		history.addChapter(chapter);
 	}

@@ -52,7 +52,8 @@ public class Paging {
 	private Chapter changeCurrentChapter(int newId) {
 		Book book = currentChapter.getChapter().getBook();
 		if (newId > 0 && newId <= getMax(book)) {
-			Chapter chapter = book.getChapter(newId, null, translationManager, bibleDao);
+			String translation = currentChapter.getChapter().getTranslation();
+			Chapter chapter = book.getChapter(newId, translation, translationManager, bibleDao);
 			currentChapter.setChapter(chapter);
 			return chapter;
 		}

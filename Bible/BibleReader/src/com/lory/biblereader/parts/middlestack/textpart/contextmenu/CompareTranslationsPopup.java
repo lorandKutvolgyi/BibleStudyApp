@@ -79,6 +79,4 @@ public class CompareTranslationsPopup {
 		content.append(creator.createEndHtml());
 		return content;
 	}
-
-	// @formatter:on 
 }
