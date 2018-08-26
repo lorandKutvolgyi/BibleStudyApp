@@ -45,8 +45,8 @@ public class Translation {
 			String activeTranslation = getActiveTranslation(app, availableTranslations);
 			if (activeTranslation != null && !activeTranslation.isEmpty()) {
 				translationManager.setActiveTranslationAbbreviation(activeTranslation);
+				activeTranslationIsSet = true;
 			}
-			activeTranslationIsSet = true;
 		}
 	}
 

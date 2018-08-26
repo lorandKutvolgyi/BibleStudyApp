@@ -124,7 +124,11 @@ public class BibleDao {
 	}
 
 	public int getBookSize(Book book, TranslationManager translationManager) {
-		return getBookSize(book.getTitle(), translationManager.getActiveTranslationAbbreviation().toLowerCase());
+		String activeTranslation = translationManager.getActiveTranslationAbbreviation();
+		if (activeTranslation.isEmpty()) {
+			return 0;
+		}
+		return getBookSize(book.getTitle(), activeTranslation.toLowerCase());
 	}
 
 	public int getBookSize(String bookTitle, String translation) {

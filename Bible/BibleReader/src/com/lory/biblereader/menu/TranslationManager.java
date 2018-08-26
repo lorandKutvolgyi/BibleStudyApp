@@ -1,5 +1,6 @@
 package com.lory.biblereader.menu;
 
+import java.util.Locale;
 import java.util.Observable;
 
 import javax.inject.Inject;
@@ -24,14 +25,22 @@ public class TranslationManager extends Observable {
 	}
 
 	public void setActiveTranslationAbbreviation(String abbrev) {
-		activeTranslation = abbrev + ":" + bibleDao.getDescription(abbrev);
+		setActiveTranslation(abbrev + ":" + bibleDao.getDescription(abbrev));
+	}
+
+	public void setActiveTranslation(String activeTranslation) {
+		this.activeTranslation = activeTranslation;
 		setChanged();
 		notifyObservers();
 	}
 
 	public String getActiveTranslationAbbreviation() {
-		if (activeTranslation == null) {
-			return "";
+		if (activeTranslation == null || activeTranslation.isEmpty()) {
+			String defaultLang = Locale.getDefault().getLanguage().toUpperCase();
+			setActiveTranslation(getAvailableTranslations().get(defaultLang).stream().findFirst().orElse(null));
+			if (activeTranslation == null) {
+				activeTranslation = "";
+			}
 		}
 		return activeTranslation.split(":")[0];
 	}
