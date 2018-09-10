@@ -190,4 +190,8 @@ public class BibleTextPart implements Observer {
 	private void registerMenu() {
 		menuService.registerContextMenu(browser, "reader.popupmenu.textpart.context");
 	}
+
+	public Browser getBrowser() {
+		return browser;
+	}
 }

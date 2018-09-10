@@ -167,7 +167,11 @@ public class TextPartManager {
 
 	private void loadTextIntoBibleTextPart(MPart part, Chapter currentChapter) {
 		BibleTextPart bibleTextPart = parts.get(part);
-		bibleTextPart.setContent(currentChapter.getText());
+		if (bibleTextPart.getBrowser().getData() != null) {
+			bibleTextPart.setContent((String) bibleTextPart.getBrowser().getData());
+		} else {
+			bibleTextPart.setContent(currentChapter.getText());
+		}
 		bibleTextPart.refreshTitle(currentChapter.getBook().getTitle(), currentChapter.getId());
 		if (currentChapter.getTranslation() == null) {
 			currentChapter.setTranslation(translationManager.getActiveTranslationAbbreviation());
