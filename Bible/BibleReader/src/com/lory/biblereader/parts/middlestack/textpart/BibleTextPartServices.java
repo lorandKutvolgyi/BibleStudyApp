@@ -7,7 +7,6 @@ import org.eclipse.e4.core.di.annotations.Creatable;
 
 import com.lory.biblereader.i18n.MessageService;
 import com.lory.biblereader.menu.TranslationManager;
-import com.lory.biblereader.model.dao.BibleDao;
 import com.lory.biblereader.parts.leftstack.bookspart.eventhandler.BooksKeyListener;
 import com.lory.biblereader.parts.middlestack.textpart.eventhandler.BrowserMouseListener;
 import com.lory.biblereader.parts.middlestack.textpart.eventhandler.BrowserProgressListener;
@@ -35,8 +34,6 @@ public class BibleTextPartServices extends Services {
 	protected MessageService messageService;
 	@Inject
 	protected TranslationManager translationManager;
-	@Inject
-	protected BibleDao bibleDao;
 
 	public BooksKeyListener getBooksKeyListener() {
 		return booksKeyListener;
@@ -52,10 +49,6 @@ public class BibleTextPartServices extends Services {
 
 	public TranslationManager getTranslationManager() {
 		return translationManager;
-	}
-
-	public BibleDao getBibleDao() {
-		return bibleDao;
 	}
 
 	public TextSearchListener getTextSearchListener() {
