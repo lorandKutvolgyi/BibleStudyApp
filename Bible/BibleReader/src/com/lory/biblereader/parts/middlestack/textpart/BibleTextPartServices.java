@@ -1,7 +1,6 @@
 package com.lory.biblereader.parts.middlestack.textpart;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 import org.eclipse.e4.core.di.annotations.Creatable;
 
@@ -15,7 +14,6 @@ import com.lory.biblereader.parts.middlestack.textpart.eventhandler.TextSearchLi
 import com.lory.biblereader.service.Services;
 
 @Creatable
-@Singleton
 public class BibleTextPartServices extends Services {
 
 	@Inject
