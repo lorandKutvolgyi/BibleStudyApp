@@ -1,5 +1,6 @@
 package com.lory.biblereader.parts.middlestack.textpart;
 
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -13,8 +14,6 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.EMenuService;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -25,9 +24,9 @@ import com.lory.biblereader.i18n.MessageService;
 import com.lory.biblereader.menu.TranslationManager;
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.ChapterContext;
-import com.lory.biblereader.model.dao.BibleDao;
 import com.lory.biblereader.parts.leftstack.bookspart.eventhandler.BooksKeyListener;
-import com.lory.biblereader.parts.middlestack.textpart.contextmenu.JavaScriptCreator;
+import com.lory.biblereader.parts.middlestack.textpart.eventhandler.BrowserMouseListener;
+import com.lory.biblereader.parts.middlestack.textpart.eventhandler.BrowserProgressListener;
 import com.lory.biblereader.parts.middlestack.textpart.eventhandler.SearchTextVerifyListener;
 import com.lory.biblereader.parts.middlestack.textpart.eventhandler.TextSearchListener;
 
@@ -39,25 +38,28 @@ public class BibleTextPart implements Observer {
 
 	private MPart part;
 	private Composite parent;
-	private Browser text;
+	private Browser browser;
 	private Label translationLabel;
 	private final BooksKeyListener booksKeyListener;
 	private final TextPartManager textPartManager;
 	private final MessageService messageService;
 	private final TranslationManager translationManager;
-	private final BibleDao bibleDao;
-	protected TextSearchListener textSearchListener;
-	protected SearchTextVerifyListener searchTextVerifyListener;
+	private final TextSearchListener textSearchListener;
+	private final SearchTextVerifyListener searchTextVerifyListener;
+	private final BrowserMouseListener browserMouseListener;
+	private final BrowserProgressListener browserProgressListener;
 
 	@Inject
-	public BibleTextPart(BibleTextPartServiceFacade services) {
+	public BibleTextPart(BibleTextPartServices services) {
 		booksKeyListener = services.getBooksKeyListener();
 		textPartManager = services.getTextPartManager();
 		messageService = services.getMessageService();
 		translationManager = services.getTranslationManager();
-		bibleDao = services.getBibleDao();
 		textSearchListener = services.getTextSearchListener();
 		searchTextVerifyListener = services.getSearchTextVerifyListener();
+		browserMouseListener = services.getBrowserMouseListener();
+		browserProgressListener = services.getBrowserProgressListener();
+
 	}
 
 	@PostConstruct
@@ -67,7 +69,7 @@ public class BibleTextPart implements Observer {
 		initParent(parent);
 		createTranslationLabel(parent);
 		createSearchText(parent);
-		createText(parent);
+		createBrowser(parent);
 		registerPart(part);
 		registerMenu();
 	}
@@ -101,41 +103,31 @@ public class BibleTextPart implements Observer {
 		return searchtext;
 	}
 
-	private void createText(Composite parent) {
-		text = new Browser(parent, SWT.NONE);
-		text.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		text.addKeyListener(booksKeyListener);
-		text.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseDown(MouseEvent event) {
-				if (event.button == 3) {
-					String script = new JavaScriptCreator(bibleDao).getVerseIdScript(event.x, event.y);
-					String verseId = (String) text.evaluate(script);
-					textPartManager.setComparingVerseId(verseId);
-				}
-			}
-
-		});
-		textSearchListener.setBibleText(text);
+	private void createBrowser(Composite parent) {
+		browser = new Browser(parent, SWT.NONE);
+		browser.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		browser.addKeyListener(booksKeyListener);
+		browser.addMouseListener(browserMouseListener);
+		browser.addProgressListener(browserProgressListener);
+		textSearchListener.setBrowser(browser);
 	}
 
 	private void registerPart(MPart part) {
 		ChapterContext chapter = null;
-		if (part.getPersistedState().get("title") != null) {
-			chapter = new ChapterContext(part.getPersistedState().get("id"), part.getPersistedState().get("title"),
-					part.getPersistedState().get("translation"));
+		Map<String, String> persistedState = part.getPersistedState();
+		if (persistedState.get("title") != null) {
+			chapter = new ChapterContext(persistedState.get("id"), persistedState.get("title"),
+					persistedState.get("translation"));
 		}
 		textPartManager.registerPart(part, this, chapter);
 		showTranslation(chapter);
 	}
 
 	public void showTranslation(ChapterContext chapter) {
-		if (chapter == null) {
-			if (!translationManager.getActiveTranslationDescription().isEmpty()) {
-				translationLabel.setText(translationManager.getActiveTranslationDescription());
-			}
-		} else {
+		if (chapter != null) {
 			translationLabel.setText(translationManager.getTranslationDescription(chapter.getTranslation()));
+		} else if (!translationManager.getActiveTranslationDescription().isEmpty()) {
+			translationLabel.setText(translationManager.getActiveTranslationDescription());
 		}
 	}
 
@@ -171,8 +163,9 @@ public class BibleTextPart implements Observer {
 	}
 
 	public void setContent(String text) {
-		if (!this.text.isDisposed()) {
-			this.text.setText(text);
+		if (!this.browser.isDisposed()) {
+			this.browser.setText("<body>" + text + "</body>");
+			this.browser.setData("<body>" + text + "</body>");
 		}
 	}
 
@@ -195,6 +188,6 @@ public class BibleTextPart implements Observer {
 	}
 
 	private void registerMenu() {
-		BibleTextPart.menuService.registerContextMenu(text, "reader.popupmenu.textpart.context");
+		menuService.registerContextMenu(browser, "reader.popupmenu.textpart.context");
 	}
 }

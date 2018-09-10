@@ -9,7 +9,7 @@ public class SearchTextVerifyListener implements VerifyListener {
 
 	@Override
 	public void verifyText(VerifyEvent e) {
-		if (e.character >= '0' && e.character <= '9') {
+		if ((e.character >= '0' && e.character <= '9') || e.character == '\\') {
 			e.doit = false;
 		}
 	}

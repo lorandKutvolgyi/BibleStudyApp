@@ -6,6 +6,6 @@ import org.eclipse.e4.core.di.annotations.Creatable;
 
 @Creatable
 @Singleton
-public class ServiceFacade {
+public class Services {
 
 }

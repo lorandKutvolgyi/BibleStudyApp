@@ -35,7 +35,7 @@ public class BooksPart implements Observer {
 	private TreeViewer booksTreeViewer;
 
 	@Inject
-	public BooksPart(BooksPartServiceFacade services) {
+	public BooksPart(BooksPartServices services) {
 		selectionListener = services.getSelectionListener();
 		bookClickListener = services.getBookClickListener();
 		booksKeyListener = services.getBooksKeyListener();

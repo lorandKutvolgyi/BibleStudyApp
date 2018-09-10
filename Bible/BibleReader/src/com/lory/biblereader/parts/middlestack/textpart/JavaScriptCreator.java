@@ -1,23 +1,14 @@
-package com.lory.biblereader.parts.middlestack.textpart.contextmenu;
+package com.lory.biblereader.parts.middlestack.textpart;
 
 import com.lory.biblereader.model.dao.BibleDao;
+import com.lory.biblereader.parts.middlestack.textpart.contextmenu.VerseContext;
 
 public class JavaScriptCreator {
 
-	private BibleDao bibleDao;
-
-	public JavaScriptCreator(BibleDao bibleDao) {
-		this.bibleDao = bibleDao;
+	private JavaScriptCreator() {
 	}
 
-	public String getVerseChangeScript(VerseContext verseContext) {
-		if (verseContext == null) {
-			return null;
-		}
-		return createVerseChangeScript(verseContext).toString();
-	}
-
-	public String getVerseIdScript(int x, int y) {
+	public static String getVerseIdScript(int x, int y) {
 		StringBuilder script = new StringBuilder();
 
 		script.append("   if (!Element.prototype.matches) {                                                         ");
@@ -49,7 +40,14 @@ public class JavaScriptCreator {
 		return script.toString();
 	}
 
-	private StringBuilder createVerseChangeScript(VerseContext verseContext) {
+	public static String getVerseChangeScript(VerseContext verseContext, BibleDao bibleDao) {
+		if (verseContext == null) {
+			return null;
+		}
+		return createVerseChangeScript(verseContext, bibleDao).toString();
+	}
+
+	private static StringBuilder createVerseChangeScript(VerseContext verseContext, BibleDao bibleDao) {
 		StringBuilder script = new StringBuilder();
 
 		script.append("var span = document.querySelector('#" + verseContext.getTranslation() + " span');");
@@ -60,5 +58,9 @@ public class JavaScriptCreator {
 		script.append("<br/>" + bibleDao.findVerseByContext(verseContext) + "';");
 
 		return script;
+	}
+
+	public static String scrollToFirstMark() {
+		return "document.getElementsByTagName('mark')[0].scrollIntoView();";
 	}
 }

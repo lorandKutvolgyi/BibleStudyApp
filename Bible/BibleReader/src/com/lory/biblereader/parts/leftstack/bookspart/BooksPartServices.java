@@ -10,11 +10,11 @@ import com.lory.biblereader.model.CurrentChapter;
 import com.lory.biblereader.parts.leftstack.bookspart.eventhandler.BookClickListener;
 import com.lory.biblereader.parts.leftstack.bookspart.eventhandler.BookSelectionListener;
 import com.lory.biblereader.parts.leftstack.bookspart.eventhandler.BooksKeyListener;
-import com.lory.biblereader.service.ServiceFacade;
+import com.lory.biblereader.service.Services;
 
 @Creatable
 @Singleton
-public class BooksPartServiceFacade extends ServiceFacade {
+public class BooksPartServices extends Services {
 
 	@Inject
 	private BookSelectionListener selectionListener;

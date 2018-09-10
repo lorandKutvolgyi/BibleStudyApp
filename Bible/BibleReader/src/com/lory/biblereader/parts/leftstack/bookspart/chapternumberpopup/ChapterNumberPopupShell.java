@@ -93,8 +93,8 @@ public class ChapterNumberPopupShell {
 	}
 
 	private int calculateHeight(int numOfLabels) {
-		int rowHeight = 19;
-		int firstRowCapacity = 10;
+		int rowHeight = 22;
+		int firstRowCapacity = 8;
 		if (numOfLabels <= firstRowCapacity) {
 			return rowHeight;
 		}
@@ -105,7 +105,7 @@ public class ChapterNumberPopupShell {
 	}
 
 	private int getRowsHeightInCaseOfLessThan100Labels(int numOfLabels, int rowHeight, int firstRowCapacity) {
-		int rowCapacityOfTwoDigitNums = 6;
+		int rowCapacityOfTwoDigitNums = 5;
 		int numOfFullRows = (numOfLabels - firstRowCapacity) / rowCapacityOfTwoDigitNums + 1;
 		boolean rowFragmentExist = (numOfLabels - firstRowCapacity) % rowCapacityOfTwoDigitNums != 0;
 		int rowsHeight = (numOfFullRows + (rowFragmentExist ? 1 : 0)) * rowHeight;
@@ -113,8 +113,8 @@ public class ChapterNumberPopupShell {
 	}
 
 	private int getRowsHeightInCaseOfMoreThan100Labels(int numOfLabels, int rowHeight) {
-		int rowCapacityOfThreeDigitNums = 4;
-		int rowsOfHundredLabels = 15;
+		int rowCapacityOfThreeDigitNums = 3;
+		int rowsOfHundredLabels = 18;
 		int numOfFullRows = (numOfLabels - 100) / rowCapacityOfThreeDigitNums + rowsOfHundredLabels;
 		boolean rowFragmentExist = (numOfLabels - 100) % rowCapacityOfThreeDigitNums != 0;
 		int rowsHeight = (numOfFullRows + (rowFragmentExist ? 1 : 0)) * rowHeight;

@@ -57,6 +57,7 @@ public class CompareTranslationsPopup {
 
 	private void createBrowserInShell() {
 		browser = new Browser(shell, SWT.NONE);
+		browser.addListener(SWT.MenuDetect, event -> event.doit = false);
 		browser.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		browser.setText(createBrowserContent().toString());
 	}

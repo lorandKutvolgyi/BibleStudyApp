@@ -4,6 +4,7 @@ import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.BrowserFunction;
 
 import com.lory.biblereader.model.dao.BibleDao;
+import com.lory.biblereader.parts.middlestack.textpart.JavaScriptCreator;
 
 public class StepFunction extends BrowserFunction {
 
@@ -28,7 +29,7 @@ public class StepFunction extends BrowserFunction {
 		} else {
 			context = stepForward(translation, book, chapter, verse);
 		}
-		browser.evaluate(new JavaScriptCreator(bibleDao).getVerseChangeScript(context));
+		browser.evaluate(JavaScriptCreator.getVerseChangeScript(context, bibleDao));
 		return null;
 	}
 
