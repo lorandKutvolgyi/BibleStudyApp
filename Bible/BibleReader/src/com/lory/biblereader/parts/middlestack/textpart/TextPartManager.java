@@ -17,6 +17,7 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
+import org.eclipse.swt.widgets.Text;
 
 import com.lory.biblereader.menu.TranslationManager;
 import com.lory.biblereader.model.Book;
@@ -167,11 +168,10 @@ public class TextPartManager {
 
 	private void loadTextIntoBibleTextPart(MPart part, Chapter currentChapter) {
 		BibleTextPart bibleTextPart = parts.get(part);
-		if (bibleTextPart.getBrowser().getData() != null) {
-			bibleTextPart.setContent((String) bibleTextPart.getBrowser().getData());
-		} else {
-			bibleTextPart.setContent(currentChapter.getText());
-		}
+		bibleTextPart.setContent(currentChapter.getText());
+		Text searchtext = bibleTextPart.getSearchtext();
+		String text = searchtext.getText();
+		searchtext.setText(text);
 		bibleTextPart.refreshTitle(currentChapter.getBook().getTitle(), currentChapter.getId());
 		if (currentChapter.getTranslation() == null) {
 			currentChapter.setTranslation(translationManager.getActiveTranslationAbbreviation());

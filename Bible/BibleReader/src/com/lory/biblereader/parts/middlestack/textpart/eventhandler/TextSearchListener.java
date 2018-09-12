@@ -26,9 +26,8 @@ public class TextSearchListener implements ModifyListener {
 		if (searchText.length() < 2) {
 			return;
 		}
-//		searchText = String.join("[\\p{C}0-9 ]+", searchText.split("[ ]+")).replaceAll("([.?()])", "\\\\$1");
+		searchText = String.join("[\\p{C}0-9 ]+", searchText.split("[ ]+")).replaceAll("([.?()])", "\\\\$1");
 		String innerHtml = highlight(text, searchText);
-		System.out.println(innerHtml);
 		browser.setData(innerHtml);
 		browser.setText(innerHtml);
 	}

@@ -39,6 +39,7 @@ public class BibleTextPart implements Observer {
 	private MPart part;
 	private Composite parent;
 	private Browser browser;
+	private Text searchtext;
 	private Label translationLabel;
 	private final BooksKeyListener booksKeyListener;
 	private final TextPartManager textPartManager;
@@ -95,7 +96,7 @@ public class BibleTextPart implements Observer {
 	}
 
 	private Text createSearchText(Composite parent) {
-		Text searchtext = new Text(parent, SWT.SEARCH | SWT.ICON_CANCEL);
+		searchtext = new Text(parent, SWT.SEARCH | SWT.ICON_CANCEL);
 		searchtext.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
 		searchtext.addModifyListener(textSearchListener);
 		searchtext.setMessage(messageService.getMessage("searchTextPlaceholder"));
@@ -194,4 +195,9 @@ public class BibleTextPart implements Observer {
 	public Browser getBrowser() {
 		return browser;
 	}
+
+	public Text getSearchtext() {
+		return searchtext;
+	}
+
 }
