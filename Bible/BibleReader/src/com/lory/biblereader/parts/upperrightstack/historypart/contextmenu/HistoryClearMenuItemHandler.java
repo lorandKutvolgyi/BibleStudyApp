@@ -1,4 +1,3 @@
-
 package com.lory.biblereader.parts.upperrightstack.historypart.contextmenu;
 
 import javax.inject.Inject;

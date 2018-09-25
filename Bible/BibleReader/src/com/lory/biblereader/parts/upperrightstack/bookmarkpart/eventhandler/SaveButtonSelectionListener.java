@@ -16,6 +16,7 @@ import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.dao.BibleDao;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMark;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkCategory;
+import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkCategoryFactory;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkManager;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkSelectionPopup;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkUtil;
@@ -52,8 +53,11 @@ public class SaveButtonSelectionListener extends SelectionAdapter {
 		Chapter chapter = bible.getBooks().get(bookIndex).getChapter(chapterIndex, null, translationManager, bibleDao);
 		List<Integer> versesAsIntegers = BookMarkUtil.getVersesAsIntegers(isVersesEmpty() ? "" : verses.getText());
 		BookMarkCategory category = isCategoriesEmpty() ? bookMarkManager.getDefaultCategory()
-				: new BookMarkCategory(categories.getText(), bookMarkManager);
-		bookMarkManager.storeBookMark(new BookMark(chapter, versesAsIntegers, category, messageService));
+				: BookMarkCategoryFactory.getBookMarkCategory(categories.getText());
+		BookMark bookMark = new BookMark(chapter.getId(), chapter.getBook().getTitle(), versesAsIntegers, category,
+				messageService);
+		category.add(bookMark);
+		bookMarkManager.storeBookMark(bookMark);
 		popup.close();
 	}
 

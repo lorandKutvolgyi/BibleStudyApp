@@ -1,27 +1,27 @@
 package com.lory.biblereader.parts.upperrightstack.bookmarkpart;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.lory.biblereader.model.TreeElement;
 
-public class BookMarkCategory implements TreeElement, Comparable<BookMarkCategory> {
+public class BookMarkCategory implements TreeElement {
+	private String label;
+	private Set<BookMark> bookMarks = new HashSet<>();
 
-	private String category;
-	private BookMarkManager bookMarkManager;
-
-	public BookMarkCategory(String category, BookMarkManager bookMarkManager) {
-		this.category = category;
-		this.bookMarkManager = bookMarkManager;
+	public BookMarkCategory(String label) {
+		this.label = label;
 	}
 
 	@Override
 	public String getText() {
-		return category;
+		return label;
 	}
 
 	@Override
 	public Collection<? extends TreeElement> getChildren() {
-		return bookMarkManager.getBookMarksByCategory(this);
+		return bookMarks;
 	}
 
 	@Override
@@ -29,14 +29,16 @@ public class BookMarkCategory implements TreeElement, Comparable<BookMarkCategor
 		return null;
 	}
 
-	@Override
-	public int compareTo(BookMarkCategory bookMarkCategory) {
-		return category.compareTo(bookMarkCategory.getText());
+	public void add(BookMark bookMark) {
+		bookMarks.add(bookMark);
 	}
 
 	@Override
 	public int hashCode() {
-		return category == null ? 0 : category.hashCode();
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((label == null) ? 0 : label.hashCode());
+		return result;
 	}
 
 	@Override
@@ -51,11 +53,11 @@ public class BookMarkCategory implements TreeElement, Comparable<BookMarkCategor
 			return false;
 		}
 		BookMarkCategory other = (BookMarkCategory) obj;
-		if (category == null) {
-			if (other.category != null) {
+		if (label == null) {
+			if (other.label != null) {
 				return false;
 			}
-		} else if (!category.equals(other.category)) {
+		} else if (!label.equals(other.label)) {
 			return false;
 		}
 		return true;

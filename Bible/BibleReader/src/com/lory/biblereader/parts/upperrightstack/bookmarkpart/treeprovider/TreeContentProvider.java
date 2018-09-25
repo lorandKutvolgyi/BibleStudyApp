@@ -1,9 +1,12 @@
 package com.lory.biblereader.parts.upperrightstack.bookmarkpart.treeprovider;
 
+import java.util.Collection;
+
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
 import com.lory.biblereader.model.TreeElement;
+import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkCategory;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkManager;
 
 public class TreeContentProvider implements ITreeContentProvider {
@@ -25,7 +28,9 @@ public class TreeContentProvider implements ITreeContentProvider {
 
 	@Override
 	public Object[] getElements(Object inputElement) {
-		return bookMarkManager.getCategories().keySet().toArray();
+		@SuppressWarnings("unchecked")
+		Collection<BookMarkCategory> categories = (Collection<BookMarkCategory>) inputElement;
+		return categories.toArray();
 	}
 
 	@Override

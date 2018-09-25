@@ -6,10 +6,6 @@ import java.util.Observable;
 
 public class BookMarkUtil extends Observable {
 
-	public static String getVersesAsString(BookMark bookMark) {
-		return getVersesAsString(bookMark.getVerses());
-	}
-
 	public static String getVersesAsString(List<Integer> verses) {
 		StringBuilder result = new StringBuilder();
 		Integer previous = null;
@@ -22,6 +18,22 @@ public class BookMarkUtil extends Observable {
 			previous = verse;
 		}
 		return result.toString();
+	}
+
+	public static List<Integer> getVersesAsIntegers(String verses) {
+		List<Integer> result = new ArrayList<>();
+		String[] parts = verses.split(",");
+		for (String part : parts) {
+			if (part.isEmpty()) {
+				continue;
+			}
+			if (isRange(part)) {
+				addElementsOfRange(result, part);
+			} else {
+				addSingleVerse(result, part);
+			}
+		}
+		return result;
 	}
 
 	private static boolean isFirstVerse(Integer previous) {
@@ -47,22 +59,6 @@ public class BookMarkUtil extends Observable {
 			}
 			result.append("," + verse);
 		}
-	}
-
-	public static List<Integer> getVersesAsIntegers(String verses) {
-		List<Integer> result = new ArrayList<>();
-		String[] parts = verses.split(",");
-		for (String part : parts) {
-			if (part.isEmpty()) {
-				continue;
-			}
-			if (isRange(part)) {
-				addElementsOfRange(result, part);
-			} else {
-				addSingleVerse(result, part);
-			}
-		}
-		return result;
 	}
 
 	private static boolean isRange(String part) {

@@ -7,18 +7,25 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import org.eclipse.e4.core.di.annotations.Creatable;
 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.TreeMultimap;
+import com.lory.biblereader.i18n.MessageService;
 import com.lory.biblereader.menu.TranslationManager;
 import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.parts.middlestack.textpart.contextmenu.VerseContext;
+import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMark;
+import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkCategoryFactory;
+import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkUtil;
 
 @Creatable
 @Singleton
@@ -26,8 +33,11 @@ public class BibleDao {
 
 	private Connection connection;
 	private final Properties prop = new Properties();
+	private final MessageService messageService;
 
-	public BibleDao() {
+	@Inject
+	public BibleDao(MessageService messageService) {
+		this.messageService = messageService;
 		loadProperties();
 		loadDriverClass();
 		createConnection(prop.getProperty("url"), prop.getProperty("username"), prop.getProperty("password"));
@@ -193,6 +203,122 @@ public class BibleDao {
 			return result.getString("description");
 		} catch (SQLException e) {
 			throw new IllegalStateException("Translation has not been downloaded");
+		}
+	}
+
+	public void saveUserNote(String bookTitle, int chapterId, String note) {
+		if (isExistingUserNotes(bookTitle, chapterId, note)) {
+			updateUserNotes(bookTitle, chapterId, note);
+		} else {
+			insertUserNotes(bookTitle, chapterId, note);
+		}
+	}
+
+	public boolean isExistingUserNotes(String bookTitle, int chapterId, String note) {
+		try {
+			PreparedStatement stmt = connection
+					.prepareStatement("SELECT count(*) FROM study_app.user_notes WHERE book=? AND chapter=?;");
+			stmt.setString(1, bookTitle);
+			stmt.setInt(2, chapterId);
+			ResultSet result = stmt.executeQuery();
+			if (result.next()) {
+				return result.getInt(1) > 0;
+			} else {
+				return false;
+			}
+		} catch (SQLException e) {
+			throw new IllegalStateException("Database error");
+		}
+	}
+
+	public void updateUserNotes(String bookTitle, int chapterId, String note) {
+		try {
+			PreparedStatement stmt = connection
+					.prepareStatement("UPDATE study_app.user_notes SET notes=? WHERE book=? AND chapter=?;");
+			stmt.setString(1, note);
+			stmt.setString(2, bookTitle);
+			stmt.setInt(3, chapterId);
+			stmt.execute();
+		} catch (SQLException e) {
+			throw new IllegalStateException("Database error");
+		}
+	}
+
+	public void insertUserNotes(String bookTitle, int chapterId, String note) {
+		try {
+			PreparedStatement stmt = connection
+					.prepareStatement("INSERT INTO study_app.user_notes (book, chapter, notes) VALUES(?, ?, ?);");
+			stmt.setString(1, bookTitle);
+			stmt.setInt(2, chapterId);
+			stmt.setString(3, note);
+			stmt.execute();
+		} catch (SQLException e) {
+			throw new IllegalStateException("Database error");
+		}
+	}
+
+	public String getUserNote(Chapter chapter) {
+		try {
+			PreparedStatement stmt = connection
+					.prepareStatement("SELECT notes FROM study_app.user_notes WHERE book=? AND chapter=?;");
+			stmt.setString(1, chapter.getBook().getTitle());
+			stmt.setInt(2, chapter.getId());
+			ResultSet resultSet = stmt.executeQuery();
+			if (resultSet.next()) {
+				return resultSet.getString(1);
+			} else {
+				return "";
+			}
+		} catch (SQLException e) {
+			throw new IllegalStateException("Database error");
+		}
+	}
+
+	public List<BookMark> getBookMarks() {
+		try {
+			PreparedStatement stmt = connection
+					.prepareStatement("SELECT chapter, book, verses, label, 'time' FROM study_app.bookmark;");
+			ResultSet resultSet = stmt.executeQuery();
+			List<BookMark> result = new ArrayList<>();
+			while (resultSet.next()) {
+				BookMark bookMark = new BookMark(resultSet.getInt(1), resultSet.getString(2),
+						BookMarkUtil.getVersesAsIntegers(resultSet.getString(3)),
+						BookMarkCategoryFactory.getBookMarkCategory(resultSet.getString(4)), messageService);
+				result.add(bookMark);
+			}
+			return result;
+		} catch (SQLException e) {
+			throw new IllegalStateException("Database error");
+		}
+	}
+
+	public void saveBookMark(BookMark bookMark) {
+		try {
+			PreparedStatement stmt = connection.prepareStatement(
+					"INSERT INTO study_app.bookmark (chapter, book, verses, label) VALUES(?, ?, ?, ?) ;");
+			stmt.setInt(1, bookMark.getChapterId());
+			stmt.setString(2, bookMark.getBookTitle());
+			stmt.setString(3, BookMarkUtil.getVersesAsString(bookMark.getVerses()));
+			stmt.setString(4, bookMark.getCategory().getText());
+			stmt.execute();
+		} catch (SQLException e) {
+			throw new IllegalStateException("Database error");
+		}
+	}
+
+	public boolean hasBookMark(BookMark bookMark) {
+		try {
+			PreparedStatement stmt = connection.prepareStatement(
+					"SELECT chapter, book, verses, label FROM study_app.bookmark WHERE chapter=? AND book=? AND verses=? AND label=?;",
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			stmt.setInt(1, bookMark.getChapterId());
+			stmt.setString(2, bookMark.getBookTitle());
+			stmt.setString(3, BookMarkUtil.getVersesAsString(bookMark.getVerses()));
+			stmt.setString(4, bookMark.getCategory().getText());
+			ResultSet resultSet = stmt.executeQuery();
+			return resultSet.first();
+		} catch (SQLException e) {
+			throw new IllegalStateException("Database error");
 		}
 	}
 

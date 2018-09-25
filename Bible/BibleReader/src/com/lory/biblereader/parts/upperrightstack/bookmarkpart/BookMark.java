@@ -5,28 +5,41 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import com.lory.biblereader.i18n.MessageService;
-import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.TreeElement;
 
 public class BookMark implements TreeElement {
 
-	private Chapter chapter;
+	private int chapterId;
+	private String bookTitle;
 	private List<Integer> verses;
 	private BookMarkCategory category;
 	private LocalDateTime date;
 	private MessageService messageService;
 
-	public BookMark(Chapter chapter, List<Integer> verses, BookMarkCategory category, MessageService messageService) {
-		this.chapter = chapter;
+	public BookMark(int chapterId, String bookTitle, List<Integer> verses, BookMarkCategory category,
+			MessageService messageService) {
+		this.chapterId = chapterId;
+		this.bookTitle = bookTitle;
 		this.verses = verses;
 		this.category = category;
 		this.date = LocalDateTime.now();
 		this.messageService = messageService;
 	}
 
-	public Chapter getChapter() {
-		return chapter;
+	@PostConstruct
+	public void setThisToParent() {
+		category.add(this);
+	}
+
+	public int getChapterId() {
+		return chapterId;
+	}
+
+	public String getBookTitle() {
+		return bookTitle;
 	}
 
 	public List<Integer> getVerses() {
@@ -43,8 +56,7 @@ public class BookMark implements TreeElement {
 
 	@Override
 	public String getText() {
-		return messageService.getMessage(chapter.getBook().getTitle()) + ": " + chapter.getId() + " "
-				+ BookMarkUtil.getVersesAsString(verses);
+		return messageService.getMessage(bookTitle) + " " + chapterId + ":" + BookMarkUtil.getVersesAsString(verses);
 	}
 
 	@Override
@@ -59,16 +71,16 @@ public class BookMark implements TreeElement {
 
 	@Override
 	public String toString() {
-		return "BookMark [chapter=" + chapter + ", verses=" + verses + ", category=" + category + ", date=" + date
-				+ "]";
+		return "";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((bookTitle == null) ? 0 : bookTitle.hashCode());
 		result = prime * result + ((category == null) ? 0 : category.hashCode());
-		result = prime * result + ((chapter == null) ? 0 : chapter.hashCode());
+		result = prime * result + chapterId;
 		result = prime * result + ((verses == null) ? 0 : verses.hashCode());
 		return result;
 	}
@@ -85,6 +97,13 @@ public class BookMark implements TreeElement {
 			return false;
 		}
 		BookMark other = (BookMark) obj;
+		if (bookTitle == null) {
+			if (other.bookTitle != null) {
+				return false;
+			}
+		} else if (!bookTitle.equals(other.bookTitle)) {
+			return false;
+		}
 		if (category == null) {
 			if (other.category != null) {
 				return false;
@@ -92,11 +111,7 @@ public class BookMark implements TreeElement {
 		} else if (!category.equals(other.category)) {
 			return false;
 		}
-		if (chapter == null) {
-			if (other.chapter != null) {
-				return false;
-			}
-		} else if (!chapter.equals(other.chapter)) {
+		if (chapterId != other.chapterId) {
 			return false;
 		}
 		if (verses == null) {
@@ -108,4 +123,5 @@ public class BookMark implements TreeElement {
 		}
 		return true;
 	}
+
 }

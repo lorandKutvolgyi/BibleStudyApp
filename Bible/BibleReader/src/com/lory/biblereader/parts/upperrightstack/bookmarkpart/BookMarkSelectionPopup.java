@@ -69,8 +69,8 @@ public class BookMarkSelectionPopup {
 
 	private void createPopupShell() {
 		shell = new Shell(Display.getDefault().getActiveShell(), SWT.APPLICATION_MODAL);
-		shell.setSize(340, 140);
 		shell.setLayout(createShellLayout());
+		shell.layout(true, true);
 	}
 
 	private FillLayout createShellLayout() {
@@ -161,19 +161,28 @@ public class BookMarkSelectionPopup {
 	public void open(Chapter chapter) {
 		shell.open();
 		cancel.setFocus();
-		books.select(bible.getBooks().indexOf(chapter.getBook()));
+		selectBook(chapter);
 		fillChaptersCombo();
-		chapters.select(chapter.getId() - 1);
+		selectChapter(chapter);
 		addPlaceHolderToCategories();
 		addPlaceHolderToVerses();
+		resizeShell();
+	}
+
+	private void selectBook(Chapter chapter) {
+		books.select(bible.getBooks().indexOf(chapter.getBook()));
 	}
 
 	private void fillCategoriesCombo() {
-		bookMarkManager.getCategories().keySet().stream().map(category -> category.getText())
+		BookMarkCategoryFactory.getCategories().stream().map(category -> category.getText())
 				.forEach(text -> categories.setItems(text));
 
 		categories.setForeground(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
 		categories.setText(placeholderForCategories);
+	}
+
+	private void selectChapter(Chapter chapter) {
+		chapters.select(chapter.getId() - 1);
 	}
 
 	private void fillBooksCombo() {
@@ -206,6 +215,10 @@ public class BookMarkSelectionPopup {
 		verses.setText(placeholderForVerses);
 		verses.setForeground(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
 		verses.addFocusListener(new VersesComboFocusListener(this));
+	}
+
+	private void resizeShell() {
+		shell.setSize(shell.computeSize(SWT.DEFAULT, SWT.DEFAULT, true));
 	}
 
 	public void close() {

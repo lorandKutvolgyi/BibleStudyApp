@@ -1,14 +1,12 @@
 package com.lory.biblereader.parts.upperrightstack.bookmarkpart;
 
-import java.time.LocalDateTime;
-import java.util.Map.Entry;
+import java.util.Collection;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
-import org.eclipse.e4.ui.di.PersistState;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
@@ -45,34 +43,29 @@ public class BookMarkPart implements Observer {
 
 	@PostConstruct
 	public void postConstruct(MPart part, Composite parent) {
-		bookMarkManager.addObserver(this);
-		restorePersistedState(part);
 		setLayout(parent);
 		createTree(parent);
 		createButton(parent);
-		update(bookMarkManager, null);
+		bookMarkManager.addObserver(this);
+		restorePersistedState(part);
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		categories.setInput(bookMarkManager.getCategories());
-		categories.expandAll();
-	}
-
-	@PersistState
-	private void persist(MPart part) {
-		part.getPersistedState().clear();
-		for (Entry<BookMarkCategory, LocalDateTime> categoryAndDate : bookMarkManager.getCategories().entrySet()) {
-			String category = categoryAndDate.getKey().getText();
-			String date = categoryAndDate.getValue().toString();
-			part.getPersistedState().put("Cat:" + category, date);
-			part.getPersistedState().put(category, getBookMarks(categoryAndDate));
+		Collection<BookMarkCategory> categories = BookMarkCategoryFactory.getCategories();
+		if (categories != null && !categories.isEmpty()) {
+			this.categories.setInput(categories);
+			this.categories.expandAll();
 		}
 	}
 
 	private void restorePersistedState(MPart part) {
-		bookMarkManager.restoreCategoriesWithDate(part.getPersistedState());
-		bookMarkManager.restoreCategoriesWithBookMarks(part.getPersistedState(), messageService);
+		bibleDao.getBookMarks().stream().forEach(bookMark -> {
+			BookMarkCategory category = bookMark.getCategory();
+			category.add(bookMark);
+			BookMarkCategoryFactory.add(category);
+		});
+		update(null, null);
 	}
 
 	private void setLayout(final Composite parent) {
@@ -94,14 +87,4 @@ public class BookMarkPart implements Observer {
 				bible, translationManager, bibleDao));
 	}
 
-	private String getBookMarks(Entry<BookMarkCategory, LocalDateTime> categoryAndDate) {
-		StringBuilder builder = new StringBuilder();
-		for (BookMark bookMark : bookMarkManager.getBookMarksByCategory(categoryAndDate.getKey())) {
-			String title = bookMark.getChapter().getBook().getTitle();
-			int chapter = bookMark.getChapter().getId();
-			String versesAsString = BookMarkUtil.getVersesAsString(bookMark);
-			builder.append(title + ":" + chapter + "(" + versesAsString + ");");
-		}
-		return builder.toString();
-	}
 }
