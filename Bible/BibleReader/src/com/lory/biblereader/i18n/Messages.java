@@ -78,6 +78,8 @@ public class Messages {
 	public String remove;
 
 	public String newBookMark;
+	public String confirm;
+	public String sureQuestionForBookMark;
 
 	public String save;
 	public String cancel;
@@ -88,4 +90,6 @@ public class Messages {
 	public String withoutLabel;
 
 	public String edit;
+	public String change;
+
 }

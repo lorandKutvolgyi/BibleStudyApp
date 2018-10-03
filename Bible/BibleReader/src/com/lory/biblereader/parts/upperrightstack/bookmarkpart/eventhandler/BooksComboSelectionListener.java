@@ -28,7 +28,9 @@ public class BooksComboSelectionListener extends SelectionAdapter {
 
 	@Override
 	public void widgetSelected(SelectionEvent e) {
-		chapters.removeAll();
+		if (chapters != null) {
+			chapters.removeAll();
+		}
 		Book selectedBook = bible.getBooks().get(books.getSelectionIndex());
 		int bookSize = selectedBook.getBookSize(translationManager, bibleDao);
 		for (int i = 1; i <= bookSize; i++) {

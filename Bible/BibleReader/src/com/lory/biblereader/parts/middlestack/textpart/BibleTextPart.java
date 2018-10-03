@@ -14,8 +14,11 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.EMenuService;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
@@ -60,7 +63,6 @@ public class BibleTextPart implements Observer {
 		searchTextVerifyListener = services.getSearchTextVerifyListener();
 		browserMouseListener = services.getBrowserMouseListener();
 		browserProgressListener = services.getBrowserProgressListener();
-
 	}
 
 	@PostConstruct
@@ -68,7 +70,7 @@ public class BibleTextPart implements Observer {
 		initMenuService(menuService);
 		initPart(part);
 		initParent(parent);
-		createTranslationLabel(parent);
+		createTranslationRelatedPart(parent, part);
 		createSearchText(parent);
 		createBrowser(parent);
 		registerPart(part);
@@ -83,16 +85,42 @@ public class BibleTextPart implements Observer {
 
 	private void initPart(MPart part) {
 		this.part = part;
+		this.part.setIconURI("platform:/plugin/reader/resources/icons8-paper.png");
 	}
 
 	private void initParent(Composite parent) {
 		this.parent = parent;
-		parent.setLayout(new GridLayout(1, true));
+		this.parent.setLayout(new GridLayout(1, true));
+	}
+
+	private void createTranslationRelatedPart(Composite parent, MPart part) {
+		Composite composite = new Composite(parent, SWT.NONE);
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
+		composite.setLayout(new GridLayout(2, false));
+		createTranslationLabel(composite);
+		createTranslationChangeButton(composite, part);
 	}
 
 	private void createTranslationLabel(Composite parent) {
 		translationLabel = new Label(parent, SWT.NONE);
-		translationLabel.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
+		translationLabel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+	}
+
+	private void createTranslationChangeButton(Composite parent, MPart part) {
+		Button button = new Button(parent, SWT.PUSH);
+		button.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, true));
+		button.setText(messageService.getMessage("change"));
+		button.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				Chapter chapter = textPartManager.getChapters().get(part);
+				chapter.setTranslation(translationManager.getActiveTranslationAbbreviation());
+				textPartManager.registerPart(part, BibleTextPart.this, new ChapterContext(chapter));
+				showTranslation(chapter);
+			}
+
+		});
 	}
 
 	private Text createSearchText(Composite parent) {

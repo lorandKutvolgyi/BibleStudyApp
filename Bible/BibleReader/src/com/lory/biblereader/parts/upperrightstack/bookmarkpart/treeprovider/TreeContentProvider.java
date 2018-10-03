@@ -7,15 +7,8 @@ import org.eclipse.jface.viewers.Viewer;
 
 import com.lory.biblereader.model.TreeElement;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkCategory;
-import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkManager;
 
 public class TreeContentProvider implements ITreeContentProvider {
-
-	private BookMarkManager bookMarkManager;
-
-	public TreeContentProvider(BookMarkManager bookMarkManager) {
-		this.bookMarkManager = bookMarkManager;
-	}
 
 	@Override
 	public void dispose() {

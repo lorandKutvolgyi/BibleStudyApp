@@ -7,8 +7,12 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import org.eclipse.e4.core.di.annotations.Creatable;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Shell;
 
 import com.lory.biblereader.i18n.MessageService;
+import com.lory.biblereader.model.TreeElement;
 import com.lory.biblereader.model.dao.BibleDao;
 
 @Creatable
@@ -35,6 +39,33 @@ public class BookMarkManager extends Observable {
 		}
 	}
 
+	public void removeBookMark(TreeElement treeElement) {
+		if (treeElement.getChildren().isEmpty()) {
+			bibleDao.removeBookMark((BookMark) treeElement);
+		} else {
+			bibleDao.removeBookMarkCategory((BookMarkCategory) treeElement);
+		}
+		setChanged();
+		notifyObservers();
+	}
+
+	public void removeAllBookMark(Shell shell) {
+		// @formatter:off
+		int result = MessageDialog.open(MessageDialog.CONFIRM,
+				shell,
+				messageService.getMessage("confirm"),
+				messageService.getMessage("sureQuestionForBookMark"), 
+				SWT.NONE, 
+				messageService.getMessage("cancel"),
+				messageService.getMessage("remove"));
+		// @formatter:on
+		if (result == 1) {
+			bibleDao.removeAllBookMark();
+			setChanged();
+			notifyObservers();
+		}
+	}
+
 	private boolean hasBookMark(BookMark bookMark) {
 		return bibleDao.hasBookMark(bookMark);
 	}
@@ -43,18 +74,7 @@ public class BookMarkManager extends Observable {
 		bibleDao.saveBookMark(bookMark);
 	}
 
-	private BookMarkCategory getCategory(BookMark bookMark) {
-		return bookMark.getParent() != null
-				? BookMarkCategoryFactory.getBookMarkCategory(bookMark.getParent().getText())
-				: DEFAULT_CATEGORY;
-	}
-
 	public BookMarkCategory getDefaultCategory() {
 		return DEFAULT_CATEGORY;
 	}
-
-	private boolean isCategoryExist(BookMarkCategory category) {
-		return false;
-	}
-
 }

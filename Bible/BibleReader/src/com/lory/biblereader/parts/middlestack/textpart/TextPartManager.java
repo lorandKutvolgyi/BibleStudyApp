@@ -3,7 +3,7 @@ package com.lory.biblereader.parts.middlestack.textpart;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
+import java.util.WeakHashMap;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
@@ -46,15 +46,15 @@ public class TextPartManager {
 	private static final String STACK_ID = "biblereader.partstack.bibletext";
 	private static final String BIBLE_TEXT_PART_URI = "bundleclass://reader/com.lory.biblereader.parts.middlestack.textpart.BibleTextPart";
 	private static long partId = 1;
-	private Map<MPart, BibleTextPart> parts;
-	private Map<MPart, Chapter> chapters;
+	private WeakHashMap<MPart, BibleTextPart> parts;
+	private WeakHashMap<MPart, Chapter> chapters;
 	private MPart activePart;
 	private MPartStack stack;
 	private String comparingVerseId;
 
 	public TextPartManager() {
-		parts = new TreeMap<>((part1, part2) -> part1.getElementId().compareTo(part2.getElementId()));
-		chapters = new TreeMap<>((part1, part2) -> part1.getElementId().compareTo(part2.getElementId()));
+		parts = new WeakHashMap<>();
+		chapters = new WeakHashMap<>();
 	}
 
 	public synchronized void registerPart(MPart part, BibleTextPart bibleTextPart, ChapterContext chapter) {
@@ -87,7 +87,7 @@ public class TextPartManager {
 	}
 
 	public synchronized void loadCurrentChapter(MPart part) {
-		if (currentChapter.getChapter() != null) {
+		if (currentChapter.getChapter() != null && !currentChapter.getChapter().equals(chapters.get(part))) {
 			loadTextIntoBibleTextPart(part, currentChapter.getChapter());
 			chapters.put(part, currentChapter.getChapter());
 		}
@@ -212,4 +212,5 @@ public class TextPartManager {
 	private static long getPartId() {
 		return partId++;
 	}
+
 }

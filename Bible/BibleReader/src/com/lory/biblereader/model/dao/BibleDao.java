@@ -24,6 +24,7 @@ import com.lory.biblereader.model.Book;
 import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.parts.middlestack.textpart.contextmenu.VerseContext;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMark;
+import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkCategory;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkCategoryFactory;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkUtil;
 
@@ -325,5 +326,38 @@ public class BibleDao {
 	@Override
 	public String toString() {
 		return "ChapterSqlDao\n\tconnection: " + (connection != null);
+	}
+
+	public void removeBookMark(BookMark bookMark) {
+		try {
+			PreparedStatement stmt = connection.prepareStatement(
+					"DELETE FROM study_app.bookmark WHERE chapter=? AND book=? AND verses=? AND label=?;");
+			stmt.setInt(1, bookMark.getChapterId());
+			stmt.setString(2, bookMark.getBookTitle());
+			stmt.setString(3, BookMarkUtil.getVersesAsString(bookMark.getVerses()));
+			stmt.setString(4, bookMark.getCategory().getText());
+			stmt.execute();
+		} catch (SQLException e) {
+			throw new IllegalStateException("Database error");
+		}
+	}
+
+	public void removeBookMarkCategory(BookMarkCategory bookMarkCategory) {
+		try {
+			PreparedStatement stmt = connection.prepareStatement("DELETE FROM study_app.bookmark WHERE label=?;");
+			stmt.setString(1, bookMarkCategory.getText());
+			stmt.execute();
+		} catch (SQLException e) {
+			throw new IllegalStateException("Database error");
+		}
+	}
+
+	public void removeAllBookMark() {
+		try {
+			PreparedStatement stmt = connection.prepareStatement("DELETE FROM study_app.bookmark;");
+			stmt.execute();
+		} catch (SQLException e) {
+			throw new IllegalStateException("Database error");
+		}
 	}
 }

@@ -8,6 +8,10 @@ import java.util.Observer;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.e4.ui.workbench.modeling.EModelService;
+import org.eclipse.e4.ui.workbench.modeling.EPartService;
+import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.ControlAdapter;
@@ -32,6 +36,7 @@ import com.lory.biblereader.model.Chapter;
 import com.lory.biblereader.model.CurrentChapter;
 import com.lory.biblereader.model.dao.BibleDao;
 import com.lory.biblereader.parts.leftstack.bookspart.treesorter.BooksComparator;
+import com.lory.biblereader.parts.middlestack.textpart.TextPartManager;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkManager;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.BookMarkSelectionPopup;
 
@@ -53,6 +58,14 @@ public class HistoryPart implements Observer {
 	private TranslationManager translationManager;
 	@Inject
 	private BibleDao bibleDao;
+	@Inject
+	private TextPartManager textPartManager;
+	@Inject
+	private static EPartService partService;
+	@Inject
+	private static EModelService modelService;
+	@Inject
+	private static MApplication application;
 
 	private Composite parent;
 	private ScrolledComposite scrolledComposite;
@@ -64,9 +77,8 @@ public class HistoryPart implements Observer {
 		this.parent.setLayout(new FillLayout());
 		createScrolledComposite();
 		createSubComposite();
-		scrolledComposite.setContent(subComposite);
 		loadHistory();
-		history.addObserver(this);
+		addObserverToHistory();
 	}
 
 	@Override
@@ -96,12 +108,17 @@ public class HistoryPart implements Observer {
 	private void createSubComposite() {
 		subComposite = new Composite(scrolledComposite, SWT.NONE);
 		subComposite.setLayout(new RowLayout());
+		scrolledComposite.setContent(subComposite);
 	}
 
 	private void loadHistory() {
 		if (!scrolledComposite.isDisposed()) {
 			history.getHistory().stream().forEach(chapter -> addNewElement(chapter));
 		}
+	}
+
+	private void addObserverToHistory() {
+		history.addObserver(this);
 	}
 
 	private boolean isClearHappened() {
@@ -204,9 +221,21 @@ public class HistoryPart implements Observer {
 		link.addHyperlinkListener(new HyperlinkAdapter() {
 			@Override
 			public void linkActivated(HyperlinkEvent e) {
+				if (isNewTabNeeded(e)) {
+					partService.showPart(textPartManager.createNewTextPart(modelService, application),
+							PartState.ACTIVATE);
+				}
 				HistoryPart.this.currentChapter.setChapter(currentChapter);
 			}
 		});
+	}
+
+	private boolean isNewTabNeeded(HyperlinkEvent e) {
+		System.out.println(e.getStateMask());
+		System.out.println(SWT.CTRL);
+		System.out.println(SWT.CTRL);
+		return e.getStateMask() == 786432
+				|| (!textPartManager.isAnyActivePart() && !textPartManager.isAnyVisiblePart());
 	}
 
 	private void addMouseListener(Hyperlink link, Menu menu) {

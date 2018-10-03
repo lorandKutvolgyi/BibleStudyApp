@@ -33,7 +33,7 @@ public class JavaScriptCreator {
 		script.append("   }                                                                                         ");
 
 		script.append("   var element = document.elementFromPoint(" + x + "," + y + ");                             ");
-		script.append("   if (element.closest('div') !==null) {                                                     ");
+		script.append("   if (element.closest('div') !== null) {                                                     ");
 		script.append("       return element.closest('div').getAttribute('id');                                     ");
 		script.append("   }                                                                                         ");
 
@@ -61,6 +61,6 @@ public class JavaScriptCreator {
 	}
 
 	public static String scrollToFirstMark() {
-		return "document.getElementsByTagName('mark')[0].scrollIntoView();";
+		return "if(document.readyState === 'complete'){document.getElementsByTagName('mark')[0].scrollIntoView();}";
 	}
 }

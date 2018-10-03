@@ -25,4 +25,8 @@ public class BookMarkCategoryFactory {
 	public static void add(BookMarkCategory category) {
 		categories.put(category.getText(), category);
 	}
+
+	public static void clear() {
+		categories.clear();
+	}
 }

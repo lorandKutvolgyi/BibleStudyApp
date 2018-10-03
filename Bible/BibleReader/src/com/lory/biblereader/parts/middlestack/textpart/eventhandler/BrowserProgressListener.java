@@ -15,5 +15,4 @@ public class BrowserProgressListener extends ProgressAdapter {
 		Browser browser = (Browser) event.getSource();
 		browser.execute(JavaScriptCreator.scrollToFirstMark());
 	}
-
 }

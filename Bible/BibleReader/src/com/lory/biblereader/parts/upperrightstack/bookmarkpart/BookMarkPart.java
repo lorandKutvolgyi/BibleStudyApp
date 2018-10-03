@@ -21,6 +21,7 @@ import com.lory.biblereader.model.Bible;
 import com.lory.biblereader.model.dao.BibleDao;
 import com.lory.biblereader.parts.leftstack.bookspart.treesorter.BooksComparator;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.eventhandler.BookMarkSelectionListener;
+import com.lory.biblereader.parts.upperrightstack.bookmarkpart.eventhandler.BookMarkTreeContextMenuHandler;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.treeprovider.BookMarkLabelProvider;
 import com.lory.biblereader.parts.upperrightstack.bookmarkpart.treeprovider.TreeContentProvider;
 
@@ -38,6 +39,8 @@ public class BookMarkPart implements Observer {
 	private TranslationManager translationManager;
 	@Inject
 	private BibleDao bibleDao;
+	@Inject
+	private BookMarkTreeContextMenuHandler bookMarkTreeContextMenuHandler;
 
 	private TreeViewer categories;
 
@@ -47,25 +50,30 @@ public class BookMarkPart implements Observer {
 		createTree(parent);
 		createButton(parent);
 		bookMarkManager.addObserver(this);
-		restorePersistedState(part);
+		update(null, null);
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		Collection<BookMarkCategory> categories = BookMarkCategoryFactory.getCategories();
-		if (categories != null && !categories.isEmpty()) {
-			this.categories.setInput(categories);
-			this.categories.expandAll();
-		}
+		BookMarkCategoryFactory.clear();
+		reloadCategoriesFromDb();
+		setCategoriesToTree();
 	}
 
-	private void restorePersistedState(MPart part) {
+	private void reloadCategoriesFromDb() {
 		bibleDao.getBookMarks().stream().forEach(bookMark -> {
 			BookMarkCategory category = bookMark.getCategory();
 			category.add(bookMark);
 			BookMarkCategoryFactory.add(category);
 		});
-		update(null, null);
+	}
+
+	private void setCategoriesToTree() {
+		Collection<BookMarkCategory> categories = BookMarkCategoryFactory.getCategories();
+		this.categories.setInput(categories);
+		if (categories != null && !categories.isEmpty()) {
+			this.categories.expandAll();
+		}
 	}
 
 	private void setLayout(final Composite parent) {
@@ -76,8 +84,9 @@ public class BookMarkPart implements Observer {
 		categories = new TreeViewer(parent, SWT.V_SCROLL);
 		categories.getTree().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		categories.setLabelProvider(new BookMarkLabelProvider());
-		categories.setContentProvider(new TreeContentProvider(bookMarkManager));
+		categories.setContentProvider(new TreeContentProvider());
 		categories.expandAll();
+		bookMarkTreeContextMenuHandler.createContextMenu(categories);
 	}
 
 	private void createButton(Composite parent) {

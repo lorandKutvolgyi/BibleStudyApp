@@ -65,6 +65,7 @@ public class BookMarkSelectionPopup {
 		createButtons();
 		fillCategoriesCombo();
 		fillBooksCombo();
+		addSelectionListenerToBooks();
 	}
 
 	private void createPopupShell() {
@@ -103,6 +104,9 @@ public class BookMarkSelectionPopup {
 		books = new Combo(group, SWT.DROP_DOWN | SWT.READ_ONLY);
 		books.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		books.setVisibleItemCount(10);
+	}
+
+	private void addSelectionListenerToBooks() {
 		books.addSelectionListener(
 				new BooksComboSelectionListener(books, chapters, bible, translationManager, bibleDao));
 	}
@@ -118,7 +122,7 @@ public class BookMarkSelectionPopup {
 		verses.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		verses.addVerifyListener(event -> {
 			event.doit = event.character == '-' || event.character == ','
-					|| (event.character > '0' && event.character < '9') || event.text.equals(placeholderForVerses)
+					|| (event.character >= '0' && event.character <= '9') || event.text.equals(placeholderForVerses)
 					|| event.text.equals("");
 		});
 	}
