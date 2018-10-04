@@ -53,7 +53,7 @@ public class ChapterNumberMouseListener extends MouseAdapter {
 		if (isNewTabNeeded(event)) {
 			showNewTextPart();
 		} else if (isNewActiveTabNeeded()) {
-			textPartManager.activatePart(textPartManager.getAnyVisiblePart());
+			textPartManager.activateAnyVisiblePart();
 		}
 
 		textPartManager.modifyPartContent(book, getChapterId(getLabel(event)));

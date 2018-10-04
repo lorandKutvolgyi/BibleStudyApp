@@ -86,8 +86,13 @@ public class TextPartManager {
 		}
 	}
 
+	public synchronized void activateAnyVisiblePart() {
+		activatePart(getAnyVisiblePart());
+	}
+
 	public synchronized void loadCurrentChapter(MPart part) {
-		if (currentChapter.getChapter() != null && !currentChapter.getChapter().equals(chapters.get(part))) {
+		if (currentChapter.getChapter() != null && !(currentChapter.getChapter().equals(chapters.get(part))
+				&& !parts.get(part).getBrowser().getText().equals(""))) {
 			loadTextIntoBibleTextPart(part, currentChapter.getChapter());
 			chapters.put(part, currentChapter.getChapter());
 		}
@@ -105,7 +110,7 @@ public class TextPartManager {
 		return parts.keySet().stream().anyMatch((mPart) -> mPart.isToBeRendered() && !mPart.equals(currentPart));
 	}
 
-	public synchronized MPart getAnyVisiblePart() {
+	private MPart getAnyVisiblePart() {
 		return parts.keySet().stream().filter((mPart) -> mPart.isToBeRendered()).findAny().get();
 	}
 

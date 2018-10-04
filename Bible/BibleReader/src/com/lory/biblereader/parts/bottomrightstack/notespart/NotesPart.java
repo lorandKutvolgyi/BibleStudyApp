@@ -48,11 +48,12 @@ public class NotesPart implements Observer {
 		button.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, true, false));
 		button.setText(messageService.getMessage("save"));
 		button.addSelectionListener(new SelectionAdapter() {
-
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				dao.saveUserNote(currentChapter.getChapter().getBook().getTitle(), currentChapter.getChapter().getId(),
-						editor.getText());
+				if (currentChapter.getChapter() != null) {
+					dao.saveUserNote(currentChapter.getChapter().getBook().getTitle(),
+							currentChapter.getChapter().getId(), editor.getText());
+				}
 			}
 		});
 	}

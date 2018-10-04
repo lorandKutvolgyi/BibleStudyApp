@@ -1,4 +1,3 @@
-
 package com.lory.biblereader.parts.upperrightstack.historypart;
 
 import java.util.Arrays;
@@ -231,9 +230,6 @@ public class HistoryPart implements Observer {
 	}
 
 	private boolean isNewTabNeeded(HyperlinkEvent e) {
-		System.out.println(e.getStateMask());
-		System.out.println(SWT.CTRL);
-		System.out.println(SWT.CTRL);
 		return e.getStateMask() == 786432
 				|| (!textPartManager.isAnyActivePart() && !textPartManager.isAnyVisiblePart());
 	}
