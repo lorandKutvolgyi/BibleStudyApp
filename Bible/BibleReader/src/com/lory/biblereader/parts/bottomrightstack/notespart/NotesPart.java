@@ -50,9 +50,9 @@ public class NotesPart implements Observer {
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				if (currentChapter.getChapter() != null) {
+				if (currentChapter.getChapter() != null && editor.getData() != null) {
 					dao.saveUserNote(currentChapter.getChapter().getBook().getTitle(),
-							currentChapter.getChapter().getId(), editor.getText());
+							currentChapter.getChapter().getId(), editor.getData().toString());
 				}
 			}
 		});
@@ -62,8 +62,17 @@ public class NotesPart implements Observer {
 	public void update(Observable o, Object arg) {
 		Chapter chapter = currentChapter.getChapter();
 		if (chapter != null) {
-			editor.setText(chapter != null ? dao.getUserNote(chapter) : "");
+			String userNote = dao.getUserNote(chapter);
+//			editor.setData(chapter != null ? dao.getUserNote(chapter) : "");
+			if (!userNote.isEmpty()) {
+				editor.setText(userNote);
+				editor.setData(userNote);
+			} else {
+				if (!("".equals(editor.getData()))) {
+					editor.setText("");
+					editor.setData("");
+				}
+			}
 		}
 	}
-
 }

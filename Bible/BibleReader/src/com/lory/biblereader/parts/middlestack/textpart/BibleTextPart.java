@@ -189,6 +189,10 @@ public class BibleTextPart implements Observer {
 		if (textPartManager.isAnyVisiblePartExcept(part)) {
 			textPartManager.activatePart(textPartManager.getAnyVisiblePartExcept(part));
 		}
+		browser.dispose();
+		searchtext.dispose();
+		translationLabel.dispose();
+		parent.dispose();
 	}
 
 	public void setContent(String text) {
