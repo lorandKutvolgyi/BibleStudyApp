@@ -37,7 +37,7 @@ shortestChapterByVerses()
     psql -h localhost -p 5433 -U postgres -d bible -c\
 	 "SELECT book||':'||chapter||'@'||max(verse) FROM study_app.$1 GROUP BY book, chapter HAVING max(verse)=
                 (SELECT min(maxverse) FROM (SELECT book, chapter, max(verse) maxverse FROM study_app.$1 GROUP BY book, chapter) A);"  | 
-                sed '1,2 d' | sed '$d' | sed '$d' | xargs | sed 's/@[^ ]\+ /,/g'
+                sed '1,2 d' | sed '$d' | sed '$d' | xargs
 }
 
 longestChapterByVerses()
@@ -45,7 +45,7 @@ longestChapterByVerses()
     psql -h localhost -p 5433 -U postgres -d bible -c\
 	 "SELECT distinct book||':'||chapter||'@'||verse FROM study_app.$1 WHERE
                 verse=(SELECT max(verse) FROM study_app.$1);"| 
-                sed '1,2 d' | sed '$d' | sed '$d' | xargs | sed 's/@[^ ]\+ /,/g'
+                sed '1,2 d' | sed '$d' | sed '$d' | xargs
 }
 
 shortestChapterByCharacters()
@@ -64,30 +64,30 @@ longestChapterByCharacters()
                 BY book, chapter) cont_table ORDER BY CHAR_LENGTH(cont) DESC LIMIT 1;" | sed '1,2 d' | sed '$d' | sed '$d' | xargs
 }
 
-shortestVerse()
+shortestVerseByCharacters()
 {
     if [ $2 ]
     then
         psql -h localhost -p 5433 -U postgres -d bible -c\
-         "SELECT verse FROM study_app.$1 WHERE book='""$2""' AND chapter='""$3""' ORDER BY CHAR_LENGTH(contents) LIMIT 1;" | sed '1,2 d' | 
-                 sed '$d' | sed '$d' | xargs
+         "SELECT verse||' ('||CHAR_LENGTH(contents)||')' FROM study_app.$1 WHERE book='""$2""' AND chapter='""$3""' ORDER BY 
+                 CHAR_LENGTH(contents) LIMIT 1;" | sed '1,2 d' | sed '$d' | sed '$d' | xargs
     else
         psql -h localhost -p 5433 -U postgres -d bible -c\
-         "SELECT book||':'||chapter||':'||verse FROM study_app.$1 ORDER BY CHAR_LENGTH(contents) LIMIT 1;" | sed '1,2 d' | sed '$d' | 
+         "SELECT book||':'||chapter||':'||verse||'@'||CHAR_LENGTH(contents) FROM study_app.$1 ORDER BY CHAR_LENGTH(contents) LIMIT 1;" | sed '1,2 d' | sed '$d' | 
                  sed '$d' | xargs
     fi
 }
 
-longestVerse()
+longestVerseByCharacters()
 {
     if [ $2 ]
     then
         psql -h localhost -p 5433 -U postgres -d bible -c\
-         "SELECT verse FROM study_app.$1 WHERE book='""$2""' AND chapter='""$3""' ORDER BY CHAR_LENGTH(contents) DESC LIMIT 1;" | 
-                 sed '1,2 d' | sed '$d' | sed '$d' | xargs
+         "SELECT verse||' ('||CHAR_LENGTH(contents)||')' FROM study_app.$1 WHERE book='""$2""' AND chapter='""$3""' ORDER BY 
+                 CHAR_LENGTH(contents) DESC LIMIT 1;" | sed '1,2 d' | sed '$d' | sed '$d' | xargs
     else
         psql -h localhost -p 5433 -U postgres -d bible -c\
-         "SELECT book||':'||chapter||':'||verse FROM study_app.$1 ORDER BY CHAR_LENGTH(contents) DESC LIMIT 1;" | sed '1,2 d' | sed '$d' | 
+         "SELECT book||':'||chapter||':'||verse||'@'||CHAR_LENGTH(contents) FROM study_app.$1 ORDER BY CHAR_LENGTH(contents) DESC LIMIT 1;" | sed '1,2 d' | sed '$d' | 
                  sed '$d' | xargs
     fi
 }
@@ -158,7 +158,7 @@ fill_global()
 fill_per_chapter()
 {
     psql -h localhost -p 5433 -U postgres -d bible -c\
-         "INSERT INTO study_app.$1_statistics_per_chapters (book,chapter,key,value) VALUES('$2', '$3', '$4', '$5');"
+         "INSERT INTO study_app.$1_statistics_per_chapters (book,chapter,key,value) VALUES('$2', '$3', '$4', '$5 $6');"
 }
 
 fillTables()
@@ -171,8 +171,8 @@ fillTables()
     fill_global $(longestChapterByVerses $1)      'LONGEST_CHAPTER_BY_VERSES'       $1
     fill_global $(shortestChapterByCharacters $1) 'SHORTEST_CHAPTER_BY_CHARACTERS'  $1
     fill_global $(longestChapterByCharacters $1)  'LONGEST_CHAPTER_BY_CHARACTERS'   $1
-    fill_global $(shortestVerse $1)               'SHORTEST_VERSE'                  $1
-    fill_global $(longestVerse $1)                'LONGEST_VERSE'                   $1
+    fill_global $(shortestVerseByCharacters $1)   'SHORTEST_VERSE'                  $1
+    fill_global $(longestVerseByCharacters $1)    'LONGEST_VERSE'                   $1
     fill_global $(numberOfAllBooks $1)            'NUMBER_OF_ALL_BOOKS'             $1
     fill_global $(numberOfAllChapters $1)         'NUMBER_OF_ALL_CHAPTERS'          $1
     fill_global $(numberOfAllVerses $1)           'NUMBER_OF_ALL_VERSES'            $1
@@ -182,8 +182,8 @@ fillTables()
     {
         for chapter in `psql -h localhost -p 5433 -U postgres -d bible -c "select distinct chapter from study_app.$1 WHERE book LIKE'""$book""';" | sed '1,2 d'| sed '$d' | sed '$d'| xargs |sed 's/{//'| sed 's/}//'| sed 's/,/ /g'`
         {
-            fill_per_chapter $1 $book $chapter 'SHORTEST_VERSE'       $(shortestVerse $1 $book $chapter)
-            fill_per_chapter $1 $book $chapter 'LONGEST_VERSE'        $(longestVerse $1 $book $chapter)
+            fill_per_chapter $1 $book $chapter 'SHORTEST_VERSE'       $(shortestVerseByCharacters $1 $book $chapter)
+            fill_per_chapter $1 $book $chapter 'LONGEST_VERSE'        $(longestVerseByCharacters $1 $book $chapter)
             fill_per_chapter $1 $book $chapter 'NUMBER_OF_VERSES'     $(numberOfVerses $1 $book $chapter)
             fill_per_chapter $1 $book $chapter 'NUMBER_OF_CHARACTERS' $(numberOfCharacters $1 $book $chapter)
             fill_per_chapter $1 $book $chapter 'NUMBER_OF_WORDS'      $(numberOfWords $1 $book $chapter)
@@ -196,7 +196,7 @@ main()
     for i in `psql -h localhost -p 5433 -U postgres -d bible -c "select array_agg(abbrev) from study_app.translations;" | sed '1,2 d'| sed '$d' | sed '$d'| xargs |sed 's/{//'| sed 's/}//'| sed 's/,/ /g'`
     {
         createTables $i
-        fillTables $i
+        fillTables $i &
     }
 }
 
