@@ -12,9 +12,12 @@ import org.eclipse.e4.core.services.nls.Translation;
 @Creatable
 public final class MessageService {
 
-	@Inject
-	@Translation
 	private Messages messages;
+
+	@Inject
+	public MessageService(@Translation Messages messages) {
+		this.messages = messages;
+	}
 
 	public String getMessage(String messageKey) {
 		try {
