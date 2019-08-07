@@ -35,7 +35,7 @@
                 </children>
               </children>
               <children xsi:type="basic:PartStack" xmi:id="_-Pf_YBw7EeetS7PfnSTHUQ" elementId="biblereader.partstack.6" selectedElement="_BTgu0IsdEeelZdqObeRc3w">
-                <children xsi:type="basic:Part" xmi:id="_BTgu0IsdEeelZdqObeRc3w" elementId="biblereader.part.notes" contributionURI="bundleclass://reader/com.lory.biblereader.notespart.NotesPart" label="%notes" iconURI="platform:/plugin/reader/resources/icons8-task.png" tooltip="%notes" closeable="true"/>
+                <children xsi:type="basic:Part" xmi:id="_BTgu0IsdEeelZdqObeRc3w" elementId="biblereader.part.notes" contributionURI="bundleclass://reader/com.lory.biblereader.notespart.external.NotesView" label="%notes" iconURI="platform:/plugin/reader/resources/icons8-task.png" tooltip="%notes" closeable="true"/>
                 <children xsi:type="basic:Part" xmi:id="_m9e_YH9tEee-tMwEAan16g" elementId="biblereader.part.statistics" contributionURI="bundleclass://reader/com.lory.biblereader.statisticspart.external.StatisticsView" label="%statistics" iconURI="platform:/plugin/reader/resources/icons8-list-filled.png" tooltip="%statistics" closeable="true"/>
               </children>
             </children>
