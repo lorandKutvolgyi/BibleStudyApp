@@ -36,6 +36,7 @@ public class StatisticsPresenter implements Observer {
 	@PostConstruct
 	public void init() {
 		setUpLabels();
+		update(null, null);
 		currentChapter.addObserver(this);
 	}
 

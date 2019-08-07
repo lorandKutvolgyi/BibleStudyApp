@@ -55,6 +55,7 @@ public class StatisticsView implements Observer {
 
 		createChapterRelatedPart(chapterStatistics);
 		createTranslationRelatedPart(chapterStatistics);
+		setValues();
 
 		model.addObserver(this);
 	}
@@ -126,10 +127,10 @@ public class StatisticsView implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		setItems();
+		setValues();
 	}
 
-	private void setItems() {
+	private void setValues() {
 		chapterHeader.setText(0, model.getChapter());
 		translationHeader.setText(0, model.getTranslation());
 
