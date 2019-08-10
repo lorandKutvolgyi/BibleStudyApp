@@ -21,12 +21,16 @@ import com.google.common.collect.Multimap;
 
 public class Translation {
 
-	@Inject
 	private TranslationManager translationManager;
-	@Inject
 	private EModelService modelService;
 
 	private static boolean activeTranslationIsSet;
+
+	@Inject
+	public Translation(TranslationManager translationManager, EModelService modelService) {
+		this.translationManager = translationManager;
+		this.modelService = modelService;
+	}
 
 	@AboutToShow
 	public void aboutToShow(Shell shell, List<MMenuElement> items, MApplication app) {

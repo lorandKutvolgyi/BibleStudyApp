@@ -9,10 +9,14 @@ import org.eclipse.e4.ui.model.application.ui.menu.MMenuItem;
 
 public class TranslationSelectionHandler {
 
-	@Inject
 	private TranslationManager translationManager;
 
 	private String selectedTranslation;
+
+	@Inject
+	public TranslationSelectionHandler(TranslationManager translationManager) {
+		this.translationManager = translationManager;
+	}
 
 	@Execute
 	public void execute() {

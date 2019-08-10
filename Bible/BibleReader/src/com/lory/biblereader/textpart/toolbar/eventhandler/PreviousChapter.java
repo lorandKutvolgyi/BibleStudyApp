@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.swt.SWT;
 
-import com.lory.biblereader.historypart.History;
+import com.lory.biblereader.historypart.entity.History;
 
 public class PreviousChapter {
 

@@ -1,4 +1,4 @@
-package com.lory.biblereader.historypart;
+package com.lory.biblereader.historypart.entity;
 
 import java.util.LinkedList;
 import java.util.Observable;
@@ -29,6 +29,8 @@ public class History extends Observable {
 
 	public void removeElement(int index) {
 		history.remove(index);
+		setChanged();
+		notifyObservers();
 	}
 
 	public LinkedList<Chapter> getHistory() {

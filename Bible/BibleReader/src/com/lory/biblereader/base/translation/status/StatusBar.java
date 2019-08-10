@@ -16,10 +16,14 @@ import com.lory.biblereader.base.translation.menu.TranslationManager;
 
 public class StatusBar implements Observer {
 
-	@Inject
 	private TranslationManager translationManager;
 
 	private Label label;
+
+	@Inject
+	public StatusBar(TranslationManager translationManager) {
+		this.translationManager = translationManager;
+	}
 
 	@PostConstruct
 	public void createGui(Composite parent) {

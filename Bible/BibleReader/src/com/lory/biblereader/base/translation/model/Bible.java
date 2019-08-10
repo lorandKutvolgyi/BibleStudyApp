@@ -16,14 +16,14 @@ import com.lory.biblereader.base.translation.model.dao.BibleDao;
 @Singleton
 public class Bible {
 
-	@Inject
 	private TranslationManager translationManager;
-	@Inject
 	private BibleDao bibleDao;
-
 	private List<Book> books = new ArrayList<>();
 
-	public Bible() {
+	@Inject
+	public Bible(TranslationManager translationManager, BibleDao bibleDao) {
+		this.translationManager = translationManager;
+		this.bibleDao = bibleDao;
 		books.addAll(Arrays.asList(OldTestamentBooks.values()));
 		books.addAll(Arrays.asList(NewTestamentBooks.values()));
 	}

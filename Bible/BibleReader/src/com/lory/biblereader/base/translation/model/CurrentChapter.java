@@ -15,14 +15,18 @@ import com.lory.biblereader.base.translation.model.dao.BibleDao;
 @Singleton
 public class CurrentChapter extends Observable {
 
-	@Inject
 	private Bible bible;
-	@Inject
 	private TranslationManager translationManager;
-	@Inject
 	private BibleDao bibleDao;
 
 	private Chapter chapter;
+
+	@Inject
+	public CurrentChapter(Bible bible, TranslationManager translationManager, BibleDao bibleDao) {
+		this.bible = bible;
+		this.translationManager = translationManager;
+		this.bibleDao = bibleDao;
+	}
 
 	public Chapter getChapter() {
 		return chapter;

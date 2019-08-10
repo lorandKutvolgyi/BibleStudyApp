@@ -11,7 +11,7 @@ import com.lory.biblereader.base.translation.model.Book;
 import com.lory.biblereader.base.translation.model.Chapter;
 import com.lory.biblereader.base.translation.model.CurrentChapter;
 import com.lory.biblereader.base.translation.model.dao.BibleDao;
-import com.lory.biblereader.historypart.History;
+import com.lory.biblereader.historypart.entity.History;
 
 @Creatable
 @Singleton

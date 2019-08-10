@@ -6,7 +6,7 @@ import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.swt.SWT;
 
 import com.lory.biblereader.bookspart.treesorter.BooksComparator;
-import com.lory.biblereader.historypart.History;
+import com.lory.biblereader.historypart.entity.History;
 
 public class PreviousBook {
 

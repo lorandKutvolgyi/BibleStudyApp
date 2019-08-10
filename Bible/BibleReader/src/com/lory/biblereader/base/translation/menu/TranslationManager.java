@@ -15,10 +15,13 @@ import com.lory.biblereader.base.translation.model.dao.BibleDao;
 @Singleton
 public class TranslationManager extends Observable {
 
-	@Inject
 	private BibleDao bibleDao;
-
 	private String activeTranslation;
+
+	@Inject
+	public TranslationManager(BibleDao bibleDao) {
+		this.bibleDao = bibleDao;
+	}
 
 	public Multimap<String, String> getAvailableTranslations() {
 		return bibleDao.getAvailableTranslations();

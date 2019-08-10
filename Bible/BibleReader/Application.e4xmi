@@ -28,9 +28,9 @@
                     <children xsi:type="menu:DirectToolItem" xmi:id="_DGKV0MD4EeiAztRFQB7sAg" elementId="reader.directtoolitem.1" iconURI="platform:/plugin/reader/resources/trash.png" tooltip="%clear" contributionURI="bundleclass://reader/com.lory.biblereader.bookmarkpart.BookMarkClearTooltemHandler"/>
                   </toolbar>
                 </children>
-                <children xsi:type="basic:Part" xmi:id="_-7KykBw7EeetS7PfnSTHUQ" elementId="biblereader.part.history" contributionURI="bundleclass://reader/com.lory.biblereader.historypart.HistoryPart" label="%history" iconURI="platform:/plugin/reader/resources/icons8-time-machine-32.png" tooltip="%history" closeable="true">
+                <children xsi:type="basic:Part" xmi:id="_-7KykBw7EeetS7PfnSTHUQ" elementId="biblereader.part.history" contributionURI="bundleclass://reader/com.lory.biblereader.historypart.external.HistoryView" label="%history" iconURI="platform:/plugin/reader/resources/icons8-time-machine-32.png" tooltip="%history" closeable="true">
                   <toolbar xmi:id="_Ak7IIMD4EeiAztRFQB7sAg" elementId="reader.toolbar.0">
-                    <children xsi:type="menu:DirectToolItem" xmi:id="_BXt3AMD4EeiAztRFQB7sAg" elementId="reader.directtoolitem.0" iconURI="platform:/plugin/reader/resources/trash.png" tooltip="%clear" contributionURI="bundleclass://reader/com.lory.biblereader.historypart.contextmenu.HistoryClearMenuItemHandler"/>
+                    <children xsi:type="menu:DirectToolItem" xmi:id="_BXt3AMD4EeiAztRFQB7sAg" elementId="reader.directtoolitem.0" iconURI="platform:/plugin/reader/resources/trash.png" tooltip="%clear" contributionURI="bundleclass://reader/com.lory.biblereader.historypart.interfaceadapter.toolbarmenu.HistoryClearMenuItemHandler"/>
                   </toolbar>
                 </children>
               </children>

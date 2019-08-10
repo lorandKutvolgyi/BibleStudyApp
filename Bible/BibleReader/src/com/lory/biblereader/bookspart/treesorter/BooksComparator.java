@@ -13,13 +13,17 @@ import org.eclipse.e4.core.di.annotations.Creatable;
 @Singleton
 public class BooksComparator {
 
-	@Inject
 	private HistoricalBooksOrder historicalBooksOrder;
-	@Inject
 	private CanonicalBooksOrder canonicalicalBooksOrder;
 
 	private final List<AbstractBooksOrder> comparators = new ArrayList<>();
 	private int index = 0;
+
+	@Inject
+	public BooksComparator(HistoricalBooksOrder historicalBooksOrder, CanonicalBooksOrder canonicalicalBooksOrder) {
+		this.historicalBooksOrder = historicalBooksOrder;
+		this.canonicalicalBooksOrder = canonicalicalBooksOrder;
+	}
 
 	@PostConstruct
 	public void init() {
