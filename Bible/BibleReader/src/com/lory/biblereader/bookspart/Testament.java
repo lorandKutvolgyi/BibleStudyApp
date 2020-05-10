@@ -1,8 +1,10 @@
-package com.lory.biblereader.base.translation.model;
+package com.lory.biblereader.bookspart;
 
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Set;
+
+import com.lory.biblereader.base.translation.model.TreeElement;
 
 public enum Testament implements TreeElement {
 

@@ -6,9 +6,9 @@ import javax.inject.Singleton;
 
 import org.eclipse.e4.core.di.annotations.Creatable;
 
-import com.lory.biblereader.base.translation.model.Book;
-import com.lory.biblereader.base.translation.model.NewTestamentBooks;
-import com.lory.biblereader.base.translation.model.OldTestamentBooks;
+import com.lory.biblereader.bookspart.Book;
+import com.lory.biblereader.bookspart.NewTestamentBooks;
+import com.lory.biblereader.bookspart.OldTestamentBooks;
 
 @Creatable
 @Singleton

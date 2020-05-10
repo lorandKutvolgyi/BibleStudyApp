@@ -19,11 +19,11 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.ui.forms.widgets.Hyperlink;
 
-import com.lory.biblereader.base.translation.model.Chapter;
 import com.lory.biblereader.historypart.interfaceadapter.listener.ListenerFactory;
 import com.lory.biblereader.historypart.interfaceadapter.presenter.ChangeType;
 import com.lory.biblereader.historypart.interfaceadapter.presenter.HistoryPresenter;
 import com.lory.biblereader.historypart.interfaceadapter.presenter.HistoryViewModel;
+import com.lory.biblereader.textpart.Chapter;
 
 public class HistoryView implements Observer {
 

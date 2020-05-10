@@ -8,7 +8,7 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeSelection;
 
-import com.lory.biblereader.base.translation.model.Book;
+import com.lory.biblereader.bookspart.Book;
 import com.lory.biblereader.bookspart.chapternumberpopup.ChapterNumberPopupShell;
 
 @Creatable

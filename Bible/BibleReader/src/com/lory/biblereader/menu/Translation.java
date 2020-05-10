@@ -1,4 +1,4 @@
-package com.lory.biblereader.base.translation.menu;
+package com.lory.biblereader.menu;
 
 import java.util.Collections;
 import java.util.List;
@@ -103,7 +103,7 @@ public class Translation {
 			MDirectMenuItem item = MMenuFactory.INSTANCE.createDirectMenuItem();
 			item.setContributorURI("platform:/plugin/reader");
 			item.setContributionURI(
-					"bundleclass://reader/com.lory.biblereader.base.translation.menu.TranslationSelectionHandler");
+					"bundcom.lory.biblereader.base.translation.menu.TranslationSelec.biblereader.menutionHandler");
 			item.setLabel(translation.split(":")[0]);
 			item.setElementId(translation.split(":")[0]);
 			item.setTooltip(translation.split(":")[1]);

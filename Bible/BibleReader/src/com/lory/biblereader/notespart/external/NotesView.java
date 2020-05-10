@@ -7,7 +7,6 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.eclipse.nebula.widgets.richtext.RichTextEditor;
-import org.eclipse.nebula.widgets.richtext.RichTextEditorConfiguration;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -45,16 +44,9 @@ public class NotesView implements Observer {
 	}
 
 	private void createEditor(Composite parent) {
-		editor = new RichTextEditor(parent, createConfig());
+		editor = new RichTextEditor(parent);
 		editor.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		editor.addModifyListener(changeNotesListener);
-	}
-
-	private RichTextEditorConfiguration createConfig() {
-		RichTextEditorConfiguration config = new RichTextEditorConfiguration();
-		config.setToolbarCollapsible(true);
-		config.setToolbarInitialExpanded(false);
-		return config;
 	}
 
 	private void createButton(Composite parent) {

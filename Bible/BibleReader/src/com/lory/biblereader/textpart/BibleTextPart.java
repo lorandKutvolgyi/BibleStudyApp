@@ -24,10 +24,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import com.lory.biblereader.base.translation.i18n.MessageService;
-import com.lory.biblereader.base.translation.menu.TranslationManager;
-import com.lory.biblereader.base.translation.model.Chapter;
-import com.lory.biblereader.base.translation.model.ChapterContext;
 import com.lory.biblereader.bookspart.eventhandler.BooksKeyListener;
+import com.lory.biblereader.menu.TranslationManager;
 import com.lory.biblereader.textpart.eventhandler.BrowserMouseListener;
 import com.lory.biblereader.textpart.eventhandler.BrowserProgressListener;
 import com.lory.biblereader.textpart.eventhandler.SearchTextVerifyListener;

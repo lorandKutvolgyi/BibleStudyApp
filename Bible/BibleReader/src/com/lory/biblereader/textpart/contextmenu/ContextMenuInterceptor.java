@@ -7,7 +7,7 @@ import org.eclipse.e4.core.di.annotations.Evaluate;
 
 import com.lory.biblereader.textpart.TextPartManager;
 
-public class ContextMenuInterseptor {
+public class ContextMenuInterceptor {
 
 	@Inject
 	private TextPartManager textPartManager;

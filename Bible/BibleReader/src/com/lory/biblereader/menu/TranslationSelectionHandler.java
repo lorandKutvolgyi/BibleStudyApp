@@ -1,5 +1,4 @@
-
-package com.lory.biblereader.base.translation.menu;
+package com.lory.biblereader.menu;
 
 import javax.inject.Inject;
 

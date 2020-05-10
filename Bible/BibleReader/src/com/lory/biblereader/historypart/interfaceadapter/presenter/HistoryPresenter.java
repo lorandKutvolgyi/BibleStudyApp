@@ -11,9 +11,9 @@ import javax.inject.Singleton;
 import org.eclipse.e4.core.di.annotations.Creatable;
 
 import com.lory.biblereader.base.translation.i18n.MessageService;
-import com.lory.biblereader.base.translation.model.Chapter;
 import com.lory.biblereader.historypart.entity.History;
 import com.lory.biblereader.historypart.service.HistoryService;
+import com.lory.biblereader.textpart.Chapter;
 
 @Creatable
 @Singleton

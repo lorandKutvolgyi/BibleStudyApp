@@ -19,12 +19,10 @@ import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 import org.eclipse.swt.widgets.Text;
 
-import com.lory.biblereader.base.translation.menu.TranslationManager;
-import com.lory.biblereader.base.translation.model.Book;
-import com.lory.biblereader.base.translation.model.Chapter;
-import com.lory.biblereader.base.translation.model.ChapterContext;
 import com.lory.biblereader.base.translation.model.CurrentChapter;
-import com.lory.biblereader.base.translation.model.dao.BibleDao;
+import com.lory.biblereader.bookspart.Book;
+import com.lory.biblereader.menu.TranslationManager;
+import com.lory.biblereader.textpart.repository.TextRepository;
 
 @Creatable
 @Singleton
@@ -41,7 +39,7 @@ public class TextPartManager {
 	@Inject
 	private TranslationManager translationManager;
 	@Inject
-	private BibleDao bibleDao;
+	private TextRepository textRepository;
 
 	private static final String STACK_ID = "biblereader.partstack.bibletext";
 	private static final String BIBLE_TEXT_PART_URI = "bundleclass://reader/com.lory.biblereader.textpart.BibleTextPart";
@@ -131,7 +129,7 @@ public class TextPartManager {
 	}
 
 	public synchronized void modifyPartContent(Book book, int chapterId) {
-		Chapter chapter = book.getChapter(chapterId, null, translationManager, bibleDao);
+		Chapter chapter = book.getChapter(chapterId, null, translationManager, textRepository);
 		currentChapter.setChapter(chapter);
 		chapters.put(activePart, chapter);
 	}

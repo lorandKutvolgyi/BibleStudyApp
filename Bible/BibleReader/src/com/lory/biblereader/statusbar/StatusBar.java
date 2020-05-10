@@ -1,4 +1,4 @@
-package com.lory.biblereader.base.translation.status;
+package com.lory.biblereader.statusbar;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -12,7 +12,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
-import com.lory.biblereader.base.translation.menu.TranslationManager;
+import com.lory.biblereader.menu.TranslationManager;
 
 public class StatusBar implements Observer {
 

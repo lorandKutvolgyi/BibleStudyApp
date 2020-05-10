@@ -5,8 +5,8 @@ import javax.inject.Inject;
 import org.eclipse.e4.core.di.annotations.Creatable;
 
 import com.lory.biblereader.base.translation.i18n.MessageService;
-import com.lory.biblereader.base.translation.menu.TranslationManager;
 import com.lory.biblereader.bookspart.eventhandler.BooksKeyListener;
+import com.lory.biblereader.menu.TranslationManager;
 import com.lory.biblereader.textpart.eventhandler.BrowserMouseListener;
 import com.lory.biblereader.textpart.eventhandler.BrowserProgressListener;
 import com.lory.biblereader.textpart.eventhandler.SearchTextVerifyListener;

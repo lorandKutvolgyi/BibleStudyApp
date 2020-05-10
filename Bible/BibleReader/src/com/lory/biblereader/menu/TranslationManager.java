@@ -1,4 +1,4 @@
-package com.lory.biblereader.base.translation.menu;
+package com.lory.biblereader.menu;
 
 import java.util.Locale;
 import java.util.Observable;
@@ -9,26 +9,26 @@ import javax.inject.Singleton;
 import org.eclipse.e4.core.di.annotations.Creatable;
 
 import com.google.common.collect.Multimap;
-import com.lory.biblereader.base.translation.model.dao.BibleDao;
+import com.lory.biblereader.menu.repository.MenuRepository;
 
 @Creatable
 @Singleton
 public class TranslationManager extends Observable {
 
-	private BibleDao bibleDao;
+	private MenuRepository menuRepository;
 	private String activeTranslation;
 
 	@Inject
-	public TranslationManager(BibleDao bibleDao) {
-		this.bibleDao = bibleDao;
+	public TranslationManager(MenuRepository menuRepository) {
+		this.menuRepository = menuRepository;
 	}
 
 	public Multimap<String, String> getAvailableTranslations() {
-		return bibleDao.getAvailableTranslations();
+		return menuRepository.getAvailableTranslations();
 	}
 
 	public void setActiveTranslationAbbreviation(String abbrev) {
-		setActiveTranslation(abbrev + ":" + bibleDao.getDescription(abbrev));
+		setActiveTranslation(abbrev + ":" + menuRepository.getDescription(abbrev));
 	}
 
 	public void setActiveTranslation(String activeTranslation) {

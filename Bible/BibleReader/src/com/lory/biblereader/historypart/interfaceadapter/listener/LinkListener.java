@@ -7,9 +7,9 @@ import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.ui.forms.events.HyperlinkAdapter;
 import org.eclipse.ui.forms.events.HyperlinkEvent;
 
-import com.lory.biblereader.base.translation.model.Chapter;
 import com.lory.biblereader.historypart.interfaceadapter.presenter.HistoryPresenter;
 import com.lory.biblereader.historypart.service.HistoryService;
+import com.lory.biblereader.textpart.Chapter;
 import com.lory.biblereader.textpart.TextPartManager;
 
 @Creatable

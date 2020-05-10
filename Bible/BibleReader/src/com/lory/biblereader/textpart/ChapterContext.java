@@ -1,4 +1,4 @@
-package com.lory.biblereader.base.translation.model;
+package com.lory.biblereader.textpart;
 
 public class ChapterContext {
 	private final String id;

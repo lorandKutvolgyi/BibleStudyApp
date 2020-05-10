@@ -9,9 +9,9 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.google.common.collect.Multimap;
 import com.lory.biblereader.base.translation.i18n.MessageService;
-import com.lory.biblereader.base.translation.menu.TranslationManager;
-import com.lory.biblereader.base.translation.model.Chapter;
-import com.lory.biblereader.base.translation.model.dao.BibleDao;
+import com.lory.biblereader.menu.TranslationManager;
+import com.lory.biblereader.textpart.Chapter;
+import com.lory.biblereader.textpart.repository.TextRepository;
 
 public class CompareTranslationsPopup {
 
@@ -23,16 +23,16 @@ public class CompareTranslationsPopup {
 	private MessageService messageService;
 	private DisplayService displayService;
 	private Browser browser;
-	private BibleDao bibleDao;
+	private TextRepository textRepository;
 
 	public CompareTranslationsPopup(Chapter chapter, String verse, TranslationManager translationManager,
-			MessageService messageService, DisplayService displayService, BibleDao bibleDao) {
+			MessageService messageService, DisplayService displayService, TextRepository textRepository) {
 		this.chapter = chapter;
 		this.verse = verse;
 		this.translationManager = translationManager;
 		this.messageService = messageService;
 		this.displayService = displayService;
-		this.bibleDao = bibleDao;
+		this.textRepository = textRepository;
 	}
 
 	public void open() {
@@ -63,12 +63,12 @@ public class CompareTranslationsPopup {
 
 	// step function will be called by javascript code
 	private void createStepFunction() {
-		new StepFunction(browser, "step", bibleDao);
+		new StepFunction(browser, "step", textRepository);
 	}
 
 	private StringBuilder createBrowserContent() {
 		String activeTranslation = translationManager.getActiveTranslationAbbreviation();
-		HtmlCreator creator = new HtmlCreator(shell, chapter, verse, bibleDao);
+		HtmlCreator creator = new HtmlCreator(shell, chapter, verse, textRepository);
 		StringBuilder content = new StringBuilder(creator.createStartHtml())
 				.append(creator.createHtml(activeTranslation));
 		Multimap<String, String> availableTranslations = translationManager.getAvailableTranslations();

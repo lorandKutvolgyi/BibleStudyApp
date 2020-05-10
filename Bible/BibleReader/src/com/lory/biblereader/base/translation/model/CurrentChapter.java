@@ -8,8 +8,11 @@ import javax.inject.Singleton;
 
 import org.eclipse.e4.core.di.annotations.Creatable;
 
-import com.lory.biblereader.base.translation.menu.TranslationManager;
-import com.lory.biblereader.base.translation.model.dao.BibleDao;
+import com.lory.biblereader.bookspart.Bible;
+import com.lory.biblereader.bookspart.Book;
+import com.lory.biblereader.menu.TranslationManager;
+import com.lory.biblereader.textpart.Chapter;
+import com.lory.biblereader.textpart.repository.TextRepository;
 
 @Creatable
 @Singleton
@@ -17,15 +20,15 @@ public class CurrentChapter extends Observable {
 
 	private Bible bible;
 	private TranslationManager translationManager;
-	private BibleDao bibleDao;
+	private TextRepository textRepository;
 
 	private Chapter chapter;
 
 	@Inject
-	public CurrentChapter(Bible bible, TranslationManager translationManager, BibleDao bibleDao) {
+	public CurrentChapter(Bible bible, TranslationManager translationManager, TextRepository textRepository) {
 		this.bible = bible;
 		this.translationManager = translationManager;
-		this.bibleDao = bibleDao;
+		this.textRepository = textRepository;
 	}
 
 	public Chapter getChapter() {
@@ -40,7 +43,7 @@ public class CurrentChapter extends Observable {
 
 	public void setChapter(String bookTitle, int chapterId, String translation) {
 		Book book = bible.getBookByTitle(bookTitle);
-		setChapter(book.getChapter(chapterId, translation, translationManager, bibleDao));
+		setChapter(book.getChapter(chapterId, translation, translationManager, textRepository));
 	}
 
 	public void setObserver(Observer observer) {

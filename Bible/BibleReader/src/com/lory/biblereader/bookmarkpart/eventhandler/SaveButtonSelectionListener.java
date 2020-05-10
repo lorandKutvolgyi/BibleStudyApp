@@ -10,16 +10,16 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Text;
 
 import com.lory.biblereader.base.translation.i18n.MessageService;
-import com.lory.biblereader.base.translation.menu.TranslationManager;
-import com.lory.biblereader.base.translation.model.Bible;
-import com.lory.biblereader.base.translation.model.Chapter;
-import com.lory.biblereader.base.translation.model.dao.BibleDao;
 import com.lory.biblereader.bookmarkpart.BookMark;
 import com.lory.biblereader.bookmarkpart.BookMarkCategory;
 import com.lory.biblereader.bookmarkpart.BookMarkCategoryFactory;
 import com.lory.biblereader.bookmarkpart.BookMarkManager;
 import com.lory.biblereader.bookmarkpart.BookMarkSelectionPopup;
 import com.lory.biblereader.bookmarkpart.BookMarkUtil;
+import com.lory.biblereader.bookspart.Bible;
+import com.lory.biblereader.menu.TranslationManager;
+import com.lory.biblereader.textpart.Chapter;
+import com.lory.biblereader.textpart.repository.TextRepository;
 
 public class SaveButtonSelectionListener extends SelectionAdapter {
 
@@ -30,10 +30,11 @@ public class SaveButtonSelectionListener extends SelectionAdapter {
 	private Combo categories;
 	private Bible bible;
 	private TranslationManager translationManager;
-	private BibleDao bibleDao;
+	private TextRepository textRepository;
 
 	public SaveButtonSelectionListener(BookMarkSelectionPopup popup, BookMarkManager bookMarkManager,
-			MessageService messageService, Bible bible, TranslationManager translationManager, BibleDao bibleDao) {
+			MessageService messageService, Bible bible, TranslationManager translationManager,
+			TextRepository textRepository) {
 		this.popup = popup;
 		this.bookMarkManager = bookMarkManager;
 		this.messageService = messageService;
@@ -41,7 +42,7 @@ public class SaveButtonSelectionListener extends SelectionAdapter {
 		this.categories = popup.getCategories();
 		this.bible = bible;
 		this.translationManager = translationManager;
-		this.bibleDao = bibleDao;
+		this.textRepository = textRepository;
 	}
 
 	@Override
@@ -50,7 +51,8 @@ public class SaveButtonSelectionListener extends SelectionAdapter {
 		popup.getCancel().setEnabled(false);
 		int bookIndex = popup.getBooks().getSelectionIndex();
 		int chapterIndex = popup.getChapters().getSelectionIndex() + 1;
-		Chapter chapter = bible.getBooks().get(bookIndex).getChapter(chapterIndex, null, translationManager, bibleDao);
+		Chapter chapter = bible.getBooks().get(bookIndex).getChapter(chapterIndex, null, translationManager,
+				textRepository);
 		List<Integer> versesAsIntegers = BookMarkUtil.getVersesAsIntegers(isVersesEmpty() ? "" : verses.getText());
 		BookMarkCategory category = isCategoriesEmpty() ? bookMarkManager.getDefaultCategory()
 				: BookMarkCategoryFactory.getBookMarkCategory(categories.getText());

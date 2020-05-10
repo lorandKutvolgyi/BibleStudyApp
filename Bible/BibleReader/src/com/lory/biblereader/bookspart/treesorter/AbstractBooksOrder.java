@@ -6,8 +6,8 @@ import java.util.List;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerComparator;
 
-import com.lory.biblereader.base.translation.model.Book;
-import com.lory.biblereader.base.translation.model.Testament;
+import com.lory.biblereader.bookspart.Book;
+import com.lory.biblereader.bookspart.Testament;
 
 public abstract class AbstractBooksOrder extends ViewerComparator {
 

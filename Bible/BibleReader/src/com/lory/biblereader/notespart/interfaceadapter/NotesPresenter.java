@@ -10,9 +10,9 @@ import javax.inject.Singleton;
 import org.eclipse.e4.core.di.annotations.Creatable;
 
 import com.lory.biblereader.base.translation.i18n.MessageService;
-import com.lory.biblereader.base.translation.model.Chapter;
 import com.lory.biblereader.base.translation.model.CurrentChapter;
 import com.lory.biblereader.notespart.service.NotesService;
+import com.lory.biblereader.textpart.Chapter;
 
 @Creatable
 @Singleton

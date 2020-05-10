@@ -7,25 +7,25 @@ import javax.inject.Singleton;
 
 import org.eclipse.e4.core.di.annotations.Creatable;
 
-import com.lory.biblereader.base.translation.model.Chapter;
-import com.lory.biblereader.base.translation.model.dao.BibleDao;
+import com.lory.biblereader.statisticspart.repository.StatisticsRepository;
+import com.lory.biblereader.textpart.Chapter;
 
 @Creatable
 @Singleton
 public class StatisticsService {
 
-	private BibleDao dao;// TODO separate dao for statistics
+	private StatisticsRepository repository;
 
 	@Inject
-	public StatisticsService(BibleDao dao) {
-		this.dao = dao;
+	public StatisticsService(StatisticsRepository repository) {
+		this.repository = repository;
 	}
 
 	public Map<String, String> getStatisticsByChapter(Chapter chapter) {
-		return dao.getStatisticsByChapter(chapter);
+		return repository.getStatisticsByChapter(chapter);
 	}
 
 	public Map<String, String> getGlobalStatistics(Chapter chapter) {
-		return dao.getGlobalStatistics(chapter.getTranslation());
+		return repository.getGlobalStatistics(chapter.getTranslation());
 	}
 }

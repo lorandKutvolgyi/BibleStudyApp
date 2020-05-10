@@ -17,11 +17,11 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Tree;
 
-import com.lory.biblereader.base.translation.menu.TranslationManager;
-import com.lory.biblereader.base.translation.model.Book;
-import com.lory.biblereader.base.translation.model.dao.BibleDao;
+import com.lory.biblereader.bookspart.Book;
 import com.lory.biblereader.bookspart.chapternumberpopup.eventhandler.ChapterNumberKeyListener;
 import com.lory.biblereader.bookspart.chapternumberpopup.eventhandler.ChapterNumberMouseListener;
+import com.lory.biblereader.menu.TranslationManager;
+import com.lory.biblereader.textpart.repository.TextRepository;
 
 @Creatable
 @Singleton
@@ -34,7 +34,7 @@ public class ChapterNumberPopupShell {
 	@Inject
 	private TranslationManager translationManager;
 	@Inject
-	private BibleDao bibleDao;
+	private TextRepository textRepository;
 
 	private Display display = Display.getDefault();
 	private Shell shell;
@@ -90,7 +90,7 @@ public class ChapterNumberPopupShell {
 	}
 
 	private int getNumberOfChapters(final Book selectedBook) {
-		return selectedBook.getBookSize(translationManager, bibleDao);
+		return selectedBook.getBookSize(translationManager, textRepository);
 	}
 
 	private Point calculateLocation(Tree tree, int height) {

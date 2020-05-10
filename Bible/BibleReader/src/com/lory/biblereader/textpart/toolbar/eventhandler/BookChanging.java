@@ -6,14 +6,14 @@ import javax.inject.Singleton;
 import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.swt.SWT;
 
-import com.lory.biblereader.base.translation.menu.TranslationManager;
-import com.lory.biblereader.base.translation.model.Book;
-import com.lory.biblereader.base.translation.model.Chapter;
 import com.lory.biblereader.base.translation.model.CurrentChapter;
-import com.lory.biblereader.base.translation.model.dao.BibleDao;
+import com.lory.biblereader.bookspart.Book;
 import com.lory.biblereader.bookspart.treesorter.AbstractBooksOrder;
 import com.lory.biblereader.bookspart.treesorter.BooksComparator;
 import com.lory.biblereader.historypart.entity.History;
+import com.lory.biblereader.menu.TranslationManager;
+import com.lory.biblereader.textpart.Chapter;
+import com.lory.biblereader.textpart.repository.TextRepository;
 
 @Creatable
 @Singleton
@@ -21,13 +21,14 @@ public class BookChanging {
 
 	private CurrentChapter currentChapter;
 	private TranslationManager translationManager;
-	private BibleDao bibleDao;
+	private TextRepository textRepository;
 
 	@Inject
-	public BookChanging(CurrentChapter currentChapter, TranslationManager translationManager, BibleDao bibleDao) {
+	public BookChanging(CurrentChapter currentChapter, TranslationManager translationManager,
+			TextRepository textRepository) {
 		this.currentChapter = currentChapter;
 		this.translationManager = translationManager;
-		this.bibleDao = bibleDao;
+		this.textRepository = textRepository;
 	}
 
 	public void change(int keyCode, BooksComparator booksComparator, History history) {
@@ -38,7 +39,7 @@ public class BookChanging {
 		Book book = currentChapter.getChapter().getBook();
 		int index = order.getBooks().indexOf(book);
 		String translation = currentChapter.getChapter().getTranslation();
-		Chapter chapter = getBook(order, index, keyCode).getChapter(1, translation, translationManager, bibleDao);
+		Chapter chapter = getBook(order, index, keyCode).getChapter(1, translation, translationManager, textRepository);
 		currentChapter.setChapter(chapter);
 		history.addChapter(chapter);
 	}

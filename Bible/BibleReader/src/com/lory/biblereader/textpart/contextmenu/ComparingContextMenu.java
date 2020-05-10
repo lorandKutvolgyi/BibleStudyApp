@@ -10,10 +10,10 @@ import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 
 import com.lory.biblereader.base.translation.i18n.MessageService;
-import com.lory.biblereader.base.translation.menu.TranslationManager;
-import com.lory.biblereader.base.translation.model.Chapter;
-import com.lory.biblereader.base.translation.model.dao.BibleDao;
+import com.lory.biblereader.menu.TranslationManager;
+import com.lory.biblereader.textpart.Chapter;
 import com.lory.biblereader.textpart.TextPartManager;
+import com.lory.biblereader.textpart.repository.TextRepository;
 
 public class ComparingContextMenu {
 
@@ -26,7 +26,7 @@ public class ComparingContextMenu {
 	@Inject
 	private DisplayService displayService;
 	@Inject
-	private BibleDao bibleDao;
+	private TextRepository textRepository;
 
 	@Execute
 	public void execute() {
@@ -35,7 +35,7 @@ public class ComparingContextMenu {
 		Map<MPart, Chapter> chapters = textPartManager.getChapters();
 		Chapter chapter = chapters.get(activePart);
 		CompareTranslationsPopup popup = new CompareTranslationsPopup(chapter, verse, translationManager,
-				messageService, displayService, bibleDao);
+				messageService, displayService, textRepository);
 		popup.open();
 	}
 

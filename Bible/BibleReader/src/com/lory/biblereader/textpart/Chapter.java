@@ -1,4 +1,6 @@
-package com.lory.biblereader.base.translation.model;
+package com.lory.biblereader.textpart;
+
+import com.lory.biblereader.bookspart.Book;
 
 public class Chapter {
 

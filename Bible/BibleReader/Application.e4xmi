@@ -14,7 +14,7 @@
                 <children xsi:type="basic:Part" xmi:id="_33tk4Ff4EeWw0_pvm8Qobg" elementId="biblereader.BibleTextPart" accessibilityPhrase="" contributionURI="bundleclass://reader/com.lory.biblereader.textpart.BibleTextPart" label="" iconURI="platform:/plugin/reader/resources/icons8-paper.png" bindingContexts="_d53TOyM8EeWAgOzJmBnGEA _d53TOiM8EeWAgOzJmBnGEA" closeable="true">
                   <menus xsi:type="menu:PopupMenu" xmi:id="_sMnA0HVsEeiIKIvIk2QO-w" elementId="reader.popupmenu.textpart.context" accessibilityPhrase="" label="" tooltip="" mnemonics="context">
                     <children xsi:type="menu:DirectMenuItem" xmi:id="_8PjgAHVsEeiIKIvIk2QO-w" elementId="reader.directmenuitem.compare" label="%compare" contributionURI="bundleclass://reader/com.lory.biblereader.textpart.contextmenu.ComparingContextMenu">
-                      <visibleWhen xsi:type="ui:ImperativeExpression" xmi:id="_QErs8HZVEeip7OwKmNjTdQ" contributionURI="bundleclass://reader/com.lory.biblereader.textpart.contextmenu.ContextMenuInterseptor"/>
+                      <visibleWhen xsi:type="ui:ImperativeExpression" xmi:id="_QErs8HZVEeip7OwKmNjTdQ" contributionURI="bundleclass://reader/com.lory.biblereader.textpart.contextmenu.ContextMenuInterceptor"/>
                     </children>
                   </menus>
                 </children>
@@ -45,8 +45,7 @@
     </children>
     <mainMenu xmi:id="_P5x4EBo0EeeuaO7Y1kMvqw" elementId="biblereader.menu.2" accessibilityPhrase="">
       <children xsi:type="menu:Menu" xmi:id="_THOEcBo0EeeuaO7Y1kMvqw" elementId="biblereader.menu.translations" label="%translations">
-        <children xsi:type="menu:DynamicMenuContribution" xmi:id="_PKgEEHMdEeiNPaidIWbpwg" elementId="reader.dynamicmenucontribution.0" label="" contributionURI="bundleclass://reader/com.lory.biblereader.base.translation.menu.Translation"/>
-      </children>
+        <children xsi:type="menu:DynamicMenuContribution" xmi:id="_PKgEEHMdEeiNPaidIWbpwg" elementId="reader.dynamicmenucontribution.0" label="" contributionURI="bundleclass://reader/com.lory.biblereader.menu      </children>
     </mainMenu>
     <trimBars xmi:id="__LiGoBw3EeetS7PfnSTHUQ" elementId="biblereader.trimbar.0">
       <children xsi:type="menu:ToolBar" xmi:id="_CNSAYBw4EeetS7PfnSTHUQ" elementId="biblereader.toolbar.0">
@@ -57,7 +56,7 @@
       </children>
     </trimBars>
     <trimBars xmi:id="_lts-IHU0EeikzJ5LpnWjuA" elementId="reader.trimbar.0" side="Bottom">
-      <children xsi:type="menu:ToolControl" xmi:id="_p5CWIHU0EeikzJ5LpnWjuA" elementId="reader.toolcontrol.0" contributionURI="bundleclass://reader/com.lory.biblereader.base.translation.status.StatusBar">
+      <children xsi:type="menu:ToolControl" xmi:id="_p5CWIHU0EeikzJ5LpnWjuA" elementId="reader.toolcontrol.0" contributionURI="bundleclass://reader/com.lory.biblereader.statusbar.StatusBar">
         <persistedState key="activeTranslation"/>
       </children>
     </trimBars>

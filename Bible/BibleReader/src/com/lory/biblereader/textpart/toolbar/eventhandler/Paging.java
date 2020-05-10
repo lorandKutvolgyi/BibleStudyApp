@@ -6,12 +6,12 @@ import javax.inject.Singleton;
 import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.swt.SWT;
 
-import com.lory.biblereader.base.translation.menu.TranslationManager;
-import com.lory.biblereader.base.translation.model.Book;
-import com.lory.biblereader.base.translation.model.Chapter;
 import com.lory.biblereader.base.translation.model.CurrentChapter;
-import com.lory.biblereader.base.translation.model.dao.BibleDao;
+import com.lory.biblereader.bookspart.Book;
 import com.lory.biblereader.historypart.entity.History;
+import com.lory.biblereader.menu.TranslationManager;
+import com.lory.biblereader.textpart.Chapter;
+import com.lory.biblereader.textpart.repository.TextRepository;
 
 @Creatable
 @Singleton
@@ -22,7 +22,7 @@ public class Paging {
 	@Inject
 	private TranslationManager translationManager;
 	@Inject
-	private BibleDao bibleDao;
+	private TextRepository textRepository;
 
 	public void paging(int keyCode, History history) {
 		if (!isSelectedChapter()) {
@@ -53,7 +53,7 @@ public class Paging {
 		Book book = currentChapter.getChapter().getBook();
 		if (newId > 0 && newId <= getMax(book)) {
 			String translation = currentChapter.getChapter().getTranslation();
-			Chapter chapter = book.getChapter(newId, translation, translationManager, bibleDao);
+			Chapter chapter = book.getChapter(newId, translation, translationManager, textRepository);
 			currentChapter.setChapter(chapter);
 			return chapter;
 		}
@@ -61,6 +61,6 @@ public class Paging {
 	}
 
 	private int getMax(Book book) {
-		return book.getBookSize(translationManager, bibleDao);
+		return book.getBookSize(translationManager, textRepository);
 	}
 }

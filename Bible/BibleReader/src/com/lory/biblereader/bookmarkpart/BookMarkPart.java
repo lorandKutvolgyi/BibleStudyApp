@@ -16,14 +16,15 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
 import com.lory.biblereader.base.translation.i18n.MessageService;
-import com.lory.biblereader.base.translation.menu.TranslationManager;
-import com.lory.biblereader.base.translation.model.Bible;
-import com.lory.biblereader.base.translation.model.dao.BibleDao;
 import com.lory.biblereader.bookmarkpart.eventhandler.BookMarkSelectionListener;
 import com.lory.biblereader.bookmarkpart.eventhandler.BookMarkTreeContextMenuHandler;
+import com.lory.biblereader.bookmarkpart.repository.BookMarkRepository;
 import com.lory.biblereader.bookmarkpart.treeprovider.BookMarkLabelProvider;
 import com.lory.biblereader.bookmarkpart.treeprovider.TreeContentProvider;
+import com.lory.biblereader.bookspart.Bible;
 import com.lory.biblereader.bookspart.treesorter.BooksComparator;
+import com.lory.biblereader.menu.TranslationManager;
+import com.lory.biblereader.textpart.repository.TextRepository;
 
 public class BookMarkPart implements Observer {
 
@@ -38,7 +39,9 @@ public class BookMarkPart implements Observer {
 	@Inject
 	private TranslationManager translationManager;
 	@Inject
-	private BibleDao bibleDao;
+	private BookMarkRepository bookMarkRepository;
+	@Inject
+	private TextRepository textRepository;
 	@Inject
 	private BookMarkTreeContextMenuHandler bookMarkTreeContextMenuHandler;
 
@@ -61,7 +64,7 @@ public class BookMarkPart implements Observer {
 	}
 
 	private void reloadCategoriesFromDb() {
-		bibleDao.getBookMarks().stream().forEach(bookMark -> {
+		bookMarkRepository.getBookMarks().stream().forEach(bookMark -> {
 			BookMarkCategory category = bookMark.getCategory();
 			category.add(bookMark);
 			BookMarkCategoryFactory.add(category);
@@ -93,7 +96,7 @@ public class BookMarkPart implements Observer {
 		Button button = new Button(parent, SWT.NONE);
 		button.setText(messageService.getMessage("newBookMark"));
 		button.addSelectionListener(new BookMarkSelectionListener(messageService, bookMarkManager, booksComparator,
-				bible, translationManager, bibleDao));
+				bible, translationManager, textRepository));
 	}
 
 }

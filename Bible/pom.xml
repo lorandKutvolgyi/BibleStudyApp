@@ -20,7 +20,7 @@
 		<update-repo.url>http://download.eclipse.org/eclipse/updates/4.8</update-repo.url>
 		<aspectj-repo.url>http://download.eclipse.org/tools/ajdt/48/dev/update</aspectj-repo.url>
 		<orbit>http://download.eclipse.org/tools/orbit/downloads/drops/R20180606145124/repository</orbit>
-		<log4j>http://oneclicklabs.io/repo/eclipse/plugin/log4j</log4j>
+<!-- 		<log4j>http://oneclicklabs.io/repo/eclipse/plugin/log4j</log4j> -->
 	</properties>
 	<repositories>
 		<repository>
@@ -30,7 +30,7 @@
 		</repository>
 		<repository>
 			<id>Nebula</id>
-			<url>http://download.eclipse.org/nebula/releases/2.0.1/</url>
+			<url>http://download.eclipse.org/nebula/releases/2.3.0/</url>
 			<layout>p2</layout>
 		</repository>
 		<repository>
@@ -48,11 +48,11 @@
 			<url>${orbit}</url>
 			<layout>p2</layout>
 		</repository>
-		<repository>
-			<id>log4j</id>
-			<url>${log4j}</url>
-			<layout>p2</layout>
-		</repository>
+<!-- 		<repository> -->
+<!-- 			<id>log4j</id> -->
+<!-- 			<url>${log4j}</url> -->
+<!-- 			<layout>p2</layout> -->
+<!-- 		</repository> -->
 	</repositories>
 	<dependencies>
 		<dependency>

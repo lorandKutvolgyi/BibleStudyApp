@@ -8,13 +8,13 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
 import com.lory.biblereader.base.translation.i18n.MessageService;
-import com.lory.biblereader.base.translation.menu.TranslationManager;
-import com.lory.biblereader.base.translation.model.Bible;
-import com.lory.biblereader.base.translation.model.Chapter;
-import com.lory.biblereader.base.translation.model.dao.BibleDao;
 import com.lory.biblereader.bookmarkpart.BookMarkManager;
 import com.lory.biblereader.bookmarkpart.BookMarkSelectionPopup;
+import com.lory.biblereader.bookspart.Bible;
 import com.lory.biblereader.bookspart.treesorter.BooksComparator;
+import com.lory.biblereader.menu.TranslationManager;
+import com.lory.biblereader.textpart.Chapter;
+import com.lory.biblereader.textpart.repository.TextRepository;
 
 @Creatable
 @Singleton
@@ -25,22 +25,23 @@ public class AddToBookMarkMenuListener implements Listener {
 	private BooksComparator booksComparator;
 	private Bible bible;
 	private TranslationManager translationManager;
-	private BibleDao bibleDao;
+	private TextRepository textRepository;
 
 	@Inject
 	public AddToBookMarkMenuListener(MessageService messageService, BookMarkManager bookMarkManager,
-			BooksComparator booksComparator, Bible bible, TranslationManager translationManager, BibleDao bibleDao) {
+			BooksComparator booksComparator, Bible bible, TranslationManager translationManager,
+			TextRepository textRepository) {
 		this.messageService = messageService;
 		this.bookMarkManager = bookMarkManager;
 		this.booksComparator = booksComparator;
 		this.bible = bible;
 		this.translationManager = translationManager;
-		this.bibleDao = bibleDao;
+		this.textRepository = textRepository;
 	}
 
 	@Override
 	public void handleEvent(Event event) {
 		new BookMarkSelectionPopup(messageService, bookMarkManager, booksComparator, bible, translationManager,
-				bibleDao).open((Chapter) event.widget.getData());
+				textRepository).open((Chapter) event.widget.getData());
 	}
 }

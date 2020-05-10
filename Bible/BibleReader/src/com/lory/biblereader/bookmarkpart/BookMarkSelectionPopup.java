@@ -14,17 +14,17 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import com.lory.biblereader.base.translation.i18n.MessageService;
-import com.lory.biblereader.base.translation.menu.TranslationManager;
-import com.lory.biblereader.base.translation.model.Bible;
-import com.lory.biblereader.base.translation.model.Book;
-import com.lory.biblereader.base.translation.model.Chapter;
-import com.lory.biblereader.base.translation.model.dao.BibleDao;
 import com.lory.biblereader.bookmarkpart.eventhandler.BooksComboSelectionListener;
 import com.lory.biblereader.bookmarkpart.eventhandler.CancelButtonSelectionListener;
 import com.lory.biblereader.bookmarkpart.eventhandler.CategoriesFocusListener;
 import com.lory.biblereader.bookmarkpart.eventhandler.SaveButtonSelectionListener;
 import com.lory.biblereader.bookmarkpart.eventhandler.VersesComboFocusListener;
+import com.lory.biblereader.bookspart.Bible;
+import com.lory.biblereader.bookspart.Book;
 import com.lory.biblereader.bookspart.treesorter.BooksComparator;
+import com.lory.biblereader.menu.TranslationManager;
+import com.lory.biblereader.textpart.Chapter;
+import com.lory.biblereader.textpart.repository.TextRepository;
 
 public class BookMarkSelectionPopup {
 
@@ -43,10 +43,11 @@ public class BookMarkSelectionPopup {
 	private Text verses;
 	private Group group;
 	private Button save;
-	private BibleDao bibleDao;
+	private TextRepository textRepository;
 
 	public BookMarkSelectionPopup(MessageService messageService, BookMarkManager bookMarkManager,
-			BooksComparator booksComparator, Bible bible, TranslationManager translationManager, BibleDao bibleDao) {
+			BooksComparator booksComparator, Bible bible, TranslationManager translationManager,
+			TextRepository textRepository) {
 		this.messageService = messageService;
 		this.bookMarkManager = bookMarkManager;
 		this.booksComparator = booksComparator;
@@ -54,7 +55,7 @@ public class BookMarkSelectionPopup {
 		this.placeholderForVerses = messageService.getMessage("verses");
 		this.bible = bible;
 		this.translationManager = translationManager;
-		this.bibleDao = bibleDao;
+		this.textRepository = textRepository;
 
 		createPopupShell();
 		createGroup();
@@ -108,7 +109,7 @@ public class BookMarkSelectionPopup {
 
 	private void addSelectionListenerToBooks() {
 		books.addSelectionListener(
-				new BooksComboSelectionListener(books, chapters, bible, translationManager, bibleDao));
+				new BooksComboSelectionListener(books, chapters, bible, translationManager, textRepository));
 	}
 
 	private void createChaptersCombo() {
@@ -147,7 +148,7 @@ public class BookMarkSelectionPopup {
 		save.setText(messageService.getMessage("save"));
 		save.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 		save.addSelectionListener(new SaveButtonSelectionListener(this, bookMarkManager, messageService, bible,
-				translationManager, bibleDao));
+				translationManager, textRepository));
 	}
 
 	private void createCancelButton(Composite buttons) {
@@ -159,7 +160,7 @@ public class BookMarkSelectionPopup {
 
 	public void open() {
 		Book firstBook = booksComparator.current().getBooks().get(0);
-		open(firstBook.getChapter(1, null, translationManager, bibleDao));
+		open(firstBook.getChapter(1, null, translationManager, textRepository));
 	}
 
 	public void open(Chapter chapter) {
@@ -196,7 +197,7 @@ public class BookMarkSelectionPopup {
 	}
 
 	private void fillChaptersCombo() {
-		int size = bible.getBooks().get(books.getSelectionIndex()).getBookSize(translationManager, bibleDao);
+		int size = bible.getBooks().get(books.getSelectionIndex()).getBookSize(translationManager, textRepository);
 		for (int i = 1; i <= size; i++) {
 			chapters.add(String.valueOf(i));
 		}

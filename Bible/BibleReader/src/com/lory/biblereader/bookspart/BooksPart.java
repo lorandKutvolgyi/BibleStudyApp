@@ -15,9 +15,7 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 
 import com.lory.biblereader.base.translation.i18n.MessageService;
-import com.lory.biblereader.base.translation.model.Book;
 import com.lory.biblereader.base.translation.model.CurrentChapter;
-import com.lory.biblereader.base.translation.model.Testament;
 import com.lory.biblereader.bookspart.eventhandler.BookClickListener;
 import com.lory.biblereader.bookspart.eventhandler.BookSelectionListener;
 import com.lory.biblereader.bookspart.eventhandler.BooksKeyListener;
@@ -31,7 +29,6 @@ public class BooksPart implements Observer {
 	private BooksKeyListener booksKeyListener;
 	private MessageService messageService;
 	private CurrentChapter currentChapter;
-
 	private TreeViewer booksTreeViewer;
 
 	@Inject

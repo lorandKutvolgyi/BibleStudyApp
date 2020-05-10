@@ -3,8 +3,8 @@ package com.lory.biblereader.bookspart.treeprovider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
-import com.lory.biblereader.base.translation.model.Testament;
 import com.lory.biblereader.base.translation.model.TreeElement;
+import com.lory.biblereader.bookspart.Testament;
 
 public class ViewerTreeContentProvider implements ITreeContentProvider {
 

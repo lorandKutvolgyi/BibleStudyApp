@@ -1,7 +1,7 @@
 package com.lory.biblereader.textpart;
 
-import com.lory.biblereader.base.translation.model.dao.BibleDao;
 import com.lory.biblereader.textpart.contextmenu.VerseContext;
+import com.lory.biblereader.textpart.repository.TextRepository;
 
 public class JavaScriptCreator {
 
@@ -40,14 +40,14 @@ public class JavaScriptCreator {
 		return script.toString();
 	}
 
-	public static String getVerseChangeScript(VerseContext verseContext, BibleDao bibleDao) {
+	public static String getVerseChangeScript(VerseContext verseContext, TextRepository textRepository) {
 		if (verseContext == null) {
 			return null;
 		}
-		return createVerseChangeScript(verseContext, bibleDao).toString();
+		return createVerseChangeScript(verseContext, textRepository).toString();
 	}
 
-	private static StringBuilder createVerseChangeScript(VerseContext verseContext, BibleDao bibleDao) {
+	private static StringBuilder createVerseChangeScript(VerseContext verseContext, TextRepository textRepository) {
 		StringBuilder script = new StringBuilder();
 
 		script.append("var span = document.querySelector('#" + verseContext.getTranslation() + " span');");
@@ -55,7 +55,7 @@ public class JavaScriptCreator {
 		script.append("span.setAttribute('data-chapter','" + verseContext.getChapterId() + "');");
 		script.append("span.setAttribute('data-verse','" + verseContext.getVerseId() + "');");
 		script.append("span.innerHTML = '<i>" + verseContext.getChapterId() + ":" + verseContext.getVerseId() + "</i>");
-		script.append("<br/>" + bibleDao.findVerseByContext(verseContext) + "';");
+		script.append("<br/>" + textRepository.findVerseByContext(verseContext) + "';");
 
 		return script;
 	}

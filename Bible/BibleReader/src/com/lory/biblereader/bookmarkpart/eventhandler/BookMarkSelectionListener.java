@@ -4,12 +4,12 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 
 import com.lory.biblereader.base.translation.i18n.MessageService;
-import com.lory.biblereader.base.translation.menu.TranslationManager;
-import com.lory.biblereader.base.translation.model.Bible;
-import com.lory.biblereader.base.translation.model.dao.BibleDao;
 import com.lory.biblereader.bookmarkpart.BookMarkManager;
 import com.lory.biblereader.bookmarkpart.BookMarkSelectionPopup;
+import com.lory.biblereader.bookspart.Bible;
 import com.lory.biblereader.bookspart.treesorter.BooksComparator;
+import com.lory.biblereader.menu.TranslationManager;
+import com.lory.biblereader.textpart.repository.TextRepository;
 
 public class BookMarkSelectionListener implements SelectionListener {
 
@@ -18,22 +18,23 @@ public class BookMarkSelectionListener implements SelectionListener {
 	private BooksComparator booksComparator;
 	private Bible bible;
 	private TranslationManager translationManager;
-	private BibleDao bibleDao;
+	private TextRepository textRepository;
 
 	public BookMarkSelectionListener(MessageService messageService, BookMarkManager bookMarkManager,
-			BooksComparator booksComparator, Bible bible, TranslationManager translationManager, BibleDao bibleDao) {
+			BooksComparator booksComparator, Bible bible, TranslationManager translationManager,
+			TextRepository textRepository) {
 		this.messageService = messageService;
 		this.bookMarkManager = bookMarkManager;
 		this.booksComparator = booksComparator;
 		this.bible = bible;
 		this.translationManager = translationManager;
-		this.bibleDao = bibleDao;
+		this.textRepository = textRepository;
 	}
 
 	@Override
 	public void widgetSelected(SelectionEvent e) {
 		BookMarkSelectionPopup bookMarkSelectionPopup = new BookMarkSelectionPopup(messageService, bookMarkManager,
-				booksComparator, bible, translationManager, bibleDao);
+				booksComparator, bible, translationManager, textRepository);
 		bookMarkSelectionPopup.open();
 	}
 

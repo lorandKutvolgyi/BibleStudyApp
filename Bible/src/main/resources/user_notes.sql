@@ -1,3 +1,14 @@
+-- Sequence: study_app.user_notes_id_seq
+
+-- DROP SEQUENCE study_app.user_notes_id_seq;
+
+CREATE SEQUENCE study_app.user_notes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
 -- Table: study_app.user_notes
 
 -- DROP TABLE study_app.user_notes;
