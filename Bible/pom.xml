@@ -15,7 +15,7 @@
 	</modules>
 	<properties>
 		<tycho.version>0.26.0</tycho.version>
-		<postgresql.version>42.2.2</postgresql.version>
+		<postgresql.version>42.3.3</postgresql.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<update-repo.url>http://download.eclipse.org/eclipse/updates/4.8</update-repo.url>
 		<aspectj-repo.url>http://download.eclipse.org/tools/ajdt/48/dev/update</aspectj-repo.url>
